@@ -49,10 +49,10 @@ public class Asteroid {
     /**
      * Set the value of surfaceThickness
      *
-     * @param newVar the new value of surfaceThickness
+     * @param thickness the new value of surfaceThickness
      */
-    public void setSurfaceThickness(int newVar) {
-        surfaceThickness = newVar;
+    public void setSurfaceThickness(int thickness) {
+        surfaceThickness = thickness;
     }
 
     /**
@@ -67,10 +67,10 @@ public class Asteroid {
     /**
      * Set the value of inPerihelion
      *
-     * @param newVar the new value of inPerihelion
+     * @param inPerihelion the new value of inPerihelion
      */
-    public void setInPerihelion(boolean newVar) {
-        inPerihelion = newVar;
+    public void setInPerihelion(boolean inPerihelion) {
+        this.inPerihelion = inPerihelion;
     }
 
     /**
@@ -85,24 +85,24 @@ public class Asteroid {
     /**
      * Set the value of name
      *
-     * @param newVar the new value of name
+     * @param name the new value of name
      */
-    public void setName(String newVar) {
-        name = newVar;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * Add a Entities object to the entitiesVector List
+     * Add a Entities object to the entities List
      */
-    private void addEntities(Entity new_object) {
-        entities.add(new_object);
+    private void addEntities(Entity entity) {
+        this.entities.add(entity);
     }
 
     /**
      * Remove a Entities object from entitiesVector List
      */
-    private void removeEntities(Entity new_object) {
-        entities.remove(new_object);
+    private void removeEntities(Entity entity) {
+        this.entities.remove(entity);
     }
 
     /**
@@ -118,8 +118,8 @@ public class Asteroid {
     /**
      * Add a Resource object to the Asteroid
      */
-    private void addResource(Resource new_object) {
-        resource = new_object;
+    private void addResource(Resource resource) {
+        this.resource = resource;
     }
 
     /**
@@ -201,6 +201,7 @@ public class Asteroid {
      * @param asteroid
      */
     public void addNeighbour(Asteroid asteroid) {
+        this.neighbours.add(asteroid);
     }
 
 
