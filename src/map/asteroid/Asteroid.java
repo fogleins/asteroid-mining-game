@@ -2,6 +2,7 @@ package map.asteroid;
 
 import map.entity.Entity;
 import map.entity.TeleportGate;
+import utility.OutputFormatter;
 
 import java.util.ArrayList;
 
@@ -123,8 +124,9 @@ public class Asteroid {
     /**
      * Add a map.asteroid.Resource object to the map.asteroid.Asteroid
      */
-    private void addResource(Resource resource) {
+    public void addResource(Resource resource) {
         this.resource = resource;
+        resource.setAsteroid(this);
     }
 
     /**
@@ -169,6 +171,16 @@ public class Asteroid {
      *
      */
     public void drilled() {
+        OutputFormatter.OutputCall("drilled() - "+this.toString());
+        if (surfaceThickness == 0){
+            if (inPerihelion) {
+                resource.drilledInPerihelion();
+                OutputFormatter.OutputReturn("return // drilledInPerihelion");
+            }
+        } else {
+            surfaceThickness--;
+            OutputFormatter.OutputReturn("return // surfaceThickness--");
+        }
     }
 
 
@@ -192,6 +204,7 @@ public class Asteroid {
      * @param entity
      */
     public void acceptEntity(Entity entity) {
+        entities.add(entity);
     }
 
 
