@@ -28,8 +28,8 @@ public class Resource {
     /**
      * Add a Asteroid object to the asteroidVector List
      */
-    private void setAsteroid(Asteroid new_object) {
-        asteroid = new_object;
+    private void setAsteroid(Asteroid asteroid) {
+        this.asteroid = asteroid;
     }
 
 //    /**

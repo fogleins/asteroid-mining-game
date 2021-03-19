@@ -33,15 +33,15 @@ public class BillOfResources {
     /**
      * Add a Resources object to the resourcesVector List
      */
-    private void addResources(Resource new_object) {
-        resources.add(new_object);
+    private void addResources(Resource resource) {
+        this.resources.add(resource);
     }
 
     /**
      * Remove a Resources object from resourcesVector List
      */
-    private void removeResources(Resource new_object) {
-        resources.remove(new_object);
+    private void removeResources(Resource resource) {
+        this.resources.remove(resource);
     }
 
     /**

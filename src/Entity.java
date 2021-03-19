@@ -9,7 +9,7 @@ abstract public class Entity {
 
     private String name;
 
-    private Asteroid m_asteroid;
+    private Asteroid asteroid;
 
     //
     // Constructors
@@ -38,10 +38,10 @@ abstract public class Entity {
     /**
      * Set the value of name
      *
-     * @param newVar the new value of name
+     * @param name the new value of name
      */
-    public void setName(String newVar) {
-        name = newVar;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -50,16 +50,16 @@ abstract public class Entity {
      * @return the value of m_asteroid
      */
     private Asteroid getAsteroid() {
-        return m_asteroid;
+        return asteroid;
     }
 
     /**
      * Set the value of m_asteroid
      *
-     * @param newVar the new value of m_asteroid
+     * @param asteroid the new value of m_asteroid
      */
-    private void setAsteroid(Asteroid newVar) {
-        m_asteroid = newVar;
+    private void setAsteroid(Asteroid asteroid) {
+        this.asteroid = asteroid;
     }
 
     //

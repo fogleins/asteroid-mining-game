@@ -44,15 +44,15 @@ public class Map {
     /**
      * Add a Asteroids object to the asteroidsVector List
      */
-    private void addAsteroids(Asteroid new_object) {
-        asteroids.add(new_object);
+    private void addAsteroids(Asteroid asteroid) {
+        asteroids.add(asteroid);
     }
 
     /**
      * Remove a Asteroids object from asteroidsVector List
      */
-    private void removeAsteroids(Asteroid new_object) {
-        asteroids.remove(new_object);
+    private void removeAsteroids(Asteroid asteroid) {
+        asteroids.remove(asteroid);
     }
 
     /**

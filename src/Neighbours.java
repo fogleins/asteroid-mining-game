@@ -39,10 +39,10 @@ public class Neighbours {
     /**
      * Set the value of asteroidNeighbours
      *
-     * @param newVar the new value of asteroidNeighbours
+     * @param asteroid the new value of asteroidNeighbours
      */
-    public void setAsteroidNeighbours(Asteroid newVar) {
-        asteroidNeighbours = newVar;
+    public void setAsteroidNeighbours(Asteroid asteroid) {
+        asteroidNeighbours = asteroid;
     }
 
     /**
@@ -57,10 +57,10 @@ public class Neighbours {
     /**
      * Set the value of teleportGateNeighbours
      *
-     * @param newVar the new value of teleportGateNeighbours
+     * @param asteroid the new value of teleportGateNeighbours
      */
-    public void setTeleportGateNeighbours(Asteroid newVar) {
-        teleportGateNeighbours = newVar;
+    public void setTeleportGateNeighbours(Asteroid asteroid) {
+        teleportGateNeighbours = asteroid;
     }
 
     //

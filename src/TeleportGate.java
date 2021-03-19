@@ -59,7 +59,7 @@ public class TeleportGate {
      * @return Asteroid
      */
     public Asteroid getOtherSide() {
-        return null; // TODO: implementálni
+        return otherGate.getCurrentAsteroid(); // TODO: implementálni
     }
 
 

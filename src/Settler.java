@@ -43,10 +43,10 @@ public class Settler extends Entity {
     /**
      * Set the value of robotBill
      *
-     * @param newVar the new value of robotBill
+     * @param billOfResources the new value of robotBill
      */
-    public void setRobotBill(BillOfResources newVar) {
-        robotBill = newVar;
+    public void setRobotBill(BillOfResources billOfResources) {
+        robotBill = billOfResources;
     }
 
     /**
@@ -61,10 +61,10 @@ public class Settler extends Entity {
     /**
      * Set the value of teleportBill
      *
-     * @param newVar the new value of teleportBill
+     * @param billOfResources the new value of teleportBill
      */
-    public void setTeleportBill(BillOfResources newVar) {
-        teleportBill = newVar;
+    public void setTeleportBill(BillOfResources billOfResources) {
+        teleportBill = billOfResources;
     }
 
     /**
@@ -79,24 +79,24 @@ public class Settler extends Entity {
     /**
      * Set the value of m_game
      *
-     * @param newVar the new value of m_game
+     * @param game the new value of m_game
      */
-    private void setGame(Game newVar) {
-        m_game = newVar;
+    private void setGame(Game game) {
+        m_game = game;
     }
 
     /**
      * Add a Resources object to the resourcesVector List
      */
-    private void addResources(Resource new_object) {
-        resources.add(new_object);
+    private void addResources(Resource resource) {
+        resources.add(resource);
     }
 
     /**
      * Remove a Resources object from resourcesVector List
      */
-    private void removeResources(Resource new_object) {
-        resources.remove(new_object);
+    private void removeResources(Resource resource) {
+        resources.remove(resource);
     }
 
     /**
@@ -111,15 +111,15 @@ public class Settler extends Entity {
     /**
      * Add a Teleport object to the teleportVector List
      */
-    private void addTeleport(TeleportGate new_object) {
-        teleports.add(new_object);
+    private void addTeleport(TeleportGate teleportGate) {
+        teleports.add(teleportGate);
     }
 
     /**
      * Remove a Teleport object from teleportVector List
      */
-    private void removeTeleport(TeleportGate new_object) {
-        teleports.remove(new_object);
+    private void removeTeleport(TeleportGate teleportGate) {
+        teleports.remove(teleportGate);
     }
 
 

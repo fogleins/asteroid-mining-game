@@ -13,13 +13,13 @@ public class Game {
     private int currentRound;
     private int nextSunflare;
 
-    private Map m_map;
+    private Map map;
 
-    private Game m_game;
+//    private Game m_game;
 
     private ArrayList<Settler> settlers = new ArrayList<>();
 
-    private Settler m_current;
+    private Settler current;
 
     private ArrayList<Robot> robots = new ArrayList<>();
 
@@ -49,14 +49,14 @@ public class Game {
         return currentRound;
     }
 
-    /**
-     * Set the value of currentRound
-     *
-     * @param newVar the new value of currentRound
-     */
-    public void setCurrentRound(int newVar) {
-        currentRound = newVar;
-    }
+//    /**
+//     * Set the value of currentRound
+//     *
+//     * @param newVar the new value of currentRound
+//     */
+//    public void setCurrentRound(int newVar) {
+//        currentRound = newVar;
+//    }
 
     /**
      * Get the value of nextSunflare
@@ -67,14 +67,14 @@ public class Game {
         return nextSunflare;
     }
 
-    /**
-     * Set the value of nextSunflare
-     *
-     * @param newVar the new value of nextSunflare
-     */
-    public void setNextSunflare(int newVar) {
-        nextSunflare = newVar;
-    }
+//    /**
+//     * Set the value of nextSunflare
+//     *
+//     * @param newVar the new value of nextSunflare
+//     */
+//    public void setNextSunflare(int newVar) {
+//        nextSunflare = newVar;
+//    }
 
     /**
      * Get the value of m_map
@@ -82,30 +82,30 @@ public class Game {
      * @return the value of m_map
      */
     private Map getMap() {
-        return m_map;
+        return map;
     }
 
     /**
      * Set the value of m_map
      *
-     * @param newVar the new value of m_map
+     * @param map the new value of m_map
      */
-    private void setMap(Map newVar) {
-        m_map = newVar;
+    private void setMap(Map map) {
+        this.map = map;
     }
 
     /**
      * Add a Settlers object to the settlersVector List
      */
-    private void addSettlers(Settler new_object) {
-        settlers.add(new_object);
+    private void addSettler(Settler settler) {
+        settlers.add(settler);
     }
 
     /**
      * Remove a Settlers object from settlersVector List
      */
-    private void removeSettlers(Settler new_object) {
-        settlers.remove(new_object);
+    private void removeSettler(Settler settler) {
+        settlers.remove(settler);
     }
 
     /**
@@ -113,40 +113,40 @@ public class Game {
      *
      * @return List of Settlers objects held by settlersVector
      */
-    private ArrayList<Settler> getSettlersList() {
+    private ArrayList<Settler> getSettlers() {
         return settlers;
     }
 
     /**
-     * Get the value of m_current
+     * Get the value of current
      *
-     * @return the value of m_current
+     * @return the value of current
      */
     private Settler getCurrent() {
-        return m_current;
+        return current;
     }
 
     /**
-     * Set the value of m_current
+     * Set the value of current
      *
-     * @param newVar the new value of m_current
+     * @param settler the new value of current
      */
-    private void setCurrent(Settler newVar) {
-        m_current = newVar;
+    private void setCurrent(Settler settler) {
+        current = settler;
     }
 
     /**
      * Add a Robots object to the robotsVector List
      */
-    private void addRobots(Robot new_object) {
-        robots.add(new_object);
+    private void addRobot(Robot robot) {
+        robots.add(robot);
     }
 
     /**
      * Remove a Robots object from robotsVector List
      */
-    private void removeRobots(Robot new_object) {
-        robots.remove(new_object);
+    private void removeRobot(Robot robot) {
+        robots.remove(robot);
     }
 
     /**
@@ -154,7 +154,7 @@ public class Game {
      *
      * @return List of Robots objects held by robotsVector
      */
-    private ArrayList<Robot> getRobotsList() {
+    private ArrayList<Robot> getRobots() {
         return robots;
     }
 
@@ -169,33 +169,35 @@ public class Game {
     public void gameWon() {
     }
 
-
-    /**
-     * @param settler
-     */
-    public void addSettler(Settler settler) {
-    }
-
-
-    /**
-     * @param settler
-     */
-    public void removeSettler(Settler settler) {
-    }
-
-
-    /**
-     * @param robot
-     */
-    public void addRobot(Robot robot) {
-    }
-
-
-    /**
-     * @param robot
-     */
-    public void removeRobot(Robot robot) {
-    }
+//  Ezek már fent megvannak
+//
+//    /**
+//     * @param settler
+//     */
+//    public void addSettler(Settler settler) {
+//    }
+//
+//
+//    /**
+//     * @param settler
+//     */
+//    public void removeSettler(Settler settler) {
+//    }
+//
+//
+//
+//    /**
+//     * @param robot
+//     */
+//    public void addRobot(Robot robot) {
+//    }
+//
+//
+//    /**
+//     * @param robot
+//     */
+//    public void removeRobot(Robot robot) {
+//    }
 
 
     /**

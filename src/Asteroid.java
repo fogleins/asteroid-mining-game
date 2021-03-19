@@ -216,7 +216,8 @@ public class Asteroid {
     /**
      * @param teleportGate
      */
-    public void addTeleportGate(TeleportGate teleportGate) {
+    public void setTeleportGate(TeleportGate teleportGate) {
+        this.teleportGate = teleportGate;
     }
 
 
@@ -224,6 +225,7 @@ public class Asteroid {
      *
      */
     public void removeTeleportGate() {
+        this.teleportGate = null;
     }
 
 

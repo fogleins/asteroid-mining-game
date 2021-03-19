@@ -8,7 +8,7 @@ public class BaseAsteroid extends Asteroid {
     //
 
 
-    public BillOfResources m_billOfResources;
+    public BillOfResources billOfResources;
 
     //
     // Constructors
@@ -31,16 +31,16 @@ public class BaseAsteroid extends Asteroid {
      * @return the value of m_billOfResources
      */
     public BillOfResources getBillOfResources() {
-        return m_billOfResources;
+        return billOfResources;
     }
 
     /**
      * Set the value of m_billOfResources
      *
-     * @param newVar the new value of m_billOfResources
+     * @param billOfResources the new value of m_billOfResources
      */
-    public void setBillOfResources(BillOfResources newVar) {
-        m_billOfResources = newVar;
+    public void setBillOfResources(BillOfResources billOfResources) {
+        this.billOfResources = billOfResources;
     }
 
     //
