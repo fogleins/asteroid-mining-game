@@ -163,12 +163,6 @@ public class Settler extends Entity {
     /**
      *
      */
-    public void asteroidExploded() {
-    }
-
-    /**
-     *
-     */
     public void placeTeleport() {
     }
 
