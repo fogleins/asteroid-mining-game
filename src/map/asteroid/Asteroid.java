@@ -31,6 +31,7 @@ public class Asteroid {
     // Constructors
     //
     public Asteroid() {
+        System.out.println("Asteroid constructor called");
     }
 
     //
@@ -48,6 +49,7 @@ public class Asteroid {
      * @return the value of surfaceThickness
      */
     public int getSurfaceThickness() {
+        System.out.println("getSurfaceThickness()");
         return surfaceThickness;
     }
 
@@ -57,6 +59,7 @@ public class Asteroid {
      * @param thickness the new value of surfaceThickness
      */
     public void setSurfaceThickness(int thickness) {
+        System.out.println("setSurfaceThickness()");
         surfaceThickness = thickness;
     }
 
@@ -66,6 +69,7 @@ public class Asteroid {
      * @return the value of inPerihelion
      */
     public boolean getInPerihelion() {
+        System.out.println("getInPerihelion()");
         return inPerihelion;
     }
 
@@ -75,6 +79,7 @@ public class Asteroid {
      * @param inPerihelion the new value of inPerihelion
      */
     public void setInPerihelion(boolean inPerihelion) {
+        System.out.println("setInPerihelion()");
         this.inPerihelion = inPerihelion;
     }
 
@@ -84,6 +89,7 @@ public class Asteroid {
      * @return the value of name
      */
     public String getName() {
+        System.out.println("getName()");
         return name;
     }
 
@@ -93,6 +99,7 @@ public class Asteroid {
      * @param name the new value of name
      */
     public void setName(String name) {
+        System.out.println("setName()");
         this.name = name;
     }
 
@@ -100,6 +107,7 @@ public class Asteroid {
      * Add a Entities object to the entities List
      */
     private void addEntities(Entity entity) {
+        System.out.println("Entity added onto the asteroid. Name: " + entity.getName());
         this.entities.add(entity);
     }
 
@@ -116,6 +124,7 @@ public class Asteroid {
      * @return List of Entities objects held by entitiesVector
      */
     private ArrayList<Entity> getEntitiesList() {
+        System.out.println("getEntitiesList()");
         return entities;
     }
 
@@ -124,6 +133,7 @@ public class Asteroid {
      * Add a map.asteroid.Resource object to the map.asteroid.Asteroid
      */
     private void addResource(Resource resource) {
+        System.out.println("addResource()");
         this.resource = resource;
     }
 
@@ -141,6 +151,7 @@ public class Asteroid {
      * @return List of map.asteroid.Resource objects held by resourceVector
      */
     private Resource getResource() {
+        System.out.println("getResource()");
         return resource;
     }
 
@@ -150,6 +161,7 @@ public class Asteroid {
      * @return List of map.entity.TeleportGate objects held by teleportgateVector
      */
     private TeleportGate getTeleportGate() {
+        System.out.println("getTeleportGate()");
         return teleportGate;
     }
 
@@ -162,6 +174,7 @@ public class Asteroid {
      *
      */
     public void explode() {
+        System.out.println("explode()");
     }
 
 
@@ -169,6 +182,7 @@ public class Asteroid {
      *
      */
     public void drilled() {
+        System.out.println("drilled()");
     }
 
 
@@ -176,6 +190,7 @@ public class Asteroid {
      * @return map.asteroid.Resource
      */
     public Resource mined() {
+        System.out.println("mined()");
         return null; // TODO: implementálni
     }
 
@@ -184,6 +199,7 @@ public class Asteroid {
      * @return map.asteroid.Neighbours
      */
     public Neighbours getNeighbours() {
+        System.out.println("getNeighbours()");
         return null; // TODO: implementálni
     }
 
@@ -192,6 +208,7 @@ public class Asteroid {
      * @param entity
      */
     public void acceptEntity(Entity entity) {
+        System.out.println("acceptEntity()");
     }
 
 
@@ -199,6 +216,7 @@ public class Asteroid {
      * @param entity
      */
     public void removeEntity(Entity entity) {
+        System.out.println("removeEntity()");
     }
 
 
@@ -206,6 +224,7 @@ public class Asteroid {
      * @param asteroid
      */
     public void addNeighbour(Asteroid asteroid) {
+        System.out.println("addNeighbour");
         this.neighbours.add(asteroid);
     }
 
@@ -215,6 +234,7 @@ public class Asteroid {
      * @return map.asteroid.Asteroid
      */
     public Asteroid removeAsteroid(Asteroid asteroid) {
+        System.out.println("removeAsteroid()");
         return null; // TODO: implementálni
     }
 
@@ -223,6 +243,7 @@ public class Asteroid {
      * @param teleportGate
      */
     public void setTeleportGate(TeleportGate teleportGate) {
+        System.out.println("setTeleportGate()");
         this.teleportGate = teleportGate;
     }
 
@@ -231,6 +252,7 @@ public class Asteroid {
      *
      */
     public void removeTeleportGate() {
+        System.out.println("removeTeleportGate()");
         this.teleportGate = null;
     }
 
@@ -239,6 +261,7 @@ public class Asteroid {
      * @param resource
      */
     public void placeResource(Resource resource) {
+        System.out.println("placeResource()");
     }
 
 
@@ -246,6 +269,7 @@ public class Asteroid {
      *
      */
     public void hitBySunflare() {
+        System.out.println("hitBySunflare()");
     }
 
 
@@ -253,6 +277,7 @@ public class Asteroid {
      *
      */
     public void changePerihelionState() {
+        System.out.println("changePerihelionState()");
     }
 
 
