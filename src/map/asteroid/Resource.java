@@ -10,7 +10,7 @@ public class Resource {
     //
 
 
-    private Asteroid asteroid;
+    protected Asteroid asteroid;
 
     //
     // Constructors
@@ -30,7 +30,7 @@ public class Resource {
     /**
      * Add a map.asteroid.Asteroid object to the asteroidVector List
      */
-    private void setAsteroid(Asteroid asteroid) {
+    public void setAsteroid(Asteroid asteroid) {
         this.asteroid = asteroid;
     }
 

@@ -3,6 +3,7 @@ package map.entity;
 import control.Game;
 import map.BillOfResources;
 import map.asteroid.Resource;
+import utility.OutputFormatter;
 
 import java.util.ArrayList;
 
@@ -18,14 +19,15 @@ public class Settler extends Entity {
 
     private final ArrayList<Resource> resources = new ArrayList<>();
     private final ArrayList<TeleportGate> teleports = new ArrayList<>();
-    private BillOfResources robotBill;
-    private BillOfResources teleportBill;
     private Game m_game;
 
     //
     // Constructors
     //
-    public Settler() {
+    public Settler(Game g) {
+        OutputFormatter.OutputCall("create - " + this.toString());
+        m_game = g;
+        OutputFormatter.OutputReturn("return");
     }
 
     //
@@ -37,73 +39,6 @@ public class Settler extends Entity {
     // Accessor methods
     //
 
-    /**
-     * Get the value of robotBill
-     *
-     * @return the value of robotBill
-     */
-    public BillOfResources getRobotBill() {
-        return robotBill;
-    }
-
-    /**
-     * Set the value of robotBill
-     *
-     * @param billOfResources the new value of robotBill
-     */
-    public void setRobotBill(BillOfResources billOfResources) {
-        robotBill = billOfResources;
-    }
-
-    /**
-     * Get the value of teleportBill
-     *
-     * @return the value of teleportBill
-     */
-    public BillOfResources getTeleportBill() {
-        return teleportBill;
-    }
-
-    /**
-     * Set the value of teleportBill
-     *
-     * @param billOfResources the new value of teleportBill
-     */
-    public void setTeleportBill(BillOfResources billOfResources) {
-        teleportBill = billOfResources;
-    }
-
-    /**
-     * Get the value of m_game
-     *
-     * @return the value of m_game
-     */
-    private Game getGame() {
-        return m_game;
-    }
-
-    /**
-     * Set the value of m_game
-     *
-     * @param game the new value of m_game
-     */
-    private void setGame(Game game) {
-        m_game = game;
-    }
-
-    /**
-     * Add a Resources object to the resourcesVector List
-     */
-    private void addResources(Resource resource) {
-        resources.add(resource);
-    }
-
-    /**
-     * Remove a Resources object from resourcesVector List
-     */
-    private void removeResources(Resource resource) {
-        resources.remove(resource);
-    }
 
     /**
      * Get the List of Resources objects held by resourcesVector
@@ -111,23 +46,10 @@ public class Settler extends Entity {
      * @return List of Resources objects held by resourcesVector
      */
     private ArrayList<Resource> getResources() {
+        OutputFormatter.OutputCall("getResources() - " + name);
+        OutputFormatter.OutputReturn("return - resources");
         return resources;
     }
-
-    /**
-     * Add a Teleport object to the teleportVector List
-     */
-    private void addTeleport(TeleportGate teleportGate) {
-        teleports.add(teleportGate);
-    }
-
-    /**
-     * Remove a Teleport object from teleportVector List
-     */
-    private void removeTeleport(TeleportGate teleportGate) {
-        teleports.remove(teleportGate);
-    }
-
 
     //
     // Other methods
@@ -139,6 +61,8 @@ public class Settler extends Entity {
      * @return List of Teleport objects held by teleportVector
      */
     private ArrayList<TeleportGate> getTeleportList() {
+        OutputFormatter.OutputCall("getTeleportList() - " + name);
+        OutputFormatter.OutputReturn("return - teleports");
         return teleports;
     }
 
@@ -146,24 +70,62 @@ public class Settler extends Entity {
      *
      */
     public void mine() {
+        OutputFormatter.OutputCall("mine() - " + name);
+        Resource r = asteroid.mined();
+        if(r != null){
+            resources.add(r);
+            OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
+        } else {
+            OutputFormatter.OutputReturn("return - null");
+        }
     }
 
     /**
      *
      */
     public void buildRobot() {
+        OutputFormatter.OutputCall("buildRobot() - " + name);
+        Robot r = Robot.create(resources);
+        if(r != null){
+            r.move(asteroid);
+            OutputFormatter.OutputReturn("return - robot created " + r.toString());
+        } else {
+            OutputFormatter.OutputReturn("return - null");
+        }
     }
 
     /**
      *
      */
     public void buildTeleport() {
+        OutputFormatter.OutputCall("buildTeleport() - " + name);
+        if(teleports.size() == 0) {
+            ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
+            if (teleportGates != null) {
+                for (TeleportGate tp : teleportGates){
+                    teleports.add(tp);
+                }
+                OutputFormatter.OutputReturn("return - teleportgates created ");
+            } else {
+                OutputFormatter.OutputReturn("return - null");
+            }
+        } else{
+            OutputFormatter.OutputReturn("return - already has teleports");
+        }
     }
 
     /**
      *
      */
     public void placeTeleport() {
+        OutputFormatter.OutputCall("buildTeleport() - " + name);
+        if(teleports.size() != 0){
+            asteroid.setTeleportGate(teleports.get(0));
+            teleports.remove(0);
+            OutputFormatter.OutputReturn("return - teleportgate placed");
+        } else {
+            OutputFormatter.OutputReturn("return - there is no teleportgate to place");
+        }
     }
 
 
