@@ -12,9 +12,9 @@ abstract public class Entity {
     // Fields
     //
 
-    private String name;
+    protected String name;
 
-    private Asteroid asteroid;
+    protected Asteroid asteroid;
 
     //
     // Constructors
