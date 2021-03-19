@@ -1,7 +1,9 @@
+package map.asteroid;
+
 /**
- * Class Iron
+ * Class map.asteroid.Uranium
  */
-public class Iron extends Resource {
+public class Uranium extends RadioactiveResource {
 
     //
     // Fields
@@ -11,7 +13,7 @@ public class Iron extends Resource {
     //
     // Constructors
     //
-    public Iron() {
+    public Uranium() {
     }
 
     //

@@ -1,5 +1,10 @@
+package map.asteroid;
+
+import map.BillOfResources;
+import map.entity.Entity;
+
 /**
- * Class BaseAsteroid
+ * Class map.asteroid.BaseAsteroid
  */
 public class BaseAsteroid extends Asteroid {
 

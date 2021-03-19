@@ -1,5 +1,9 @@
+package map.entity;
+
+import map.asteroid.Asteroid;
+
 /**
- * Class TeleportGate
+ * Class map.entity.TeleportGate
  */
 public class TeleportGate {
 
@@ -39,7 +43,7 @@ public class TeleportGate {
 //    /**
 //     * Remove a CurrentAsteroid object from currentasteroidVector List
 //     */
-//    private void removeCurrentAsteroid(Asteroid new_object) {
+//    private void removeCurrentAsteroid(map.asteroid.Asteroid new_object) {
 //        currentAsteroid.remove(new_object);
 //    }
 
@@ -56,7 +60,7 @@ public class TeleportGate {
     //
 
     /**
-     * @return Asteroid
+     * @return map.asteroid.Asteroid
      */
     public Asteroid getOtherSide() {
         return otherGate.getCurrentAsteroid(); // TODO: implementálni

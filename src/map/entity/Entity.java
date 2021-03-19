@@ -1,5 +1,9 @@
+package map.entity;
+
+import map.asteroid.Asteroid;
+
 /**
- * Class Entity
+ * Class map.entity.Entity
  */
 abstract public class Entity {
 

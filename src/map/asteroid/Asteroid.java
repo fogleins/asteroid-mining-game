@@ -1,8 +1,13 @@
+package map.asteroid;
+
+import map.entity.Entity;
+import map.entity.TeleportGate;
+
 import java.util.ArrayList;
 
 
 /**
- * Class Asteroid
+ * Class map.asteroid.Asteroid
  */
 public class Asteroid {
 
@@ -17,10 +22,10 @@ public class Asteroid {
     private String name;
     private Resource resource;
     private TeleportGate teleportGate;
-//    private final ArrayList<Resource> resourceVector = new ArrayList<>();
+//    private final ArrayList<map.asteroid.Resource> resourceVector = new ArrayList<>();
 //    private final Vector teleportgateVector = new Vector();
-//    private Asteroid m_asteroid;
-//    private final ArrayList<Asteroid> asteroid = new ArrayList<>();
+//    private map.asteroid.Asteroid m_asteroid;
+//    private final ArrayList<map.asteroid.Asteroid> asteroid = new ArrayList<>();
 
     //
     // Constructors
@@ -116,33 +121,33 @@ public class Asteroid {
 
 
     /**
-     * Add a Resource object to the Asteroid
+     * Add a map.asteroid.Resource object to the map.asteroid.Asteroid
      */
     private void addResource(Resource resource) {
         this.resource = resource;
     }
 
     /**
-     * Remove a Resource object from resourceVector List
+     * Remove a map.asteroid.Resource object from resourceVector List
      */
-    private void removeResource(/*Resource new_object*/) {
+    private void removeResource(/*map.asteroid.Resource new_object*/) {
 //        resource.remove(new_object);
         resource = null;
     }
 
     /**
-     * Get the List of Resource objects held by resourceVector
+     * Get the List of map.asteroid.Resource objects held by resourceVector
      *
-     * @return List of Resource objects held by resourceVector
+     * @return List of map.asteroid.Resource objects held by resourceVector
      */
     private Resource getResource() {
         return resource;
     }
 
     /**
-     * Get the List of TeleportGate objects held by teleportgateVector
+     * Get the List of map.entity.TeleportGate objects held by teleportgateVector
      *
-     * @return List of TeleportGate objects held by teleportgateVector
+     * @return List of map.entity.TeleportGate objects held by teleportgateVector
      */
     private TeleportGate getTeleportGate() {
         return teleportGate;
@@ -168,7 +173,7 @@ public class Asteroid {
 
 
     /**
-     * @return Resource
+     * @return map.asteroid.Resource
      */
     public Resource mined() {
         return null; // TODO: implementálni
@@ -176,7 +181,7 @@ public class Asteroid {
 
 
     /**
-     * @return Neighbours
+     * @return map.asteroid.Neighbours
      */
     public Neighbours getNeighbours() {
         return null; // TODO: implementálni
@@ -207,7 +212,7 @@ public class Asteroid {
 
     /**
      * @param asteroid
-     * @return Asteroid
+     * @return map.asteroid.Asteroid
      */
     public Asteroid removeAsteroid(Asteroid asteroid) {
         return null; // TODO: implementálni

@@ -1,7 +1,9 @@
+package map.entity;
+
 /**
- * Class SublimableResource
+ * Class map.entity.Robot
  */
-public class SublimableResource extends Resource {
+public class Robot extends Entity {
 
     //
     // Fields
@@ -11,7 +13,7 @@ public class SublimableResource extends Resource {
     //
     // Constructors
     //
-    public SublimableResource() {
+    public Robot() {
     }
 
     //
@@ -30,7 +32,14 @@ public class SublimableResource extends Resource {
     /**
      *
      */
-    public void drilledInPerihelion() {
+    public void asteroidExploded() {
+    }
+
+
+    /**
+     *
+     */
+    public void step() {
     }
 
 

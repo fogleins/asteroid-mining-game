@@ -1,7 +1,9 @@
+package map.asteroid;
+
 /**
- * Class RadioactiveResource
+ * Class map.asteroid.SublimableResource
  */
-public class RadioactiveResource extends Resource {
+public class SublimableResource extends Resource {
 
     //
     // Fields
@@ -11,7 +13,7 @@ public class RadioactiveResource extends Resource {
     //
     // Constructors
     //
-    public RadioactiveResource() {
+    public SublimableResource() {
     }
 
     //

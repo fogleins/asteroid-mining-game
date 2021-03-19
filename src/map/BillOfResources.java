@@ -1,8 +1,12 @@
+package map;
+
+import map.asteroid.Resource;
+
 import java.util.ArrayList;
 
 
 /**
- * Class BillOfResources
+ * Class map.BillOfResources
  */
 public class BillOfResources {
 

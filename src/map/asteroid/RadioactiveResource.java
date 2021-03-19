@@ -1,7 +1,9 @@
+package map.asteroid;
+
 /**
- * Class Robot
+ * Class map.asteroid.RadioactiveResource
  */
-public class Robot extends Entity {
+public class RadioactiveResource extends Resource {
 
     //
     // Fields
@@ -11,7 +13,7 @@ public class Robot extends Entity {
     //
     // Constructors
     //
-    public Robot() {
+    public RadioactiveResource() {
     }
 
     //
@@ -30,14 +32,7 @@ public class Robot extends Entity {
     /**
      *
      */
-    public void asteroidExploded() {
-    }
-
-
-    /**
-     *
-     */
-    public void step() {
+    public void drilledInPerihelion() {
     }
 
 

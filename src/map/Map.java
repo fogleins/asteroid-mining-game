@@ -1,8 +1,12 @@
+package map;
+
+import map.asteroid.Asteroid;
+
 import java.util.ArrayList;
 
 
 /**
- * Class Map
+ * Class map.Map
  */
 public class Map {
 
@@ -32,9 +36,9 @@ public class Map {
 
 
     /**
-     * Get the List of BaseAsteroid objects held by baseasteroidVector
+     * Get the List of map.asteroid.BaseAsteroid objects held by baseasteroidVector
      *
-     * @return List of BaseAsteroid objects held by baseasteroidVector
+     * @return List of map.asteroid.BaseAsteroid objects held by baseasteroidVector
      */
     private Asteroid getBaseAsteroid() {
         return baseAsteroid;
@@ -71,7 +75,7 @@ public class Map {
 
     /**
      * @param asteroid
-     * @return Asteroid
+     * @return map.asteroid.Asteroid
      */
     public Asteroid removeAsteroid(Asteroid asteroid) {
         return null; // TODO: implementálni

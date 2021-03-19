@@ -1,8 +1,15 @@
+package control;
+
+import map.Map;
+import map.asteroid.Resource;
+import map.entity.Robot;
+import map.entity.Settler;
+
 import java.util.ArrayList;
 
 
 /**
- * Class Game
+ * Class control.Game
  */
 public class Game {
 
@@ -15,7 +22,7 @@ public class Game {
 
     private Map map;
 
-//    private Game m_game;
+//    private control.Game m_game;
 
     private ArrayList<Settler> settlers = new ArrayList<>();
 
@@ -174,14 +181,14 @@ public class Game {
 //    /**
 //     * @param settler
 //     */
-//    public void addSettler(Settler settler) {
+//    public void addSettler(map.entity.Settler settler) {
 //    }
 //
 //
 //    /**
 //     * @param settler
 //     */
-//    public void removeSettler(Settler settler) {
+//    public void removeSettler(map.entity.Settler settler) {
 //    }
 //
 //
@@ -189,20 +196,20 @@ public class Game {
 //    /**
 //     * @param robot
 //     */
-//    public void addRobot(Robot robot) {
+//    public void addRobot(map.entity.Robot robot) {
 //    }
 //
 //
 //    /**
 //     * @param robot
 //     */
-//    public void removeRobot(Robot robot) {
+//    public void removeRobot(map.entity.Robot robot) {
 //    }
 
 
     /**
      * @param resources
-     * @return Resource
+     * @return map.asteroid.Resource
      */
     public Resource exchangeResource(ArrayList<Resource> resources) {
         return null; // TODO: implementálni

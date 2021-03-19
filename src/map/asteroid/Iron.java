@@ -1,7 +1,9 @@
+package map.asteroid;
+
 /**
- * Class Ice
+ * Class map.asteroid.Iron
  */
-public class Ice extends SublimableResource {
+public class Iron extends Resource {
 
     //
     // Fields
@@ -11,7 +13,7 @@ public class Ice extends SublimableResource {
     //
     // Constructors
     //
-    public Ice() {
+    public Iron() {
     }
 
     //

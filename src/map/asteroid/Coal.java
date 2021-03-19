@@ -1,5 +1,7 @@
+package map.asteroid;
+
 /**
- * Class Coal
+ * Class map.asteroid.Coal
  */
 public class Coal extends Resource {
 

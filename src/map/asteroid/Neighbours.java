@@ -1,5 +1,9 @@
+package map.asteroid;
+
+import map.asteroid.Asteroid;
+
 /**
- * Class Neighbours
+ * Class map.asteroid.Neighbours
  */
 public class Neighbours {
 

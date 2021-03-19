@@ -1,8 +1,14 @@
+package map.entity;
+
+import control.Game;
+import map.BillOfResources;
+import map.asteroid.Resource;
+
 import java.util.ArrayList;
 
 
 /**
- * Class Settler
+ * Class map.entity.Settler
  */
 public class Settler extends Entity {
 

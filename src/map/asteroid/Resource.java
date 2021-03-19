@@ -1,5 +1,7 @@
+package map.asteroid;
+
 /**
- * Class Resource
+ * Class map.asteroid.Resource
  */
 public class Resource {
 
@@ -26,16 +28,16 @@ public class Resource {
     //
 
     /**
-     * Add a Asteroid object to the asteroidVector List
+     * Add a map.asteroid.Asteroid object to the asteroidVector List
      */
     private void setAsteroid(Asteroid asteroid) {
         this.asteroid = asteroid;
     }
 
 //    /**
-//     * Remove a Asteroid object from asteroidVector List
+//     * Remove a map.asteroid.Asteroid object from asteroidVector List
 //     */
-//    private void removeAsteroid(Asteroid new_object) {
+//    private void removeAsteroid(map.asteroid.Asteroid new_object) {
 //        asteroidVector.remove(new_object);
 //    }
 
