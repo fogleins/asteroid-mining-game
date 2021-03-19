@@ -1,6 +1,7 @@
 package map.entity;
 
 import map.asteroid.Asteroid;
+import utility.OutputFormatter;
 
 /**
  * Class map.entity.Entity
@@ -74,6 +75,13 @@ abstract public class Entity {
      * @param whereTo
      */
     public void move(Asteroid whereTo) {
+        OutputFormatter.OutputCall("move(" + whereTo.toString() + ") - " + name);
+        if (asteroid != null) {
+            asteroid.removeEntity(this);
+        }
+        whereTo.acceptEntity(this);
+        asteroid = whereTo;
+        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -81,6 +89,9 @@ abstract public class Entity {
      *
      */
     public void drill() {
+        OutputFormatter.OutputCall("drill() - " + this.name);
+        asteroid.drilled();
+        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -88,6 +99,9 @@ abstract public class Entity {
      *
      */
     public void die() {
+        OutputFormatter.OutputCall("die() - " + this.name);
+        asteroid.removeEntity(this);
+        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -95,6 +109,9 @@ abstract public class Entity {
      *
      */
     public void asteroidExploded() {
+        OutputFormatter.OutputCall("asteroidExploded() - " + this.name);
+        die();
+        OutputFormatter.OutputReturn("return");
     }
 
 

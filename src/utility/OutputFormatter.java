@@ -20,12 +20,12 @@ public class OutputFormatter {
     }
 
     public static void OutputReturn(String s) {
+        level--;
         String res = "";
         for (int i = 0; i < level; i++) {
             res += "\t";
         }
         res += s;
         System.out.println(res);
-        level--;
     }
 }
