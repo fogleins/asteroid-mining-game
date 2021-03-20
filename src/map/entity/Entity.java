@@ -63,7 +63,7 @@ abstract public class Entity {
      *
      * @param asteroid the new value of m_asteroid
      */
-    private void setAsteroid(Asteroid asteroid) {
+    public void setAsteroid(Asteroid asteroid) {
         this.asteroid = asteroid;
     }
 

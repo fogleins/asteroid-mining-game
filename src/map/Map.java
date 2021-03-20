@@ -1,6 +1,8 @@
 package map;
 
 import map.asteroid.Asteroid;
+import map.asteroid.BaseAsteroid;
+import utility.OutputFormatter;
 
 import java.util.ArrayList;
 
@@ -16,13 +18,29 @@ public class Map {
 
 
     private final ArrayList<Asteroid> asteroids = new ArrayList<>();
-    private Asteroid baseAsteroid;
+    private BaseAsteroid baseAsteroid;
 
     //
     // Constructors
     //
-    public Map(Asteroid baseAsteroid) {
-        this.baseAsteroid = baseAsteroid;
+    public Map(BaseAsteroid baseAst) {
+        OutputFormatter.OutputCall("create - " + this.toString());
+        baseAsteroid=baseAst;
+        asteroids.add(baseAsteroid);
+        for(int i = 1;i<3;i++){
+            Asteroid a = new Asteroid();
+            a.setName("a"+ i);
+            asteroids.add(a);
+        }
+        for(Asteroid a : asteroids){
+            for(Asteroid b : asteroids){
+                if(a!=b){
+                    a.addNeighbour(b);
+
+                }
+            }
+        }
+        OutputFormatter.OutputReturn("return");
     }
 
     //
@@ -56,6 +74,7 @@ public class Map {
      * Remove a Asteroids object from asteroidsVector List
      */
     private void removeAsteroids(Asteroid asteroid) {
+
         asteroids.remove(asteroid);
     }
 
@@ -78,7 +97,10 @@ public class Map {
      * @return map.asteroid.Asteroid
      */
     public Asteroid removeAsteroid(Asteroid asteroid) {
-        return null; // TODO: implementálni
+        OutputFormatter.OutputCall("remove - " + asteroid.toString());
+        asteroids.remove(asteroid);
+        OutputFormatter.OutputReturn("return - "+ asteroid.toString());
+        return asteroid;
     }
 
 
@@ -86,6 +108,11 @@ public class Map {
      *
      */
     public void sunflare() {
+        for (Asteroid a : asteroids){
+            a.hitBySunflare();
+            OutputFormatter.OutputCall("hitBySunflare() - " + a.toString());
+        }
+        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -93,6 +120,11 @@ public class Map {
      *
      */
     public void changePerihelion() {
+        for (Asteroid a : asteroids){
+            a.changePerihelionState();
+            OutputFormatter.OutputCall("changePerihelionState() - " + a.toString());
+        }
+        OutputFormatter.OutputReturn("return");
     }
 
 

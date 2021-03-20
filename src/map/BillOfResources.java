@@ -37,7 +37,7 @@ public class BillOfResources {
     /**
      * Add a Resources object to the resourcesVector List
      */
-    private void addResources(Resource resource) {
+    public void addResources(Resource resource) {
         this.resources.add(resource);
     }
 
@@ -66,7 +66,7 @@ public class BillOfResources {
      * @param ownedResources
      * @return boolean
      */
-    public boolean use(Resource ownedResources) {
+    public boolean use(ArrayList<Resource> ownedResources) {
         return false; // TODO: implementálni
     }
 

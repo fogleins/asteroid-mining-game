@@ -241,7 +241,7 @@ public class Asteroid {
      * @param asteroid
      */
     public void addNeighbour(Asteroid asteroid) {
-        OutputFormatter.OutputCall("addNeighbour() - " + name);
+        OutputFormatter.OutputCall("addNeighbour() - " + name+ " -> "+ asteroid.name);
         this.neighbours.add(asteroid);
         OutputFormatter.OutputReturn("return");
     }

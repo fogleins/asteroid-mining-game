@@ -83,6 +83,7 @@ public class Settler extends Entity {
     /**
      *
      */
+    /*
     public void buildRobot() {
         OutputFormatter.OutputCall("buildRobot() - " + name);
         Robot r = Robot.create(resources);
@@ -93,6 +94,8 @@ public class Settler extends Entity {
             OutputFormatter.OutputReturn("return - null");
         }
     }
+
+     */
 
     /**
      *

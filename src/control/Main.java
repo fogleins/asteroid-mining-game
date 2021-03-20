@@ -1,13 +1,15 @@
 package control;
 
+import map.Map;
 import map.asteroid.*;
+import map.entity.Entity;
 import map.entity.Robot;
 import map.entity.Settler;
 import utility.OutputFormatter;
 
 public class Main {
     public static void main(String[] args) {
-        Test_Settler_Mines_Enough_Space();
+        //Test_Settler_Mines_Enough_Space();
     }
 
     public static void Test_Drill_Normal_Asteroid_Drilled(){
@@ -149,6 +151,36 @@ public class Main {
         OutputFormatter.setState(true);
         s.mine();
     }
+
+    public static void Test_Map_Initialization(){
+        System.out.println("Test_Map_Initialization:\n\n");
+        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
+        BaseAsteroid ba = new BaseAsteroid();
+        ba.setName("ba");
+        Map map = new Map(ba);
+    }
+
+    public static void Test_Move(){
+        System.out.println("Test_Move:\n\n");
+        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
+        Asteroid a1 = new Asteroid();
+        a1.setName("a1");
+        Asteroid a2 = new Asteroid();
+        a2.setName("a2");
+        a1.addNeighbour(a2);
+        a2.addNeighbour(a1);
+        Settler s = new Settler(null);
+        s.setName("telepes");
+        s.setAsteroid(a1);
+        a1.acceptEntity(s);
+        s.move(a2);
+    }
+
+
+
+
+
+
 
 
 }
