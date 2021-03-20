@@ -191,7 +191,7 @@ public class Asteroid {
 
 
         Resource minedResource = null;
-
+        // TODO: itt a thickness-t nem kéne ellenőrizni?
         //Ha nem üreges az aszteroida, akkor kivesszük belőle a nyersanyagot
         if (this.resource != null){
             minedResource = resource;
@@ -269,6 +269,10 @@ public class Asteroid {
         this.teleportGate = teleportGate;
 
         OutputFormatter.OutputReturn("return");
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
 

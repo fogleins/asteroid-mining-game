@@ -54,7 +54,7 @@ abstract public class Entity {
      *
      * @return the value of m_asteroid
      */
-    private Asteroid getAsteroid() {
+    public Asteroid getAsteroid() {
         return asteroid;
     }
 

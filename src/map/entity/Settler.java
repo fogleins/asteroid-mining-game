@@ -45,7 +45,7 @@ public class Settler extends Entity {
      *
      * @return List of Resources objects held by resourcesVector
      */
-    private ArrayList<Resource> getResources() {
+    public ArrayList<Resource> getResources() {
         OutputFormatter.OutputCall("getResources() - " + name);
         OutputFormatter.OutputReturn("return - resources");
         return resources;
@@ -60,7 +60,7 @@ public class Settler extends Entity {
      *
      * @return List of Teleport objects held by teleportVector
      */
-    private ArrayList<TeleportGate> getTeleportList() {
+    public ArrayList<TeleportGate> getTeleportList() {
         OutputFormatter.OutputCall("getTeleportList() - " + name);
         OutputFormatter.OutputReturn("return - teleports");
         return teleports;
