@@ -1,16 +1,13 @@
 package control;
 
-import map.asteroid.Asteroid;
-import map.asteroid.Ice;
-import map.asteroid.Iron;
-import map.asteroid.Uranium;
+import map.asteroid.*;
 import map.entity.Robot;
 import map.entity.Settler;
 import utility.OutputFormatter;
 
 public class Main {
     public static void main(String[] args) {
-        Test_Drill_Radioactive_Asteroid_Perihelion_Settler();
+        Test_Settler_Mines_Enough_Space();
     }
 
     public static void Test_Drill_Normal_Asteroid_Drilled(){
@@ -105,4 +102,53 @@ public class Main {
         OutputFormatter.setState(true); // Innen már számít a kimenet, így bekapcsoljuk az OutputFormattert.
         s.drill();
     }
+
+    public static void Test_Settler_Mines_Enough_Space() {
+        System.out.println("Settler Mines With Enough Space In Storage:\n\n");
+        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
+        Settler s = new Settler(null); // Létrehozzuk  a teszthez szükséges objektumokat.
+        s.setName("Settler");
+
+        Asteroid a = new Asteroid();
+        a.setName("Asteroid");
+        Uranium uranium = new Uranium();
+
+        a.addResource(uranium);
+        a.setSurfaceThickness(0);
+
+        s.move(a);
+
+        OutputFormatter.setState(true);
+        s.mine();
+    }
+
+    public static void Test_Settler_Mines_Not_Enough_Space() {
+        System.out.println("Settler Mines Without Enough Space In Storage:\n\n");
+        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
+        Settler s = new Settler(null); // Létrehozzuk  a teszthez szükséges objektumokat.
+        s.setName("Settler");
+
+        Asteroid [] a = new Asteroid[11];
+        Uranium uranium = new Uranium();
+
+
+        for (int i = 0; i < 10; i++) {
+            a[i] = new Asteroid();
+            a[i].addResource(uranium);
+            a[i].setSurfaceThickness(0);
+        }
+
+        //A telepes raktere be kell hogy telljen
+        for (int i = 0; i < 10; i++) {
+            s.move(a[i]);
+            s.mine();
+        }
+
+        s.move(a[10]);
+
+        OutputFormatter.setState(true);
+        s.mine();
+    }
+
+
 }

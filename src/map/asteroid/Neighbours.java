@@ -1,6 +1,6 @@
 package map.asteroid;
 
-import map.asteroid.Asteroid;
+import java.util.ArrayList;
 
 /**
  * Class map.asteroid.Neighbours
@@ -11,13 +11,15 @@ public class Neighbours {
     // Fields
     //
 
-    private Asteroid asteroidNeighbours;
-    private Asteroid teleportGateNeighbours;
+    private ArrayList<Asteroid> asteroidNeighbours;
+    private ArrayList<Asteroid> teleportGateNeighbours;
 
     //
     // Constructors
     //
-    public Neighbours() {
+    public Neighbours(ArrayList<Asteroid> asteroidNeighbours, ArrayList<Asteroid> teleportGateNeighbours) {
+        this.asteroidNeighbours = asteroidNeighbours;
+        this.teleportGateNeighbours = teleportGateNeighbours;
     }
 
     ;
@@ -36,7 +38,7 @@ public class Neighbours {
      *
      * @return the value of asteroidNeighbours
      */
-    public Asteroid getAsteroidNeighbours() {
+    public ArrayList<Asteroid> getAsteroidNeighbours() {
         return asteroidNeighbours;
     }
 
@@ -45,7 +47,7 @@ public class Neighbours {
      *
      * @param asteroid the new value of asteroidNeighbours
      */
-    public void setAsteroidNeighbours(Asteroid asteroid) {
+    public void setAsteroidNeighbours(ArrayList<Asteroid> asteroid) {
         asteroidNeighbours = asteroid;
     }
 
@@ -54,17 +56,17 @@ public class Neighbours {
      *
      * @return the value of teleportGateNeighbours
      */
-    public Asteroid getTeleportGateNeighbours() {
+    public ArrayList<Asteroid> getTeleportGateNeighbours() {
         return teleportGateNeighbours;
     }
 
     /**
      * Set the value of teleportGateNeighbours
      *
-     * @param asteroid the new value of teleportGateNeighbours
+     * @param asteroids the new value of teleportGateNeighbours
      */
-    public void setTeleportGateNeighbours(Asteroid asteroid) {
-        teleportGateNeighbours = asteroid;
+    public void setTeleportGateNeighbours(ArrayList<Asteroid> asteroids) {
+        teleportGateNeighbours = asteroids;
     }
 
     //
