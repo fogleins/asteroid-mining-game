@@ -112,7 +112,7 @@ public class Main {
     public static void Test_Drill_Normal_Asteroid_Drilled(){
         System.out.println("Drill Normal Asteroid Perihelion:\n\n");
         OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
-        Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
+        Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
         a.setName("NGC-1304");
@@ -127,7 +127,7 @@ public class Main {
     public static void Test_Drill_Normal_Asteroid(){
         System.out.println("Drill Normal Asteroid Perihelion:\n\n");
         OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
-        Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
+        Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
         a.setName("NGC-1304");
@@ -197,7 +197,7 @@ public class Main {
     public static void Test_Drill_Sublimable_Asteroid_Perihelion(){
         System.out.println("Drill Sublimable Asteroid Perihelion:\n\n");
         OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
-        Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
+        Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
         a.setName("NGC-1304");
