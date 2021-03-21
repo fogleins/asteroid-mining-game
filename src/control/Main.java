@@ -205,14 +205,6 @@ public class Main {
         s.mine();
     }
 
-    public static void Test_Map_Initialization(){
-        System.out.println("Test_Map_Initialization:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
-        BaseAsteroid ba = new BaseAsteroid();
-        ba.setName("ba");
-        Map map = new Map(ba);
-    }
-
     public static void Test_Move(){
         System.out.println("Test_Move:\n\n");
         OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
