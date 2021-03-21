@@ -51,6 +51,17 @@ public class Settler extends Entity {
         return resources;
     }
 
+    /*// only used in testing initialization
+    public void setResources(ArrayList<Resource> res) {
+        resources.clear();
+        resources.addAll(res);
+    }*/
+
+    // only used in testing initialization
+    public void addTeleport(TeleportGate teleportGate) {
+        teleports.add(teleportGate);
+    }
+
     //
     // Other methods
     //

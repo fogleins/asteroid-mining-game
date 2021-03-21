@@ -5,8 +5,10 @@ import map.asteroid.*;
 import map.entity.Entity;
 import map.entity.Robot;
 import map.entity.Settler;
+import map.entity.TeleportGate;
 import utility.OutputFormatter;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,7 +18,12 @@ public class Main {
             System.out.println("Choose a use-case:");
             System.out.println("\t0. Exit");
             System.out.println("\t1. Settler mines (enough space)" +
-                    "\n\t2. Settler mines (not enough space)"); //TODO: minden use-case hozzáadása
+                    "\n\t2. Settler mines (not enough space)" +
+                    "\n\t3. Build teleport (enough resource)" +
+                    "\n\t4. Build teleport (not enough resource)" +
+                    "\n\t5. Place teleport (ok)" +
+                    "\n\t6. Place teleport (no teleport gate in storage)" +
+                    "\n\t7. Place teleport (teleport already placed on asteroid)"); //TODO: minden use-case hozzáadása
             System.out.println("\n> ");
             int selection = input.nextInt();
             switch (selection) {
@@ -28,6 +35,21 @@ public class Main {
                     break;
                 case 2:
                     Test_Settler_Mines_Not_Enough_Space();
+                    break;
+                case 3:
+                    Test_Build_Teleport_Has_Resources();
+                    break;
+                case 4:
+                    Test_Build_Teleport_No_Resources();
+                    break;
+                case 5:
+                    Test_Place_Teleport_Ok();
+                    break;
+                case 6:
+                    Test_Place_Teleport_No_Teleport();
+                    break;
+                case 7:
+                    Test_Place_Teleport_Already_Exists();
                     break;
                 default:
                     System.out.println("Invalid selection!");
@@ -207,11 +229,96 @@ public class Main {
         s.move(a2);
     }
 
+    public static void Test_Build_Teleport_Has_Resources() {
+        System.out.println("Test_Build_Teleport_Has_Resources:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+        Settler s = new Settler(g);
+        s.setName("s");
+        Asteroid a = new Asteroid();
+        a.setName("a1");
+        s.setAsteroid(a);
 
+        a.setSurfaceThickness(0);
+        a.setResource(new Iron());
+        s.mine();
+        a.setResource(new Iron());
+        s.mine();
+        a.setResource(new Ice());
+        s.mine();
+        a.setResource(new Uranium());
+        s.mine();
 
+        TeleportGate tg0 = new TeleportGate(); // to generate BillOfRes data
 
+        OutputFormatter.setState(true);
+        s.buildTeleport();
+    }
 
+    public static void Test_Build_Teleport_No_Resources() {
+        System.out.println("Test_Build_Teleport_No_Resources:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+        Settler s = new Settler(g);
+        s.setName("s");
+        Asteroid a = new Asteroid();
+        a.setName("a1");
+        s.setAsteroid(a);
 
+        a.setSurfaceThickness(0);
+        a.setResource(new Iron());
+        s.mine();
 
+        TeleportGate tg0 = new TeleportGate(); // to generate BillOfRes data
 
+        OutputFormatter.setState(true);
+        s.buildTeleport();
+    }
+
+    public static void  Test_Place_Teleport_Ok() {
+        System.out.println("Test_Place_Teleport_Ok:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+        Settler s = new Settler(g);
+        s.setName("s");
+        Asteroid a = new Asteroid();
+        a.setName("a1");
+        s.setAsteroid(a);
+        TeleportGate tg = new TeleportGate();
+        s.addTeleport(tg);
+
+        OutputFormatter.setState(true);
+        s.placeTeleport();
+    }
+
+    public static void  Test_Place_Teleport_No_Teleport() {
+        System.out.println("Test_Place_Teleport_No_Teleport:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+        Settler s = new Settler(g);
+        s.setName("s");
+        Asteroid a = new Asteroid();
+        a.setName("a1");
+        s.setAsteroid(a);
+
+        OutputFormatter.setState(true);
+        s.placeTeleport();
+    }
+
+    public static void  Test_Place_Teleport_Already_Exists() {
+        System.out.println("Test_Place_Teleport_Already_Exists:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+        Settler s = new Settler(g);
+        s.setName("s");
+        Asteroid a = new Asteroid();
+        a.setName("a1");
+        s.setAsteroid(a);
+        TeleportGate tg = new TeleportGate();
+        a.setTeleportGate(tg);
+        s.addTeleport(tg);
+
+        OutputFormatter.setState(true);
+        s.placeTeleport();
+    }
 }
