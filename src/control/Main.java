@@ -1,5 +1,6 @@
 package control;
 
+import map.Map;
 import map.asteroid.*;
 import map.entity.Robot;
 import map.entity.Settler;
@@ -368,16 +369,16 @@ public class Main {
         a2.setSurfaceThickness(0);
         a2.setName("a2");
         OutputFormatter.setState(true);
-        Resource exchange = g.exchangeResource(s.getResources());
-        a2.placeResource(exchange);
+        s.mine();
     }
 
     public static void Test_Generate_Sunflare() {
         System.out.println("Test_Generate_Sunflare:\n");
         Game g = new Game();
+        Map m = g.getMap();
 
         OutputFormatter.setState(true);
-        g.getMap().sunflare();
+        m.sunflare();
     }
 
     public static void Test_Build_Robot_Has_Resources() {

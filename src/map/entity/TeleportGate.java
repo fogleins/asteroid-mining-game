@@ -33,7 +33,7 @@ public class TeleportGate {
     // Methods
     //
     public static ArrayList<TeleportGate> create(ArrayList<Resource> ownedResources){
-        OutputFormatter.OutputCall("create() - static in TeleportGate");
+        OutputFormatter.OutputCall("create("+ownedResources.toString()+") - static in TeleportGate");
         boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
         if(hasResourcesToBuildTeleport){
             ArrayList<TeleportGate> gates = new ArrayList<>();
