@@ -187,7 +187,7 @@ public class Main {
         Uranium uranium = new Uranium();
 
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 11; i++) {
             a[i] = new Asteroid();
             a[i].addResource(uranium);
             a[i].setSurfaceThickness(0);
