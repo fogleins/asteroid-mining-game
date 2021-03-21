@@ -46,12 +46,9 @@ abstract public class Entity {
         this.name = name;
     }
 
-    //
-    // Other methods
-    //
-
     /**
-     * @param whereTo
+     * Moves the entity from current asteroid to the asteroid given as parameter.
+     * @param whereTo Given asteroid.
      */
     public void move(Asteroid whereTo) {
         OutputFormatter.OutputCall("move(" + whereTo.toString() + ") - " + name);
@@ -65,7 +62,7 @@ abstract public class Entity {
 
 
     /**
-     * Entity drills.
+     * Entity tries to drill.
      */
     public void drill() {
         OutputFormatter.OutputCall("drill() - " + this.name);
@@ -85,7 +82,7 @@ abstract public class Entity {
 
 
     /**
-     * Asteroid explodes.
+     * Handles the event of asteroid explosion on the exposed entity.
      */
     public void asteroidExploded() {
         OutputFormatter.OutputCall("asteroidExploded() - " + this.name);
@@ -102,6 +99,4 @@ abstract public class Entity {
         OutputFormatter.OutputReturn("return - null");
         return null;
     }
-
-
 }

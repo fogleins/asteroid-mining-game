@@ -52,7 +52,6 @@ public class Settler extends Entity {
     }
 
     // only used in testing initialization
-
     /**
      * Adds a teleportgate to an asteroid.
      *
