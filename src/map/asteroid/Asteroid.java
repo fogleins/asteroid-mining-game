@@ -271,14 +271,20 @@ public class Asteroid {
 
 
     /**
+     *
      * @param teleportGate
+     * @return
      */
-    public void setTeleportGate(TeleportGate teleportGate) {
+    public boolean setTeleportGate(TeleportGate teleportGate) {
         OutputFormatter.OutputCall("setTeleportGate() - " + name);
-
-        this.teleportGate = teleportGate;
-
-        OutputFormatter.OutputReturn("return");
+        if (this.teleportGate == null){
+            this.teleportGate = teleportGate;
+            OutputFormatter.OutputReturn("return - true");
+            return true;
+        } else {
+            OutputFormatter.OutputReturn("return - false");
+            return false;
+        }
     }
 
     public void setResource(Resource resource) {

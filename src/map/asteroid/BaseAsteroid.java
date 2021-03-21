@@ -40,7 +40,6 @@ public class BaseAsteroid extends Asteroid {
     }
 
 
-
     /**
      * Get the value of m_billOfResources
      *
@@ -68,6 +67,7 @@ public class BaseAsteroid extends Asteroid {
 
     /**
      * Accepts an entity and checks if the game is won.
+     *
      * @param entity it will be added to the list of entities.
      */
     public void acceptEntity(Entity entity) {
@@ -78,10 +78,12 @@ public class BaseAsteroid extends Asteroid {
 
         //We need to know the quantity of the resources that are on the baseAsteroid.
         for (int i = 0; i < entities.size(); i++) {
-            resourcesOnAsteroid.add(entities.get(i).getResources());
+            for (Resource r : entities.get(i).getResources()) {
+                resourcesOnAsteroid.add(r);
+            }
         }
 
-        if(winConditionResources.check(resourcesOnAsteroid))
+        if (winConditionResources.check(resourcesOnAsteroid))
             game.gameWon();
 
 

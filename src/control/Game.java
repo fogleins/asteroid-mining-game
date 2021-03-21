@@ -31,7 +31,7 @@ public class Game {
         OutputFormatter.OutputCall("Game() - " + this.toString());
         currentRound = 0;
         nextSunflare = generateNextSunflare();
-        BaseAsteroid baseAsteroid = new BaseAsteroid();
+        BaseAsteroid baseAsteroid = new BaseAsteroid(this);
         map = new Map(baseAsteroid);
         settlers = new ArrayList<>();
         robots = new ArrayList<>();

@@ -39,9 +39,10 @@ public class Robot extends Entity {
         if (hasResourcesToBuildTeleport) {
             Robot robot = new Robot();
             robot.move(currentAsteroid);
-            OutputFormatter.OutputReturn("return");
+            OutputFormatter.OutputReturn("return - success");
+        } else {
+            OutputFormatter.OutputReturn("return - could not create");
         }
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
