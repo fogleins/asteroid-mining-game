@@ -78,9 +78,10 @@ public class Robot extends Entity {
         if (choice == 0) {
             ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
             super.move(neighbours.get(rnd.nextInt(neighbours.size())));
+            OutputFormatter.OutputReturn("return - move");
         } else {
             super.drill();
+            OutputFormatter.OutputReturn("return - drill");
         }
-        OutputFormatter.OutputReturn("return");
     }
 }
