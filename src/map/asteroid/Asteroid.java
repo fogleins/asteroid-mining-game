@@ -162,10 +162,12 @@ public class Asteroid {
     //
 
     /**
-     *
+     *Asteroid explodes.
      */
     public void explode() {
         OutputFormatter.OutputCall("explode() - " + name);
+
+        //All entities that were on the asteroid are warned that the asteroid has been exploded
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).asteroidExploded();
         }
@@ -174,14 +176,16 @@ public class Asteroid {
 
 
     /**
-     *
+     *The asteroid is drilled.
      */
     public void drilled() {
         OutputFormatter.OutputCall("drilled() - " + name);
 
+        //You can't drill if the surface thickness is 0
         if (surfaceThickness != 0) {
             this.surfaceThickness--;
 
+            //If the asteroid is in the perihelion zone, some resources behave different, that's why drilledInPerihelion() is called
             if (surfaceThickness == 0 && inPerihelion) {
                 this.resource.drilledInPerihelion();
             }
@@ -192,14 +196,16 @@ public class Asteroid {
 
 
     /**
-     * @return map.asteroid.Resource
+     *
+     *
+     *  @return the mined asteroid (map.asteroid.Resource)
      */
     public Resource mined() {
         OutputFormatter.OutputCall("mined() - " + name);
 
 
         Resource minedResource = null;
-        //Ha nem üreges az aszteroida, akkor kivesszük belőle a nyersanyagot
+        //If the asteroid is not empty and the thickness is zero, the resource is mined
         if (this.resource != null && surfaceThickness == 0) {
             minedResource = resource;
             resource = null;
@@ -211,7 +217,8 @@ public class Asteroid {
 
 
     /**
-     * @return map.asteroid.Neighbours
+     *
+     * @return A map.asteroid.Neighbours object that contains all the neighbours of the asteroid
      */
     public Neighbours getNeighbours() {
         OutputFormatter.OutputCall("getNeighbours() - " + name);
@@ -229,7 +236,7 @@ public class Asteroid {
 
 
     /**
-     * @param entity
+     * @param entity that will be added to the list
      */
     public void acceptEntity(Entity entity) {
         OutputFormatter.OutputCall("acceptEntity() - " + name);
@@ -239,7 +246,7 @@ public class Asteroid {
 
 
     /**
-     * @param entity
+     * @param entity that will be removed from the list
      */
     public void removeEntity(Entity entity) {
         OutputFormatter.OutputCall("removeEntity() - " + name);
@@ -249,7 +256,7 @@ public class Asteroid {
 
 
     /**
-     * @param asteroid
+     * @param asteroid new neighbour of the asteroid
      */
     public void addNeighbour(Asteroid asteroid) {
         OutputFormatter.OutputCall("addNeighbour() - " + name + " -> " + asteroid.name);
@@ -259,7 +266,7 @@ public class Asteroid {
 
 
     /**
-     * @param asteroid
+     * @param asteroid remove this asteroid from  it's neighbours
      */
     public void removeAsteroid(Asteroid asteroid) {
         OutputFormatter.OutputCall("removeAsteroid() - " + name);
@@ -272,8 +279,8 @@ public class Asteroid {
 
     /**
      *
-     * @param teleportGate
-     * @return
+     * @param teleportGate the teleport gate that will be placed on the asteroid
+     * @return success or not
      */
     public boolean setTeleportGate(TeleportGate teleportGate) {
         OutputFormatter.OutputCall("setTeleportGate() - " + name);
@@ -294,7 +301,7 @@ public class Asteroid {
 
 
     /**
-     *
+     *remove the teleport gate from the asteroid
      */
     public void removeTeleportGate() {
         OutputFormatter.OutputCall("removeTeleportGate() - " + name);
@@ -306,11 +313,12 @@ public class Asteroid {
 
 
     /**
-     * @param resource
+     * @param resource this will be placed in the asteroid
      */
     public boolean placeResource(Resource resource) {
         OutputFormatter.OutputCall("placeResource() - " + name);
 
+        //if the asteroid is empty and the surface thickness is zero, we can place the resource inside the asteroid
         if (this.resource == null && surfaceThickness == 0) {
             this.resource = resource;
             this.resource.setAsteroid(this);
@@ -324,12 +332,12 @@ public class Asteroid {
 
 
     /**
-     *
+     *a sunflare hits the asteroid
      */
     public void hitBySunflare() {
         OutputFormatter.OutputCall("hitBySunflare() - " + name);
 
-        //Ha nem üreges a mag, az összes rajta lévő entitás elhalálozik
+        ///If the asteroid is not empty, all the entities die on its surface
         if (resource != null) {
             for (Entity e : entities) {
                 if (resource != null || surfaceThickness != 0){
@@ -343,7 +351,7 @@ public class Asteroid {
 
 
     /**
-     *
+     *change the perihelion state
      */
     public void changePerihelionState() {
         OutputFormatter.OutputCall("changePerihelionState() - " + name);
