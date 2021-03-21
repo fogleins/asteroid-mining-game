@@ -29,7 +29,9 @@ public class Main {
                     "\n\t10. Test Drill Normal Asteroid Perihelion" +
                     "\n\t11. Test Drill Radioactive Asteroid Perihelion Settler" +
                     "\n\t12. Test Drill Radioactive Asteroid Perihelion Robot" +
-                    "\n\t13. Test Drill Sublimable Asteroid Perihelion"); //TODO: minden use-case hozzáadása
+                    "\n\t13. Test Drill Sublimable Asteroid Perihelion" +
+                    "\n\t14. Test Resource Placeback" +
+                    "\n\t15. Test Move"); //TODO: minden use-case hozzáadása
             System.out.println("\n> ");
             int selection = input.nextInt();
             switch (selection) {
@@ -74,6 +76,12 @@ public class Main {
                     break;
                 case 13:
                     Test_Drill_Sublimable_Asteroid_Perihelion();
+                    break;
+                case 14:
+                    Test_Resource_Placeback();
+                    break;
+                case 15:
+                    Test_Move();
                     break;
                 default:
                     System.out.println("Invalid selection!");
@@ -241,7 +249,7 @@ public class Main {
 
     public static void Test_Move(){
         System.out.println("Test_Move:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
+        OutputFormatter.reset();
         Asteroid a1 = new Asteroid();
         a1.setName("a1");
         Asteroid a2 = new Asteroid();
@@ -252,6 +260,8 @@ public class Main {
         s.setName("telepes");
         s.setAsteroid(a1);
         a1.acceptEntity(s);
+
+        OutputFormatter.setState(true);
         s.move(a2);
     }
 
@@ -347,4 +357,24 @@ public class Main {
         OutputFormatter.setState(true);
         s.placeTeleport();
     }
+
+    public static void Test_Resource_Placeback(){
+        System.out.println("Test_Resource_Placeback:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+        Settler s = new Settler(g);
+        Asteroid a1 = new Asteroid();
+        a1.addResource(new Iron());
+        Asteroid a2 = new Asteroid();
+        s.setAsteroid(a1);
+        a1.acceptEntity(s);
+        s.mine();
+        s.move(a2);
+        a2.setSurfaceThickness(0);
+        a2.setName("a2");
+        OutputFormatter.setState(true);
+        Resource exchange = g.exchangeResource(s.getResources());
+        a2.placeResource(exchange);
+    }
+
 }
