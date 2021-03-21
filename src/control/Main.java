@@ -6,6 +6,7 @@ import map.entity.Robot;
 import map.entity.Settler;
 import map.entity.TeleportGate;
 import utility.OutputFormatter;
+
 import java.util.Scanner;
 
 public class Main {
@@ -100,15 +101,16 @@ public class Main {
             }
             if (running) {
                 System.out.println("\nPress enter to continue.");
-                try { System.in.read(); }
-                catch (Exception e) {/*this is fine (:*/}
+                try {
+                    System.in.read();
+                } catch (Exception e) {/*this is fine (:*/}
             }
         }
         input.close();
         System.out.println("\nBye!");
     }
 
-    public static void Test_Drill_Normal_Asteroid_Drilled(){
+    public static void Test_Drill_Normal_Asteroid_Drilled() {
         System.out.println("Drill Normal Asteroid Perihelion:\n\n");
         Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
@@ -122,7 +124,7 @@ public class Main {
         s.drill();
     }
 
-    public static void Test_Drill_Normal_Asteroid(){
+    public static void Test_Drill_Normal_Asteroid() {
         System.out.println("Drill Normal Asteroid Perihelion:\n\n");
         Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
@@ -136,7 +138,7 @@ public class Main {
         s.drill();
     }
 
-    public static void Test_Drill_Normal_Asteroid_Perihelion(){
+    public static void Test_Drill_Normal_Asteroid_Perihelion() {
         System.out.println("Drill Normal Asteroid Perihelion:\n\n");
         Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
@@ -152,7 +154,7 @@ public class Main {
         s.drill();
     }
 
-    public static void Test_Drill_Radioactive_Asteroid_Perihelion_Settler(){
+    public static void Test_Drill_Radioactive_Asteroid_Perihelion_Settler() {
         System.out.println("Drill Radioactive Asteroid Perihelion Settler:\n\n");
         Game g = new Game();
         Settler s = new Settler(g); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
@@ -169,7 +171,7 @@ public class Main {
         s.drill();
     }
 
-    public static void Test_Drill_Radioactive_Asteroid_Perihelion_Robot(){
+    public static void Test_Drill_Radioactive_Asteroid_Perihelion_Robot() {
         System.out.println("Drill Radioactive Asteroid Perihelion Robot:\n\n");
         Robot r = new Robot(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         r.setName("Robot");
@@ -188,7 +190,7 @@ public class Main {
         r.drill();
     }
 
-    public static void Test_Drill_Sublimable_Asteroid_Perihelion(){
+    public static void Test_Drill_Sublimable_Asteroid_Perihelion() {
         System.out.println("Drill Sublimable Asteroid Perihelion:\n\n");
         Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
@@ -227,7 +229,7 @@ public class Main {
         Settler s = new Settler(new Game()); // Létrehozzuk  a teszthez szükséges objektumokat.
         s.setName("Settler");
 
-        Asteroid [] a = new Asteroid[11];
+        Asteroid[] a = new Asteroid[11];
         Uranium uranium = new Uranium();
 
 
@@ -250,7 +252,7 @@ public class Main {
         s.mine();
     }
 
-    public static void Test_Move(){
+    public static void Test_Move() {
         System.out.println("Test_Move:\n\n");
         Asteroid a1 = new Asteroid();
         a1.setName("a1");
@@ -260,8 +262,7 @@ public class Main {
         a2.addNeighbour(a1);
         Settler s = new Settler(null);
         s.setName("telepes");
-        s.setAsteroid(a1);
-        a1.acceptEntity(s);
+        s.move(a1);
 
         OutputFormatter.setState(true);
         s.move(a2);
@@ -274,7 +275,7 @@ public class Main {
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
-        s.setAsteroid(a);
+        s.move(a);
 
         a.setSurfaceThickness(0);
         a.setResource(new Iron());
@@ -299,7 +300,7 @@ public class Main {
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
-        s.setAsteroid(a);
+        s.move(a);
 
         a.setSurfaceThickness(0);
         a.setResource(new Iron());
@@ -318,7 +319,7 @@ public class Main {
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
-        s.setAsteroid(a);
+        s.move(a);
         TeleportGate tg = new TeleportGate();
         s.addTeleport(tg);
 
@@ -333,7 +334,7 @@ public class Main {
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
-        s.setAsteroid(a);
+        s.move(a);
 
         OutputFormatter.setState(true);
         s.placeTeleport();
@@ -346,7 +347,7 @@ public class Main {
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
-        s.setAsteroid(a);
+        s.move(a);
         TeleportGate tg = new TeleportGate();
         a.setTeleportGate(tg);
         s.addTeleport(tg);
@@ -355,17 +356,19 @@ public class Main {
         s.placeTeleport();
     }
 
-    public static void Test_Resource_Placeback(){
+    public static void Test_Resource_Placeback() {
         System.out.println("Test_Resource_Placeback:\n");
         Game g = new Game();
         Settler s = new Settler(g);
         s.setName("settler");
-        Asteroid a1 = new Asteroid();
-        a1.addResource(new Iron());
+        for (int i = 0; i < 10; i++) {
+            Asteroid a = new Asteroid();
+            a.addResource(new Iron());
+            s.move(a);
+            s.mine();
+        }
         Asteroid a2 = new Asteroid();
-        s.setAsteroid(a1);
-        a1.acceptEntity(s);
-        s.mine();
+        a2.addResource(new Iron());
         s.move(a2);
         a2.setSurfaceThickness(0);
         a2.setName("a2");
@@ -389,7 +392,7 @@ public class Main {
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
-        s.setAsteroid(a);
+        s.move(a);
 
         a.setSurfaceThickness(0);
         a.setResource(new Iron());
@@ -412,7 +415,7 @@ public class Main {
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
-        s.setAsteroid(a);
+        s.move(a);
 
         a.setSurfaceThickness(0);
         a.setResource(new Iron());

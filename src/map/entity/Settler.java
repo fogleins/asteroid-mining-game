@@ -88,13 +88,6 @@ public class Settler extends Entity {
             if(r != null){
                 resources.add(r);
                 OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
-            } else {
-                if(resources.size()>0){
-                    Resource res = m_game.exchangeResource(resources);
-                    asteroid.placeResource(res);
-                    resources.remove(res);
-                }
-                OutputFormatter.OutputReturn("return - null");
             }
         } else {
             Resource resourceToExchange = m_game.exchangeResource(resources);

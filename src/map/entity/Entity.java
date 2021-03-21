@@ -47,24 +47,6 @@ abstract public class Entity {
         this.name = name;
     }
 
-    /**
-     * Get the value of m_asteroid
-     *
-     * @return the value of m_asteroid
-     */
-    public Asteroid getAsteroid() {
-        return asteroid;
-    }
-
-    /**
-     * Set the value of m_asteroid
-     *
-     * @param asteroid the new value of m_asteroid
-     */
-    public void setAsteroid(Asteroid asteroid) {
-        this.asteroid = asteroid;
-    }
-
     //
     // Other methods
     //
