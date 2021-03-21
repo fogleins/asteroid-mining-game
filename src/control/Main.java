@@ -95,6 +95,7 @@ public class Main {
         Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
+        a.setName("NGC-1304");
         a.setInPerihelion(false);
         a.setSurfaceThickness(0);
 
@@ -109,6 +110,7 @@ public class Main {
         Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
+        a.setName("NGC-1304");
         a.setInPerihelion(false);
         a.setSurfaceThickness(2);
 
@@ -123,6 +125,7 @@ public class Main {
         Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
+        a.setName("NGC-1304");
         a.setInPerihelion(true);
         Iron i = new Iron();
         a.addResource(i);
@@ -140,6 +143,7 @@ public class Main {
         Settler s = new Settler(g); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
+        a.setName("NGC-1304");
         a.setInPerihelion(true);
         Uranium u = new Uranium();
         a.addResource(u);
@@ -156,7 +160,9 @@ public class Main {
         Robot r = new Robot(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         r.setName("Robot");
         Asteroid a = new Asteroid();
+        a.setName("NGC-1304");
         Asteroid b = new Asteroid();
+        b.setName("NGC-1305");
         a.setInPerihelion(true);
         Uranium u = new Uranium();
         a.addResource(u);
@@ -174,6 +180,7 @@ public class Main {
         Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
+        a.setName("NGC-1304");
         a.setInPerihelion(true);
         Ice i = new Ice();
         a.addResource(i);
@@ -215,6 +222,7 @@ public class Main {
 
         for (int i = 0; i < 11; i++) {
             a[i] = new Asteroid();
+            a[i].setName("NGC-13" + i);
             a[i].addResource(uranium);
             a[i].setSurfaceThickness(0);
         }

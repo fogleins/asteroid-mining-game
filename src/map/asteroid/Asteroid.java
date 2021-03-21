@@ -129,9 +129,9 @@ public class Asteroid {
     public void addResource(Resource resource) {
         OutputFormatter.OutputCall("addResource() - " + name);
         this.resource = resource;
+        this.resource.setAsteroid(this);
         OutputFormatter.OutputReturn("return");
     }
-
 
 
     /**
@@ -166,8 +166,8 @@ public class Asteroid {
      */
     public void explode() {
         OutputFormatter.OutputCall("explode() - " + name);
-        for (Entity entity : entities) {
-            entity.asteroidExploded();
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).asteroidExploded();
         }
         OutputFormatter.OutputReturn("return");
     }
@@ -179,10 +179,10 @@ public class Asteroid {
     public void drilled() {
         OutputFormatter.OutputCall("drilled() - " + name);
 
-        if(surfaceThickness!=0){
+        if (surfaceThickness != 0) {
             this.surfaceThickness--;
 
-            if(surfaceThickness==0 && inPerihelion){
+            if (surfaceThickness == 0 && inPerihelion) {
                 this.resource.drilledInPerihelion();
             }
         }
@@ -201,7 +201,7 @@ public class Asteroid {
         Resource minedResource = null;
         // TODO: itt a thickness-t nem kéne ellenőrizni?
         //Ha nem üreges az aszteroida, akkor kivesszük belőle a nyersanyagot
-        if (this.resource != null){
+        if (this.resource != null) {
             minedResource = resource;
             resource = null;
         }
@@ -218,7 +218,9 @@ public class Asteroid {
 
         //A Neighbours osztály konstruktora ArrayList-et vár a teleport által összekötött aszteroidák listájával
         ArrayList<Asteroid> teleportGateOtherSide = new ArrayList<>();
-        teleportGateOtherSide.add(teleportGate.getOtherSide());
+        if(teleportGate != null) {
+            teleportGateOtherSide.add(teleportGate.getOtherSide());
+        }
 
         OutputFormatter.OutputReturn("return - new Neighbours(neighbours, teleportGateOtherSide)");
 
@@ -250,7 +252,7 @@ public class Asteroid {
      * @param asteroid
      */
     public void addNeighbour(Asteroid asteroid) {
-        OutputFormatter.OutputCall("addNeighbour() - " + name+ " -> "+ asteroid.name);
+        OutputFormatter.OutputCall("addNeighbour() - " + name + " -> " + asteroid.name);
         this.neighbours.add(asteroid);
         OutputFormatter.OutputReturn("return");
     }
@@ -299,14 +301,18 @@ public class Asteroid {
     /**
      * @param resource
      */
-    public void placeResource(Resource resource) {
+    public boolean placeResource(Resource resource) {
         OutputFormatter.OutputCall("placeResource() - " + name);
 
-        if(this.resource ==null){
+        if (this.resource == null && surfaceThickness == 0) {
             this.resource = resource;
+            this.resource.setAsteroid(this);
+            OutputFormatter.OutputReturn("return - true");
+            return true;
         }
 
-        OutputFormatter.OutputReturn("return");
+        OutputFormatter.OutputReturn("return - false");
+        return false;
     }
 
 
@@ -317,8 +323,8 @@ public class Asteroid {
         OutputFormatter.OutputCall("hitBySunflare() - " + name);
 
         //Ha nem üreges a mag, az összes rajta lévő entitás elhalálozik
-        if(resource!=null){
-            for(Entity e : entities){
+        if (resource != null) {
+            for (Entity e : entities) {
                 e.die();
             }
         }
