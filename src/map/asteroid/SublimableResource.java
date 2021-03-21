@@ -2,7 +2,7 @@ package map.asteroid;
 
 import utility.OutputFormatter;
 
-public class SublimableResource extends Resource {
+public abstract class SublimableResource extends Resource {
 
     public SublimableResource() { }
 
