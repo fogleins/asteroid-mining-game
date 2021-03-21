@@ -199,11 +199,11 @@ public class Asteroid {
 
 
         Resource minedResource = null;
+        // TODO: itt a thickness-t nem kéne ellenőrizni?
         //Ha nem üreges az aszteroida, akkor kivesszük belőle a nyersanyagot
-        if (this.resource != null && surfaceThickness == 0) {
+        if (this.resource != null) {
             minedResource = resource;
             resource = null;
-            minedResource.setAsteroid(null);
         }
         OutputFormatter.OutputReturn("return - minedResource");
         return minedResource;
