@@ -199,11 +199,11 @@ public class Asteroid {
 
 
         Resource minedResource = null;
-        // TODO: itt a thickness-t nem kéne ellenőrizni?
         //Ha nem üreges az aszteroida, akkor kivesszük belőle a nyersanyagot
-        if (this.resource != null) {
+        if (this.resource != null && surfaceThickness == 0) {
             minedResource = resource;
             resource = null;
+            this.resource.setAsteroid(null);
         }
         OutputFormatter.OutputReturn("return - minedResource");
         return minedResource;
@@ -289,6 +289,7 @@ public class Asteroid {
 
     public void setResource(Resource resource) {
         this.resource = resource;
+        this.resource.setAsteroid(this);
     }
 
 
@@ -331,7 +332,9 @@ public class Asteroid {
         //Ha nem üreges a mag, az összes rajta lévő entitás elhalálozik
         if (resource != null) {
             for (Entity e : entities) {
-                e.die();
+                if (resource != null || surfaceThickness != 0){
+                    e.die();
+                }
             }
         }
 
