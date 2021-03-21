@@ -108,9 +108,9 @@ public class Map {
      *
      */
     public void sunflare() {
+        OutputFormatter.OutputCall("sunflare() - " + this.toString());
         for (Asteroid a : asteroids){
             a.hitBySunflare();
-            OutputFormatter.OutputCall("hitBySunflare() - " + a.toString());
         }
         OutputFormatter.OutputReturn("return");
     }

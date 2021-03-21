@@ -12,24 +12,22 @@ abstract public class Entity {
     // Fields
     //
 
+    /**
+     * Entity's name.
+     */
     protected String name;
 
+    /**
+     * Asteroid.
+     */
     protected Asteroid asteroid;
 
-    //
-    // Constructors
-    //
+    /**
+     * Constructor.
+     */
     public Entity() {
     }
 
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
 
     /**
      * Get the value of name
@@ -86,7 +84,7 @@ abstract public class Entity {
 
 
     /**
-     *
+     * Entity drills.
      */
     public void drill() {
         OutputFormatter.OutputCall("drill() - " + this.name);
@@ -96,7 +94,7 @@ abstract public class Entity {
 
 
     /**
-     *
+     * Entity dies.
      */
     public void die() {
         OutputFormatter.OutputCall("die() - " + this.name);
@@ -106,7 +104,7 @@ abstract public class Entity {
 
 
     /**
-     *
+     * Asteroid explodes.
      */
     public void asteroidExploded() {
         OutputFormatter.OutputCall("asteroidExploded() - " + this.name);

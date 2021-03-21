@@ -2,19 +2,18 @@ package control;
 
 import map.Map;
 import map.asteroid.*;
-import map.entity.Entity;
 import map.entity.Robot;
 import map.entity.Settler;
 import map.entity.TeleportGate;
 import utility.OutputFormatter;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
         boolean running = true;
         Scanner input = new Scanner(System.in);
         while (running) {
+            OutputFormatter.reset();
             System.out.println("Choose a use-case:");
             System.out.println("\t0. Exit");
             System.out.println("\t1. Settler mines (enough space)" +
@@ -111,7 +110,6 @@ public class Main {
 
     public static void Test_Drill_Normal_Asteroid_Drilled(){
         System.out.println("Drill Normal Asteroid Perihelion:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
@@ -126,7 +124,6 @@ public class Main {
 
     public static void Test_Drill_Normal_Asteroid(){
         System.out.println("Drill Normal Asteroid Perihelion:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
@@ -141,7 +138,6 @@ public class Main {
 
     public static void Test_Drill_Normal_Asteroid_Perihelion(){
         System.out.println("Drill Normal Asteroid Perihelion:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
@@ -158,7 +154,6 @@ public class Main {
 
     public static void Test_Drill_Radioactive_Asteroid_Perihelion_Settler(){
         System.out.println("Drill Radioactive Asteroid Perihelion Settler:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Game g = new Game();
         Settler s = new Settler(g); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
@@ -176,7 +171,6 @@ public class Main {
 
     public static void Test_Drill_Radioactive_Asteroid_Perihelion_Robot(){
         System.out.println("Drill Radioactive Asteroid Perihelion Robot:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Robot r = new Robot(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         r.setName("Robot");
         Asteroid a = new Asteroid();
@@ -196,7 +190,6 @@ public class Main {
 
     public static void Test_Drill_Sublimable_Asteroid_Perihelion(){
         System.out.println("Drill Sublimable Asteroid Perihelion:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
@@ -213,7 +206,6 @@ public class Main {
 
     public static void Test_Settler_Mines_Enough_Space() {
         System.out.println("Settler Mines With Enough Space In Storage:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Settler s = new Settler(new Game()); // Létrehozzuk  a teszthez szükséges objektumokat.
         s.setName("Settler");
 
@@ -232,7 +224,6 @@ public class Main {
 
     public static void Test_Settler_Mines_Not_Enough_Space() {
         System.out.println("Settler Mines Without Enough Space In Storage:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Settler s = new Settler(new Game()); // Létrehozzuk  a teszthez szükséges objektumokat.
         s.setName("Settler");
 
@@ -261,7 +252,6 @@ public class Main {
 
     public static void Test_Move(){
         System.out.println("Test_Move:\n\n");
-        OutputFormatter.reset();
         Asteroid a1 = new Asteroid();
         a1.setName("a1");
         Asteroid a2 = new Asteroid();
@@ -279,7 +269,6 @@ public class Main {
 
     public static void Test_Build_Teleport_Has_Resources() {
         System.out.println("Test_Build_Teleport_Has_Resources:\n");
-        OutputFormatter.reset();
         Game g = new Game();
         Settler s = new Settler(g);
         s.setName("s");
@@ -305,7 +294,6 @@ public class Main {
 
     public static void Test_Build_Teleport_No_Resources() {
         System.out.println("Test_Build_Teleport_No_Resources:\n");
-        OutputFormatter.reset();
         Game g = new Game();
         Settler s = new Settler(g);
         s.setName("s");
@@ -325,7 +313,6 @@ public class Main {
 
     public static void Test_Place_Teleport_Ok() {
         System.out.println("Test_Place_Teleport_Ok:\n");
-        OutputFormatter.reset();
         Game g = new Game();
         Settler s = new Settler(g);
         s.setName("s");
@@ -341,7 +328,6 @@ public class Main {
 
     public static void Test_Place_Teleport_No_Teleport() {
         System.out.println("Test_Place_Teleport_No_Teleport:\n");
-        OutputFormatter.reset();
         Game g = new Game();
         Settler s = new Settler(g);
         s.setName("s");
@@ -355,7 +341,6 @@ public class Main {
 
     public static void Test_Place_Teleport_Already_Exists() {
         System.out.println("Test_Place_Teleport_Already_Exists:\n");
-        OutputFormatter.reset();
         Game g = new Game();
         Settler s = new Settler(g);
         s.setName("s");
@@ -372,7 +357,6 @@ public class Main {
 
     public static void Test_Resource_Placeback(){
         System.out.println("Test_Resource_Placeback:\n");
-        OutputFormatter.reset();
         Game g = new Game();
         Settler s = new Settler(g);
         Asteroid a1 = new Asteroid();
@@ -385,22 +369,20 @@ public class Main {
         a2.setSurfaceThickness(0);
         a2.setName("a2");
         OutputFormatter.setState(true);
-        Resource exchange = g.exchangeResource(s.getResources());
-        a2.placeResource(exchange);
+        s.mine();
     }
 
     public static void Test_Generate_Sunflare() {
         System.out.println("Test_Generate_Sunflare:\n");
-        OutputFormatter.reset();
         Game g = new Game();
+        Map m = g.getMap();
 
         OutputFormatter.setState(true);
-        g.getMap().sunflare();
+        m.sunflare();
     }
 
     public static void Test_Build_Robot_Has_Resources() {
         System.out.println("Test_Build_Robot_Has_Resources:\n");
-        OutputFormatter.reset();
         Game g = new Game();
         Settler s = new Settler(g);
         s.setName("s");
@@ -424,7 +406,6 @@ public class Main {
 
     public static void Test_Build_Robot_No_Resources() {
         System.out.println("Test_Build_Robot_No_Resources:\n");
-        OutputFormatter.reset();
         Game g = new Game();
         Settler s = new Settler(g);
         s.setName("s");

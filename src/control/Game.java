@@ -84,8 +84,9 @@ public class Game {
      */
     public Resource exchangeResource(ArrayList<Resource> resources) {
         OutputFormatter.OutputCall("exchangeResource() - " + this.toString());
+        var ret = resources.get(resources.size() - 1);
         OutputFormatter.OutputReturn("return - resource");
-        return resources.get(resources.size() - 1); // a lista utolsó tagját cseréljük ki
+        return ret; // a lista utolsó tagját cseréljük ki
     }
 
     /**

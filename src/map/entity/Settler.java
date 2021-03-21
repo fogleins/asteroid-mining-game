@@ -78,7 +78,7 @@ public class Settler extends Entity {
     }
 
     /**
-     *
+     * Settler mines.
      */
     public void mine() {
         OutputFormatter.OutputCall("mine() - " + name);
@@ -95,38 +95,32 @@ public class Settler extends Entity {
             Resource r = asteroid.mined();
             if(r != null){
                 resources.add(r);
-                OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
-            } else {
-                OutputFormatter.OutputReturn("return - null");
             }
             boolean success = asteroid.placeResource(resourceToExchange);
             if (success){
+                OutputFormatter.OutputReturn("return - resource exchanged " + r.getClass().toString());
                 resources.remove(resourceToExchange);
+            } else {
+                OutputFormatter.OutputReturn("return - exchange not possible");
             }
         }
 
     }
 
     /**
-     *
+     * Settler builds robot.
      */
 
     public void buildRobot() {
         OutputFormatter.OutputCall("buildRobot() - " + name);
-        Robot r = Robot.create(asteroid, resources);
-        m_game.addRobot(r);
-        if(r != null){
-            r.move(asteroid);
-            OutputFormatter.OutputReturn("return - robot created " + r.toString());
-        } else {
-            OutputFormatter.OutputReturn("return - null");
-        }
+        Robot.create(asteroid, resources);
+        OutputFormatter.OutputReturn("return");
     }
 
 
 
     /**
-     *
+     * Settler builds teleport.
      */
     public void buildTeleport() {
         OutputFormatter.OutputCall("buildTeleport() - " + name);
@@ -146,7 +140,7 @@ public class Settler extends Entity {
     }
 
     /**
-     *
+     * Settler places teleport.
      */
     public void placeTeleport() {
         OutputFormatter.OutputCall("placeTeleport() - " + name);
