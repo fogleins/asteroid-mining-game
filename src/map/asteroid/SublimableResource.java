@@ -1,39 +1,14 @@
 package map.asteroid;
 
-/**
- * Class map.asteroid.SublimableResource
- */
+import utility.OutputFormatter;
+
 public class SublimableResource extends Resource {
 
-    //
-    // Fields
-    //
+    public SublimableResource() { }
 
-
-    //
-    // Constructors
-    //
-    public SublimableResource() {
-    }
-
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
-
-    //
-    // Other methods
-    //
-
-    /**
-     *
-     */
     public void drilledInPerihelion() {
+        OutputFormatter.OutputCall("drilledInPerihelion() - " + this.toString());
+        asteroid.mined();
+        OutputFormatter.OutputReturn("return");
     }
-
-
 }
