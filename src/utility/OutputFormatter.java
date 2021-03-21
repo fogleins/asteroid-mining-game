@@ -18,7 +18,7 @@ public class OutputFormatter {
         if (state) {
             String res = "";
             for (int i = 0; i < level; i++) {
-                res += "\t";
+                res += "|   ";
             }
             res += s;
             System.out.println(res);
@@ -31,7 +31,7 @@ public class OutputFormatter {
             level--;
             String res = "";
             for (int i = 0; i < level; i++) {
-                res += "\t";
+                res += "|   ";
             }
             res += s;
             System.out.println(res);
