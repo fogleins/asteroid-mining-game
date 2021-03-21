@@ -1,6 +1,7 @@
 package map.entity;
 
-import map.asteroid.Asteroid;
+import map.BillOfResources;
+import map.asteroid.*;
 import utility.OutputFormatter;
 
 import java.util.ArrayList;
@@ -11,6 +12,13 @@ import java.util.Random;
  */
 public class Robot extends Entity {
 
+    private static BillOfResources billToBuild;
+
+    public Robot() {
+        OutputFormatter.OutputCall("create - " + this.toString());
+        initBillToBuild();
+        OutputFormatter.OutputReturn("return");
+    }
     /**
      *
      */
@@ -39,5 +47,23 @@ public class Robot extends Entity {
         OutputFormatter.OutputReturn("return");
     }
 
+    public static Robot create(Asteroid current, ArrayList<Resource> ownedResources){
+        OutputFormatter.OutputCall("create() - static in Robot");
+        boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
+        if (hasResourcesToBuildTeleport) {
+            Robot robot = new Robot();
 
+            OutputFormatter.OutputReturn("return - " + robot.toString());
+            return robot;
+        }
+        OutputFormatter.OutputReturn("return - null");
+        return null;
+    }
+
+    private void initBillToBuild(){
+        billToBuild = new BillOfResources();
+        billToBuild.addResources(new Iron());
+        billToBuild.addResources(new Coal());
+        billToBuild.addResources(new Uranium());
+    }
 }

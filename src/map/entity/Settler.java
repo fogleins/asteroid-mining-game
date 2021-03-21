@@ -113,8 +113,8 @@ public class Settler extends Entity {
 
     public void buildRobot() {
         OutputFormatter.OutputCall("buildRobot() - " + name);
-        //Robot r = Robot.create(resources);
-        Robot r = null;
+        Robot r = Robot.create(asteroid, resources);
+        m_game.addRobot(r);
         if(r != null){
             r.move(asteroid);
             OutputFormatter.OutputReturn("return - robot created " + r.toString());
@@ -131,8 +131,7 @@ public class Settler extends Entity {
     public void buildTeleport() {
         OutputFormatter.OutputCall("buildTeleport() - " + name);
         if(teleports.size() == 0) {
-            //ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
-            ArrayList<TeleportGate> teleportGates = null;
+            ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
                 for (TeleportGate tp : teleportGates){
                     teleports.add(tp);

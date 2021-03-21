@@ -31,7 +31,10 @@ public class Main {
                     "\n\t12. Test Drill Radioactive Asteroid Perihelion Robot" +
                     "\n\t13. Test Drill Sublimable Asteroid Perihelion" +
                     "\n\t14. Test Resource Placeback" +
-                    "\n\t15. Test Move"); //TODO: minden use-case hozzáadása
+                    "\n\t15. Test Move" +
+                    "\n\t16. Test Generate Sunflare" +
+                    "\n\t17. Test Build Robot (enough resources)" +
+                    "\n\t18. Test Build Robot (not enough resources)");
             System.out.println("\n> ");
             int selection = input.nextInt();
             switch (selection) {
@@ -82,6 +85,15 @@ public class Main {
                     break;
                 case 15:
                     Test_Move();
+                    break;
+                case 16:
+                    Test_Generate_Sunflare();
+                    break;
+                case 17:
+                    Test_Build_Robot_Has_Resources();
+                    break;
+                case 18:
+                    Test_Build_Robot_No_Resources();
                     break;
                 default:
                     System.out.println("Invalid selection!");
@@ -311,7 +323,7 @@ public class Main {
         s.buildTeleport();
     }
 
-    public static void  Test_Place_Teleport_Ok() {
+    public static void Test_Place_Teleport_Ok() {
         System.out.println("Test_Place_Teleport_Ok:\n");
         OutputFormatter.reset();
         Game g = new Game();
@@ -327,7 +339,7 @@ public class Main {
         s.placeTeleport();
     }
 
-    public static void  Test_Place_Teleport_No_Teleport() {
+    public static void Test_Place_Teleport_No_Teleport() {
         System.out.println("Test_Place_Teleport_No_Teleport:\n");
         OutputFormatter.reset();
         Game g = new Game();
@@ -341,7 +353,7 @@ public class Main {
         s.placeTeleport();
     }
 
-    public static void  Test_Place_Teleport_Already_Exists() {
+    public static void Test_Place_Teleport_Already_Exists() {
         System.out.println("Test_Place_Teleport_Already_Exists:\n");
         OutputFormatter.reset();
         Game g = new Game();
@@ -377,4 +389,56 @@ public class Main {
         a2.placeResource(exchange);
     }
 
+    public static void Test_Generate_Sunflare() {
+        System.out.println("Test_Generate_Sunflare:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+
+        OutputFormatter.setState(true);
+        g.getMap().sunflare();
+    }
+
+    public static void Test_Build_Robot_Has_Resources() {
+        System.out.println("Test_Build_Robot_Has_Resources:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+        Settler s = new Settler(g);
+        s.setName("s");
+        Asteroid a = new Asteroid();
+        a.setName("a1");
+        s.setAsteroid(a);
+
+        a.setSurfaceThickness(0);
+        a.setResource(new Iron());
+        s.mine();
+        a.setResource(new Coal());
+        s.mine();
+        a.setResource(new Uranium());
+        s.mine();
+
+        Robot r = new Robot(); // to generate BillOfRes data
+
+        OutputFormatter.setState(true);
+        s.buildRobot();
+    }
+
+    public static void Test_Build_Robot_No_Resources() {
+        System.out.println("Test_Build_Robot_No_Resources:\n");
+        OutputFormatter.reset();
+        Game g = new Game();
+        Settler s = new Settler(g);
+        s.setName("s");
+        Asteroid a = new Asteroid();
+        a.setName("a1");
+        s.setAsteroid(a);
+
+        a.setSurfaceThickness(0);
+        a.setResource(new Iron());
+        s.mine();
+
+        Robot r = new Robot(); // to generate BillOfRes data
+
+        OutputFormatter.setState(true);
+        s.buildRobot();
+    }
 }
