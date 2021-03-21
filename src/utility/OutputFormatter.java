@@ -9,23 +9,32 @@ public class OutputFormatter {
         OutputFormatter.state = state;
     }
 
+    public static void reset() {
+        level = 0;
+        state = false;
+    }
+
     public static void OutputCall(String s) {
-        String res = "";
-        for (int i = 0; i < level; i++) {
-            res += "\t";
+        if (state) {
+            String res = "";
+            for (int i = 0; i < level; i++) {
+                res += "\t";
+            }
+            res += s;
+            System.out.println(res);
+            level++;
         }
-        res += s;
-        System.out.println(res);
-        level++;
     }
 
     public static void OutputReturn(String s) {
-        level--;
-        String res = "";
-        for (int i = 0; i < level; i++) {
-            res += "\t";
+        if (state) {
+            level--;
+            String res = "";
+            for (int i = 0; i < level; i++) {
+                res += "\t";
+            }
+            res += s;
+            System.out.println(res);
         }
-        res += s;
-        System.out.println(res);
     }
 }

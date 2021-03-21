@@ -121,8 +121,9 @@ public class Settler extends Entity {
      *
      */
     public void placeTeleport() {
-        OutputFormatter.OutputCall("buildTeleport() - " + name);
+        OutputFormatter.OutputCall("placeTeleport() - " + name);
         if(teleports.size() != 0){
+            //todo: check if the asteroid has a teleport gate (could be in Asteroid)
             asteroid.setTeleportGate(teleports.get(0));
             teleports.remove(0);
             OutputFormatter.OutputReturn("return - teleportgate placed");
