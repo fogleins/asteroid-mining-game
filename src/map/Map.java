@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 /**
- * Class map.Map
+ * Class Map
  */
 public class Map {
 
@@ -16,13 +16,23 @@ public class Map {
     // Fields
     //
 
-
+    /**
+     * The asteroids in the map.
+     */
     private final ArrayList<Asteroid> asteroids = new ArrayList<>();
+    /**
+     * The baseasteroid, where all settlers must be to win the game (with enough resources).
+     */
     private BaseAsteroid baseAsteroid;
 
     //
     // Constructors
     //
+
+    /**
+     * Constructor of the map, which is initialize some asteroids.
+     * @param baseAst Where all settlers must be to win the game (with enough resources).
+     */
     public Map(BaseAsteroid baseAst) {
         OutputFormatter.OutputCall("create - " + this.toString());
         baseAsteroid=baseAst;
@@ -54,9 +64,9 @@ public class Map {
 
 
     /**
-     * Get the List of map.asteroid.BaseAsteroid objects held by baseasteroidVector
+     * Default getter of the BaseAsteroid, not used in the test.
      *
-     * @return List of map.asteroid.BaseAsteroid objects held by baseasteroidVector
+     * @return baseAsteroid
      */
     private Asteroid getBaseAsteroid() {
         return baseAsteroid;
@@ -64,22 +74,19 @@ public class Map {
 
 
     /**
-     * Add a Asteroids object to the asteroidsVector List
+     * Adds an asteroid to the asteroids.
      */
     private void addAsteroids(Asteroid asteroid) {
         asteroids.add(asteroid);
     }
 
     /**
-     * Remove a Asteroids object from asteroidsVector List
+     * Remove an asteroid from the asteroids.
      */
-    private void removeAsteroids(Asteroid asteroid) {
 
-        asteroids.remove(asteroid);
-    }
 
     /**
-     * Get the List of Asteroids objects held by asteroidsVector
+     * Getter of the asteroid list, not used in the test.
      *
      * @return List of Asteroids objects held by asteroidsVector
      */
@@ -93,8 +100,10 @@ public class Map {
     //
 
     /**
-     * @param asteroid
-     * @return map.asteroid.Asteroid
+     * Removes an asteroid from the asteroids list.
+     *
+     * @param asteroid need to remove from the asteroids list.
+     * @return with the reference of the removed asteroid.
      */
     public Asteroid removeAsteroid(Asteroid asteroid) {
         OutputFormatter.OutputCall("remove - " + asteroid.toString());
@@ -105,7 +114,7 @@ public class Map {
 
 
     /**
-     *
+     * Spreads sunflare all across the asteroids in the list.
      */
     public void sunflare() {
         OutputFormatter.OutputCall("sunflare() - " + this.toString());
@@ -117,7 +126,7 @@ public class Map {
 
 
     /**
-     *
+     * Calls changePerihelionState function in all asteroids at the end of the round.
      */
     public void changePerihelion() {
         for (Asteroid a : asteroids){

@@ -2,6 +2,7 @@ package map.entity;
 
 import control.Game;
 import map.BillOfResources;
+import map.asteroid.Asteroid;
 import map.asteroid.Resource;
 import utility.OutputFormatter;
 
@@ -88,6 +89,11 @@ public class Settler extends Entity {
                 resources.add(r);
                 OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
             } else {
+                if(resources.size()>0){
+                    Resource res = m_game.exchangeResource(resources);
+                    asteroid.placeResource(res);
+                    resources.remove(res);
+                }
                 OutputFormatter.OutputReturn("return - null");
             }
         } else {

@@ -359,6 +359,7 @@ public class Main {
         System.out.println("Test_Resource_Placeback:\n");
         Game g = new Game();
         Settler s = new Settler(g);
+        s.setName("settler");
         Asteroid a1 = new Asteroid();
         a1.addResource(new Iron());
         Asteroid a2 = new Asteroid();
