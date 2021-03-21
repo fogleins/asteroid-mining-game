@@ -7,7 +7,7 @@ import utility.OutputFormatter;
 import java.util.ArrayList;
 
 /**
- * Class map.entity.TeleportGate
+ * Class TeleportGate
  */
 public class TeleportGate {
 
@@ -15,14 +15,26 @@ public class TeleportGate {
     //
     // Fields
     //
-
+    /**
+     * The bill to build a teleportgate(pair).
+     */
     private static BillOfResources billToBuild;
+    /**
+     * The asteroid, where the teleportgate placed on.
+     */
     private Asteroid currentAsteroid;
+    /**
+     * The pair of this teleportgate.
+     */
     private TeleportGate otherGate;
 
     //
     // Constructors
     //
+
+    /**
+     * Constructor of the TeleportGate, which initialize the resources to build a gate(pair).
+     */
     public TeleportGate() {
         OutputFormatter.OutputCall("create - " + this.toString());
         initBillToBuild();
@@ -32,6 +44,12 @@ public class TeleportGate {
     //
     // Methods
     //
+
+    /**
+     * Creates a teleportgate(pair) if there is enough resources to build.
+     * @param ownedResources The resources of settler, whereof the gate can be built.
+     * @return with the gate-pair.
+     */
     public static ArrayList<TeleportGate> create(ArrayList<Resource> ownedResources){
         OutputFormatter.OutputCall("create("+ownedResources.toString()+") - static in TeleportGate");
         boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
@@ -55,16 +73,16 @@ public class TeleportGate {
     //
 
     /**
-     * Get the List of CurrentAsteroid objects held by currentasteroidVector
+     * Getter of the current asteroid, not used in the test.
      *
-     * @return List of CurrentAsteroid objects held by currentasteroidVector
+     * @return currentAsteroid.
      */
     private Asteroid getCurrentAsteroid() {
         return currentAsteroid;
     }
 
     /**
-     * Add a CurrentAsteroid object to the currentasteroidVector List
+     * Sets the current asteroid, not used in the test.
      */
     private void setCurrentAsteroid(Asteroid new_object) {
         currentAsteroid = new_object;
@@ -75,6 +93,9 @@ public class TeleportGate {
     // Other methods
     //
 
+    /**
+     * Initialize the resources to the bill, which is required to build a gate(pair).
+     */
     private void initBillToBuild(){
         billToBuild = new BillOfResources();
         billToBuild.addResources(new Iron());
@@ -85,7 +106,8 @@ public class TeleportGate {
 
 
     /**
-     * @return map.asteroid.Asteroid
+     * Returns an asteroid, where the other gate is placed on.
+     * @return The asteroid, where the other gate is placed on.
      */
     public Asteroid getOtherSide() {
         OutputFormatter.OutputCall("getOtherSide() - " + this.toString());
