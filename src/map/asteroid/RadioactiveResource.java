@@ -5,7 +5,7 @@ import utility.OutputFormatter;
 /**
  * Class map.asteroid.RadioactiveResource
  */
-public class RadioactiveResource extends Resource {
+public abstract class RadioactiveResource extends Resource {
 
     public RadioactiveResource() { }
 

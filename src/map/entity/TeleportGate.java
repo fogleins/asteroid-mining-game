@@ -24,21 +24,21 @@ public class TeleportGate {
     // Constructors
     //
     public TeleportGate() {
+        OutputFormatter.OutputCall("create - " + this.toString());
         initBillToBuild();
+        OutputFormatter.OutputReturn("return");
     }
 
     //
     // Methods
     //
     public static ArrayList<TeleportGate> create(ArrayList<Resource> ownedResources){
+        OutputFormatter.OutputCall("create() - static in TeleportGate");
         boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
         if(hasResourcesToBuildTeleport){
             ArrayList<TeleportGate> gates = new ArrayList<>();
-            OutputFormatter.OutputCall("create - " + gates.toString());
             TeleportGate t1 = new TeleportGate();
-            OutputFormatter.OutputCall("create - " + t1.toString());
             TeleportGate t2 = new TeleportGate();
-            OutputFormatter.OutputCall("create - " + t2.toString());
             t1.otherGate=t2;
             t2.otherGate=t1;
             gates.add(t1);
@@ -47,7 +47,7 @@ public class TeleportGate {
             return gates;
         }
         OutputFormatter.OutputReturn("return - null");
-        return  null;
+        return null;
     }
 
     //
