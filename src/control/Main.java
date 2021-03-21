@@ -213,7 +213,7 @@ public class Main {
         Uranium uranium = new Uranium();
 
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 11; i++) {
             a[i] = new Asteroid();
             a[i].addResource(uranium);
             a[i].setSurfaceThickness(0);
@@ -229,14 +229,6 @@ public class Main {
 
         OutputFormatter.setState(true);
         s.mine();
-    }
-
-    public static void Test_Map_Initialization(){
-        System.out.println("Test_Map_Initialization:\n\n");
-        OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
-        BaseAsteroid ba = new BaseAsteroid();
-        ba.setName("ba");
-        Map map = new Map(ba);
     }
 
     public static void Test_Move(){

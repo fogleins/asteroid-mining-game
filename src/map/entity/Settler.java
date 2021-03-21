@@ -113,7 +113,8 @@ public class Settler extends Entity {
     /*
     public void buildRobot() {
         OutputFormatter.OutputCall("buildRobot() - " + name);
-        Robot r = Robot.create(resources);
+        //Robot r = Robot.create(resources);
+        Robot r = null;
         if(r != null){
             r.move(asteroid);
             OutputFormatter.OutputReturn("return - robot created " + r.toString());
@@ -130,7 +131,8 @@ public class Settler extends Entity {
     public void buildTeleport() {
         OutputFormatter.OutputCall("buildTeleport() - " + name);
         if(teleports.size() == 0) {
-            ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
+            //ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
+            ArrayList<TeleportGate> teleportGates = null;
             if (teleportGates != null) {
                 for (TeleportGate tp : teleportGates){
                     teleports.add(tp);
@@ -158,6 +160,4 @@ public class Settler extends Entity {
             OutputFormatter.OutputReturn("return - there is no teleportgate to place");
         }
     }
-
-
 }
