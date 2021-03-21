@@ -166,6 +166,9 @@ public class Asteroid {
      */
     public void explode() {
         OutputFormatter.OutputCall("explode() - " + name);
+        for (Entity entity : entities) {
+            entity.asteroidExploded();
+        }
         OutputFormatter.OutputReturn("return");
     }
 
@@ -175,6 +178,15 @@ public class Asteroid {
      */
     public void drilled() {
         OutputFormatter.OutputCall("drilled() - " + name);
+
+        if(surfaceThickness!=0){
+            this.surfaceThickness--;
+
+            if(surfaceThickness==0 && inPerihelion){
+                this.resource.drilledInPerihelion();
+            }
+        }
+
         OutputFormatter.OutputReturn("return");
     }
 
@@ -229,6 +241,7 @@ public class Asteroid {
      */
     public void removeEntity(Entity entity) {
         OutputFormatter.OutputCall("removeEntity() - " + name);
+        entities.remove(entity);
         OutputFormatter.OutputReturn("return");
     }
 

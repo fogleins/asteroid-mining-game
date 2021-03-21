@@ -54,7 +54,7 @@ public class BillOfResources {
      * @param ownedResources The resources that the caller owns.
      * @return boolean Is there enough resources for the build?
      */
-    public boolean check(ArrayList<Resource> ownedResources) {
+    public boolean check(ArrayList<Resource> ownedResources) { //todo: deep copy of array, to properly check for duplicate
         OutputFormatter.OutputCall("check("+ ownedResources.toString() +")");
         int okCnt = 0;
         for (Resource rn : resourcesNeeded) {
