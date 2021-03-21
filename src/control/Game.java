@@ -36,6 +36,11 @@ public class Game {
         OutputFormatter.OutputReturn("return");
     }
 
+    public Map getMap() {
+        OutputFormatter.OutputCall("addSettler() - " + this.toString());
+        OutputFormatter.OutputReturn("return - map");
+        return map;
+    }
 
     /**
      * Add a Settler object to the settlers list
@@ -79,7 +84,7 @@ public class Game {
      */
     public Resource exchangeResource(ArrayList<Resource> resources) {
         OutputFormatter.OutputCall("exchangeResource() - " + this.toString());
-        OutputFormatter.OutputReturn("return");
+        OutputFormatter.OutputReturn("return - resource");
         return resources.get(resources.size() - 1); // a lista utolsó tagját cseréljük ki
     }
 
@@ -107,7 +112,7 @@ public class Game {
     private int generateNextSunflare() {
         OutputFormatter.OutputCall("generateNextSunflare() - " + this.toString());
         Random rnd = new Random();
-        OutputFormatter.OutputReturn("return");
+        OutputFormatter.OutputReturn("return - int");
         if (currentRound < 20) {
             return rnd.nextInt(2) + 20;
         }
