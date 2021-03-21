@@ -11,30 +11,6 @@ import java.util.Random;
  */
 public class Robot extends Entity {
 
-    //
-    // Fields
-    //
-
-
-    //
-    // Constructors
-    //
-//    public Robot() {
-//    }
-
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
-
-    //
-    // Other methods
-    //
-
     /**
      *
      */

@@ -22,8 +22,6 @@ public class Neighbours {
         this.teleportGateNeighbours = teleportGateNeighbours;
     }
 
-    ;
-
     //
     // Methods
     //

@@ -63,13 +63,6 @@ public class TeleportGate {
         return currentAsteroid;
     }
 
-//    /**
-//     * Remove a CurrentAsteroid object from currentasteroidVector List
-//     */
-//    private void removeCurrentAsteroid(map.asteroid.Asteroid new_object) {
-//        currentAsteroid.remove(new_object);
-//    }
-
     /**
      * Add a CurrentAsteroid object to the currentasteroidVector List
      */

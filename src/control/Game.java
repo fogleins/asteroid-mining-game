@@ -22,7 +22,6 @@ public class Game {
     private int currentRound;
     private int nextSunflare;
     private Map map;
-    //    private control.Game m_game;
     private Settler current;
     private ArrayList<Settler> settlers;
     private ArrayList<Robot> robots;
@@ -161,70 +160,5 @@ public class Game {
     private void roundFinished() {
         currentRound++;
     }
-
-    // TODO: ezekből valami kell?
-//    /**
-//     * Get the List of Settlers objects held by settlersVector
-//     *
-//     * @return List of Settlers objects held by settlersVector
-//     */
-//    private ArrayList<Settler> getSettlers() {
-//        return settlers;
-//    }
-
-//    /**
-//     * Get the value of current
-//     *
-//     * @return the value of current
-//     */
-//    private Settler getCurrent() {
-//        return current;
-//    }
-
-//    /**
-//     * Set the value of current
-//     *
-//     * @param settler the new value of current
-//     */
-//    private void setCurrent(Settler settler) {
-//        current = settler;
-//    }
-
-//    /**
-//     * Set the value of m_map
-//     *
-//     * @param map the new value of m_map
-//     */
-//    private void setMap(Map map) {
-//        this.map = map;
-//    }
-
-//    /**
-//     * Set the value of nextSunflare
-//     *
-//     * @param newVar the new value of nextSunflare
-//     */
-//    public void setNextSunflare(int newVar) {
-//        nextSunflare = newVar;
-//    }
-
-//    /**
-//     * Set the value of currentRound
-//     *
-//     * @param newVar the new value of currentRound
-//     */
-//    public void setCurrentRound(int newVar) {
-//        currentRound = newVar;
-//    }
-
-//    /**
-//     * Get the List of Robots objects held by robotsVector
-//     *
-//     * @return List of Robots objects held by robotsVector
-//     */
-//    private ArrayList<Robot> getRobots() {
-//        return robots;
-//    }
-
 
 }

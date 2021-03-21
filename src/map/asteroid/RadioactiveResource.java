@@ -7,29 +7,7 @@ import utility.OutputFormatter;
  */
 public class RadioactiveResource extends Resource {
 
-    //
-    // Fields
-    //
-
-
-    //
-    // Constructors
-    //
-    public RadioactiveResource() {
-    }
-
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
-
-    //
-    // Other methods
-    //
+    public RadioactiveResource() { }
 
     /**
      *
@@ -39,6 +17,4 @@ public class RadioactiveResource extends Resource {
         asteroid.explode();
         OutputFormatter.OutputReturn("return");
     }
-
-
 }

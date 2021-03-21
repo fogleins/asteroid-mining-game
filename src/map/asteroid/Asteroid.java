@@ -38,10 +38,6 @@ public class Asteroid {
     protected String name;
     protected Resource resource;
     protected TeleportGate teleportGate;
-//    private final ArrayList<map.asteroid.Resource> resourceVector = new ArrayList<>();
-//    private final Vector teleportgateVector = new Vector();
-//    private map.asteroid.Asteroid m_asteroid;
-//    private final ArrayList<map.asteroid.Asteroid> asteroid = new ArrayList<>();
 
     //
     // Constructors
@@ -209,7 +205,7 @@ public class Asteroid {
         OutputFormatter.OutputCall("getNeighbours() - " + name);
 
         //A Neighbours osztály konstruktora ArrayList-et vár a teleport által összekötött aszteroidák listájával
-        ArrayList<Asteroid> teleportGateOtherSide = new ArrayList<Asteroid>();
+        ArrayList<Asteroid> teleportGateOtherSide = new ArrayList<>();
         teleportGateOtherSide.add(teleportGate.getOtherSide());
 
         OutputFormatter.OutputReturn("return - new Neighbours(neighbours, teleportGateOtherSide)");
@@ -249,7 +245,6 @@ public class Asteroid {
 
     /**
      * @param asteroid
-     * @return map.asteroid.Asteroid
      */
     public void removeAsteroid(Asteroid asteroid) {
         OutputFormatter.OutputCall("removeAsteroid() - " + name);

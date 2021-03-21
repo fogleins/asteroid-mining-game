@@ -5,28 +5,6 @@ package map.asteroid;
  */
 public class Uranium extends RadioactiveResource {
 
-    //
-    // Fields
-    //
-
-
-    //
-    // Constructors
-    //
-    public Uranium() {
-    }
-
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
-
-    //
-    // Other methods
-    //
+    public Uranium() { }
 
 }
