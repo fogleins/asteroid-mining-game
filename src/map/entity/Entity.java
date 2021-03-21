@@ -1,16 +1,15 @@
 package map.entity;
 
 import map.asteroid.Asteroid;
+import map.asteroid.Resource;
 import utility.OutputFormatter;
+
+import java.util.ArrayList;
 
 /**
  * Class map.entity.Entity
  */
 abstract public class Entity {
-
-    //
-    // Fields
-    //
 
     /**
      * Entity's name.
@@ -23,7 +22,7 @@ abstract public class Entity {
     protected Asteroid asteroid;
 
     /**
-     * Constructor.
+     * Constructor of Entity.
      */
     public Entity() {
     }
@@ -92,6 +91,16 @@ abstract public class Entity {
         OutputFormatter.OutputCall("asteroidExploded() - " + this.name);
         die();
         OutputFormatter.OutputReturn("return");
+    }
+
+    /**
+     * Returns a list of resources in carry capable entities. Returns null by default.
+     * @return null.
+     */
+    public ArrayList<Resource> getResources() {
+        OutputFormatter.OutputCall("getResources() - " + name);
+        OutputFormatter.OutputReturn("return - null");
+        return null;
     }
 
 
