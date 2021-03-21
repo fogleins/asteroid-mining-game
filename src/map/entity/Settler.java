@@ -95,13 +95,13 @@ public class Settler extends Entity {
             Resource r = asteroid.mined();
             if(r != null){
                 resources.add(r);
-                OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
-            } else {
-                OutputFormatter.OutputReturn("return - null");
             }
             boolean success = asteroid.placeResource(resourceToExchange);
             if (success){
+                OutputFormatter.OutputReturn("return - resource exchanged " + r.getClass().toString());
                 resources.remove(resourceToExchange);
+            } else {
+                OutputFormatter.OutputReturn("return - exchange not possible");
             }
         }
 
