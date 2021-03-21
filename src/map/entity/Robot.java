@@ -15,7 +15,7 @@ public class Robot extends Entity {
      *
      */
     public void asteroidExploded() {
-        OutputFormatter.OutputCall("asteroidExploded() - " + this.name);
+        OutputFormatter.OutputCall("asteroidExploded() - " + this.toString());
         ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
         Random rnd = new Random();
         super.move(neighbours.get(rnd.nextInt(neighbours.size())));
@@ -27,8 +27,7 @@ public class Robot extends Entity {
      *
      */
     public void step() {
-        // TODO: napközeli, egy egységnyi kéreggel rendelkező aszteroida fúrása helyett lépjen szomszédosra?
-        OutputFormatter.OutputCall("step() - " + this.name);
+        OutputFormatter.OutputCall("step() - " + this.toString());
         Random rnd = new Random();
         int choice = rnd.nextInt(2); // 0 vagy 1 lesz a generált szám
         if (choice == 0) {

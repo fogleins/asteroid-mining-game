@@ -1,6 +1,7 @@
 package control;
 
 import map.Map;
+import map.asteroid.BaseAsteroid;
 import map.asteroid.Resource;
 import map.entity.Robot;
 import map.entity.Settler;
@@ -15,10 +16,6 @@ import java.util.Random;
  */
 public class Game {
 
-    //
-    // Fields
-    //
-
     private int currentRound;
     private int nextSunflare;
     private Map map;
@@ -26,108 +23,71 @@ public class Game {
     private ArrayList<Settler> settlers;
     private ArrayList<Robot> robots;
 
-    //
-    // Constructors
-    //
+
     public Game() {
-        /* TODO: listák inicializálás? */
+        OutputFormatter.OutputCall("Game() - " + this.toString());
         currentRound = 0;
-        nextSunflare = generateNextSunflare(); // TODO: az elején is lehet, vagy csak későbbi körökben?
-//        map = ? // TODO: map és settler init
+        nextSunflare = generateNextSunflare();
+        BaseAsteroid baseAsteroid = new BaseAsteroid();
+        map = new Map(baseAsteroid);
         settlers = new ArrayList<>();
         robots = new ArrayList<>();
         current = null/*settlers.get(0)*/;
+        OutputFormatter.OutputReturn("return");
     }
 
-
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
-
-    /**
-     * Get the value of currentRound
-     *
-     * @return the value of currentRound
-     */
-    public int getCurrentRound() {
-        return currentRound;
-    }
-
-    /**
-     * Get the value of nextSunflare
-     *
-     * @return the value of nextSunflare
-     */
-    public int getNextSunflare() {
-        return nextSunflare;
-    }
-
-    /**
-     * Get the value of m_map
-     *
-     * @return the value of m_map
-     */
-    public Map getMap() {
-        return map;
-    }
 
     /**
      * Add a Settler object to the settlers list
      */
     public void addSettler(Settler settler) {
+        OutputFormatter.OutputCall("addSettler() - " + this.toString());
         settlers.add(settler);
+        OutputFormatter.OutputReturn("return");
     }
 
     /**
      * Remove a Settler object from settlers
      */
     public void removeSettler(Settler settler) {
+        OutputFormatter.OutputCall("removeSettler() - " + this.toString());
         settlers.remove(settler);
+        OutputFormatter.OutputReturn("return");
     }
 
     /**
      * Add a Robot object to the robots list
      */
     public void addRobot(Robot robot) {
+        OutputFormatter.OutputCall("addRobot() - " + this.toString());
         robots.add(robot);
+        OutputFormatter.OutputReturn("return");
     }
 
     /**
      * Remove a Robot object from robots
      */
     public void removeRobot(Robot robot) {
+        OutputFormatter.OutputCall("removeRobot() - " + this.toString());
         robots.remove(robot);
+        OutputFormatter.OutputReturn("return");
     }
-
-    //
-    // Other methods
-    //
 
     /**
      * @param resources
      * @return map.asteroid.Resource
      */
     public Resource exchangeResource(ArrayList<Resource> resources) {
-        /* TODO: a leírásban az szerepel, hogy a lista bármelyik elemét kicserélheti, ehhez nem kellene a kicserélendő
-                elem indexe?
-         */
-        Resource tmp = resources.get(resources.size() - 1); // a lista utolsó tagját cseréljük ki
-        Resource mined = current.getAsteroid().mined(); // a magból kibányászott nyersanyag
-        current.getAsteroid().setResource(tmp);
-        return mined;
+        OutputFormatter.OutputCall("exchangeResource() - " + this.toString());
+        OutputFormatter.OutputReturn("return");
+        return resources.get(resources.size() - 1); // a lista utolsó tagját cseréljük ki
     }
 
     /**
      *
      */
     public void gameWon() {
-        OutputFormatter.OutputCall("gameWon()");
-        // TODO: ennyi elég?
+        OutputFormatter.OutputCall("gameWon() - " + this.toString());
         System.out.println("Settlers won!");
         OutputFormatter.OutputReturn("return");
     }
@@ -136,8 +96,7 @@ public class Game {
      *
      */
     private void gameLost() {
-        OutputFormatter.OutputCall("gameLost()");
-        // TODO: ennyi elég?
+        OutputFormatter.OutputCall("gameLost() - " + this.toString());
         System.out.println("Settlers lost!");
         OutputFormatter.OutputReturn("return");
     }
@@ -146,19 +105,29 @@ public class Game {
      * @return int
      */
     private int generateNextSunflare() {
-        OutputFormatter.OutputCall("generateNextSunflare()");
+        OutputFormatter.OutputCall("generateNextSunflare() - " + this.toString());
         Random rnd = new Random();
         OutputFormatter.OutputReturn("return");
-        // a random szám 0 <= rnd.nextInt() <= 2, de mivel nem lehet az éppen játszott körben napvihar (mert egy körrel
-        // előtte értesítjük a játékosokat), hozzáadunk egyet, így 1 <= return <= 4 lesz.
-        return rnd.nextInt(3) + 1;
+        if (currentRound < 20) {
+            return rnd.nextInt(2) + 20;
+        }
+        return rnd.nextInt(19) + 10 + currentRound;
     }
 
     /**
      *
      */
     private void roundFinished() {
+        OutputFormatter.OutputCall("roundFinished() - " + this.toString());
+        for (Robot robot : robots) {
+            robot.step();
+        }
+        if (currentRound == nextSunflare) {
+            map.sunflare();
+            generateNextSunflare();
+        }
+        map.changePerihelion();
         currentRound++;
+        OutputFormatter.OutputReturn("return");
     }
-
 }
