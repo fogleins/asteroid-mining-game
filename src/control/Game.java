@@ -24,6 +24,9 @@ public class Game {
     private ArrayList<Robot> robots;
 
 
+    /**
+     * Constructor. Initializes the Game object.
+     */
     public Game() {
         OutputFormatter.OutputCall("Game() - " + this.toString());
         currentRound = 0;
@@ -36,6 +39,11 @@ public class Game {
         OutputFormatter.OutputReturn("return");
     }
 
+    /**
+     * Returns the map the game is played on.
+     *
+     * @return The game's Map object.
+     */
     public Map getMap() {
         OutputFormatter.OutputCall("addSettler() - " + this.toString());
         OutputFormatter.OutputReturn("return - map");
@@ -79,8 +87,10 @@ public class Game {
     }
 
     /**
-     * @param resources
-     * @return map.asteroid.Resource
+     * Returns a {@code Resource} object from the Settler's resource list which should be exchanged.
+     *
+     * @param resources A list of {@code Resource}s the Settler has.
+     * @return The {@code Resource} which should be exchanged.
      */
     public Resource exchangeResource(ArrayList<Resource> resources) {
         OutputFormatter.OutputCall("exchangeResource() - " + this.toString());
@@ -90,7 +100,7 @@ public class Game {
     }
 
     /**
-     *
+     * This method is called when the settlers have collected all the needed resources on a single asteroid.
      */
     public void gameWon() {
         OutputFormatter.OutputCall("gameWon() - " + this.toString());
@@ -99,7 +109,7 @@ public class Game {
     }
 
     /**
-     *
+     * This method is called if there's no way for the players to win.
      */
     private void gameLost() {
         OutputFormatter.OutputCall("gameLost() - " + this.toString());
@@ -108,7 +118,9 @@ public class Game {
     }
 
     /**
-     * @return int
+     * Randomly generates a number when a sunflare should occur.
+     *
+     * @return int The number of round in which the next sunflare occurs.
      */
     private int generateNextSunflare() {
         OutputFormatter.OutputCall("generateNextSunflare() - " + this.toString());
@@ -121,7 +133,8 @@ public class Game {
     }
 
     /**
-     *
+     * This method is called every time all the settlers have moved in a given round. It steps with all the robots,
+     * checks if there should be a sunflare, and changes the asteroid's 'inPerihelion' state.
      */
     private void roundFinished() {
         OutputFormatter.OutputCall("roundFinished() - " + this.toString());
