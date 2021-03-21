@@ -113,14 +113,8 @@ public class Settler extends Entity {
 
     public void buildRobot() {
         OutputFormatter.OutputCall("buildRobot() - " + name);
-        Robot r = Robot.create(asteroid, resources);
-        m_game.addRobot(r);
-        if(r != null){
-            r.move(asteroid);
-            OutputFormatter.OutputReturn("return - robot created " + r.toString());
-        } else {
-            OutputFormatter.OutputReturn("return - null");
-        }
+        Robot.create(asteroid, resources);
+        OutputFormatter.OutputReturn("return");
     }
 
 
