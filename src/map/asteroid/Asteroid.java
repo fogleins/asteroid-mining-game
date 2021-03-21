@@ -203,7 +203,7 @@ public class Asteroid {
         if (this.resource != null && surfaceThickness == 0) {
             minedResource = resource;
             resource = null;
-            this.resource.setAsteroid(null);
+            minedResource.setAsteroid(null);
         }
         OutputFormatter.OutputReturn("return - minedResource");
         return minedResource;
