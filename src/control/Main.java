@@ -6,10 +6,41 @@ import map.entity.Entity;
 import map.entity.Robot;
 import map.entity.Settler;
 import utility.OutputFormatter;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //Test_Settler_Mines_Enough_Space();
+        boolean running = true;
+        Scanner input = new Scanner(System.in);
+        while (running) {
+            System.out.println("Choose a use-case:");
+            System.out.println("\t0. Exit");
+            System.out.println("\t1. Settler mines (enough space)" +
+                    "\n\t2. Settler mines (not enough space)"); //TODO: minden use-case hozzáadása
+            System.out.println("\n> ");
+            int selection = input.nextInt();
+            switch (selection) {
+                case 0:
+                    running = false;
+                    break;
+                case 1:
+                    Test_Settler_Mines_Enough_Space();
+                    break;
+                case 2:
+                    Test_Settler_Mines_Not_Enough_Space();
+                    break;
+                default:
+                    System.out.println("Invalid selection!");
+                    continue;
+            }
+            if (running) {
+                System.out.println("\nPress enter to continue.");
+                try { System.in.read(); }
+                catch (Exception e) {/*this is fine (:*/}
+            }
+        }
+        input.close();
+        System.out.println("\nBye!");
     }
 
     public static void Test_Drill_Normal_Asteroid_Drilled(){
