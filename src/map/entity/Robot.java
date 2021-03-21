@@ -19,6 +19,20 @@ public class Robot extends Entity {
         initBillToBuild();
         OutputFormatter.OutputReturn("return");
     }
+
+    public static Robot create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) {
+        OutputFormatter.OutputCall("create() - static in Robot");
+        boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
+        if (hasResourcesToBuildTeleport) {
+            Robot robot = new Robot();
+            robot.move(currentAsteroid);
+            OutputFormatter.OutputReturn("return - " + robot.toString());
+            return robot;
+        }
+        OutputFormatter.OutputReturn("return - null");
+        return null;
+    }
+
     /**
      *
      */
@@ -29,7 +43,6 @@ public class Robot extends Entity {
         super.move(neighbours.get(rnd.nextInt(neighbours.size())));
         OutputFormatter.OutputReturn("return");
     }
-
 
     /**
      *
@@ -47,20 +60,7 @@ public class Robot extends Entity {
         OutputFormatter.OutputReturn("return");
     }
 
-    public static Robot create(Asteroid current, ArrayList<Resource> ownedResources){
-        OutputFormatter.OutputCall("create() - static in Robot");
-        boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
-        if (hasResourcesToBuildTeleport) {
-            Robot robot = new Robot();
-
-            OutputFormatter.OutputReturn("return - " + robot.toString());
-            return robot;
-        }
-        OutputFormatter.OutputReturn("return - null");
-        return null;
-    }
-
-    private void initBillToBuild(){
+    private void initBillToBuild() {
         billToBuild = new BillOfResources();
         billToBuild.addResources(new Iron());
         billToBuild.addResources(new Coal());
