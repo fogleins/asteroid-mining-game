@@ -214,7 +214,7 @@ public class Main {
     public static void Test_Settler_Mines_Enough_Space() {
         System.out.println("Settler Mines With Enough Space In Storage:\n\n");
         OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
-        Settler s = new Settler(null); // Létrehozzuk  a teszthez szükséges objektumokat.
+        Settler s = new Settler(new Game()); // Létrehozzuk  a teszthez szükséges objektumokat.
         s.setName("Settler");
 
         Asteroid a = new Asteroid();
@@ -233,7 +233,7 @@ public class Main {
     public static void Test_Settler_Mines_Not_Enough_Space() {
         System.out.println("Settler Mines Without Enough Space In Storage:\n\n");
         OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
-        Settler s = new Settler(null); // Létrehozzuk  a teszthez szükséges objektumokat.
+        Settler s = new Settler(new Game()); // Létrehozzuk  a teszthez szükséges objektumokat.
         s.setName("Settler");
 
         Asteroid [] a = new Asteroid[11];
