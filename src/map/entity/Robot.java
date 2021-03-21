@@ -12,29 +12,51 @@ import java.util.Random;
  */
 public class Robot extends Entity {
 
+    /**
+     * The resources needed to build a Robot
+     */
     private static BillOfResources billToBuild;
 
+    /**
+     * Constructor. Creates a Robot object.
+     */
     public Robot() {
         OutputFormatter.OutputCall("create - " + this.toString());
         initBillToBuild();
         OutputFormatter.OutputReturn("return");
     }
 
-    public static Robot create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) {
+    /**
+     * Creates a Robot object and places it on the Asteroid passed as a parameter. If the caller hasn't got enough
+     * resources, nothing happens.
+     *
+     * @param currentAsteroid The Asteroid object on which the caller Entity is on.
+     * @param ownedResources  A list of {@code Resource}s the caller has.
+     */
+    public static void create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) {
         OutputFormatter.OutputCall("create() - static in Robot");
         boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
         if (hasResourcesToBuildTeleport) {
             Robot robot = new Robot();
             robot.move(currentAsteroid);
-            OutputFormatter.OutputReturn("return - " + robot.toString());
-            return robot;
+            OutputFormatter.OutputReturn("return");
         }
-        OutputFormatter.OutputReturn("return - null");
-        return null;
+        OutputFormatter.OutputReturn("return");
     }
 
     /**
-     *
+     * Initializes the list of Resources needed to build a Robot.
+     */
+    private static void initBillToBuild() {
+        billToBuild = new BillOfResources();
+        billToBuild.addResources(new Iron());
+        billToBuild.addResources(new Coal());
+        billToBuild.addResources(new Uranium());
+    }
+
+    /**
+     * This method is called when the asteroid on which the robot is on explodes. If this happens, the robot will
+     * randomly select a neighbouring asteroid and move onto that.
      */
     public void asteroidExploded() {
         OutputFormatter.OutputCall("asteroidExploded() - " + this.toString());
@@ -45,12 +67,13 @@ public class Robot extends Entity {
     }
 
     /**
-     *
+     * Every time a round ends (all the Settlers have stepped), every Robot steps. This method is a basic implementation
+     * of a Robot object deciding what to do.
      */
     public void step() {
         OutputFormatter.OutputCall("step() - " + this.toString());
         Random rnd = new Random();
-        int choice = rnd.nextInt(2); // 0 vagy 1 lesz a generált szám
+        int choice = rnd.nextInt(2); // generated number will be 0 or 1
         if (choice == 0) {
             ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
             super.move(neighbours.get(rnd.nextInt(neighbours.size())));
@@ -58,12 +81,5 @@ public class Robot extends Entity {
             super.drill();
         }
         OutputFormatter.OutputReturn("return");
-    }
-
-    private void initBillToBuild() {
-        billToBuild = new BillOfResources();
-        billToBuild.addResources(new Iron());
-        billToBuild.addResources(new Coal());
-        billToBuild.addResources(new Uranium());
     }
 }
