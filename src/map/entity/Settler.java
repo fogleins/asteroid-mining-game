@@ -78,7 +78,7 @@ public class Settler extends Entity {
     }
 
     /**
-     *
+     * Settler mines.
      */
     public void mine() {
         OutputFormatter.OutputCall("mine() - " + name);
@@ -108,7 +108,7 @@ public class Settler extends Entity {
     }
 
     /**
-     *
+     * Settler builds robot.
      */
 
     public void buildRobot() {
@@ -126,7 +126,7 @@ public class Settler extends Entity {
 
 
     /**
-     *
+     * Settler builds teleport.
      */
     public void buildTeleport() {
         OutputFormatter.OutputCall("buildTeleport() - " + name);
@@ -146,7 +146,7 @@ public class Settler extends Entity {
     }
 
     /**
-     *
+     * Settler places teleport.
      */
     public void placeTeleport() {
         OutputFormatter.OutputCall("placeTeleport() - " + name);
