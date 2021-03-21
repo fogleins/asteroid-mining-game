@@ -82,13 +82,29 @@ public class Settler extends Entity {
      */
     public void mine() {
         OutputFormatter.OutputCall("mine() - " + name);
-        Resource r = asteroid.mined();
-        if(r != null){
-            resources.add(r);
-            OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
+        if (resources.size() < 10){
+            Resource r = asteroid.mined();
+            if(r != null){
+                resources.add(r);
+                OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
+            } else {
+                OutputFormatter.OutputReturn("return - null");
+            }
         } else {
-            OutputFormatter.OutputReturn("return - null");
+            Resource resourceToExchange = m_game.exchangeResource(resources);
+            Resource r = asteroid.mined();
+            if(r != null){
+                resources.add(r);
+                OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
+            } else {
+                OutputFormatter.OutputReturn("return - null");
+            }
+            boolean success = asteroid.placeResource(resourceToExchange);
+            if (success){
+                resources.remove(resourceToExchange);
+            }
         }
+
     }
 
     /**

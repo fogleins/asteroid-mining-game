@@ -23,7 +23,13 @@ public class Main {
                     "\n\t4. Build teleport (not enough resource)" +
                     "\n\t5. Place teleport (ok)" +
                     "\n\t6. Place teleport (no teleport gate in storage)" +
-                    "\n\t7. Place teleport (teleport already placed on asteroid)"); //TODO: minden use-case hozzáadása
+                    "\n\t7. Place teleport (teleport already placed on asteroid)" +
+                    "\n\t8. Test Drill Normal Asteroid Drilled" +
+                    "\n\t9. Test Drill Normal Asteroid" +
+                    "\n\t10. Test Drill Normal Asteroid Perihelion" +
+                    "\n\t11. Test Drill Radioactive Asteroid Perihelion Settler" +
+                    "\n\t12. Test Drill Radioactive Asteroid Perihelion Robot" +
+                    "\n\t13. Test Drill Sublimable Asteroid Perihelion"); //TODO: minden use-case hozzáadása
             System.out.println("\n> ");
             int selection = input.nextInt();
             switch (selection) {
@@ -50,6 +56,24 @@ public class Main {
                     break;
                 case 7:
                     Test_Place_Teleport_Already_Exists();
+                    break;
+                case 8:
+                    Test_Drill_Normal_Asteroid_Drilled();
+                    break;
+                case 9:
+                    Test_Drill_Normal_Asteroid();
+                    break;
+                case 10:
+                    Test_Drill_Normal_Asteroid_Perihelion();
+                    break;
+                case 11:
+                    Test_Drill_Radioactive_Asteroid_Perihelion_Settler();
+                    break;
+                case 12:
+                    Test_Drill_Radioactive_Asteroid_Perihelion_Robot();
+                    break;
+                case 13:
+                    Test_Drill_Sublimable_Asteroid_Perihelion();
                     break;
                 default:
                     System.out.println("Invalid selection!");
@@ -110,7 +134,7 @@ public class Main {
     }
 
     public static void Test_Drill_Radioactive_Asteroid_Perihelion_Settler(){
-        System.out.println("Drill Radioactive Asteroid Perihelion:\n\n");
+        System.out.println("Drill Radioactive Asteroid Perihelion Settler:\n\n");
         OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Game g = new Game();
         Settler s = new Settler(g); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
@@ -127,15 +151,17 @@ public class Main {
     }
 
     public static void Test_Drill_Radioactive_Asteroid_Perihelion_Robot(){
-        System.out.println("Drill Radioactive Asteroid Perihelion:\n\n");
+        System.out.println("Drill Radioactive Asteroid Perihelion Robot:\n\n");
         OutputFormatter.setState(false); // Kikapcsoljuk az OutputFormattert, hogy ne írjon ki lényegtelen információkat.
         Robot r = new Robot(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         r.setName("Robot");
         Asteroid a = new Asteroid();
+        Asteroid b = new Asteroid();
         a.setInPerihelion(true);
         Uranium u = new Uranium();
         a.addResource(u);
         a.setSurfaceThickness(1);
+        a.addNeighbour(b);
 
         r.move(a);
         OutputFormatter.setState(true); // Innen már számít a kimenet, így bekapcsoljuk az OutputFormattert.
