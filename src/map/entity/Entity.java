@@ -1,5 +1,6 @@
 package map.entity;
 
+import control.Game;
 import map.asteroid.Asteroid;
 import map.asteroid.Resource;
 import utility.OutputFormatter;
@@ -12,10 +13,13 @@ import java.util.ArrayList;
 abstract public class Entity {
 
     /**
+     * Game reference.
+     */
+    protected static Game game;
+    /**
      * Entity's name.
      */
     protected String name;
-
     /**
      * Asteroid.
      */
@@ -27,6 +31,14 @@ abstract public class Entity {
     public Entity() {
     }
 
+    /**
+     * Set the value of game
+     *
+     * @param g The new value of game
+     */
+    public static void setGame(Game g) {
+        game = g;
+    }
 
     /**
      * Get the value of name
@@ -48,6 +60,7 @@ abstract public class Entity {
 
     /**
      * Moves the entity from current asteroid to the asteroid given as parameter.
+     *
      * @param whereTo Given asteroid.
      */
     public void move(Asteroid whereTo) {
@@ -92,6 +105,7 @@ abstract public class Entity {
 
     /**
      * Returns a list of resources in carry capable entities. Returns null by default.
+     *
      * @return null.
      */
     public ArrayList<Resource> getResources() {

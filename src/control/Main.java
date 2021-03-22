@@ -114,7 +114,7 @@ public class Main {
         System.out.println("\nBye!");
     }
 
-    public static void Test_Run_All(){
+    public static void Test_Run_All() {
         Test_Settler_Mines_Enough_Space();
         System.out.println("\n");
         Test_Settler_Mines_Not_Enough_Space();
@@ -155,7 +155,8 @@ public class Main {
     public static void Test_Drill_Normal_Asteroid_Drilled() {
         System.out.println("Drill Normal Asteroid Perihelion:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
+        Game g = new Game();
+        Settler s = new Settler(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
         a.setName("NGC-1304");
@@ -170,7 +171,8 @@ public class Main {
     public static void Test_Drill_Normal_Asteroid() {
         System.out.println("Drill Normal Asteroid:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
+        Game g = new Game();
+        Settler s = new Settler(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
         a.setName("NGC-1304");
@@ -185,7 +187,8 @@ public class Main {
     public static void Test_Drill_Normal_Asteroid_Perihelion() {
         System.out.println("Drill Normal Asteroid Perihelion:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Settler s = new Settler(null); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
+        Game g = new Game();
+        Settler s = new Settler(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
         a.setName("NGC-1304");
@@ -203,7 +206,7 @@ public class Main {
         System.out.println("Drill Radioactive Asteroid Perihelion Settler:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
+        Settler s = new Settler(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
         a.setName("NGC-1304");
@@ -240,7 +243,8 @@ public class Main {
     public static void Test_Drill_Sublimable_Asteroid_Perihelion() {
         System.out.println("Drill Sublimable Asteroid Perihelion:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Settler s = new Settler(new Game()); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
+        Game g = new Game();
+        Settler s = new Settler(); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
         s.setName("Settler");
         Asteroid a = new Asteroid();
         a.setName("NGC-1304");
@@ -257,7 +261,8 @@ public class Main {
     public static void Test_Settler_Mines_Enough_Space() {
         System.out.println("Settler Mines With Enough Space In Storage:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Settler s = new Settler(new Game()); // Létrehozzuk  a teszthez szükséges objektumokat.
+        Game g = new Game();
+        Settler s = new Settler(); // Létrehozzuk  a teszthez szükséges objektumokat.
         s.setName("Settler");
 
         Asteroid a = new Asteroid();
@@ -276,7 +281,8 @@ public class Main {
     public static void Test_Settler_Mines_Not_Enough_Space() {
         System.out.println("Settler Mines Without Enough Space In Storage:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Settler s = new Settler(new Game()); // Létrehozzuk  a teszthez szükséges objektumokat.
+        Game g = new Game();
+        Settler s = new Settler(); // Létrehozzuk  a teszthez szükséges objektumokat.
         s.setName("Settler");
 
         Asteroid[] a = new Asteroid[11];
@@ -311,7 +317,8 @@ public class Main {
         a2.setName("a2");
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
-        Settler s = new Settler(null);
+        Game g = new Game();
+        Settler s = new Settler();
         s.setName("telepes");
         s.move(a1);
 
@@ -323,7 +330,7 @@ public class Main {
         System.out.println("Test_Build_Teleport_Has_Resources:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g);
+        Settler s = new Settler();
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
@@ -349,7 +356,7 @@ public class Main {
         System.out.println("Test_Build_Teleport_No_Resources:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g);
+        Settler s = new Settler();
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
@@ -369,7 +376,7 @@ public class Main {
         System.out.println("Test_Place_Teleport_Ok:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g);
+        Settler s = new Settler();
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
@@ -385,7 +392,7 @@ public class Main {
         System.out.println("Test_Place_Teleport_No_Teleport:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g);
+        Settler s = new Settler();
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
@@ -399,7 +406,7 @@ public class Main {
         System.out.println("Test_Place_Teleport_Already_Exists:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g);
+        Settler s = new Settler();
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
@@ -416,7 +423,7 @@ public class Main {
         System.out.println("Test_Resource_Placeback:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g);
+        Settler s = new Settler();
         s.setName("settler");
         for (int i = 0; i < 10; i++) {
             Asteroid a = new Asteroid();
@@ -447,7 +454,7 @@ public class Main {
         System.out.println("Test_Build_Robot_Has_Resources:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g);
+        Settler s = new Settler();
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");
@@ -471,7 +478,7 @@ public class Main {
         System.out.println("Test_Build_Robot_No_Resources:\n");
         OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
         Game g = new Game();
-        Settler s = new Settler(g);
+        Settler s = new Settler();
         s.setName("s");
         Asteroid a = new Asteroid();
         a.setName("a1");

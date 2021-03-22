@@ -1,8 +1,5 @@
 package map.entity;
 
-import control.Game;
-import map.BillOfResources;
-import map.asteroid.Asteroid;
 import map.asteroid.Resource;
 import utility.OutputFormatter;
 
@@ -24,19 +21,12 @@ public class Settler extends Entity {
      */
     private final ArrayList<TeleportGate> teleports = new ArrayList<>();
 
-    /**
-     * Game reference.
-     */
-    private Game m_game;
 
     /**
      * Constructor of Settler.
-     *
-     * @param g Reference to game.
      */
-    public Settler(Game g) {
+    public Settler() {
         OutputFormatter.OutputCall("create - " + this.toString());
-        m_game = g;
         OutputFormatter.OutputReturn("return");
     }
 
@@ -52,6 +42,7 @@ public class Settler extends Entity {
     }
 
     // only used in testing initialization
+
     /**
      * Adds a teleportgate to an asteroid.
      *
@@ -75,7 +66,7 @@ public class Settler extends Entity {
                 OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
             }
         } else {
-            Resource resourceToExchange = m_game.exchangeResource(resources);
+            Resource resourceToExchange = game.exchangeResource(resources);
             Resource r = asteroid.mined();
             if (r != null) {
                 resources.add(r);

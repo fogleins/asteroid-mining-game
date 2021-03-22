@@ -3,6 +3,7 @@ package control;
 import map.Map;
 import map.asteroid.BaseAsteroid;
 import map.asteroid.Resource;
+import map.entity.Entity;
 import map.entity.Robot;
 import map.entity.Settler;
 import utility.OutputFormatter;
@@ -16,11 +17,34 @@ import java.util.Random;
  */
 public class Game {
 
+    /**
+     * Counts the number of rounds played.
+     */
     private int currentRound;
+
+    /**
+     * The number of the round in which the next sunflare occurs.
+     */
     private int nextSunflare;
+
+    /**
+     * Reference to the Map object, which contains game's map.
+     */
     private Map map;
+
+    /**
+     * The settler, who should steps next.
+     */
     private Settler current;
+
+    /**
+     * List of Settlers, who are playing the game.
+     */
     private ArrayList<Settler> settlers;
+
+    /**
+     * List of Robots who are playing.
+     */
     private ArrayList<Robot> robots;
 
 
@@ -29,6 +53,7 @@ public class Game {
      */
     public Game() {
         OutputFormatter.OutputCall("Game() - " + this.toString());
+        Entity.setGame(this);
         currentRound = 0;
         nextSunflare = generateNextSunflare();
         BaseAsteroid baseAsteroid = new BaseAsteroid(this);

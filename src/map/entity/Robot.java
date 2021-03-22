@@ -35,9 +35,10 @@ public class Robot extends Entity {
      */
     public static void create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) {
         OutputFormatter.OutputCall("create() - static in Robot");
-        boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
-        if (hasResourcesToBuildTeleport) {
+        boolean hasResourcesToBuildRobot = billToBuild.use(ownedResources);
+        if (hasResourcesToBuildRobot) {
             Robot robot = new Robot();
+            game.addRobot(robot);
             robot.move(currentAsteroid);
             OutputFormatter.OutputReturn("return - success");
         } else {
