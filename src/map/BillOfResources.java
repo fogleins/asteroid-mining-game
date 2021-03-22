@@ -16,12 +16,6 @@ public class BillOfResources {
      * Constructor of class
      */
     public BillOfResources() { }
-    /*// a much nicer constructor
-    public BillOfResources(ArrayList<Resource> resourcesNeeded) {
-        OutputFormatter.OutputCall("create - " + this.toString());
-        this.resourcesNeeded = resourcesNeeded;
-        OutputFormatter.OutputReturn("return");
-    }*/
 
     /**
      * Add a Resource object to the resources list

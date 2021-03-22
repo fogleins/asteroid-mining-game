@@ -7,29 +7,13 @@ import java.util.ArrayList;
  */
 public class Neighbours {
 
-    //
-    // Fields
-    //
-
     private ArrayList<Asteroid> asteroidNeighbours;
     private ArrayList<Asteroid> teleportGateNeighbours;
 
-    //
-    // Constructors
-    //
     public Neighbours(ArrayList<Asteroid> asteroidNeighbours, ArrayList<Asteroid> teleportGateNeighbours) {
         this.asteroidNeighbours = asteroidNeighbours;
         this.teleportGateNeighbours = teleportGateNeighbours;
     }
-
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
 
     /**
      * Get the value of asteroidNeighbours
@@ -66,9 +50,4 @@ public class Neighbours {
     public void setTeleportGateNeighbours(ArrayList<Asteroid> asteroids) {
         teleportGateNeighbours = asteroids;
     }
-
-    //
-    // Other methods
-    //
-
 }

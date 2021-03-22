@@ -11,10 +11,6 @@ import java.util.ArrayList;
  */
 public class TeleportGate {
 
-
-    //
-    // Fields
-    //
     /**
      * The bill to build a teleportgate(pair).
      */
@@ -28,10 +24,6 @@ public class TeleportGate {
      */
     private TeleportGate otherGate;
 
-    //
-    // Constructors
-    //
-
     /**
      * Constructor of the TeleportGate, which initialize the resources to build a gate(pair).
      */
@@ -41,24 +33,21 @@ public class TeleportGate {
         OutputFormatter.OutputReturn("return");
     }
 
-    //
-    // Methods
-    //
-
     /**
      * Creates a teleportgate(pair) if there is enough resources to build.
+     *
      * @param ownedResources The resources of settler, whereof the gate can be built.
      * @return with the gate-pair.
      */
-    public static ArrayList<TeleportGate> create(ArrayList<Resource> ownedResources){
-        OutputFormatter.OutputCall("create("+ownedResources.toString()+") - static in TeleportGate");
+    public static ArrayList<TeleportGate> create(ArrayList<Resource> ownedResources) {
+        OutputFormatter.OutputCall("create(" + ownedResources.toString() + ") - static in TeleportGate");
         boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
-        if(hasResourcesToBuildTeleport){
+        if (hasResourcesToBuildTeleport) {
             ArrayList<TeleportGate> gates = new ArrayList<>();
             TeleportGate t1 = new TeleportGate();
             TeleportGate t2 = new TeleportGate();
-            t1.otherGate=t2;
-            t2.otherGate=t1;
+            t1.otherGate = t2;
+            t2.otherGate = t1;
             gates.add(t1);
             gates.add(t2);
             OutputFormatter.OutputReturn("return - " + gates.toString());
@@ -68,9 +57,6 @@ public class TeleportGate {
         return null;
     }
 
-    //
-    // Accessor methods
-    //
 
     /**
      * Getter of the current asteroid, not used in the test.
@@ -88,15 +74,10 @@ public class TeleportGate {
         currentAsteroid = new_object;
     }
 
-
-    //
-    // Other methods
-    //
-
     /**
      * Initialize the resources to the bill, which is required to build a gate(pair).
      */
-    private void initBillToBuild(){
+    private void initBillToBuild() {
         billToBuild = new BillOfResources();
         billToBuild.addResources(new Iron());
         billToBuild.addResources(new Iron());
@@ -107,13 +88,12 @@ public class TeleportGate {
 
     /**
      * Returns an asteroid, where the other gate is placed on.
+     *
      * @return The asteroid, where the other gate is placed on.
      */
     public Asteroid getOtherSide() {
         OutputFormatter.OutputCall("getOtherSide() - " + this.toString());
-        OutputFormatter.OutputReturn("return - "+ otherGate.getCurrentAsteroid().getName());
+        OutputFormatter.OutputReturn("return - " + otherGate.getCurrentAsteroid().getName());
         return otherGate.getCurrentAsteroid();
     }
-
-
 }

@@ -15,7 +15,7 @@ public abstract class RadioactiveResource extends Resource {
      * Generates a nuclear explosion
      */
     public void drilledInPerihelion() {
-        OutputFormatter.OutputCall("drilledInPerihelion() - "+this.toString());
+        OutputFormatter.OutputCall("drilledInPerihelion() - " + this.toString());
         asteroid.explode(); // explosion
         OutputFormatter.OutputReturn("return");
     }

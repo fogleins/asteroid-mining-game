@@ -29,11 +29,12 @@ public abstract class Resource {
 
     /**
      * Returns whether the parameter is the same type of resource as this resource
+     *
      * @param res The other resource object
      * @return True, if the 2 resources are the same type
      */
     public boolean isCompatibleWith(Resource res) {
-        OutputFormatter.OutputCall("isCompatibleWith("+res.toString()+")");
+        OutputFormatter.OutputCall("isCompatibleWith(" + res.toString() + ")");
         boolean result = res.getClass().equals(this.getClass()); // check
         OutputFormatter.OutputReturn("return - " + result);
         return result;
