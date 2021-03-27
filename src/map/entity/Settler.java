@@ -98,7 +98,7 @@ public class Settler extends Entity {
      */
     public void buildTeleport() {
         OutputFormatter.OutputCall("buildTeleport() - " + name);
-        if (teleports.size() == 0) {
+        if (teleports.size() < 2) {
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
                 for (TeleportGate tp : teleportGates) {
