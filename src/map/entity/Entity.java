@@ -28,7 +28,8 @@ abstract public class Entity {
     /**
      * Constructor of Entity.
      */
-    public Entity() {
+    public Entity(String name) {
+        this.name = name;
     }
 
     /**
@@ -47,15 +48,6 @@ abstract public class Entity {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Set the value of name
-     *
-     * @param name the new value of name
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**

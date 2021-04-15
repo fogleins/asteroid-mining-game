@@ -25,8 +25,9 @@ public class Settler extends Entity {
     /**
      * Constructor of Settler.
      */
-    public Settler() {
-        OutputFormatter.OutputCall("create - " + this.toString());
+    public Settler(String name) {
+        super(name);
+        OutputFormatter.OutputCall("create - " + name);
         OutputFormatter.OutputReturn("return");
     }
 
@@ -65,21 +66,22 @@ public class Settler extends Entity {
                 resources.add(r);
                 OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
             }
+            OutputFormatter.OutputReturn("return - nothing to mine");
         } else {
-            Resource resourceToExchange = game.exchangeResource(resources);
             Resource r = asteroid.mined();
             if (r != null) {
+                Resource resourceToExchange = game.exchangeResource(resources);
                 resources.add(r);
+                boolean success = asteroid.placeResource(resourceToExchange);
+                if (success) {
+                    OutputFormatter.OutputReturn("return - resource exchanged " + r.getClass().toString());
+                    resources.remove(resourceToExchange);
+                } else {
+                    OutputFormatter.OutputReturn("return - exchange not possible");
+                }
             }
-            boolean success = asteroid.placeResource(resourceToExchange);
-            if (success) {
-                OutputFormatter.OutputReturn("return - resource exchanged " + r.getClass().toString());
-                resources.remove(resourceToExchange);
-            } else {
-                OutputFormatter.OutputReturn("return - exchange not possible");
-            }
+            OutputFormatter.OutputReturn("return - nothing to mine");
         }
-
     }
 
     /**
@@ -106,10 +108,10 @@ public class Settler extends Entity {
                 }
                 OutputFormatter.OutputReturn("return - teleportgates created ");
             } else {
-                OutputFormatter.OutputReturn("return - null");
+                OutputFormatter.OutputReturn("return - couldn't create teleportgates");
             }
         } else {
-            OutputFormatter.OutputReturn("return - already has teleports");
+            OutputFormatter.OutputReturn("return - too much teleport in cargo");
         }
     }
 

@@ -18,10 +18,16 @@ public class Robot extends Entity implements Steppable {
     private static BillOfResources billToBuild;
 
     /**
+     * ID to make names unique for robots.
+     */
+    private static int nameID = 0;
+
+    /**
      * Constructor. Creates a Robot object.
      */
-    public Robot() {
-        OutputFormatter.OutputCall("create - " + this.toString());
+    public Robot(String name) {
+        super(name);
+        OutputFormatter.OutputCall("create - " + name);
         initBillToBuild();
         OutputFormatter.OutputReturn("return");
     }
@@ -37,7 +43,7 @@ public class Robot extends Entity implements Steppable {
         OutputFormatter.OutputCall("create() - static in Robot");
         boolean hasResourcesToBuildRobot = billToBuild.use(ownedResources);
         if (hasResourcesToBuildRobot) {
-            Robot robot = new Robot();
+            Robot robot = new Robot("Robot_" + nameID);
             game.addSteppable(robot);
             robot.move(currentAsteroid);
             OutputFormatter.OutputReturn("return - success");
@@ -61,7 +67,7 @@ public class Robot extends Entity implements Steppable {
      * randomly select a neighbouring asteroid and move onto that.
      */
     public void asteroidExploded() {
-        OutputFormatter.OutputCall("asteroidExploded() - " + this.toString());
+        OutputFormatter.OutputCall("asteroidExploded() - " + name);
         ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
         Random rnd = new Random();
         super.move(neighbours.get(rnd.nextInt(neighbours.size())));
@@ -73,7 +79,7 @@ public class Robot extends Entity implements Steppable {
      * of a Robot object deciding what to do.
      */
     public void step() {
-        OutputFormatter.OutputCall("step() - " + this.toString());
+        OutputFormatter.OutputCall("step() - " + name);
         Random rnd = new Random();
         int choice = rnd.nextInt(2); // generated number will be 0 or 1
         if (choice == 0) {
