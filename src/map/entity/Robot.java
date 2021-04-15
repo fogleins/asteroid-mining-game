@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * Class map.entity.Robot
  */
-public class Robot extends Entity {
+public class Robot extends Entity implements Steppable {
 
     /**
      * The resources needed to build a Robot
@@ -38,7 +38,7 @@ public class Robot extends Entity {
         boolean hasResourcesToBuildRobot = billToBuild.use(ownedResources);
         if (hasResourcesToBuildRobot) {
             Robot robot = new Robot();
-            game.addRobot(robot);
+            game.addSteppable(robot);
             robot.move(currentAsteroid);
             OutputFormatter.OutputReturn("return - success");
         } else {

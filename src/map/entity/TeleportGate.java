@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Class TeleportGate
  */
-public class TeleportGate {
+public class TeleportGate implements Steppable {
 
     /**
      * The bill to build a teleportgate(pair).
@@ -95,5 +95,10 @@ public class TeleportGate {
         OutputFormatter.OutputCall("getOtherSide() - " + this.toString());
         OutputFormatter.OutputReturn("return - " + otherGate.getCurrentAsteroid().getName());
         return otherGate.getCurrentAsteroid();
+    }
+
+    @Override
+    public void step() {
+        // TODO
     }
 }

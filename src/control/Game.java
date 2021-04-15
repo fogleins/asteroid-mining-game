@@ -4,8 +4,8 @@ import map.Map;
 import map.asteroid.BaseAsteroid;
 import map.asteroid.Resource;
 import map.entity.Entity;
-import map.entity.Robot;
 import map.entity.Settler;
+import map.entity.Steppable;
 import utility.OutputFormatter;
 
 import java.util.ArrayList;
@@ -43,9 +43,9 @@ public class Game {
     private ArrayList<Settler> settlers;
 
     /**
-     * List of Robots who are playing.
+     * List of Steppables who are playing.
      */
-    private ArrayList<Robot> robots;
+    private ArrayList<Steppable> steppables;
 
 
     /**
@@ -59,7 +59,7 @@ public class Game {
         BaseAsteroid baseAsteroid = new BaseAsteroid(this);
         map = new Map(baseAsteroid);
         settlers = new ArrayList<>();
-        robots = new ArrayList<>();
+        steppables = new ArrayList<>();
         current = null/*settlers.get(0)*/;
         OutputFormatter.OutputReturn("return");
     }
@@ -94,20 +94,20 @@ public class Game {
     }
 
     /**
-     * Add a Robot object to the robots list
+     * Add a Steppable object to the steppables list
      */
-    public void addRobot(Robot robot) {
-        OutputFormatter.OutputCall("addRobot() - " + this.toString());
-        robots.add(robot);
+    public void addSteppable(Steppable steppable) {
+        OutputFormatter.OutputCall("addSteppable() - " + this.toString());
+        steppables.add(steppable);
         OutputFormatter.OutputReturn("return");
     }
 
     /**
-     * Remove a Robot object from robots
+     * Remove a Steppable object from steppables
      */
-    public void removeRobot(Robot robot) {
-        OutputFormatter.OutputCall("removeRobot() - " + this.toString());
-        robots.remove(robot);
+    public void removeSteppable(Steppable steppable) {
+        OutputFormatter.OutputCall("removeSteppable() - " + this.toString());
+        steppables.remove(steppable);
         OutputFormatter.OutputReturn("return");
     }
 
@@ -158,13 +158,13 @@ public class Game {
     }
 
     /**
-     * This method is called every time all the settlers have moved in a given round. It steps with all the robots,
+     * This method is called every time all the settlers have moved in a given round. It steps with all the steppables,
      * checks if there should be a sunflare, and changes the asteroid's 'inPerihelion' state.
      */
     private void roundFinished() {
         OutputFormatter.OutputCall("roundFinished() - " + this.toString());
-        for (Robot robot : robots) {
-            robot.step();
+        for (Steppable steppable : steppables) {
+            steppable.step();
         }
         if (currentRound == nextSunflare) {
             map.sunflare();
