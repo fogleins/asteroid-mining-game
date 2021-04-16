@@ -95,4 +95,8 @@ abstract public class Entity {
         OutputFormatter.OutputReturn("return - null");
         return null;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

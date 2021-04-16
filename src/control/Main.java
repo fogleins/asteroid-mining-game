@@ -6,6 +6,7 @@ import map.entity.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Main {
     private static final Game game = Game.getInstance();
@@ -222,8 +223,47 @@ public class Main {
                         } else throw new InvalidSyntaxException("Invalid syntax in drill.");
                         break;
                     case "buildrobot":
+                        if (line.matches("^buildrobot [a-zA-Z0-9]+ [a-zA-Z0-9]+$")) {
+                            String[] parameters = line.split(" ");
+                            Settler settler = getSettlerByName(parameters[1]);
+                            if (settler == null)
+                                throw new BadArgumentException("Settler " + parameters[1] + " can't be found.");
+                            // we make a copy of the current steppables, before the robot is built
+                            ArrayList<Steppable> before = new ArrayList<>();
+                            for (Steppable steppable : game.getSteppables())
+                                before.add(steppable);
+                            settler.buildRobot();
+                            // we are looking for the robot we've just created
+                            for (Steppable steppable : game.getSteppables()) {
+                                if (!before.contains(steppable)) {
+                                    ((Robot) steppable).setName(parameters[2]);
+                                    break;
+                                }
+                            }
+                        }
+                        else throw new InvalidSyntaxException("Invalid syntax in buildrobot.");
                         break;
                     case "buildteleport":
+                        if (line.matches("^buildteleport [a-zA-Z0-9]+ [a-zA-Z0-9]+ [a-zA-Z0-9]+$")) {
+                            String[] parameters = line.split(" ");
+                            Settler settler = getSettlerByName(parameters[1]);
+                            if (settler == null)
+                                throw new BadArgumentException("Settler " + parameters[1] + " can't be found.");
+                            // we make a copy of the current steppables, before the robot is built
+                            ArrayList<TeleportGate> before = new ArrayList<>();
+                            for (TeleportGate teleportGate : settler.getTeleports())
+                                before.add(teleportGate);
+                            settler.buildTeleport();
+                            boolean firstRenamed = false;
+                            // we are looking for the robot we've just created
+                            for (TeleportGate teleportGate : settler.getTeleports()) {
+                                if (!before.contains(teleportGate)) {
+                                    teleportGate.setName(firstRenamed ? parameters[2] : parameters[3]);
+                                    firstRenamed = true;
+                                }
+                            }
+                        }
+                        else throw new InvalidSyntaxException("Invalid syntax in buildrobot.");
                         break;
                     case "placeteleport":
                         break;

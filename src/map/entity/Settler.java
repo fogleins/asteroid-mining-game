@@ -101,7 +101,7 @@ public class Settler extends Entity {
      */
     public void buildTeleport() {
         OutputFormatter.OutputCall("buildTeleport() - " + name);
-        if (teleports.size() < 2) {
+        if (teleports.size() < 2) { // TODO: ez 3 (?)
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
                 for (TeleportGate tp : teleportGates) {
@@ -133,5 +133,10 @@ public class Settler extends Entity {
         } else {
             OutputFormatter.OutputReturn("return - there is no teleportgate to place");
         }
+    }
+
+    // TODO: remove after tests
+    public ArrayList<TeleportGate> getTeleports() {
+        return teleports;
     }
 }
