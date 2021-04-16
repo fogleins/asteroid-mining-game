@@ -16,6 +16,10 @@ import java.util.Random;
  * Class control.Game
  */
 public class Game {
+    /**
+     * The instance of the singleton Game class.
+     */
+    private static final Game instance = new Game();
 
     /**
      * Counts the number of rounds played.
@@ -51,7 +55,7 @@ public class Game {
     /**
      * Constructor. Initializes the Game object.
      */
-    public Game() {
+    private Game() {
         OutputFormatter.OutputCall("Game() - " + this.toString());
         Entity.setGame(this);
         currentRound = 0;
@@ -62,6 +66,15 @@ public class Game {
         steppables = new ArrayList<>();
         current = null/*settlers.get(0)*/;
         OutputFormatter.OutputReturn("return");
+    }
+
+    /**
+     * Other objects can use this method to access the Game object.
+     *
+     * @return The instance of the Game class.
+     */
+    public static Game getInstance() {
+        return instance;
     }
 
     /**
