@@ -1,7 +1,5 @@
 package map.asteroid;
 
-import utility.OutputFormatter;
-
 /**
  * Class map.asteroid.Resource
  * Represents a resource object, which is used to build things
@@ -23,8 +21,6 @@ public abstract class Resource {
      * Default implementation
      */
     public void drilledInPerihelion() {
-        OutputFormatter.OutputCall("drilledInPerihelion() - " + this.toString());
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -34,9 +30,6 @@ public abstract class Resource {
      * @return True, if the 2 resources are the same type
      */
     public boolean isCompatibleWith(Resource res) {
-        OutputFormatter.OutputCall("isCompatibleWith(" + res.toString() + ")");
-        boolean result = res.getClass().equals(this.getClass()); // check
-        OutputFormatter.OutputReturn("return - " + result);
-        return result;
+        return res.getClass().equals(this.getClass()); // check
     }
 }

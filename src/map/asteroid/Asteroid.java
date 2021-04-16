@@ -2,7 +2,6 @@ package map.asteroid;
 
 import map.entity.Entity;
 import map.entity.TeleportGate;
-import utility.OutputFormatter;
 
 import java.util.ArrayList;
 
@@ -22,23 +21,15 @@ public class Asteroid {
 
 
     public Asteroid() {
-        OutputFormatter.OutputCall("create - " + this.toString());
-        OutputFormatter.OutputReturn("return");
     }
 
 
     public String getName() {
-        OutputFormatter.OutputCall("getName() - " + name);
-        OutputFormatter.OutputReturn("return - name");
         return name;
     }
 
     public void setName(String name) {
-        OutputFormatter.OutputCall("setName() - " + name);
-
         this.name = name;
-
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -47,8 +38,6 @@ public class Asteroid {
      * @return the value of surfaceThickness
      */
     public int getSurfaceThickness() {
-        OutputFormatter.OutputCall("getSurfaceThickness() - " + name);
-        OutputFormatter.OutputReturn("return - surfaceThickness");
         return surfaceThickness;
     }
 

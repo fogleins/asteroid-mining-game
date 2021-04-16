@@ -3,7 +3,7 @@ package map.entity;
 import control.Game;
 import map.asteroid.Asteroid;
 import map.asteroid.Resource;
-import utility.OutputFormatter;
+
 
 import java.util.ArrayList;
 
@@ -46,13 +46,11 @@ abstract public class Entity {
      * @param whereTo Given asteroid.
      */
     public void move(Asteroid whereTo) {
-        OutputFormatter.OutputCall("move(" + whereTo.toString() + ") - " + name);
         if (asteroid != null) {
             asteroid.removeEntity(this);
         }
         whereTo.acceptEntity(this);
         asteroid = whereTo;
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -60,9 +58,7 @@ abstract public class Entity {
      * Entity tries to drill.
      */
     public void drill() {
-        OutputFormatter.OutputCall("drill() - " + this.name);
         asteroid.drilled();
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -70,9 +66,7 @@ abstract public class Entity {
      * Entity dies.
      */
     public void die() {
-        OutputFormatter.OutputCall("die() - " + this.name);
         asteroid.removeEntity(this);
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -80,9 +74,7 @@ abstract public class Entity {
      * Handles the event of asteroid explosion on the exposed entity.
      */
     public void asteroidExploded() {
-        OutputFormatter.OutputCall("asteroidExploded() - " + this.name);
         die();
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -91,8 +83,6 @@ abstract public class Entity {
      * @return null.
      */
     public ArrayList<Resource> getResources() {
-        OutputFormatter.OutputCall("getResources() - " + name);
-        OutputFormatter.OutputReturn("return - null");
         return null;
     }
 

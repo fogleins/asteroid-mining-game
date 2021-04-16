@@ -2,7 +2,6 @@ package map.entity;
 
 import map.BillOfResources;
 import map.asteroid.*;
-import utility.OutputFormatter;
 
 import java.util.ArrayList;
 
@@ -28,9 +27,7 @@ public class TeleportGate implements Steppable {
      * Constructor of the TeleportGate, which initialize the resources to build a gate(pair).
      */
     public TeleportGate() {
-        OutputFormatter.OutputCall("create - " + this.toString());
         initBillToBuild();
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -40,7 +37,6 @@ public class TeleportGate implements Steppable {
      * @return with the gate-pair.
      */
     public static ArrayList<TeleportGate> create(ArrayList<Resource> ownedResources) {
-        OutputFormatter.OutputCall("create(" + ownedResources.toString() + ") - static in TeleportGate");
         boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
         if (hasResourcesToBuildTeleport) {
             ArrayList<TeleportGate> gates = new ArrayList<>();
@@ -50,10 +46,8 @@ public class TeleportGate implements Steppable {
             t2.otherGate = t1;
             gates.add(t1);
             gates.add(t2);
-            OutputFormatter.OutputReturn("return - " + gates.toString());
             return gates;
         }
-        OutputFormatter.OutputReturn("return - null");
         return null;
     }
 
@@ -92,8 +86,6 @@ public class TeleportGate implements Steppable {
      * @return The asteroid, where the other gate is placed on.
      */
     public Asteroid getOtherSide() {
-        OutputFormatter.OutputCall("getOtherSide() - " + this.toString());
-        OutputFormatter.OutputReturn("return - " + otherGate.getCurrentAsteroid().getName());
         return otherGate.getCurrentAsteroid();
     }
 

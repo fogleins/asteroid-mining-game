@@ -2,7 +2,7 @@ package map.entity;
 
 import control.Game;
 import map.asteroid.Resource;
-import utility.OutputFormatter;
+
 
 import java.util.ArrayList;
 
@@ -28,8 +28,8 @@ public class Settler extends Entity {
      */
     public Settler(String name) {
         super(name);
-        OutputFormatter.OutputCall("create - " + name);
-        OutputFormatter.OutputReturn("return");
+
+
     }
 
     /**
@@ -38,8 +38,8 @@ public class Settler extends Entity {
      * @return list of resources.
      */
     public ArrayList<Resource> getResources() {
-        OutputFormatter.OutputCall("getResources() - " + name);
-        OutputFormatter.OutputReturn("return - resources");
+
+
         return resources;
     }
 
@@ -60,14 +60,11 @@ public class Settler extends Entity {
      * from the asteroid to the cargo otherwise.
      */
     public void mine() {
-        OutputFormatter.OutputCall("mine() - " + name);
         if (resources.size() < 10) {
             Resource r = asteroid.mined();
             if (r != null) {
                 resources.add(r);
-                OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
             }
-            OutputFormatter.OutputReturn("return - nothing to mine");
         } else {
             Resource r = asteroid.mined();
             if (r != null) {
@@ -75,13 +72,9 @@ public class Settler extends Entity {
                 resources.add(r);
                 boolean success = asteroid.placeResource(resourceToExchange);
                 if (success) {
-                    OutputFormatter.OutputReturn("return - resource exchanged " + r.getClass().toString());
                     resources.remove(resourceToExchange);
-                } else {
-                    OutputFormatter.OutputReturn("return - exchange not possible");
                 }
             }
-            OutputFormatter.OutputReturn("return - nothing to mine");
         }
     }
 
@@ -90,9 +83,7 @@ public class Settler extends Entity {
      */
 
     public void buildRobot() {
-        OutputFormatter.OutputCall("buildRobot() - " + name);
         Robot.create(asteroid, resources);
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -100,19 +91,13 @@ public class Settler extends Entity {
      * Settler tries to build a teleportgate if there aren't any teleportgates in the cargo hold.
      */
     public void buildTeleport() {
-        OutputFormatter.OutputCall("buildTeleport() - " + name);
         if (teleports.size() < 2) { // TODO: ez 3 (?)
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
                 for (TeleportGate tp : teleportGates) {
                     teleports.add(tp);
                 }
-                OutputFormatter.OutputReturn("return - teleportgates created ");
-            } else {
-                OutputFormatter.OutputReturn("return - couldn't create teleportgates");
             }
-        } else {
-            OutputFormatter.OutputReturn("return - too much teleport in cargo");
         }
     }
 
@@ -121,17 +106,11 @@ public class Settler extends Entity {
      * the Settler has at least one in its inventory.
      */
     public void placeTeleport() {
-        OutputFormatter.OutputCall("placeTeleport() - " + name);
         if (teleports.size() != 0) {
             boolean success = asteroid.setTeleportGate(teleports.get(0));
             if (success) {
                 teleports.remove(0);
-                OutputFormatter.OutputReturn("return - teleportgate placed");
-            } else {
-                OutputFormatter.OutputReturn("return - unable to place teleportgate");
             }
-        } else {
-            OutputFormatter.OutputReturn("return - there is no teleportgate to place");
         }
     }
 

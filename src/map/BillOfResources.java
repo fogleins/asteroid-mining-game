@@ -1,7 +1,6 @@
 package map;
 
 import map.asteroid.Resource;
-import utility.OutputFormatter;
 import java.util.ArrayList;
 
 /**
@@ -73,7 +72,6 @@ public class BillOfResources {
             if (!found) break;
             else ++okCnt; // increment the number of found resources
         }
-        boolean resultOk = okCnt == resourcesNeeded.size(); // if it found all the necessary resources, then its okay
-        return resultOk;
+        return okCnt == resourcesNeeded.size(); // if it found all the necessary resources, then its okay
     }
 }

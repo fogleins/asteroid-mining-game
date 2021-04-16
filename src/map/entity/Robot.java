@@ -3,7 +3,7 @@ package map.entity;
 import control.Game;
 import map.BillOfResources;
 import map.asteroid.*;
-import utility.OutputFormatter;
+
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,9 +28,7 @@ public class Robot extends Entity implements Steppable {
      */
     public Robot(String name) {
         super(name);
-        OutputFormatter.OutputCall("create - " + name);
         initBillToBuild();
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -41,15 +39,11 @@ public class Robot extends Entity implements Steppable {
      * @param ownedResources  A list of {@code Resource}s the caller has.
      */
     public static void create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) {
-        OutputFormatter.OutputCall("create() - static in Robot");
         boolean hasResourcesToBuildRobot = billToBuild.use(ownedResources);
         if (hasResourcesToBuildRobot) {
             Robot robot = new Robot("Robot_" + nameID);
             Game.getInstance().addSteppable(robot);
             robot.move(currentAsteroid);
-            OutputFormatter.OutputReturn("return - success");
-        } else {
-            OutputFormatter.OutputReturn("return - could not create");
         }
     }
 
@@ -68,11 +62,9 @@ public class Robot extends Entity implements Steppable {
      * randomly select a neighbouring asteroid and move onto that.
      */
     public void asteroidExploded() {
-        OutputFormatter.OutputCall("asteroidExploded() - " + name);
         ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
         Random rnd = new Random();
         super.move(neighbours.get(rnd.nextInt(neighbours.size())));
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -80,16 +72,13 @@ public class Robot extends Entity implements Steppable {
      * of a Robot object deciding what to do.
      */
     public void step() {
-        OutputFormatter.OutputCall("step() - " + name);
         Random rnd = new Random();
         int choice = rnd.nextInt(2); // generated number will be 0 or 1
         if (choice == 0) {
             ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
             super.move(neighbours.get(rnd.nextInt(neighbours.size())));
-            OutputFormatter.OutputReturn("return - move");
         } else {
             super.drill();
-            OutputFormatter.OutputReturn("return - drill");
         }
     }
 }

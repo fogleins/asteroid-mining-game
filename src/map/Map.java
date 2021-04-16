@@ -2,7 +2,6 @@ package map;
 
 import map.asteroid.Asteroid;
 import map.asteroid.BaseAsteroid;
-import utility.OutputFormatter;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,6 @@ public class Map {
      * @param baseAst Where all settlers must be to win the game (with enough resources).
      */
     public Map(BaseAsteroid baseAst) {
-        OutputFormatter.OutputCall("create - " + this.toString());
         baseAsteroid = baseAst;
         asteroids.add(baseAsteroid);
         for (int i = 1; i < 3; i++) {
@@ -43,7 +41,6 @@ public class Map {
                 }
             }
         }
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -80,9 +77,7 @@ public class Map {
      * @return with the reference of the removed asteroid.
      */
     public Asteroid removeAsteroid(Asteroid asteroid) {
-        OutputFormatter.OutputCall("remove - " + asteroid.toString());
         asteroids.remove(asteroid);
-        OutputFormatter.OutputReturn("return - " + asteroid.toString());
         return asteroid;
     }
 
@@ -91,11 +86,9 @@ public class Map {
      * Spreads sunflare all across the asteroids in the list.
      */
     public void sunflare() {
-        OutputFormatter.OutputCall("sunflare() - " + this.toString());
         for (Asteroid a : asteroids) {
             a.hitBySunflare();
         }
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -105,8 +98,6 @@ public class Map {
     public void changePerihelion() {
         for (Asteroid a : asteroids) {
             a.changePerihelionState();
-            OutputFormatter.OutputCall("changePerihelionState() - " + a.toString());
         }
-        OutputFormatter.OutputReturn("return");
     }
 }

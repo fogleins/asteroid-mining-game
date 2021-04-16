@@ -3,7 +3,6 @@ package map.asteroid;
 import control.Game;
 import map.BillOfResources;
 import map.entity.Entity;
-import utility.OutputFormatter;
 
 import java.util.ArrayList;
 
