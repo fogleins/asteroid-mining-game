@@ -21,6 +21,7 @@ public class Asteroid {
     protected int surfaceThickness;
     protected boolean inPerihelion;
 
+
     public String getName() {
         OutputFormatter.OutputCall("getName() - " + name);
         OutputFormatter.OutputReturn("return - name");
