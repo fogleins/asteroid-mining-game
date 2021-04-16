@@ -1,8 +1,6 @@
 package map.entity;
 
 import control.Game;
-import map.BillOfResources;
-import map.asteroid.Asteroid;
 import map.asteroid.Resource;
 import utility.OutputFormatter;
 
@@ -24,19 +22,13 @@ public class Settler extends Entity {
      */
     private final ArrayList<TeleportGate> teleports = new ArrayList<>();
 
-    /**
-     * Game reference.
-     */
-    private Game m_game;
 
     /**
      * Constructor of Settler.
-     *
-     * @param g Reference to game.
      */
-    public Settler(Game g) {
-        OutputFormatter.OutputCall("create - " + this.toString());
-        m_game = g;
+    public Settler(String name) {
+        super(name);
+        OutputFormatter.OutputCall("create - " + name);
         OutputFormatter.OutputReturn("return");
     }
 
@@ -52,6 +44,7 @@ public class Settler extends Entity {
     }
 
     // only used in testing initialization
+
     /**
      * Adds a teleportgate to an asteroid.
      *
@@ -74,21 +67,22 @@ public class Settler extends Entity {
                 resources.add(r);
                 OutputFormatter.OutputReturn("return - resource added " + r.getClass().toString());
             }
+            OutputFormatter.OutputReturn("return - nothing to mine");
         } else {
-            Resource resourceToExchange = m_game.exchangeResource(resources);
             Resource r = asteroid.mined();
             if (r != null) {
+                Resource resourceToExchange = Game.getInstance().exchangeResource(resources);
                 resources.add(r);
+                boolean success = asteroid.placeResource(resourceToExchange);
+                if (success) {
+                    OutputFormatter.OutputReturn("return - resource exchanged " + r.getClass().toString());
+                    resources.remove(resourceToExchange);
+                } else {
+                    OutputFormatter.OutputReturn("return - exchange not possible");
+                }
             }
-            boolean success = asteroid.placeResource(resourceToExchange);
-            if (success) {
-                OutputFormatter.OutputReturn("return - resource exchanged " + r.getClass().toString());
-                resources.remove(resourceToExchange);
-            } else {
-                OutputFormatter.OutputReturn("return - exchange not possible");
-            }
+            OutputFormatter.OutputReturn("return - nothing to mine");
         }
-
     }
 
     /**
@@ -107,7 +101,7 @@ public class Settler extends Entity {
      */
     public void buildTeleport() {
         OutputFormatter.OutputCall("buildTeleport() - " + name);
-        if (teleports.size() == 0) {
+        if (teleports.size() < 2) {
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
                 for (TeleportGate tp : teleportGates) {
@@ -115,10 +109,10 @@ public class Settler extends Entity {
                 }
                 OutputFormatter.OutputReturn("return - teleportgates created ");
             } else {
-                OutputFormatter.OutputReturn("return - null");
+                OutputFormatter.OutputReturn("return - couldn't create teleportgates");
             }
         } else {
-            OutputFormatter.OutputReturn("return - already has teleports");
+            OutputFormatter.OutputReturn("return - too much teleport in cargo");
         }
     }
 

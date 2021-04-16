@@ -5,7 +5,6 @@ import map.BillOfResources;
 import map.entity.Entity;
 import utility.OutputFormatter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -17,12 +16,9 @@ public class BaseAsteroid extends Asteroid {
     // Fields
     //
 
-    Game game;
     public BillOfResources winConditionResources;
+    private Game game;
 
-    //
-    // Constructors
-    //
     public BaseAsteroid(Game g) {
         OutputFormatter.OutputCall("create - " + this.toString());
         winConditionResources = new BillOfResources();
@@ -61,10 +57,6 @@ public class BaseAsteroid extends Asteroid {
         this.winConditionResources = billOfResources;
     }
 
-    //
-    // Other methods
-    //
-
     /**
      * Accepts an entity and checks if the game is won.
      *
@@ -89,6 +81,4 @@ public class BaseAsteroid extends Asteroid {
 
         OutputFormatter.OutputReturn("return");
     }
-
-
 }

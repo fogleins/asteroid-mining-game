@@ -12,10 +12,6 @@ import java.util.ArrayList;
  */
 public class Map {
 
-    //
-    // Fields
-    //
-
     /**
      * The asteroids in the map.
      */
@@ -25,26 +21,23 @@ public class Map {
      */
     private BaseAsteroid baseAsteroid;
 
-    //
-    // Constructors
-    //
-
     /**
      * Constructor of the map, which is initialize some asteroids.
+     *
      * @param baseAst Where all settlers must be to win the game (with enough resources).
      */
     public Map(BaseAsteroid baseAst) {
         OutputFormatter.OutputCall("create - " + this.toString());
-        baseAsteroid=baseAst;
+        baseAsteroid = baseAst;
         asteroids.add(baseAsteroid);
-        for(int i = 1;i<3;i++){
+        for (int i = 1; i < 3; i++) {
             Asteroid a = new Asteroid();
-            a.setName("a"+ i);
+            a.setName("a" + i);
             asteroids.add(a);
         }
-        for(Asteroid a : asteroids){
-            for(Asteroid b : asteroids){
-                if(a!=b){
+        for (Asteroid a : asteroids) {
+            for (Asteroid b : asteroids) {
+                if (a != b) {
                     a.addNeighbour(b);
 
                 }
@@ -52,16 +45,6 @@ public class Map {
         }
         OutputFormatter.OutputReturn("return");
     }
-
-    //
-    // Methods
-    //
-
-
-    //
-    // Accessor methods
-    //
-
 
     /**
      * Default getter of the BaseAsteroid, not used in the test.
@@ -76,28 +59,19 @@ public class Map {
     /**
      * Adds an asteroid to the asteroids.
      */
-    private void addAsteroids(Asteroid asteroid) {
+    public void addAsteroid(Asteroid asteroid) {
+        // TODO: itt le kell ellenőrizni, hogy nincs-e már hozzáadva
         asteroids.add(asteroid);
     }
-
-    /**
-     * Remove an asteroid from the asteroids.
-     */
-
 
     /**
      * Getter of the asteroid list, not used in the test.
      *
      * @return List of Asteroids objects held by asteroidsVector
      */
-    private ArrayList<Asteroid> getAsteroidsList() {
+    public ArrayList<Asteroid> getAsteroids() {
         return asteroids;
     }
-
-
-    //
-    // Other methods
-    //
 
     /**
      * Removes an asteroid from the asteroids list.
@@ -108,7 +82,7 @@ public class Map {
     public Asteroid removeAsteroid(Asteroid asteroid) {
         OutputFormatter.OutputCall("remove - " + asteroid.toString());
         asteroids.remove(asteroid);
-        OutputFormatter.OutputReturn("return - "+ asteroid.toString());
+        OutputFormatter.OutputReturn("return - " + asteroid.toString());
         return asteroid;
     }
 
@@ -118,7 +92,7 @@ public class Map {
      */
     public void sunflare() {
         OutputFormatter.OutputCall("sunflare() - " + this.toString());
-        for (Asteroid a : asteroids){
+        for (Asteroid a : asteroids) {
             a.hitBySunflare();
         }
         OutputFormatter.OutputReturn("return");
@@ -129,12 +103,10 @@ public class Map {
      * Calls changePerihelionState function in all asteroids at the end of the round.
      */
     public void changePerihelion() {
-        for (Asteroid a : asteroids){
+        for (Asteroid a : asteroids) {
             a.changePerihelionState();
             OutputFormatter.OutputCall("changePerihelionState() - " + a.toString());
         }
         OutputFormatter.OutputReturn("return");
     }
-
-
 }

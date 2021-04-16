@@ -3,8 +3,9 @@ package control;
 import map.Map;
 import map.asteroid.BaseAsteroid;
 import map.asteroid.Resource;
-import map.entity.Robot;
+import map.entity.Entity;
 import map.entity.Settler;
+import map.entity.Steppable;
 import utility.OutputFormatter;
 
 import java.util.ArrayList;
@@ -15,28 +16,64 @@ import java.util.Random;
  * Class control.Game
  */
 public class Game {
+    /**
+     * The instance of the singleton Game class.
+     */
+    private static final Game instance = new Game();
 
+    /**
+     * Counts the number of rounds played.
+     */
     private int currentRound;
+
+    /**
+     * The number of the round in which the next sunflare occurs.
+     */
     private int nextSunflare;
+
+    /**
+     * Reference to the Map object, which contains game's map.
+     */
     private Map map;
+
+    /**
+     * The settler, who should steps next.
+     */
     private Settler current;
+
+    /**
+     * List of Settlers, who are playing the game.
+     */
     private ArrayList<Settler> settlers;
-    private ArrayList<Robot> robots;
+
+    /**
+     * List of Steppables who are playing.
+     */
+    private ArrayList<Steppable> steppables;
 
 
     /**
      * Constructor. Initializes the Game object.
      */
-    public Game() {
+    private Game() {
         OutputFormatter.OutputCall("Game() - " + this.toString());
         currentRound = 0;
         nextSunflare = generateNextSunflare();
         BaseAsteroid baseAsteroid = new BaseAsteroid(this);
         map = new Map(baseAsteroid);
         settlers = new ArrayList<>();
-        robots = new ArrayList<>();
+        steppables = new ArrayList<>();
         current = null/*settlers.get(0)*/;
         OutputFormatter.OutputReturn("return");
+    }
+
+    /**
+     * Other objects can use this method to access the Game object.
+     *
+     * @return The instance of the Game class.
+     */
+    public static Game getInstance() {
+        return instance;
     }
 
     /**
@@ -48,6 +85,14 @@ public class Game {
         OutputFormatter.OutputCall("addSettler() - " + this.toString());
         OutputFormatter.OutputReturn("return - map");
         return map;
+    }
+
+    public ArrayList<Settler> getSettlers() {
+        return settlers;
+    }
+
+    public ArrayList<Steppable> getSteppables() {
+        return steppables;
     }
 
     /**
@@ -69,20 +114,20 @@ public class Game {
     }
 
     /**
-     * Add a Robot object to the robots list
+     * Add a Steppable object to the steppables list
      */
-    public void addRobot(Robot robot) {
-        OutputFormatter.OutputCall("addRobot() - " + this.toString());
-        robots.add(robot);
+    public void addSteppable(Steppable steppable) {
+        OutputFormatter.OutputCall("addSteppable() - " + this.toString());
+        steppables.add(steppable);
         OutputFormatter.OutputReturn("return");
     }
 
     /**
-     * Remove a Robot object from robots
+     * Remove a Steppable object from steppables
      */
-    public void removeRobot(Robot robot) {
-        OutputFormatter.OutputCall("removeRobot() - " + this.toString());
-        robots.remove(robot);
+    public void removeSteppable(Steppable steppable) {
+        OutputFormatter.OutputCall("removeSteppable() - " + this.toString());
+        steppables.remove(steppable);
         OutputFormatter.OutputReturn("return");
     }
 
@@ -133,13 +178,13 @@ public class Game {
     }
 
     /**
-     * This method is called every time all the settlers have moved in a given round. It steps with all the robots,
+     * This method is called every time all the settlers have moved in a given round. It steps with all the steppables,
      * checks if there should be a sunflare, and changes the asteroid's 'inPerihelion' state.
      */
     private void roundFinished() {
         OutputFormatter.OutputCall("roundFinished() - " + this.toString());
-        for (Robot robot : robots) {
-            robot.step();
+        for (Steppable steppable : steppables) {
+            steppable.step();
         }
         if (currentRound == nextSunflare) {
             map.sunflare();

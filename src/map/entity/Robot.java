@@ -1,5 +1,6 @@
 package map.entity;
 
+import control.Game;
 import map.BillOfResources;
 import map.asteroid.*;
 import utility.OutputFormatter;
@@ -10,7 +11,7 @@ import java.util.Random;
 /**
  * Class map.entity.Robot
  */
-public class Robot extends Entity {
+public class Robot extends Entity implements Steppable {
 
     /**
      * The resources needed to build a Robot
@@ -18,10 +19,16 @@ public class Robot extends Entity {
     private static BillOfResources billToBuild;
 
     /**
+     * ID to make names unique for robots.
+     */
+    private static int nameID = 0;
+
+    /**
      * Constructor. Creates a Robot object.
      */
-    public Robot() {
-        OutputFormatter.OutputCall("create - " + this.toString());
+    public Robot(String name) {
+        super(name);
+        OutputFormatter.OutputCall("create - " + name);
         initBillToBuild();
         OutputFormatter.OutputReturn("return");
     }
@@ -35,9 +42,10 @@ public class Robot extends Entity {
      */
     public static void create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) {
         OutputFormatter.OutputCall("create() - static in Robot");
-        boolean hasResourcesToBuildTeleport = billToBuild.use(ownedResources);
-        if (hasResourcesToBuildTeleport) {
-            Robot robot = new Robot();
+        boolean hasResourcesToBuildRobot = billToBuild.use(ownedResources);
+        if (hasResourcesToBuildRobot) {
+            Robot robot = new Robot("Robot_" + nameID);
+            Game.getInstance().addSteppable(robot);
             robot.move(currentAsteroid);
             OutputFormatter.OutputReturn("return - success");
         } else {
@@ -60,7 +68,7 @@ public class Robot extends Entity {
      * randomly select a neighbouring asteroid and move onto that.
      */
     public void asteroidExploded() {
-        OutputFormatter.OutputCall("asteroidExploded() - " + this.toString());
+        OutputFormatter.OutputCall("asteroidExploded() - " + name);
         ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
         Random rnd = new Random();
         super.move(neighbours.get(rnd.nextInt(neighbours.size())));
@@ -72,7 +80,7 @@ public class Robot extends Entity {
      * of a Robot object deciding what to do.
      */
     public void step() {
-        OutputFormatter.OutputCall("step() - " + this.toString());
+        OutputFormatter.OutputCall("step() - " + name);
         Random rnd = new Random();
         int choice = rnd.nextInt(2); // generated number will be 0 or 1
         if (choice == 0) {
