@@ -59,7 +59,7 @@ public class Main {
                                     "\\d+ ((ip)|(op)) [a-zA-z0-9\\-]+(\\s[a-zA-z0-9]*)?$")) {
                                 thisAsteroid = line.split(" ");
                                 neighbors = thisAsteroid[4].split("-");
-                                // We are checking if this asteroid was initialized previously. If yes, we modify it's
+                                // We are checking if this asteroid was initialized previously. If yes, we modify its
                                 // variables, otherwise we create a new asteroid.
                                 Asteroid asteroid = getAsteroidByName(thisAsteroid[0]);
                                 if (asteroid == null)
@@ -166,10 +166,60 @@ public class Main {
                         entitiesSet = true;
                         break;
                     case "move":
+                        // TODO: ha a teleportot is lehet ezzel léptetni, akkor a [sru]-hoz hozzá kell adni a teleportot is
+                        if (line.matches("^move [sru] [a-zA-Z0-9]+ [a-zA-Z0-9]+$")) {
+                            String[] parameters = line.split(" ");
+                            Asteroid whereTo = getAsteroidByName(parameters[3]);
+                            if (whereTo == null)
+                                throw new BadArgumentException("Asteroid " + parameters[3] + " can't be found.");
+                            if (parameters[1].equals("s")) {
+                                Settler settler = getSettlerByName(parameters[2]);
+                                if (settler == null)
+                                    throw new BadArgumentException("Settler " + parameters[2] + " can't be found.");
+                                settler.move(whereTo);
+                            } else {
+                                Steppable steppable = getSteppableByName(parameters[2]);
+                                if (steppable == null)
+                                    throw new BadArgumentException("Steppable " + parameters[2] + " can't be found.");
+                                if (parameters[1].equals("r"))
+                                    ((Robot) steppable).move(whereTo);
+                                else if (parameters[1].equals("u"))
+                                    ((Ufo) steppable).move(whereTo);
+                            }
+                        } else
+                            throw new InvalidSyntaxException("Invalid syntax: move <entity_type> <entity_name> <asteroid>");
                         break;
                     case "drill":
+                        if (line.matches("^drill [sr] [a-zA-Z0-9]+$")) {
+                            String[] parameters = line.split(" ");
+                            if (parameters[1].equals("s")) {
+                                Settler settler = getSettlerByName(parameters[2]);
+                                if (settler == null)
+                                    throw new BadArgumentException("Settler " + parameters[2] + " can't be found.");
+                                settler.drill();
+                            } else {
+                                Robot robot = (Robot) getSteppableByName(parameters[2]);
+                                if (robot == null)
+                                    throw new BadArgumentException("Robot " + parameters[2] + " can't be found.");
+                                robot.drill();
+                            }
+                        } else throw new InvalidSyntaxException("Invalid syntax in drill.");
                         break;
                     case "mine":
+                        if (line.matches("^mine [su] [a-zA-Z0-9]+$")) {
+                            String[] parameters = line.split(" ");
+                            if (parameters[1].equals("s")) {
+                                Settler settler = getSettlerByName(parameters[2]);
+                                if (settler == null)
+                                    throw new BadArgumentException("Settler " + parameters[2] + " can't be found.");
+                                settler.mine();
+                            } else {
+                                Ufo ufo = (Ufo) getSteppableByName(parameters[2]);
+                                if (ufo == null)
+                                    throw new BadArgumentException("Robot " + parameters[2] + " can't be found.");
+                                ufo.mine();
+                            }
+                        } else throw new InvalidSyntaxException("Invalid syntax in drill.");
                         break;
                     case "buildrobot":
                         break;
@@ -198,7 +248,7 @@ public class Main {
                 }
                 System.out.print("Type a command and hit enter: ");
             }
-        } catch (InvalidSyntaxException e) {
+        } catch (InvalidSyntaxException | BadArgumentException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
@@ -251,6 +301,15 @@ public class Main {
      */
     private final static class InvalidSyntaxException extends Exception {
         InvalidSyntaxException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Thrown when the name given as a parameter cannot be found in the current game.
+     */
+    private final static class BadArgumentException extends Exception {
+        BadArgumentException(String message) {
             super(message);
         }
     }

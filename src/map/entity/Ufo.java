@@ -21,7 +21,8 @@ public class Ufo extends Entity implements Steppable {
         // TODO
     }
 
-    private void mine() {
+    // TODO: ez korábban private volt, a tesztelés miatt lett public, majd vissza kell állítani
+    public void mine() {
         // TODO
     }
 }
