@@ -39,9 +39,7 @@ public class BillOfResources {
      * @return boolean Whether the usage was successful or not. If yes, the appropriate resources were removed.
      */
     public boolean use(ArrayList<Resource> ownedResources) {
-        OutputFormatter.OutputCall("use("+ ownedResources.toString() +")");
         if (!check(ownedResources)) { // check if there are enough resources, to prevent unnecessary removal
-            OutputFormatter.OutputReturn("return - false");
             return false;
         }
         for (Resource rn : resourcesNeeded) {
@@ -51,7 +49,6 @@ public class BillOfResources {
                     break; // we are done with this one, don't need to remove others of the same type
                 }
         }
-        OutputFormatter.OutputReturn("return - true");
         return true;
     }
 
@@ -61,7 +58,6 @@ public class BillOfResources {
      * @return boolean Is there enough resources for the build?
      */
     public boolean check(ArrayList<Resource> ownedResources) {
-        OutputFormatter.OutputCall("check("+ ownedResources.toString() +")");
 
         // create a deep copy of the input array, because we need to modify it, but just locally
         ArrayList<Resource> ownedRes = (ArrayList<Resource>) ownedResources.clone();
@@ -78,7 +74,6 @@ public class BillOfResources {
             else ++okCnt; // increment the number of found resources
         }
         boolean resultOk = okCnt == resourcesNeeded.size(); // if it found all the necessary resources, then its okay
-        OutputFormatter.OutputReturn("return - "+resultOk);
         return resultOk;
     }
 }

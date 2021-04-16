@@ -20,7 +20,6 @@ public class BaseAsteroid extends Asteroid {
     private Game game;
 
     public BaseAsteroid(Game g) {
-        OutputFormatter.OutputCall("create - " + this.toString());
         winConditionResources = new BillOfResources();
         game = g;
 
@@ -32,7 +31,6 @@ public class BaseAsteroid extends Asteroid {
             winConditionResources.addResources(new Ice());
         }
 
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -42,8 +40,6 @@ public class BaseAsteroid extends Asteroid {
      * @return the value of m_billOfResources
      */
     public BillOfResources getBillOfResources() {
-        OutputFormatter.OutputCall("getBillOfResources() - " + name);
-        OutputFormatter.OutputReturn("return - winConditionResources");
         return winConditionResources;
     }
 
@@ -63,7 +59,6 @@ public class BaseAsteroid extends Asteroid {
      * @param entity it will be added to the list of entities.
      */
     public void acceptEntity(Entity entity) {
-        OutputFormatter.OutputCall("acceptEntity() - " + name);
         this.entities.add(entity);
 
         ArrayList<Resource> resourcesOnAsteroid = new ArrayList<>();
@@ -79,6 +74,5 @@ public class BaseAsteroid extends Asteroid {
             game.gameWon();
 
 
-        OutputFormatter.OutputReturn("return");
     }
 }
