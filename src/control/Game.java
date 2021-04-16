@@ -57,7 +57,6 @@ public class Game {
      */
     private Game() {
         OutputFormatter.OutputCall("Game() - " + this.toString());
-        Entity.setGame(this);
         currentRound = 0;
         nextSunflare = generateNextSunflare();
         BaseAsteroid baseAsteroid = new BaseAsteroid(this);
@@ -86,6 +85,14 @@ public class Game {
         OutputFormatter.OutputCall("addSettler() - " + this.toString());
         OutputFormatter.OutputReturn("return - map");
         return map;
+    }
+
+    public ArrayList<Settler> getSettlers() {
+        return settlers;
+    }
+
+    public ArrayList<Steppable> getSteppables() {
+        return steppables;
     }
 
     /**

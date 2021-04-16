@@ -70,8 +70,8 @@ public class TeleportGate implements Steppable {
     /**
      * Sets the current asteroid, not used in the test.
      */
-    private void setCurrentAsteroid(Asteroid new_object) {
-        currentAsteroid = new_object;
+    public void setCurrentAsteroid(Asteroid asteroid) {
+        currentAsteroid = asteroid;
     }
 
     /**
@@ -100,5 +100,22 @@ public class TeleportGate implements Steppable {
     @Override
     public void step() {
         // TODO
+    }
+
+
+
+
+    /*
+     * TODO: MUST BE REMOVED after tests.
+     */
+    private String name;
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

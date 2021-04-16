@@ -1,479 +1,257 @@
 package control;
 
-import map.Map;
 import map.asteroid.*;
-import map.entity.Robot;
-import map.entity.Settler;
-import map.entity.TeleportGate;
-import utility.OutputFormatter;
+import map.entity.*;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
+    private static final Game game = Game.getInstance();
+
     public static void main(String[] args) {
-        boolean running = true;
-        Scanner input = new Scanner(System.in);
-        while (running) {
-            OutputFormatter.reset();
-            System.out.println("Choose a use-case:");
-            System.out.println("\t0. Exit");
-            System.out.println("\t1. Settler mines (enough space)" +
-                    "\n\t2. Settler mines (not enough space)" +
-                    "\n\t3. Build teleport (enough resource)" +
-                    "\n\t4. Build teleport (not enough resource)" +
-                    "\n\t5. Place teleport (ok)" +
-                    "\n\t6. Place teleport (no teleport gate in storage)" +
-                    "\n\t7. Place teleport (teleport already placed on asteroid)" +
-                    "\n\t8. Test Drill Normal Asteroid Drilled" +
-                    "\n\t9. Test Drill Normal Asteroid" +
-                    "\n\t10. Test Drill Normal Asteroid Perihelion" +
-                    "\n\t11. Test Drill Radioactive Asteroid Perihelion Settler" +
-                    "\n\t12. Test Drill Radioactive Asteroid Perihelion Robot" +
-                    "\n\t13. Test Drill Sublimable Asteroid Perihelion" +
-                    "\n\t14. Test Resource Placeback" +
-                    "\n\t15. Test Move" +
-                    "\n\t16. Test Generate Sunflare" +
-                    "\n\t17. Test Build Robot (enough resources)" +
-                    "\n\t18. Test Build Robot (not enough resources)" +
-                    "\n\t100. Run all tests");
-            System.out.println("\n> ");
-            int selection = input.nextInt();
-            switch (selection) {
-                case 0:
-                    running = false;
-                    break;
-                case 1:
-                    Test_Settler_Mines_Enough_Space();
-                    break;
-                case 2:
-                    Test_Settler_Mines_Not_Enough_Space();
-                    break;
-                case 3:
-                    Test_Build_Teleport_Has_Resources();
-                    break;
-                case 4:
-                    Test_Build_Teleport_No_Resources();
-                    break;
-                case 5:
-                    Test_Place_Teleport_Ok();
-                    break;
-                case 6:
-                    Test_Place_Teleport_No_Teleport();
-                    break;
-                case 7:
-                    Test_Place_Teleport_Already_Exists();
-                    break;
-                case 8:
-                    Test_Drill_Normal_Asteroid_Drilled();
-                    break;
-                case 9:
-                    Test_Drill_Normal_Asteroid();
-                    break;
-                case 10:
-                    Test_Drill_Normal_Asteroid_Perihelion();
-                    break;
-                case 11:
-                    Test_Drill_Radioactive_Asteroid_Perihelion_Settler();
-                    break;
-                case 12:
-                    Test_Drill_Radioactive_Asteroid_Perihelion_Robot();
-                    break;
-                case 13:
-                    Test_Drill_Sublimable_Asteroid_Perihelion();
-                    break;
-                case 14:
-                    Test_Resource_Placeback();
-                    break;
-                case 15:
-                    Test_Move();
-                    break;
-                case 16:
-                    Test_Generate_Sunflare();
-                    break;
-                case 17:
-                    Test_Build_Robot_Has_Resources();
-                    break;
-                case 18:
-                    Test_Build_Robot_No_Resources();
-                    break;
-                case 100:
-                    Test_Run_All();
-                    break;
-                default:
-                    System.out.println("Invalid selection!");
-                    continue;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        boolean mapSet = false;
+        boolean entitiesSet = false;
+        boolean randomize = true; // TODO ?
+
+        /*
+         * TODO: "Ha a felhasználó nem kapcsolja ki a véletlenszerűséget, akkor nem használhatja
+         *  a setsunflare és changeperihelion parancsokat."
+         *
+         * TODO: "A tesztelés során a setmap és setentities parancsokat kell legelőször kiadni, a további parancsok
+         *  csak ezek megadását követően működnek megfelelően."
+         *
+         * TODO: setteleport - "Ez a parancs csak a setmap és setentities előtt jöhet!"
+         */
+
+        try {
+            // TODO: "A bemeneti fájl szintakszisa: Az egyes parancsokat (paramétereikkel együtt)
+            //  egy üres sor választja el egymástól!
+
+            System.out.print("Random? (y/n) [y]: "); // TODO
+            if (reader.readLine().contains("n"))
+                randomize = false;
+
+            System.out.print("Type a command and hit enter: ");
+            while (((line = reader.readLine()) != null) && !(line.equals("")) && !line.equals("exit")) {
+                String[] details = line.split(" ");
+                switch (details[0]) {
+                    case "setmap":
+                        String[] asteroids = reader.readLine().split(" ");
+                        String[] thisAsteroid;
+                        String[] neighbors;
+                        for (int i = 0; i < asteroids.length; i++) {
+                            /*
+                             * Regexps arent easy:
+                             * ^ is the start of the string
+                             * ([ucx]|(ir)|(ic)) makes sure that only the specified resources can be set for an Asteroid
+                             * \d+ matches an integer
+                             * ((ip)|(op)) accepts either "ip" or "op"
+                             * [a-zA-z0-9\-]+ matches the asteroid's neighbours: their name may contain upper- or lowercase letters,
+                             *      numbers, and a dash (-)
+                             * (\s[a-zA-z0-9]*)? matches an asteroid's teleport gate; may be left empty
+                             * $ is the end of the string
+                             */
+                            if ((line = reader.readLine()).matches("^" + asteroids[i] + " ([ucx]|(ir)|(ic)) " +
+                                    "\\d+ ((ip)|(op)) [a-zA-z0-9\\-]+(\\s[a-zA-z0-9]*)?$")) {
+                                thisAsteroid = line.split(" ");
+                                neighbors = thisAsteroid[4].split("-");
+                                // We are checking if this asteroid was initialized previously. If yes, we modify it's
+                                // variables, otherwise we create a new asteroid.
+                                Asteroid asteroid = getAsteroidByName(thisAsteroid[0]);
+                                if (asteroid == null)
+                                    asteroid = new Asteroid();
+                                asteroid.setName(thisAsteroid[0]);
+                                asteroid.setResource(getResourceObject(thisAsteroid[1]));
+                                asteroid.setSurfaceThickness(Integer.parseInt(thisAsteroid[2]));
+                                asteroid.setInPerihelion(thisAsteroid[3].equals("ip"));
+                                String[] neighbours = thisAsteroid[4].split("-");
+                                if (!neighbours[0].equals("x")) {
+                                    for (int j = 0; j < neighbours.length; j++) {
+                                        Asteroid neighbor = getAsteroidByName(neighbours[j]);
+                                        if (neighbor == null) {
+                                            neighbor = new Asteroid();
+                                            game.getMap().addAsteroid(neighbor);
+                                        }
+                                        asteroid.addNeighbour(neighbor);
+                                    }
+                                }
+                                if (!thisAsteroid[5].equals("x")) {
+                                    TeleportGate teleportGate = (TeleportGate) getSteppableByName(thisAsteroid[5]);
+                                    if (teleportGate == null)
+                                        teleportGate = new TeleportGate();
+                                    // TODO: ezt a két lépést össze kéne vonni, pl ha az aszteroida elfogadja a teleportot,
+                                    //  mert van szabad helye, akkor az aszteroida setTeleportGate-jében meghívhatná a
+                                    //  teleport függvényét, önmagát paraméterül adva
+                                    teleportGate.setCurrentAsteroid(asteroid);
+                                    asteroid.setTeleportGate(teleportGate);
+                                }
+
+                                // TODO: remove - csak a teszteléshez kellett
+                                for (int j = 0; j < thisAsteroid.length; j++) {
+                                    if (j == 4) {
+                                        for (int k = 0; k < neighbors.length; k++) {
+                                            System.out.println(neighbors[k]);
+                                        }
+                                    } else {
+                                        System.out.println(thisAsteroid[j]);
+                                    }
+                                }
+                                // TODO: --- remove vége ---
+                            } else // if the syntax doesn't match the specified syntax, an exception is thrown
+                                throw new InvalidSyntaxException("Invalid syntax.");
+                        }
+                        mapSet = true;
+                        break;
+                    case "setentities":
+                        if (line.matches("setentities \\d+")) {
+                            int entityCount = Integer.parseInt(line.split(" ")[1]);
+                            String[] thisEntity;
+                            for (int i = 0; i < entityCount; i++) {
+                                line = reader.readLine();
+                                // if the entity is a settler TODO (#typecheck :))
+                                /*
+                                 * TODO Regexplecke part 2:
+                                 * ^s Makes sure the input starts with a lowercase 's'
+                                 * [a-zA-Z0-9]+ accepts any number, upper- or lowercase letter; used for checking if the
+                                 *      settler's and the asteroid's names only contain simple characters
+                                 * ([ucx\-]|(ir)|(ic)){1,19} matches 'u', 'c', 'x', '-', 'ic' or 'ir', the settler's
+                                 *      resources {1,19}, because the settler can have up to 10 resources, but the
+                                 *      separators (dashes, '-') are counted separately. At least one should be specified.
+                                 * (\s[a-zA-z0-9]*)? matches a whitespace followed by letters and/or numbers (the name
+                                 *      of the teleports the settler has
+                                 * $: end of string
+                                 */
+                                thisEntity = line.split(" ");
+                                if (line.matches("^s [a-zA-Z0-9]+ [a-zA-Z0-9]+ ([ucx\\-]|(ir)|(ic)){1,19}" +
+                                        "(\\s[a-zA-z0-9]*)?$")) { // TODO: max 3 teleport nincs ellenőrizve, [ucx] nem *-gal?
+                                    Settler settler = new Settler(thisEntity[1]);
+                                    settler.setAsteroid(getAsteroidByName(thisEntity[2]));
+                                    // TODO: 8.2.17-ben aszteroidánál x esetén null lesz a resource/teleport, itt hogy legyen?
+                                    String[] resources = thisEntity[3].split("-");
+                                    for (int j = 0; j < resources.length; j++) {
+                                        settler.getResources().add(getResourceObject(resources[j]));
+                                    }
+                                    String[] teleports = thisEntity[4].split("-");
+                                    for (int j = 0; j < teleports.length; j++) {
+                                        // TODO: teleport már létezik vagy itt hozzuk létre? Mindkettő kezelése?
+                                        // settler.addTeleport(getSteppableByName(teleports[j]));
+                                        TeleportGate teleportGate = new TeleportGate();
+                                        teleportGate.setName(teleports[j]);
+//                                        game.addSteppable(teleportGate); // TODO: itt elvileg még nincs lerakva, felesleges hozzáadni a game-hez
+                                    }
+                                    game.addSettler(settler);
+                                    // if the entity is a ufo or robot
+                                } else if (line.matches("^[ur] [a-zA-Z0-9]+ [a-zA-Z0-9]+$")) {
+                                    // ufo
+                                    if (line.startsWith("u")) {
+                                        Ufo ufo = new Ufo(thisEntity[1]);
+                                        ufo.setAsteroid(getAsteroidByName(thisEntity[2]));
+                                        game.addSteppable(ufo);
+                                        // robot
+                                    } else if (line.startsWith("r")) {
+                                        Robot robot = new Robot(thisEntity[1]);
+                                        robot.setAsteroid(getAsteroidByName(thisEntity[2]));
+                                        game.addSteppable(robot);
+                                    }
+                                } else {
+                                    throw new InvalidSyntaxException("Invalid syntax.");
+                                }
+                            }
+                        } else
+                            throw new InvalidSyntaxException("Invalid syntax.");
+                        entitiesSet = true;
+                        break;
+                    case "move":
+                        break;
+                    case "drill":
+                        break;
+                    case "mine":
+                        break;
+                    case "buildrobot":
+                        break;
+                    case "buildteleport":
+                        break;
+                    case "placeteleport":
+                        break;
+                    case "setsunflare":
+                        break;
+                    case "changeperihelion":
+                        break;
+                    case "setteleport":
+                        if (!mapSet && !entitiesSet)
+                            // TODO
+                            break;
+                        break;
+                    case "finishround":
+                        break;
+                    case "exchresource":
+                        break;
+                    case "exit":
+                        break;
+                    default:
+                        System.out.println("Unknown command.");
+                        break;
+                }
+                System.out.print("Type a command and hit enter: ");
             }
-            if (running) {
-                System.out.println("\nPress enter to continue.");
-                try {
-                    System.in.read();
-                } catch (Exception e) {/*this is fine (:*/}
-            }
+        } catch (InvalidSyntaxException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        input.close();
-        System.out.println("\nBye!");
     }
 
-    public static void Test_Run_All() {
-        Test_Settler_Mines_Enough_Space();
-        System.out.println("\n");
-        Test_Settler_Mines_Not_Enough_Space();
-        System.out.println("\n");
-        Test_Build_Teleport_Has_Resources();
-        System.out.println("\n");
-        Test_Build_Teleport_No_Resources();
-        System.out.println("\n");
-        Test_Place_Teleport_Ok();
-        System.out.println("\n");
-        Test_Place_Teleport_No_Teleport();
-        System.out.println("\n");
-        Test_Place_Teleport_Already_Exists();
-        System.out.println("\n");
-        Test_Drill_Normal_Asteroid_Drilled();
-        System.out.println("\n");
-        Test_Drill_Normal_Asteroid();
-        System.out.println("\n");
-        Test_Drill_Normal_Asteroid_Perihelion();
-        System.out.println("\n");
-        Test_Drill_Radioactive_Asteroid_Perihelion_Settler();
-        System.out.println("\n");
-        Test_Drill_Radioactive_Asteroid_Perihelion_Robot();
-        System.out.println("\n");
-        Test_Drill_Sublimable_Asteroid_Perihelion();
-        System.out.println("\n");
-        Test_Resource_Placeback();
-        System.out.println("\n");
-        Test_Move();
-        System.out.println("\n");
-        Test_Generate_Sunflare();
-        System.out.println("\n");
-        Test_Build_Robot_Has_Resources();
-        System.out.println("\n");
-        Test_Build_Robot_No_Resources();
-    }
-
-    public static void Test_Drill_Normal_Asteroid_Drilled() {
-        System.out.println("Drill Normal Asteroid Perihelion:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler"); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
-        Asteroid a = new Asteroid();
-        a.setName("NGC-1304");
-        a.setInPerihelion(false);
-        a.setSurfaceThickness(0);
-
-        s.move(a);
-        OutputFormatter.setState(true); // Innen már számít a kimenet, így bekapcsoljuk az OutputFormattert.
-        s.drill();
-    }
-
-    public static void Test_Drill_Normal_Asteroid() {
-        System.out.println("Drill Normal Asteroid:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler"); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
-        Asteroid a = new Asteroid();
-        a.setName("NGC-1304");
-        a.setInPerihelion(false);
-        a.setSurfaceThickness(2);
-
-        s.move(a);
-        OutputFormatter.setState(true); // Innen már számít a kimenet, így bekapcsoljuk az OutputFormattert.
-        s.drill();
-    }
-
-    public static void Test_Drill_Normal_Asteroid_Perihelion() {
-        System.out.println("Drill Normal Asteroid Perihelion:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler"); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
-        Asteroid a = new Asteroid();
-        a.setName("NGC-1304");
-        a.setInPerihelion(true);
-        Iron i = new Iron();
-        a.addResource(i);
-        a.setSurfaceThickness(1);
-
-        s.move(a);
-        OutputFormatter.setState(true); // Innen már számít a kimenet, így bekapcsoljuk az OutputFormattert.
-        s.drill();
-    }
-
-    public static void Test_Drill_Radioactive_Asteroid_Perihelion_Settler() {
-        System.out.println("Drill Radioactive Asteroid Perihelion Settler:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler"); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
-        Asteroid a = new Asteroid();
-        a.setName("NGC-1304");
-        a.setInPerihelion(true);
-        Uranium u = new Uranium();
-        a.addResource(u);
-        a.setSurfaceThickness(1);
-
-        s.move(a);
-        OutputFormatter.setState(true); // Innen már számít a kimenet, így bekapcsoljuk az OutputFormattert.
-        s.drill();
-    }
-
-    public static void Test_Drill_Radioactive_Asteroid_Perihelion_Robot() {
-        System.out.println("Drill Radioactive Asteroid Perihelion Robot:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Robot r = new Robot("Robot"); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
-        Asteroid a = new Asteroid();
-        a.setName("NGC-1304");
-        Asteroid b = new Asteroid();
-        b.setName("NGC-1305");
-        a.setInPerihelion(true);
-        Uranium u = new Uranium();
-        a.addResource(u);
-        a.setSurfaceThickness(1);
-        a.addNeighbour(b);
-
-        r.move(a);
-        OutputFormatter.setState(true); // Innen már számít a kimenet, így bekapcsoljuk az OutputFormattert.
-        r.drill();
-    }
-
-    public static void Test_Drill_Sublimable_Asteroid_Perihelion() {
-        System.out.println("Drill Sublimable Asteroid Perihelion:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler"); // Létrehozzuk és összekötögetjük a teszthez szükséges objektumokat.
-        Asteroid a = new Asteroid();
-        a.setName("NGC-1304");
-        a.setInPerihelion(true);
-        Ice i = new Ice();
-        a.addResource(i);
-        a.setSurfaceThickness(1);
-
-        s.move(a);
-        OutputFormatter.setState(true); // Innen már számít a kimenet, így bekapcsoljuk az OutputFormattert.
-        s.drill();
-    }
-
-    public static void Test_Settler_Mines_Enough_Space() {
-        System.out.println("Settler Mines With Enough Space In Storage:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler"); // Létrehozzuk  a teszthez szükséges objektumokat.
-
-        Asteroid a = new Asteroid();
-        a.setName("Asteroid");
-        Uranium uranium = new Uranium();
-
-        a.addResource(uranium);
-        a.setSurfaceThickness(0);
-
-        s.move(a);
-
-        OutputFormatter.setState(true);
-        s.mine();
-    }
-
-    public static void Test_Settler_Mines_Not_Enough_Space() {
-        System.out.println("Settler Mines Without Enough Space In Storage:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler"); // Létrehozzuk  a teszthez szükséges objektumokat.
-
-        Asteroid[] a = new Asteroid[11];
-
-
-        for (int i = 0; i < 11; i++) {
-            a[i] = new Asteroid();
-            a[i].setName("NGC-13" + i);
-            Uranium uranium = new Uranium();
-            a[i].addResource(uranium);
-            a[i].setSurfaceThickness(0);
+    private static Asteroid getAsteroidByName(String name) {
+        for (Asteroid asteroid : game.getMap().getAsteroids()) {
+            if (asteroid.getName() != null && asteroid.getName().equals(name))
+                return asteroid;
         }
+        return null;
+    }
 
-        //A telepes raktere be kell hogy telljen
-        for (int i = 0; i < 10; i++) {
-            s.move(a[i]);
-            s.mine();
+    private static Settler getSettlerByName(String name) {
+        for (Settler settler : game.getSettlers()) {
+            if (settler.getName() != null && settler.getName().equals(name))
+                return settler;
         }
-
-        s.move(a[10]);
-
-        OutputFormatter.setState(true);
-        s.mine();
+        return null;
     }
 
-    public static void Test_Move() {
-        System.out.println("Test_Move:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Asteroid a1 = new Asteroid();
-        a1.setName("a1");
-        Asteroid a2 = new Asteroid();
-        a2.setName("a2");
-        a1.addNeighbour(a2);
-        a2.addNeighbour(a1);
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        s.move(a1);
-
-        OutputFormatter.setState(true);
-        s.move(a2);
-    }
-
-    public static void Test_Build_Teleport_Has_Resources() {
-        System.out.println("Test_Build_Teleport_Has_Resources:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        Asteroid a = new Asteroid();
-        a.setName("a1");
-        s.move(a);
-
-        a.setSurfaceThickness(0);
-        a.setResource(new Iron());
-        s.mine();
-        a.setResource(new Iron());
-        s.mine();
-        a.setResource(new Ice());
-        s.mine();
-        a.setResource(new Uranium());
-        s.mine();
-
-        TeleportGate tg0 = new TeleportGate(); // to generate BillOfRes data
-
-        OutputFormatter.setState(true);
-        s.buildTeleport();
-    }
-
-    public static void Test_Build_Teleport_No_Resources() {
-        System.out.println("Test_Build_Teleport_No_Resources:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        Asteroid a = new Asteroid();
-        a.setName("a1");
-        s.move(a);
-
-        a.setSurfaceThickness(0);
-        a.setResource(new Iron());
-        s.mine();
-
-        TeleportGate tg0 = new TeleportGate(); // to generate BillOfRes data
-
-        OutputFormatter.setState(true);
-        s.buildTeleport();
-    }
-
-    public static void Test_Place_Teleport_Ok() {
-        System.out.println("Test_Place_Teleport_Ok:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        Asteroid a = new Asteroid();
-        a.setName("a1");
-        s.move(a);
-        TeleportGate tg = new TeleportGate();
-        s.addTeleport(tg);
-
-        OutputFormatter.setState(true);
-        s.placeTeleport();
-    }
-
-    public static void Test_Place_Teleport_No_Teleport() {
-        System.out.println("Test_Place_Teleport_No_Teleport:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        Asteroid a = new Asteroid();
-        a.setName("a1");
-        s.move(a);
-
-        OutputFormatter.setState(true);
-        s.placeTeleport();
-    }
-
-    public static void Test_Place_Teleport_Already_Exists() {
-        System.out.println("Test_Place_Teleport_Already_Exists:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        Asteroid a = new Asteroid();
-        a.setName("a1");
-        s.move(a);
-        TeleportGate tg = new TeleportGate();
-        a.setTeleportGate(tg);
-        s.addTeleport(tg);
-
-        OutputFormatter.setState(true);
-        s.placeTeleport();
-    }
-
-    public static void Test_Resource_Placeback() {
-        System.out.println("Test_Resource_Placeback:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        for (int i = 0; i < 10; i++) {
-            Asteroid a = new Asteroid();
-            a.addResource(new Iron());
-            s.move(a);
-            s.mine();
+    private static Steppable getSteppableByName(String name) {
+        for (Steppable steppable : game.getSteppables()) {
+            if (steppable.getName() != null && steppable.getName().equals(name))
+                return steppable;
         }
-        Asteroid a2 = new Asteroid();
-        a2.addResource(new Iron());
-        s.move(a2);
-        a2.setSurfaceThickness(0);
-        a2.setName("a2");
-        OutputFormatter.setState(true);
-        s.mine();
+        return null;
     }
 
-    public static void Test_Generate_Sunflare() {
-        System.out.println("Test_Generate_Sunflare:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Map m = g.getMap();
-
-        OutputFormatter.setState(true);
-        m.sunflare();
+    private static Resource getResourceObject(String type) {
+        switch (type) {
+            case "u":
+                return new Uranium();
+            case "ic":
+                return new Ice();
+            case "ir":
+                return new Iron();
+            case "c":
+                return new Coal();
+            // argument may be 'x'
+            default:
+                return null;
+        }
     }
 
-    public static void Test_Build_Robot_Has_Resources() {
-        System.out.println("Test_Build_Robot_Has_Resources:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        Asteroid a = new Asteroid();
-        a.setName("a1");
-        s.move(a);
-
-        a.setSurfaceThickness(0);
-        a.setResource(new Iron());
-        s.mine();
-        a.setResource(new Coal());
-        s.mine();
-        a.setResource(new Uranium());
-        s.mine();
-
-        Robot r = new Robot("Robot"); // to generate BillOfRes data
-
-        OutputFormatter.setState(true);
-        s.buildRobot();
-    }
-
-    public static void Test_Build_Robot_No_Resources() {
-        System.out.println("Test_Build_Robot_No_Resources:\n");
-        OutputFormatter.setState(false); // Itt még nem számít a kimenet, így kikapcsoljuk az OutputFormattert.
-        Game g = Game.getInstance();
-        Settler s = new Settler("Settler");
-        Asteroid a = new Asteroid();
-        a.setName("a1");
-        s.move(a);
-
-        a.setSurfaceThickness(0);
-        a.setResource(new Iron());
-        s.mine();
-
-        Robot r = new Robot("Robot"); // to generate BillOfRes data
-
-        OutputFormatter.setState(true);
-        s.buildRobot();
+    /**
+     * Thrown when the input does not match the specified syntax.
+     */
+    private final static class InvalidSyntaxException extends Exception {
+        InvalidSyntaxException(String message) {
+            super(message);
+        }
     }
 }

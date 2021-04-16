@@ -1,5 +1,6 @@
 package map.entity;
 
+import control.Game;
 import map.asteroid.Resource;
 import utility.OutputFormatter;
 
@@ -70,7 +71,7 @@ public class Settler extends Entity {
         } else {
             Resource r = asteroid.mined();
             if (r != null) {
-                Resource resourceToExchange = game.exchangeResource(resources);
+                Resource resourceToExchange = Game.getInstance().exchangeResource(resources);
                 resources.add(r);
                 boolean success = asteroid.placeResource(resourceToExchange);
                 if (success) {

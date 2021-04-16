@@ -1,5 +1,6 @@
 package map.entity;
 
+import control.Game;
 import map.BillOfResources;
 import map.asteroid.*;
 import utility.OutputFormatter;
@@ -44,7 +45,7 @@ public class Robot extends Entity implements Steppable {
         boolean hasResourcesToBuildRobot = billToBuild.use(ownedResources);
         if (hasResourcesToBuildRobot) {
             Robot robot = new Robot("Robot_" + nameID);
-            game.addSteppable(robot);
+            Game.getInstance().addSteppable(robot);
             robot.move(currentAsteroid);
             OutputFormatter.OutputReturn("return - success");
         } else {

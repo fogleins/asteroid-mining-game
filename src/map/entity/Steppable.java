@@ -10,4 +10,11 @@ public interface Steppable {
      * executed, and that operation is valid for the given object.
      */
     void step();
+
+    /**
+     * TODO Used only temporarily in tests. MUST be removed later.
+     *
+     * @return The steppable's name.
+     */
+    String getName();
 }

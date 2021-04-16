@@ -59,7 +59,8 @@ public class Map {
     /**
      * Adds an asteroid to the asteroids.
      */
-    private void addAsteroids(Asteroid asteroid) {
+    public void addAsteroid(Asteroid asteroid) {
+        // TODO: itt le kell ellenőrizni, hogy nincs-e már hozzáadva
         asteroids.add(asteroid);
     }
 
@@ -68,7 +69,7 @@ public class Map {
      *
      * @return List of Asteroids objects held by asteroidsVector
      */
-    private ArrayList<Asteroid> getAsteroidsList() {
+    public ArrayList<Asteroid> getAsteroids() {
         return asteroids;
     }
 

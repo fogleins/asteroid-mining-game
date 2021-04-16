@@ -11,11 +11,6 @@ import java.util.ArrayList;
  * Class map.entity.Entity
  */
 abstract public class Entity {
-
-    /**
-     * Game reference.
-     */
-    protected static Game game;
     /**
      * Entity's name.
      */
@@ -33,21 +28,16 @@ abstract public class Entity {
     }
 
     /**
-     * Set the value of game
-     *
-     * @param g The new value of game
-     */
-    public static void setGame(Game g) {
-        game = g;
-    }
-
-    /**
      * Get the value of name
      *
      * @return the value of name
      */
     public String getName() {
         return name;
+    }
+
+    public void setAsteroid(Asteroid asteroid) {
+        this.asteroid = asteroid;
     }
 
     /**
