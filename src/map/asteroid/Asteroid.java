@@ -58,9 +58,7 @@ public class Asteroid {
      * @param thickness the new value of surfaceThickness
      */
     public void setSurfaceThickness(int thickness) {
-        OutputFormatter.OutputCall("setSurfaceThickness() - " + name);
         surfaceThickness = thickness;
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -69,8 +67,6 @@ public class Asteroid {
      * @return the value of inPerihelion
      */
     public boolean getInPerihelion() {
-        OutputFormatter.OutputCall("getInPerihelion() - " + name);
-        OutputFormatter.OutputReturn("return - inPerihelion");
         return inPerihelion;
     }
 
@@ -80,9 +76,7 @@ public class Asteroid {
      * @param inPerihelion the new value of inPerihelion
      */
     public void setInPerihelion(boolean inPerihelion) {
-        OutputFormatter.OutputCall("setInPerihelion() - " + name);
         this.inPerihelion = inPerihelion;
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -92,8 +86,6 @@ public class Asteroid {
      * @return List of Entities objects held by entitiesVector
      */
     private ArrayList<Entity> getEntitiesList() {
-        OutputFormatter.OutputCall("getEntitiesList() - " + name);
-        OutputFormatter.OutputReturn("return - entities");
         return entities;
     }
 
@@ -102,10 +94,8 @@ public class Asteroid {
      * Add a map.asteroid.Resource object to the map.asteroid.Asteroid
      */
     public void addResource(Resource resource) {
-        OutputFormatter.OutputCall("addResource() - " + name);
         this.resource = resource;
         this.resource.setAsteroid(this);
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -115,8 +105,6 @@ public class Asteroid {
      * @return List of map.asteroid.Resource objects held by resourceVector
      */
     private Resource getResource() {
-        OutputFormatter.OutputCall("getResource() - " + name);
-        OutputFormatter.OutputReturn("return - resource");
         return resource;
     }
 
@@ -131,8 +119,6 @@ public class Asteroid {
      * @return List of map.entity.TeleportGate objects held by teleportgateVector
      */
     private TeleportGate getTeleportGate() {
-        OutputFormatter.OutputCall("getTeleportGate() - " + name);
-        OutputFormatter.OutputReturn("return - teleportGate");
         return teleportGate;
     }
 
@@ -140,20 +126,17 @@ public class Asteroid {
      * Asteroid explodes.
      */
     public void explode() {
-        OutputFormatter.OutputCall("explode() - " + name);
 
         //All entities that were on the asteroid are warned that the asteroid has been exploded
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).asteroidExploded();
         }
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
      * The asteroid is drilled.
      */
     public void drilled() {
-        OutputFormatter.OutputCall("drilled() - " + name);
 
         //You can't drill if the surface thickness is 0
         if (surfaceThickness != 0) {
@@ -165,14 +148,12 @@ public class Asteroid {
             }
         }
 
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
      * @return the mined asteroid (map.asteroid.Resource)
      */
     public Resource mined() {
-        OutputFormatter.OutputCall("mined() - " + name);
 
 
         Resource minedResource = null;
@@ -182,7 +163,6 @@ public class Asteroid {
             resource = null;
             minedResource.setAsteroid(null);
         }
-        OutputFormatter.OutputReturn("return - minedResource");
         return minedResource;
     }
 
@@ -190,7 +170,6 @@ public class Asteroid {
      * @return A map.asteroid.Neighbours object that contains all the neighbours of the asteroid
      */
     public Neighbours getNeighbours() {
-        OutputFormatter.OutputCall("getNeighbours() - " + name);
 
         //A Neighbours osztály konstruktora ArrayList-et vár a teleport által összekötött aszteroidák listájával
         ArrayList<Asteroid> teleportGateOtherSide = new ArrayList<>();
@@ -198,7 +177,6 @@ public class Asteroid {
             teleportGateOtherSide.add(teleportGate.getOtherSide());
         }
 
-        OutputFormatter.OutputReturn("return - new Neighbours(neighbours, teleportGateOtherSide)");
 
         return new Neighbours(neighbours, teleportGateOtherSide);
     }
@@ -207,38 +185,29 @@ public class Asteroid {
      * @param entity that will be added to the list
      */
     public void acceptEntity(Entity entity) {
-        OutputFormatter.OutputCall("acceptEntity() - " + name);
         this.entities.add(entity);
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
      * @param entity that will be removed from the list
      */
     public void removeEntity(Entity entity) {
-        OutputFormatter.OutputCall("removeEntity() - " + name);
         entities.remove(entity);
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
      * @param asteroid new neighbour of the asteroid
      */
     public void addNeighbour(Asteroid asteroid) {
-        OutputFormatter.OutputCall("addNeighbour() - " + name + " -> " + asteroid.name);
         this.neighbours.add(asteroid);
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
      * @param asteroid remove this asteroid from  it's neighbours
      */
     public void removeAsteroid(Asteroid asteroid) {
-        OutputFormatter.OutputCall("removeAsteroid() - " + name);
 
         this.neighbours.remove(asteroid);
-
-        OutputFormatter.OutputReturn("return");
     }
 
     /**
@@ -246,13 +215,10 @@ public class Asteroid {
      * @return success or not
      */
     public boolean setTeleportGate(TeleportGate teleportGate) {
-        OutputFormatter.OutputCall("setTeleportGate() - " + name);
         if (this.teleportGate == null) {
             this.teleportGate = teleportGate;
-            OutputFormatter.OutputReturn("return - true");
             return true;
         } else {
-            OutputFormatter.OutputReturn("return - false");
             return false;
         }
     }
@@ -261,11 +227,9 @@ public class Asteroid {
      * remove the teleport gate from the asteroid
      */
     public void removeTeleportGate() {
-        OutputFormatter.OutputCall("removeTeleportGate() - " + name);
 
         this.teleportGate = null;
 
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -273,17 +237,14 @@ public class Asteroid {
      * @param resource this will be placed in the asteroid
      */
     public boolean placeResource(Resource resource) {
-        OutputFormatter.OutputCall("placeResource() - " + name);
 
         //if the asteroid is empty and the surface thickness is zero, we can place the resource inside the asteroid
         if (this.resource == null && surfaceThickness == 0) {
             this.resource = resource;
             this.resource.setAsteroid(this);
-            OutputFormatter.OutputReturn("return - true");
             return true;
         }
 
-        OutputFormatter.OutputReturn("return - false");
         return false;
     }
 
@@ -292,7 +253,6 @@ public class Asteroid {
      * a sunflare hits the asteroid
      */
     public void hitBySunflare() {
-        OutputFormatter.OutputCall("hitBySunflare() - " + name);
 
         ///If the asteroid is not empty, all the entities die on its surface
         if (resource != null) {
@@ -303,7 +263,6 @@ public class Asteroid {
             }
         }
 
-        OutputFormatter.OutputReturn("return");
     }
 
 
@@ -311,8 +270,6 @@ public class Asteroid {
      * change the perihelion state
      */
     public void changePerihelionState() {
-        OutputFormatter.OutputCall("changePerihelionState() - " + name);
         this.inPerihelion = !inPerihelion;
-        OutputFormatter.OutputReturn("return");
     }
 }
