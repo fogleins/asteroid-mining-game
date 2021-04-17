@@ -23,7 +23,7 @@ public class Map {
     /**
      * Those asteroids, what affected by sunflare.
      */
-    public ArrayList<Asteroid> sunflareAsteroids = new ArrayList<>();
+    public static ArrayList<Asteroid> sunflareAsteroids = new ArrayList<>();
 
     /**
      * Constructor of the map, which is initialize some asteroids.

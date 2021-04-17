@@ -1,5 +1,6 @@
 package control;
 
+import map.Map;
 import map.asteroid.*;
 import map.entity.*;
 
@@ -10,33 +11,15 @@ import java.util.ArrayList;
 
 public class Main {
     private static final Game game = Game.getInstance();
+    private static final ArrayList<TeleportGate> teleportGates = new ArrayList<>();
 
     public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line;
         boolean mapSet = false;
         boolean entitiesSet = false;
-        boolean randomize = true; // TODO ?
-
-        /*
-         * TODO: "Ha a felhasználó nem kapcsolja ki a véletlenszerűséget, akkor nem használhatja
-         *  a setsunflare és changeperihelion parancsokat."
-         *
-         * TODO: "A tesztelés során a setmap és setentities parancsokat kell legelőször kiadni, a további parancsok
-         *  csak ezek megadását követően működnek megfelelően."
-         *
-         * TODO: setteleport - "Ez a parancs csak a setmap és setentities előtt jöhet!"
-         */
 
         try {
-            // TODO: "A bemeneti fájl szintakszisa: Az egyes parancsokat (paramétereikkel együtt)
-            //  egy üres sor választja el egymástól!
-
-            System.out.print("Random? (y/n) [y]: "); // TODO
-            if (reader.readLine().contains("n"))
-                randomize = false;
-
-            System.out.print("Type a command and hit enter: ");
             while (((line = reader.readLine()) != null) && !(line.equals("")) && !line.equals("exit")) {
                 String[] details = line.split(" ");
                 switch (details[0]) {
@@ -102,9 +85,8 @@ public class Main {
                             String[] thisEntity;
                             for (int i = 0; i < entityCount; i++) {
                                 line = reader.readLine();
-                                // if the entity is a settler TODO (#typecheck :))
+                                // if the entity is a settler
                                 /*
-                                 * TODO Regexplecke part 2:
                                  * ^s Makes sure the input starts with a lowercase 's'
                                  * [a-zA-Z0-9]+ accepts any number, upper- or lowercase letter; used for checking if the
                                  *      settler's and the asteroid's names only contain simple characters
@@ -120,18 +102,20 @@ public class Main {
                                         "(\\s[a-zA-z0-9]*)?$")) { // TODO: max 3 teleport nincs ellenőrizve, [ucx] nem *-gal?
                                     Settler settler = new Settler(thisEntity[1]);
                                     settler.setAsteroid(getAsteroidByName(thisEntity[2]));
-                                    // TODO: 8.2.17-ben aszteroidánál x esetén null lesz a resource/teleport, itt hogy legyen?
                                     String[] resources = thisEntity[3].split("-");
                                     for (int j = 0; j < resources.length; j++) {
-                                        settler.getResources().add(getResourceObject(resources[j]));
+                                        Resource resource = getResourceObject(resources[j]);
+                                        if (resource != null)
+                                            settler.getResources().add(resource);
                                     }
                                     String[] teleports = thisEntity[4].split("-");
                                     for (int j = 0; j < teleports.length; j++) {
-                                        // TODO: teleport már létezik vagy itt hozzuk létre? Mindkettő kezelése?
-                                        // settler.addTeleport(getSteppableByName(teleports[j]));
-                                        TeleportGate teleportGate = new TeleportGate();
-                                        teleportGate.setName(teleports[j]);
-//                                        game.addSteppable(teleportGate); // TODO: itt elvileg még nincs lerakva, felesleges hozzáadni a game-hez
+                                        TeleportGate teleportGate = (TeleportGate) getSteppableByName(teleports[j]);
+                                        if (teleportGate == null)
+                                            throw new BadArgumentException("TeleportGate " + teleports[j] + " doesn't exist.");
+                                        settler.addTeleport(teleportGate);
+                                        // TODO: hozzáadjuk a Game-hez? hogy kezeljük, ha a teleportkapu párja meghal
+//                                        game.addSteppable(teleportGate);
                                     }
                                     game.addSettler(settler);
                                     // if the entity is a ufo or robot
@@ -156,7 +140,6 @@ public class Main {
                         entitiesSet = true;
                         break;
                     case "move":
-                        // TODO: ha a teleportot is lehet ezzel léptetni, akkor a [sru]-hoz hozzá kell adni a teleportot is
                         if (line.matches("^move [sru] [a-zA-Z0-9]+ [a-zA-Z0-9]+$")) {
                             String[] parameters = line.split(" ");
                             Asteroid whereTo = getAsteroidByName(parameters[3]);
@@ -262,8 +245,15 @@ public class Main {
                         } else throw new InvalidSyntaxException("Invalid syntax in placeteleport.");
                         break;
                     case "setsunflare":
-                        if (line.matches("^setsunflare \\d+$")) {
-                            game.setNextSunflare(Integer.parseInt(line.split(" ")[1]));
+                        if (line.matches("^setsunflare \\d+ [a-zA-z0-9\\-]+$")) {
+                            String[] parameters = line.split(" ");
+                            game.setNextSunflare(Integer.parseInt(parameters[1]));
+                            String[] asteroids = parameters[2].split("-");
+                            Asteroid asteroid;
+                            for (String a : asteroids) {
+                                if ((asteroid = getAsteroidByName(a)) != null)
+                                    Map.sunflareAsteroids.add(asteroid);
+                            }
                         } else throw new InvalidSyntaxException("Invalid syntax in setsunflare.");
                         break;
                     case "changeperihelion": {
@@ -287,6 +277,8 @@ public class Main {
                             ArrayList<TeleportGate> gates = TeleportGate.create(resources);
                             gates.get(0).setName(gatesNames[0]);
                             gates.get(1).setName(gatesNames[1]);
+                            teleportGates.add(gates.get(0));
+                            teleportGates.add(gates.get(1));
                         } else throw new InvalidSyntaxException("Syntax error. Maybe setteleport was " +
                                 "called after map or entities have been set?");
                         break;
@@ -295,16 +287,15 @@ public class Main {
                         break;
                     case "exchresource":
                         if (line.matches("^exchresource [a-zA-Z0-9]+ \\d+")) {
-                            // TODO
+                            // TODO: ezt elvileg már nem kéne használni, egyelőre meghagyom exceptionnel
+                            throw new InvalidSyntaxException("Invalid command");
                         } else throw new InvalidSyntaxException("Invalid syntax in exchresource.");
-                        break;
                     case "exit":
                         break;
                     default:
                         System.out.println("Unknown command.");
                         break;
                 }
-                System.out.print("Type a command and hit enter: ");
             }
         } catch (InvalidSyntaxException | BadArgumentException e) {
             System.out.println(e.getMessage());
@@ -353,6 +344,9 @@ public class Main {
             if (steppable.getName() != null && steppable.getName().equals(name))
                 return steppable;
         }
+        for (TeleportGate teleportGate : teleportGates)
+            if (teleportGate.getName() != null && teleportGate.getName().equals(name))
+                return teleportGate;
         return null;
     }
 
