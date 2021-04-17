@@ -1,0 +1,7 @@
+setmap
+a1 u 0 ip x
+setentities 1
+u ufo a1
+finishround
+finishround
+finishround
