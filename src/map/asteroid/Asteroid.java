@@ -1,5 +1,6 @@
 package map.asteroid;
 
+import control.Game;
 import map.entity.Entity;
 import map.entity.TeleportGate;
 
@@ -126,7 +127,6 @@ public class Asteroid {
      * The asteroid is drilled.
      */
     public void drilled() {
-
         //You can't drill if the surface thickness is 0
         if (surfaceThickness != 0) {
             this.surfaceThickness--;
@@ -137,6 +137,8 @@ public class Asteroid {
             }
         }
 
+        // todo: just for testing, marked for removal
+        printState();
     }
 
     /**
@@ -275,5 +277,21 @@ public class Asteroid {
      */
     public void changePerihelionState() {
         this.inPerihelion = !inPerihelion;
+    }
+
+    // proto output, marked for removal
+    private void printState() {
+        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
+        System.out.println("Asteroid");
+        System.out.println("name: " + name);
+        System.out.println("resource: " + (resource != null ? resource.getTypeName() : "null"));
+        System.out.println("surfacethickness: " + surfaceThickness);
+        System.out.println("inperihelion: " + inPerihelion);
+        System.out.print("neighbours: ");
+        for (int i = 0; i < neighbours.size(); i++) {
+            if (i != 0) System.out.print("-");
+            System.out.print(neighbours.get(i).name);
+        }
+        System.out.println("\nteleportgate: " + (teleportGate != null ? teleportGate.getName() : "null"));
     }
 }
