@@ -40,7 +40,7 @@ public class Main {
             while (((line = reader.readLine()) != null) && !(line.equals("")) && !line.equals("exit")) {
                 String[] details = line.split(" ");
                 switch (details[0]) {
-                    case "setmap":
+                    case "setmap": {
                         String[] asteroids = reader.readLine().split(" ");
                         String[] thisAsteroid;
                         String[] neighbors;
@@ -90,23 +90,12 @@ public class Main {
                                     teleportGate.setCurrentAsteroid(asteroid);
                                     asteroid.setTeleportGate(teleportGate);
                                 }
-
-                                // TODO: remove - csak a teszteléshez kellett
-                                for (int j = 0; j < thisAsteroid.length; j++) {
-                                    if (j == 4) {
-                                        for (int k = 0; k < neighbors.length; k++) {
-                                            System.out.println(neighbors[k]);
-                                        }
-                                    } else {
-                                        System.out.println(thisAsteroid[j]);
-                                    }
-                                }
-                                // TODO: --- remove vége ---
                             } else // if the syntax doesn't match the specified syntax, an exception is thrown
                                 throw new InvalidSyntaxException("Invalid syntax.");
                         }
                         mapSet = true;
                         break;
+                    }
                     case "setentities":
                         if (line.matches("setentities \\d+")) {
                             int entityCount = Integer.parseInt(line.split(" ")[1]);
@@ -240,8 +229,7 @@ public class Main {
                                     break;
                                 }
                             }
-                        }
-                        else throw new InvalidSyntaxException("Invalid syntax in buildrobot.");
+                        } else throw new InvalidSyntaxException("Invalid syntax in buildrobot.");
                         break;
                     case "buildteleport":
                         if (line.matches("^buildteleport [a-zA-Z0-9]+ [a-zA-Z0-9]+ [a-zA-Z0-9]+$")) {
@@ -262,23 +250,53 @@ public class Main {
                                     firstRenamed = true;
                                 }
                             }
-                        }
-                        else throw new InvalidSyntaxException("Invalid syntax in buildrobot.");
+                        } else throw new InvalidSyntaxException("Invalid syntax in buildrobot.");
                         break;
                     case "placeteleport":
+                        if (line.matches("^placeteleport [a-zA-Z0-9]+$")) {
+                            String[] parameters = line.split(" ");
+                            Settler settler = getSettlerByName(parameters[1]);
+                            if (settler == null)
+                                throw new BadArgumentException("Settler " + parameters[1] + " can't be found.");
+                            settler.placeTeleport();
+                        } else throw new InvalidSyntaxException("Invalid syntax in placeteleport.");
                         break;
                     case "setsunflare":
+                        if (line.matches("^setsunflare \\d+$")) {
+                            game.setNextSunflare(Integer.parseInt(line.split(" ")[1]));
+                        } else throw new InvalidSyntaxException("Invalid syntax in setsunflare.");
                         break;
-                    case "changeperihelion":
+                    case "changeperihelion": {
+                        if (line.matches("^changeperihelion [a-zA-z0-9\\-]+$")) {
+                            String[] asteroids = line.split(" ")[1].split("-");
+                            for (String asteroidStr : asteroids) {
+                                Asteroid asteroid = getAsteroidByName(asteroidStr);
+                                if (asteroid == null)
+                                    throw new BadArgumentException("Asteroid " + asteroidStr + " can't be found.");
+                                asteroid.setInPerihelion(!asteroid.getInPerihelion());
+                            }
+                        } else throw new InvalidSyntaxException("Invalid syntax in changeperihelion.");
                         break;
+                    }
                     case "setteleport":
-                        if (!mapSet && !entitiesSet)
-                            // TODO
-                            break;
+                        if (!mapSet && !entitiesSet && line.matches("^setteleport [a-zA-z0-9\\-]+$")) {
+                            String[] gatesNames = line.split(" ")[1].split("-");
+                            ArrayList<Resource> resources = new ArrayList<>();
+                            for (String substr : "ir-ir-ic-u".split("-"))
+                                resources.add(getResourceObject(substr));
+                            ArrayList<TeleportGate> gates = TeleportGate.create(resources);
+                            gates.get(0).setName(gatesNames[0]);
+                            gates.get(1).setName(gatesNames[1]);
+                        } else throw new InvalidSyntaxException("Syntax error. Maybe setteleport was " +
+                                "called after map or entities have been set?");
                         break;
                     case "finishround":
+                        game.roundFinishedWrapper();
                         break;
                     case "exchresource":
+                        if (line.matches("^exchresource [a-zA-Z0-9]+ \\d+")) {
+                            // TODO
+                        } else throw new InvalidSyntaxException("Invalid syntax in exchresource.");
                         break;
                     case "exit":
                         break;
@@ -296,6 +314,12 @@ public class Main {
         }
     }
 
+    /**
+     * Gets an {@code Asteroid} from the Map's asteroids list based on the asteroid's name.
+     *
+     * @param name The name of the asteroid.
+     * @return The Asteroid with the given name, null if not found.
+     */
     private static Asteroid getAsteroidByName(String name) {
         for (Asteroid asteroid : game.getMap().getAsteroids()) {
             if (asteroid.getName() != null && asteroid.getName().equals(name))
@@ -304,6 +328,12 @@ public class Main {
         return null;
     }
 
+    /**
+     * Gets a {@code Settler} from the Game's settlers list based on the settler's name.
+     *
+     * @param name The name of the settler.
+     * @return The Settler with the given name, null if not found.
+     */
     private static Settler getSettlerByName(String name) {
         for (Settler settler : game.getSettlers()) {
             if (settler.getName() != null && settler.getName().equals(name))
@@ -312,6 +342,12 @@ public class Main {
         return null;
     }
 
+    /**
+     * Gets a steppable object from the Game's steppables list based on the name of the {@code Steppable}.
+     *
+     * @param name The name of the steppable.
+     * @return The steppable with the given name, null if not found.
+     */
     private static Steppable getSteppableByName(String name) {
         for (Steppable steppable : game.getSteppables()) {
             if (steppable.getName() != null && steppable.getName().equals(name))
@@ -320,6 +356,12 @@ public class Main {
         return null;
     }
 
+    /**
+     * Returns a resource object based on their abbreviations.
+     *
+     * @param type The resource's abbreviation as specified in the docs.
+     * @return A resource object of the specified type.
+     */
     private static Resource getResourceObject(String type) {
         switch (type) {
             case "u":

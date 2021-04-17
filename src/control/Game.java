@@ -90,6 +90,11 @@ public class Game {
         return steppables;
     }
 
+    // TODO: only for testing, remove later
+    public void setNextSunflare(int nextSunflare) {
+        this.nextSunflare = nextSunflare;
+    }
+
     /**
      * Add a Settler object to the settlers list
      */
@@ -169,5 +174,12 @@ public class Game {
         }
         map.changePerihelion();
         currentRound++;
+    }
+
+    /**
+     * TODO: used only for testing, should be removed later.
+     */
+    public void roundFinishedWrapper() {
+        this.roundFinished();
     }
 }
