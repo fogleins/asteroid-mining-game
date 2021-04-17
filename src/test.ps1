@@ -1,9 +1,10 @@
-$testname=$args[0]
-# $outputfile=$testname+"_output.txt"
-$outputfile="output.txt"
-$testcasefile=$testname+"_expected_output.txt"
+$testname = $args[0]
+$outputfile = "test\"+$testname+"_out.txt"
+$testcasefile = "test\"+$testname+".txt"
 
-$result=compare-object (Get-Content -Path $outputfile) (Get-Content -Path $testcasefile)
+$output = Get-Content $testcasefile | java -cp .\ control.Main
+
+$result = Compare-Object ($output) (Get-Content -Path $outputfile) -SyncWindow 0
 
 if(($result -like "*=>*") -or ($result -like "*<=*")) {
     Write-Host "Test failed. Differences:"
