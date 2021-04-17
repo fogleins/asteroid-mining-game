@@ -145,6 +145,8 @@ public class Asteroid {
      * @return the mined asteroid (map.asteroid.Resource)
      */
     public Resource mined() {
+
+
         Resource minedResource = null;
         //If the asteroid is not empty and the thickness is zero, the resource is mined
         if (this.resource != null && surfaceThickness == 0) {
