@@ -18,6 +18,9 @@ public class Main {
         String line;
         boolean mapSet = false;
         boolean entitiesSet = false;
+        // TODO: billToBuild inicializálása
+        new TeleportGate();
+        new Robot("");
 
         try {
             while (((line = reader.readLine()) != null) && !(line.equals("")) && !line.equals("exit")) {
@@ -63,7 +66,9 @@ public class Main {
                                         asteroid.addNeighbour(neighbor);
                                     }
                                 }
-                                if (!thisAsteroid[5].equals("x")) {
+                                // the 6th parameter is optional, but even if its given, it may be x, which has
+                                // the same result as if it was not given
+                                if (thisAsteroid.length == 6 && !thisAsteroid[5].equals("x")) {
                                     TeleportGate teleportGate = (TeleportGate) getSteppableByName(thisAsteroid[5]);
                                     if (teleportGate == null)
                                         teleportGate = new TeleportGate();
@@ -108,14 +113,17 @@ public class Main {
                                         if (resource != null)
                                             settler.getResources().add(resource);
                                     }
-                                    String[] teleports = thisEntity[4].split("-");
-                                    for (int j = 0; j < teleports.length; j++) {
-                                        TeleportGate teleportGate = (TeleportGate) getSteppableByName(teleports[j]);
-                                        if (teleportGate == null)
-                                            throw new BadArgumentException("TeleportGate " + teleports[j] + " doesn't exist.");
-                                        settler.addTeleport(teleportGate);
-                                        // TODO: hozzáadjuk a Game-hez? hogy kezeljük, ha a teleportkapu párja meghal
+                                    // teleport gate is an optional parameter
+                                    if (thisEntity.length == 5 && !thisEntity[4].equals("x")) {
+                                        String[] teleports = thisEntity[4].split("-");
+                                        for (int j = 0; j < teleports.length; j++) {
+                                            TeleportGate teleportGate = (TeleportGate) getSteppableByName(teleports[j]);
+                                            if (teleportGate == null)
+                                                throw new BadArgumentException("TeleportGate " + teleports[j] + " doesn't exist.");
+                                            settler.addTeleport(teleportGate);
+                                            // TODO: hozzáadjuk a Game-hez? hogy kezeljük, ha a teleportkapu párja meghal
 //                                        game.addSteppable(teleportGate);
+                                        }
                                     }
                                     game.addSettler(settler);
                                     // if the entity is a ufo or robot

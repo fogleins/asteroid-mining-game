@@ -100,7 +100,8 @@ public class Asteroid {
 
     public void setResource(Resource resource) {
         this.resource = resource;
-        this.resource.setAsteroid(this);
+        if (this.resource != null)
+            this.resource.setAsteroid(this);
     }
 
     /**
