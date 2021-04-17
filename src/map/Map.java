@@ -25,7 +25,6 @@ public class Map {
      */
     public ArrayList<Asteroid> sunflareAsteroids = new ArrayList<>();
 
-
     /**
      * Constructor of the map, which is initialize some asteroids.
      *
