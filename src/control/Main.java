@@ -194,12 +194,12 @@ public class Main {
                                 if (settler == null)
                                     throw new BadArgumentException("Settler " + parameters[2] + " can't be found.");
                                 settler.mine();
-                            } else {
+                            } /* TODO: ez akkor egyáltalán nem kell? else {
                                 Ufo ufo = (Ufo) getSteppableByName(parameters[2]);
                                 if (ufo == null)
                                     throw new BadArgumentException("Robot " + parameters[2] + " can't be found.");
                                 ufo.mine();
-                            }
+                            }*/
                         } else throw new InvalidSyntaxException("Invalid syntax in drill.");
                         break;
                     case "buildrobot":
