@@ -9,4 +9,8 @@ public class Coal extends Resource {
     public Coal() {
     }
 
+    @Override
+    public Resource clone() {
+        return new Coal();
+    }
 }

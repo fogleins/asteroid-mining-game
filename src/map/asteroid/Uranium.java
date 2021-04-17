@@ -6,7 +6,26 @@ package map.asteroid;
  */
 public class Uranium extends RadioactiveResource {
 
-    public Uranium() {
+    int exposedCount = 0;
+
+    public Uranium() {}
+
+    @Override
+    public void drilledInPerihelion() {}
+
+    /**
+     * Increments the exposition counter
+     * If it reaches a predetermined threshold, the asteroid explodes
+     */
+    @Override
+    public void exposed() {
+        exposedCount++;
+        if (exposedCount >= 3)
+            asteroid.explode();
     }
 
+    @Override
+    public Resource clone() {
+        return new Uranium();
+    }
 }

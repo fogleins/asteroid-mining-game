@@ -59,7 +59,10 @@ public class BillOfResources {
     public boolean check(ArrayList<Resource> ownedResources) {
 
         // create a deep copy of the input array, because we need to modify it, but just locally
-        ArrayList<Resource> ownedRes = (ArrayList<Resource>) ownedResources.clone();
+        ArrayList<Resource> ownedRes = new ArrayList<>();
+        for (Resource r : ownedResources) {
+            ownedRes.add(r.clone());
+        }
         int okCnt = 0; // number of found resources
         for (Resource rn : resourcesNeeded) {
             boolean found = false;

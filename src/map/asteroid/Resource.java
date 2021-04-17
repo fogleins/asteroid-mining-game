@@ -20,8 +20,7 @@ public abstract class Resource {
      * Called when the asteroid with this resource in its core is drilled in perihelion
      * Default implementation
      */
-    public void drilledInPerihelion() {
-    }
+    public void drilledInPerihelion() {}
 
     /**
      * Returns whether the parameter is the same type of resource as this resource
@@ -32,4 +31,13 @@ public abstract class Resource {
     public boolean isCompatibleWith(Resource res) {
         return res.getClass().equals(this.getClass()); // check
     }
+
+    public void exposed() {}
+
+    /**
+     * Creates a deep copy of the resource
+     * It just the makes a new object of the same type of resource, no data is copied (eg. exposedCount)
+     * @return Copy of the resource
+     */
+    abstract public Resource clone();
 }

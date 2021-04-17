@@ -9,4 +9,8 @@ public class Ice extends SublimableResource {
     public Ice() {
     }
 
+    @Override
+    public Resource clone() {
+        return new Ice();
+    }
 }

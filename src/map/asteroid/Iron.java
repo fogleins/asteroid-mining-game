@@ -9,4 +9,8 @@ public class Iron extends Resource {
     public Iron() {
     }
 
+    @Override
+    public Resource clone() {
+        return new Iron();
+    }
 }
