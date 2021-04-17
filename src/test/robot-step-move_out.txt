@@ -1,0 +1,5 @@
+Round number: 1
+Robot
+name: rob1
+asteroid: a2
+

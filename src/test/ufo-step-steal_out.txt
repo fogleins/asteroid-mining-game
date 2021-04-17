@@ -1,0 +1,14 @@
+Round number: 1
+Asteroid
+name: a1
+resource: null
+surfacethickness: 0
+inperihelion: false
+neighbors: a2
+teleportgate: null
+
+Round number: 1
+Ufo
+name: ufo
+asteroid: a1
+resources: ir
