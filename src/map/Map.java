@@ -21,10 +21,16 @@ public class Map {
     private BaseAsteroid baseAsteroid;
 
     /**
+     * Those asteroids, what affected by sunflare.
+     */
+    public ArrayList<Asteroid> sunflareAsteroids = new ArrayList<>();
+
+    /**
      * Constructor of the map, which is initialize some asteroids.
      *
      * @param baseAst Where all settlers must be to win the game (with enough resources).
      */
+
     public Map(BaseAsteroid baseAst) {
         baseAsteroid = baseAst;
         asteroids.add(baseAsteroid);
