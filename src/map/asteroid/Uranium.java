@@ -29,4 +29,9 @@ public class Uranium extends RadioactiveResource {
     public Resource clone() {
         return new Uranium();
     }
+
+    @Override
+    public String getTypeName() {
+        return "u";
+    }
 }

@@ -182,4 +182,9 @@ public class Game {
     public void roundFinishedWrapper() {
         this.roundFinished();
     }
+
+    // todo: just for testing, marked for removal
+    public int getCurrentRound() {
+        return currentRound;
+    }
 }

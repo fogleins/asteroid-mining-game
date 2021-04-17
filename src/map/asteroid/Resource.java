@@ -40,4 +40,7 @@ public abstract class Resource {
      * @return Copy of the resource
      */
     abstract public Resource clone();
+
+    // todo: just for testing, marked for removal
+    abstract public String getTypeName();
 }

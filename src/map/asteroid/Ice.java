@@ -13,4 +13,9 @@ public class Ice extends SublimableResource {
     public Resource clone() {
         return new Ice();
     }
+
+    @Override
+    public String getTypeName() {
+        return "ic";
+    }
 }

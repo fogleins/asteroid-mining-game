@@ -13,4 +13,9 @@ public class Coal extends Resource {
     public Resource clone() {
         return new Coal();
     }
+
+    @Override
+    public String getTypeName() {
+        return "c";
+    }
 }
