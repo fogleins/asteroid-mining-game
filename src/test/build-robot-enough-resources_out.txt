@@ -1,0 +1,11 @@
+Round number: 1
+Settler
+name: Settler
+asteroid: a1
+resources:
+teleportgates:
+
+Round number: 1
+Robot
+name: Robot
+asteroid: a1
