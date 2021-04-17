@@ -35,9 +35,12 @@ public abstract class Resource {
     public void exposed() {}
 
     /**
-     * Creates a deep copy of the resource
-     * It just the makes a new object of the same type of resource, no data is copied (eg. exposedCount)
+     * Creates a deep copy of the resource (type)
+     * It just makes a new object of the same type of resource, no data is copied (eg. exposedCount)
      * @return Copy of the resource
      */
     abstract public Resource clone();
+
+    // todo: just for testing, marked for removal
+    abstract public String getTypeName();
 }

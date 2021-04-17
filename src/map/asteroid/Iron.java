@@ -13,4 +13,9 @@ public class Iron extends Resource {
     public Resource clone() {
         return new Iron();
     }
+
+    @Override
+    public String getTypeName() {
+        return "ir";
+    }
 }
