@@ -171,6 +171,21 @@ public class Asteroid {
     }
 
     /**
+     * @return An asteroid list whose don't have teleportgate.
+     */
+    public ArrayList<Asteroid> getNeighboursWithoutTeleportGate(){
+        ArrayList<Asteroid> neighbourswithouttele =new ArrayList<>();
+        for(Asteroid a : neighbours){
+            if(a.getTeleportGate()==null){
+                neighbourswithouttele.add(a);
+            }
+        }
+        return neighbourswithouttele;
+    }
+
+
+
+    /**
      * @param entity that will be added to the list
      */
     public void acceptEntity(Entity entity) {

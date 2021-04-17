@@ -24,10 +24,16 @@ public class TeleportGate implements Steppable {
     private TeleportGate otherGate;
 
     /**
+     * Determines that the teleportgate has been hitted by sunflare.
+     */
+    private boolean crazy;
+
+    /**
      * Constructor of the TeleportGate, which initialize the resources to build a gate(pair).
      */
     public TeleportGate() {
         initBillToBuild();
+        crazy=false;
     }
 
     /**
@@ -89,9 +95,28 @@ public class TeleportGate implements Steppable {
         return otherGate.getCurrentAsteroid();
     }
 
+    public void hitBySunflare(){
+        crazy=true;
+    }
+
+    /**
+     * At the finish of the round the teleportgate move to anoteher asteroid (which hasn't got teleportgate),
+     * if the telport gate has been hitted by sunflare before.
+     */
+    private void move(){
+        ArrayList<Asteroid> neighbours = currentAsteroid.getNeighboursWithoutTeleportGate();
+        currentAsteroid.removeTeleportGate();
+        neighbours.get(neighbours.size()-1).setTeleportGate(this);
+    }
+
+    /**
+     * Overrides the Steppable interface's step method.
+     */
     @Override
     public void step() {
-        // TODO
+        if(crazy){
+            move();
+        }
     }
 
 

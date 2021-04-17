@@ -58,6 +58,11 @@ public class Map {
      */
     public void addAsteroid(Asteroid asteroid) {
         // TODO: itt le kell ellenőrizni, hogy nincs-e már hozzáadva
+        for (Asteroid a : asteroids){
+            if(a==asteroid){
+                return;
+            }
+        }
         asteroids.add(asteroid);
     }
 
