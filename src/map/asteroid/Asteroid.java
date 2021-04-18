@@ -90,11 +90,11 @@ public class Asteroid {
 
 
     /**
-     * Get the List of map.asteroid.Resource objects held by resourceVector
+     * Get the asteroid's resource
      *
-     * @return List of map.asteroid.Resource objects held by resourceVector
+     * @return The resource which the asteroid contains
      */
-    private Resource getResource() {
+    public Resource getResource() {
         return resource;
     }
 
