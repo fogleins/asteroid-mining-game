@@ -85,7 +85,7 @@ public class Robot extends Entity implements Steppable {
     }
 
     // TODO: proto output, marked for removal
-    private void printState() {
+    public void printState() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
         System.out.println("name: " + name);

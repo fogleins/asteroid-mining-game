@@ -118,4 +118,37 @@ public class Settler extends Entity {
     public ArrayList<TeleportGate> getTeleports() {
         return teleports;
     }
+
+    public void printDeath() {
+        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
+        System.out.println("Settler");
+        System.out.println("name: " + name + " ->X ");
+
+    }
+
+
+    public void printState() {
+        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
+        System.out.println("Settler");
+        System.out.println("name: " + name);
+        System.out.println("asteroid: " + asteroid + "\n");
+        String ress = "";
+        for (int i = 0; i < resources.size(); i++) {
+            if (i == resources.size() - 1) {
+                ress += resources.get(i).getTypeName();
+            } else {
+                ress += resources.get(i).getTypeName() + "-";
+            }
+        }
+        System.out.println("resources: " + (ress == "" ? "x" : ress) + "\n");
+        String tps = "";
+        for (int i = 0; i < resources.size(); i++) {
+            if (i == resources.size() - 1) {
+                tps += resources.get(i).getTypeName();
+            } else {
+                tps += resources.get(i).getTypeName() + "-";
+            }
+        }
+        System.out.println("teleportgates: " + (tps == "" ? "x" : tps) + "\n");
+    }
 }
