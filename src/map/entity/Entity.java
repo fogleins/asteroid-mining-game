@@ -94,4 +94,12 @@ abstract public class Entity {
     public void setName(String name) {
         this.name = name;
     }
+
+    // proto output, marked for removal
+    abstract void printState();
+
+    // proto output, marked for removal
+    abstract void printDeath();
+
+
 }

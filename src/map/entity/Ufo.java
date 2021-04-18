@@ -47,14 +47,16 @@ public class Ufo extends Entity implements Steppable {
         printDeath();
     }
 
-    private void printDeath() {
+
+    public void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("UFO");
         System.out.println("name: " + name + " ->X ");
 
     }
 
-    private void printState() {
+
+    public void printState() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("UFO");
         System.out.println("name: " + name);

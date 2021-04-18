@@ -1,0 +1,7 @@
+setmap
+BASE NGC1304
+BASE x 0 op NGC1304
+NGC1304 x 0 op BASE
+setentities 1
+s Settler NGC1304 x
+drill s Settler
