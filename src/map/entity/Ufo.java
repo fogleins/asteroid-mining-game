@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Ufo extends Entity implements Steppable {
     private ArrayList<Resource> resources = new ArrayList<>();
-
+    private boolean canMine = true;
     /**
      * Constructor of Entity.
      *
@@ -17,6 +17,10 @@ public class Ufo extends Entity implements Steppable {
      */
     public Ufo(String name) {
         super(name);
+    }
+
+    public void setMine(boolean value){
+        canMine = value;
     }
 
 
