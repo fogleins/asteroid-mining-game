@@ -25,7 +25,7 @@ public class Ufo extends Entity implements Steppable {
      */
     @Override
     public void step() {
-        Resource resource = null;
+        Resource resource;
         resource = asteroid.mined();
 
         //If the UFO couldn't mine, it moves on
@@ -58,7 +58,7 @@ public class Ufo extends Entity implements Steppable {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("UFO");
         System.out.println("name: " + name);
-        System.out.println("asteroid: " + asteroid + "\n");
+        System.out.println("asteroid: " + asteroid.getName());
     }
 
 

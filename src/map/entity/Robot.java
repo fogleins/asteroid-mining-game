@@ -89,6 +89,6 @@ public class Robot extends Entity implements Steppable {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
         System.out.println("name: " + name);
-        System.out.println("asteroid: " + asteroid + "\n"); // TODO: a parancs utáni üres sor legyen egységes
+        System.out.println("asteroid: " + asteroid.getName());
     }
 }

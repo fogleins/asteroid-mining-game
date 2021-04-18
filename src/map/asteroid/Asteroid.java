@@ -292,7 +292,7 @@ public class Asteroid {
         this.inPerihelion = !inPerihelion;
     }
 
-    // proto output, marked for removal
+    // todo: proto output, marked for removal
     private void printState() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Asteroid");
@@ -308,7 +308,7 @@ public class Asteroid {
         System.out.println("\nteleportgate: " + (teleportGate != null ? teleportGate.getName() : "null"));
     }
 
-    // proto output, marked for removal
+    // todo: proto output, marked for removal
     private void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Asteroid");
