@@ -164,7 +164,9 @@ public class Game {
      */
     private void roundFinished() {
         for (Steppable steppable : steppables) {
-            steppable.step();
+            // TODO: if statement only for testing, otherwise just call step() for every steppable
+            if (!steppable.getSteppedThisRound())
+                steppable.step();
         }
         if (currentRound == nextSunflare) {
             map.sunflare();
@@ -177,6 +179,9 @@ public class Game {
         }
 
         currentRound++;
+        // TODO: the following 2 lines are only used for testing
+        for (Steppable steppable : steppables)
+            steppable.setSteppedThisRound(false);
     }
 
     /**
@@ -190,8 +195,4 @@ public class Game {
     public int getCurrentRound() {
         return currentRound;
     }
-
-    // todo: only for testing
-    // called after a base asteroid has been created
-
 }

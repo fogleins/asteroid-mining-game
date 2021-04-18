@@ -21,6 +21,7 @@ public class Robot extends Entity implements Steppable {
      * ID to make names unique for robots.
      */
     private static int nameID = 0;
+    private boolean steppedThisRound = false; // TODO remove later
 
     // Initializes the list of Resources needed to build a Robot.
     static {
@@ -84,6 +85,18 @@ public class Robot extends Entity implements Steppable {
         printState(); // TODO: remove later
     }
 
+    // TODO
+    @Override
+    public boolean getSteppedThisRound() {
+        return steppedThisRound;
+    }
+
+    // TODO
+    @Override
+    public void setSteppedThisRound(boolean stepped) {
+        this.steppedThisRound = stepped;
+    }
+
     // TODO: proto output, marked for removal
     public void printState() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
@@ -93,7 +106,7 @@ public class Robot extends Entity implements Steppable {
     }
 
     @Override
-    void printDeath() {
+    public void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
         System.out.println("name: " + name + " ->X ");

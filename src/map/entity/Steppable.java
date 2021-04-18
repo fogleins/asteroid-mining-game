@@ -17,4 +17,6 @@ public interface Steppable {
      * @return The steppable's name.
      */
     String getName();
+    boolean getSteppedThisRound();
+    void setSteppedThisRound(boolean stepped);
 }

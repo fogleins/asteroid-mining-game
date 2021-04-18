@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class Ufo extends Entity implements Steppable {
     private ArrayList<Resource> resources = new ArrayList<>();
+    private boolean steppedThisRound = false; // TODO: remove after tests
     private boolean canMine = true;
     /**
      * Constructor of Entity.
@@ -43,6 +44,18 @@ public class Ufo extends Entity implements Steppable {
             }
 
         }
+    }
+
+    // todo remove after tests
+    @Override
+    public boolean getSteppedThisRound() {
+        return steppedThisRound;
+    }
+
+    // todo remove after tests
+    @Override
+    public void setSteppedThisRound(boolean stepped) {
+        this.steppedThisRound = stepped;
     }
 
     @Override

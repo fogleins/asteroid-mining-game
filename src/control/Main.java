@@ -174,6 +174,7 @@ public class Main {
                                     ((Robot) steppable).move(whereTo);
                                 else if (parameters[1].equals("u"))
                                     ((Ufo) steppable).move(whereTo);
+                                steppable.setSteppedThisRound(true);
                             }
                         } else
                             throw new InvalidSyntaxException("Invalid syntax: move <entity_type> <entity_name> <asteroid>");
@@ -191,6 +192,7 @@ public class Main {
                                 if (robot == null)
                                     throw new BadArgumentException("Robot " + parameters[2] + " can't be found.");
                                 robot.drill();
+                                robot.setSteppedThisRound(true);
                             }
                         } else throw new InvalidSyntaxException("Invalid syntax in drill.");
                         break;
@@ -207,6 +209,7 @@ public class Main {
                                 if (ufo == null)
                                     throw new BadArgumentException("Robot " + parameters[2] + " can't be found.");
                                 ufo.mine();
+                                ufo.setSteppedThisRound(true);
                             }*/
                         } else throw new InvalidSyntaxException("Invalid syntax in drill.");
                         break;

@@ -34,6 +34,7 @@ public class TeleportGate implements Steppable {
      * Determines that the teleportgate has been hitted by sunflare.
      */
     private boolean crazy;
+    private boolean steppedThisRound = false; // TODO remove later
 
     /**
      * Constructor of the TeleportGate, which initialize the resources to build a gate(pair).
@@ -125,6 +126,16 @@ public class TeleportGate implements Steppable {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public boolean getSteppedThisRound() {
+        return steppedThisRound;
+    }
+
+    @Override
+    public void setSteppedThisRound(boolean stepped) {
+        this.steppedThisRound = stepped;
     }
 
     public void setName(String name) {
