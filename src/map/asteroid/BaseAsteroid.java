@@ -16,12 +16,10 @@ public class BaseAsteroid extends Asteroid {
     //
 
     public BillOfResources winConditionResources;
-    private Game game;
 
-    public BaseAsteroid(Game g) {
-        name = "BASE";
+    public BaseAsteroid() {
+//        name = "BASE"; // TODO: uncomment after testing
         winConditionResources = new BillOfResources();
-        game = g;
 
         //To win the game, three of every resource needed
         for (int i = 0; i < 3; i++) {
@@ -30,7 +28,7 @@ public class BaseAsteroid extends Asteroid {
             winConditionResources.addResources(new Coal());
             winConditionResources.addResources(new Ice());
         }
-
+//        printState();
     }
 
 
@@ -70,8 +68,7 @@ public class BaseAsteroid extends Asteroid {
         }
 
         if (winConditionResources.check(resourcesOnAsteroid))
-            game.gameWon();
-
-
+            Game.getInstance().gameWon();
+        printState();
     }
 }

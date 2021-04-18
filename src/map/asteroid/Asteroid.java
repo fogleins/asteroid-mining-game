@@ -295,7 +295,7 @@ public class Asteroid {
     }
 
     // todo: proto output, marked for removal
-    private void printState() {
+    protected void printState() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Asteroid");
         System.out.println("name: " + name);
