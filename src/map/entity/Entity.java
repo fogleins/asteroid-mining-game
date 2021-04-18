@@ -15,6 +15,11 @@ abstract public class Entity {
      * Entity's name.
      */
     protected String name;
+
+    public Asteroid getAsteroid() {
+        return asteroid;
+    }
+
     /**
      * Asteroid.
      */
