@@ -44,7 +44,6 @@ public class Main {
                             if ((line = reader.readLine()).matches("^" + asteroids[i] + " ([ucx]|(ir)|(ic)) " +
                                     "\\d+ ((ip)|(op)) [a-zA-z0-9\\-]+(\\s[a-zA-z0-9]*)?$")) {
                                 thisAsteroid = line.split(" ");
-                                neighbors = thisAsteroid[4].split("-");
                                 // We are checking if this asteroid was initialized previously. If yes, we modify its
                                 // variables, otherwise we create a new asteroid.
                                 Asteroid asteroid = getAsteroidByName(thisAsteroid[0]);
@@ -55,11 +54,11 @@ public class Main {
                                 asteroid.setSurfaceThickness(Integer.parseInt(thisAsteroid[2]));
                                 asteroid.setInPerihelion(thisAsteroid[3].equals("ip"));
                                 String[] neighbours = thisAsteroid[4].split("-");
-                                if(game.getMap().getAsteroids().size()==0){
-                                    BaseAsteroid baseAsteroid= new BaseAsteroid(asteroid);
+                                if (game.getMap().getAsteroids().size() == 0) {
+                                    BaseAsteroid baseAsteroid = new BaseAsteroid(asteroid);
                                     game.getMap().addAsteroid(baseAsteroid);
                                     game.getMap().setBaseAsteroid(baseAsteroid);
-                                    asteroid=baseAsteroid;
+                                    asteroid = baseAsteroid;
                                 }
                                 if (!neighbours[0].equals("x")) {
                                     for (int j = 0; j < neighbours.length; j++) {
@@ -84,6 +83,8 @@ public class Main {
                                     teleportGate.setCurrentAsteroid(asteroid);
                                     asteroid.setTeleportGate(teleportGate);
                                 }
+                                if (game.getMap().getAsteroids().size() != 0)
+                                    game.getMap().addAsteroid(asteroid);
                             } else // if the syntax doesn't match the specified syntax, an exception is thrown
                                 throw new InvalidSyntaxException("Invalid syntax.");
                         }
@@ -145,7 +146,7 @@ public class Main {
                                             ufo.setMine(false);
                                         asteroid.acceptEntity(ufo);
                                         game.addSteppable(ufo);
-                                    // robot
+                                        // robot
                                     } else if (line.startsWith("r")) {
                                         Robot robot = new Robot(thisEntity[1], getAsteroidByName(thisEntity[2]));
                                         Asteroid asteroid = getAsteroidByName(thisEntity[2]);
