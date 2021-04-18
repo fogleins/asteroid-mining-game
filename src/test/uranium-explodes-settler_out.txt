@@ -13,3 +13,4 @@ NGC1304 -> X
 Round number: 3
 Settler
 s -> X
+

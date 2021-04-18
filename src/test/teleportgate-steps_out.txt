@@ -34,3 +34,4 @@ surfacethickness: 2
 inperihelion: false
 neighbors: a1
 teleportgate: t1
+

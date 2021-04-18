@@ -307,14 +307,14 @@ public class Asteroid {
             if (i != 0) System.out.print("-");
             System.out.print(neighbours.get(i).name);
         }
-        System.out.println("\nteleportgate: " + (teleportGate != null ? teleportGate.getName() : "null"));
+        System.out.println("\nteleportgate: " + (teleportGate != null ? teleportGate.getName() : "null") + "\n");
     }
 
     // todo: proto output, marked for removal
     private void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Asteroid");
-        System.out.println("name: " + name + " ->X ");
+        System.out.println("name: " + name + " ->X \n");
 
     }
 }

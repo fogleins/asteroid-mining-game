@@ -6,7 +6,9 @@ surfacethickness: 0
 inperihelion: false
 neighbours: BASE
 teleportgate: null
+
 Round number: 1
 Robot
 name: Robot_0
 asteroid: a1
+

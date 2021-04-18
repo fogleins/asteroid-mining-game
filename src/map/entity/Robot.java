@@ -104,13 +104,13 @@ public class Robot extends Entity implements Steppable {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
         System.out.println("name: " + name);
-        System.out.println("asteroid: " + asteroid.getName());
+        System.out.println("asteroid: " + asteroid.getName() + "\n");
     }
 
     @Override
     public void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
-        System.out.println(name + " ->X ");
+        System.out.println(name + " ->X \n");
     }
 }

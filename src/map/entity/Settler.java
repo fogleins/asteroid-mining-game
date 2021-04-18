@@ -127,8 +127,7 @@ public class Settler extends Entity {
     public void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Settler");
-        System.out.println(name + " ->X ");
-
+        System.out.println(name + " ->X \n");
     }
 
     @Override
@@ -154,6 +153,6 @@ public class Settler extends Entity {
                 tps += resources.get(i).getTypeName() + "-";
             }
         }
-        System.out.println("teleportgates: " + (tps.equals("") ? "x" : tps));
+        System.out.println("teleportgates: " + (tps.equals("") ? "x" : tps) + "\n");
     }
 }
