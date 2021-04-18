@@ -18,6 +18,8 @@ public class Main {
         String line;
         boolean mapSet = false;
         boolean entitiesSet = false;
+        Test.setAutomaticPerihelionChange(true); //TODO remove later
+
 
         try {
             while (((line = reader.readLine()) != null) && !(line.equals("")) && !line.equals("exit")) {
