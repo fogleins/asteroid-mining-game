@@ -64,6 +64,7 @@ public class Settler extends Entity {
             Resource r = asteroid.mined();
             if (r != null) {
                 resources.add(r);
+                printState();
             }
         } else {
             Resource r = asteroid.mined();
@@ -74,6 +75,7 @@ public class Settler extends Entity {
                 if (success) {
                     resources.remove(resourceToExchange);
                 }
+                printState();
             }
         }
     }
@@ -97,6 +99,7 @@ public class Settler extends Entity {
                 for (TeleportGate tp : teleportGates) {
                     teleports.add(tp);
                 }
+                printState();
             }
         }
     }
@@ -110,6 +113,7 @@ public class Settler extends Entity {
             boolean success = asteroid.setTeleportGate(teleports.get(0));
             if (success) {
                 teleports.remove(0);
+                printState();
             }
         }
     }

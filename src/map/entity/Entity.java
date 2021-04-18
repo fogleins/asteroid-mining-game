@@ -56,6 +56,7 @@ abstract public class Entity {
         }
         whereTo.acceptEntity(this);
         asteroid = whereTo;
+        printState();
     }
 
 
@@ -72,6 +73,7 @@ abstract public class Entity {
      */
     public void die() {
         asteroid.removeEntity(this);
+        printDeath();
     }
 
 
