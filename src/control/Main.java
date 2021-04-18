@@ -133,7 +133,7 @@ public class Main {
                                     }
                                     game.addSettler(settler);
                                     // if the entity is a ufo or robot
-                                } else if (line.matches("^[ur] [a-zA-Z0-9]+ [a-zA-Z0-9]+")) {
+                                } else if (line.matches("^[ur] [a-zA-Z0-9]+ [a-zA-Z0-9]+(\\s[a-zA-z0-9]*)?$")) {
                                     // ufo
                                     if (line.startsWith("u")) {
                                         Ufo ufo = new Ufo(thisEntity[1]);
