@@ -59,11 +59,7 @@ public class Ufo extends Entity implements Steppable {
         this.steppedThisRound = stepped;
     }
 
-    @Override
-    public void asteroidExploded() {
-        die();
-        printDeath();
-    }
+
 
 
     public void printDeath() {
