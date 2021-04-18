@@ -19,6 +19,7 @@ public class BaseAsteroid extends Asteroid {
     private Game game;
 
     public BaseAsteroid(Game g) {
+        name = "BASE";
         winConditionResources = new BillOfResources();
         game = g;
 
