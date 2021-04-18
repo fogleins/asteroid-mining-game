@@ -1,7 +1,7 @@
 setmap
 BASE NGC1304
-BASE x 2 ip
+BASE x 2 ip NGC1304
 NGC1304 ic 2 ip BASE
 setentities 1
-s Settler NGC1304
+s Settler NGC1304 x
 drill s Settler
