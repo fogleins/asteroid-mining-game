@@ -2,6 +2,12 @@ $testname = $args[0]
 $outputfile = "test\"+$testname+"_out.txt"
 $testcasefile = "test\"+$testname+".txt"
 
+Write-Host $args[1]
+
+if ($args[1] -eq "-compile") {
+    javac -cp .\ control\main.java
+}
+
 $output = Get-Content $testcasefile | java -cp .\ control.Main
 
 $result = Compare-Object ($output) (Get-Content -Path $outputfile) -SyncWindow 0
