@@ -64,9 +64,8 @@ public class BaseAsteroid extends Asteroid {
 
         //We need to know the quantity of the resources that are on the baseAsteroid.
         for (int i = 0; i < entities.size(); i++) {
-            for (Resource r : entities.get(i).getResources()) {
-                resourcesOnAsteroid.add(r);
-            }
+            if(entities.get(i).getResources()!=null)
+                resourcesOnAsteroid.addAll(entities.get(i).getResources());
         }
 
         if (winConditionResources.check(resourcesOnAsteroid))
