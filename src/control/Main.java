@@ -77,6 +77,7 @@ public class Main {
                                     teleportGate.setCurrentAsteroid(asteroid);
                                     asteroid.setTeleportGate(teleportGate);
                                 }
+                                game.getMap().addAsteroid(asteroid);
                             } else // if the syntax doesn't match the specified syntax, an exception is thrown
                                 throw new InvalidSyntaxException("Invalid syntax.");
                         }
