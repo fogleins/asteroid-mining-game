@@ -30,8 +30,9 @@ public class Ufo extends Entity implements Steppable {
      */
     @Override
     public void step() {
-        Resource resource;
-        resource = asteroid.mined();
+        Resource resource = null;
+        if(canMine)
+            resource = asteroid.mined();
 
         //If the UFO couldn't mine, it moves on
         if (resource == null) {
