@@ -1,11 +1,12 @@
 Round number: 1
-Settler
-name: Settler
-asteroid: a1
-resources:
-teleportgates:
-
+Asteroid
+name: a1
+resource: null
+surfacethickness: 0
+inperihelion: false
+neighbours: BASE
+teleportgate: null
 Round number: 1
 Robot
-name: Robot
+name: Robot_0
 asteroid: a1

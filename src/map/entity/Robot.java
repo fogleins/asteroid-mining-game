@@ -38,7 +38,7 @@ public class Robot extends Entity implements Steppable {
         super(name);
         this.asteroid = asteroid;
         this.move(asteroid); // TODO: ez eredetileg a create() végén volt, de ha itt úgyis megkapja paraméterként, talán jobb így
-        printState(); // TODO remove later
+//        printState(); // TODO remove later
     }
 
     /**
