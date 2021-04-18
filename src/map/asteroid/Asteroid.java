@@ -213,7 +213,7 @@ public class Asteroid {
      */
     public void addNeighbour(Asteroid asteroid) {
         this.neighbours.add(asteroid);
-        printState();
+
     }
 
     /**
