@@ -122,7 +122,11 @@ public class Asteroid {
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).asteroidExploded();
         }
+        Game.getInstance().getMap().removeAsteroid(this);
+        printDeath();
     }
+
+
 
     /**
      * The asteroid is drilled.
@@ -154,6 +158,7 @@ public class Asteroid {
             minedResource = resource;
             resource = null;
             minedResource.setAsteroid(null);
+            printState();
         }
         return minedResource;
     }
@@ -200,6 +205,7 @@ public class Asteroid {
      */
     public void removeEntity(Entity entity) {
         entities.remove(entity);
+        printState();
     }
 
     /**
@@ -207,6 +213,7 @@ public class Asteroid {
      */
     public void addNeighbour(Asteroid asteroid) {
         this.neighbours.add(asteroid);
+        printState();
     }
 
     /**
@@ -215,6 +222,7 @@ public class Asteroid {
     public void removeAsteroid(Asteroid asteroid) {
 
         this.neighbours.remove(asteroid);
+        printState();
     }
 
     /**
@@ -224,10 +232,12 @@ public class Asteroid {
     public boolean setTeleportGate(TeleportGate teleportGate) {
         if (this.teleportGate == null) {
             this.teleportGate = teleportGate;
+            printState();
             return true;
         } else {
             return false;
         }
+
     }
 
     /**
@@ -236,7 +246,7 @@ public class Asteroid {
     public void removeTeleportGate() {
 
         this.teleportGate = null;
-
+        printState();
     }
 
 
@@ -251,7 +261,7 @@ public class Asteroid {
             this.resource.setAsteroid(this);
             return true;
         }
-
+        printState();
         return false;
     }
 
@@ -269,6 +279,8 @@ public class Asteroid {
                 }
             }
         }
+
+
 
     }
 
@@ -294,5 +306,13 @@ public class Asteroid {
             System.out.print(neighbours.get(i).name);
         }
         System.out.println("\nteleportgate: " + (teleportGate != null ? teleportGate.getName() : "null"));
+    }
+
+    // proto output, marked for removal
+    private void printDeath() {
+        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
+        System.out.println("Asteroid");
+        System.out.println("name: " + name + " ->X ");
+
     }
 }
