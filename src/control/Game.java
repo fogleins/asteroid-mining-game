@@ -56,8 +56,9 @@ public class Game {
     private Game() {
         currentRound = 1;
         nextSunflare = generateNextSunflare();
-        BaseAsteroid baseAsteroid = new BaseAsteroid(this);
-        map = new Map(baseAsteroid);
+        // TODO: while testing, initMap() should be called instead of the following two lines
+//        BaseAsteroid baseAsteroid = new BaseAsteroid();
+//        map = new Map(baseAsteroid);
         settlers = new ArrayList<>();
         steppables = new ArrayList<>();
         current = null/*settlers.get(0)*/;
@@ -190,5 +191,11 @@ public class Game {
     // todo: just for testing, marked for removal
     public int getCurrentRound() {
         return currentRound;
+    }
+
+    // todo: only for testing
+    // called after a base asteroid has been created
+    public void initMap(BaseAsteroid baseAsteroid) {
+        this.map = new Map(baseAsteroid);
     }
 }
