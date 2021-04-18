@@ -32,8 +32,12 @@ public class Ufo extends Entity implements Steppable {
         if (resource == null) {
             Random rnd = new Random();
             ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
-            move(neighbours.get(rnd.nextInt(neighbours.size())));
-            printState();
+
+            if(neighbours.size()!=0){
+                move(neighbours.get(rnd.nextInt(neighbours.size())));
+                printState();
+            }
+
         }
     }
 
