@@ -112,7 +112,8 @@ public class Main {
                                 if (line.matches("^s [a-zA-Z0-9]+ [a-zA-Z0-9]+ ([ucx\\-]|(ir)|(ic)){1,19}" +
                                         "(\\s[a-zA-z0-9]*)?$")) { // TODO: max 3 teleport nincs ellenőrizve, [ucx] nem *-gal?
                                     Settler settler = new Settler(thisEntity[1]);
-                                    settler.setAsteroid(getAsteroidByName(thisEntity[2]));
+                                    Asteroid asteroid = getAsteroidByName(thisEntity[2]);
+                                    settler.setAsteroid(asteroid);
                                     String[] resources = thisEntity[3].split("-");
                                     for (int j = 0; j < resources.length; j++) {
                                         Resource resource = getResourceObject(resources[j]);
@@ -131,20 +132,25 @@ public class Main {
 //                                        game.addSteppable(teleportGate);
                                         }
                                     }
+                                    asteroid.acceptEntity(settler);
                                     game.addSettler(settler);
                                     // if the entity is a ufo or robot
                                 } else if (line.matches("^[ur] [a-zA-Z0-9]+ [a-zA-Z0-9]+(\\s[a-zA-z0-9]*)?$")) {
                                     // ufo
                                     if (line.startsWith("u")) {
                                         Ufo ufo = new Ufo(thisEntity[1]);
-                                        ufo.setAsteroid(getAsteroidByName(thisEntity[2]));
+                                        Asteroid asteroid = getAsteroidByName(thisEntity[2]);
+                                        ufo.setAsteroid(asteroid);
                                         if (thisEntity.length == 4 && thisEntity[3].equals("dm"))
                                             ufo.setMine(false);
+                                        asteroid.acceptEntity(ufo);
                                         game.addSteppable(ufo);
                                     // robot
                                     } else if (line.startsWith("r")) {
                                         Robot robot = new Robot(thisEntity[1], getAsteroidByName(thisEntity[2]));
-                                        robot.setAsteroid(getAsteroidByName(thisEntity[2]));
+                                        Asteroid asteroid = getAsteroidByName(thisEntity[2]);
+                                        robot.setAsteroid(asteroid);
+                                        asteroid.acceptEntity(robot);
                                         game.addSteppable(robot);
                                     }
                                 } else {
