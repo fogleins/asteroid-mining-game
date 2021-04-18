@@ -3,6 +3,6 @@ Asteroid
 name: NGC1304
 resource: null
 surfacethickness: 0
-inperihelion: false
+inperihelion: true
 neighbours: BASE
 teleportgate: null
