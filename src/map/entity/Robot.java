@@ -54,6 +54,8 @@ public class Robot extends Entity implements Steppable {
             Robot robot = new Robot("Robot_" + nameID, currentAsteroid);
             nameID++;
             Game.getInstance().addSteppable(robot);
+        } else {
+            System.out.println("Error: Not enough resources, robot cannot be built.");
         }
     }
 

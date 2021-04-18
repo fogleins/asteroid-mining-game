@@ -136,7 +136,7 @@ public class Settler extends Entity {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Settler");
         System.out.println("name: " + name);
-        System.out.println("asteroid: " + asteroid.getName() + "\n");
+        System.out.println("asteroid: " + asteroid.getName());
         String ress = "";
         for (int i = 0; i < resources.size(); i++) {
             if (i == resources.size() - 1) {
@@ -145,7 +145,7 @@ public class Settler extends Entity {
                 ress += resources.get(i).getTypeName() + "-";
             }
         }
-        System.out.println("resources: " + (ress.equals("") ? "x" : ress) + "\n");
+        System.out.println("resources: " + (ress.equals("") ? "x" : ress));
         String tps = "";
         for (int i = 0; i < resources.size(); i++) {
             if (i == resources.size() - 1) {
@@ -154,6 +154,6 @@ public class Settler extends Entity {
                 tps += resources.get(i).getTypeName() + "-";
             }
         }
-        System.out.println("teleportgates: " + (tps.equals("") ? "x" : tps) + "\n");
+        System.out.println("teleportgates: " + (tps.equals("") ? "x" : tps));
     }
 }
