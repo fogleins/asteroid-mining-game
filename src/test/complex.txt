@@ -1,5 +1,5 @@
-setteleport G1 G2
-setteleport G3 G4
+setteleport G1-G2
+setteleport G3-G4
 setmap
 A1 A2 A3
 A1 u 0 ip A2 G1
