@@ -1,0 +1,16 @@
+Round number: 1
+Asteroid
+resource: uranium
+surfacethickness: 0
+inperihelion: false
+neighbours: BASE
+teleportgate: null
+
+Round number: 3
+Asteroid
+NGC1304 -> X
+
+Round number: 3
+Robot
+name: s
+asteroid: Base
