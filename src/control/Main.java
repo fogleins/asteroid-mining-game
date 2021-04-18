@@ -63,6 +63,7 @@ public class Main {
                                             game.getMap().addAsteroid(neighbor);
                                         }
                                         asteroid.addNeighbour(neighbor);
+                                        neighbor.addNeighbour(asteroid); // TODO: ezt csinálhatná az addNeighbour?
                                     }
                                 }
                                 // the 6th parameter is optional, but even if its given, it may be x, which has
