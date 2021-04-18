@@ -3,7 +3,6 @@ package control;
 import map.Map;
 import map.asteroid.BaseAsteroid;
 import map.asteroid.Resource;
-import map.entity.Entity;
 import map.entity.Settler;
 import map.entity.Steppable;
 
@@ -172,7 +171,12 @@ public class Game {
             map.sunflare();
             generateNextSunflare();
         }
-        map.changePerihelion();
+
+        //TODO only in test phase. Remove later
+        if (Test.getAutomaticPerihelion()) {
+            map.changePerihelion();
+        }
+
         currentRound++;
     }
 
