@@ -18,9 +18,6 @@ public class Main {
         String line;
         boolean mapSet = false;
         boolean entitiesSet = false;
-        // TODO: billToBuild inicializálása
-        new TeleportGate();
-        new Robot("");
 
         try {
             while (((line = reader.readLine()) != null) && !(line.equals("")) && !line.equals("exit")) {
@@ -135,7 +132,7 @@ public class Main {
                                         game.addSteppable(ufo);
                                         // robot
                                     } else if (line.startsWith("r")) {
-                                        Robot robot = new Robot(thisEntity[1]);
+                                        Robot robot = new Robot(thisEntity[1], getAsteroidByName(thisEntity[2]));
                                         robot.setAsteroid(getAsteroidByName(thisEntity[2]));
                                         game.addSteppable(robot);
                                     }

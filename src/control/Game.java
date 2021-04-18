@@ -38,7 +38,7 @@ public class Game {
     /**
      * The settler, who should steps next.
      */
-    private Settler current;
+    private Settler current; // TODO: ez nincs beállítva sehol
 
     /**
      * List of Settlers, who are playing the game.
@@ -55,7 +55,7 @@ public class Game {
      * Constructor. Initializes the Game object.
      */
     private Game() {
-        currentRound = 0;
+        currentRound = 1;
         nextSunflare = generateNextSunflare();
         BaseAsteroid baseAsteroid = new BaseAsteroid(this);
         map = new Map(baseAsteroid);

@@ -4,7 +4,6 @@ import control.Game;
 import map.BillOfResources;
 import map.asteroid.*;
 
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,19 +15,29 @@ public class Robot extends Entity implements Steppable {
     /**
      * The resources needed to build a Robot
      */
-    private static BillOfResources billToBuild;
+    private static final BillOfResources billToBuild;
 
     /**
      * ID to make names unique for robots.
      */
     private static int nameID = 0;
 
+    // Initializes the list of Resources needed to build a Robot.
+    static {
+        billToBuild = new BillOfResources();
+        billToBuild.addResources(new Iron());
+        billToBuild.addResources(new Coal());
+        billToBuild.addResources(new Uranium());
+    }
+
     /**
      * Constructor. Creates a Robot object.
      */
-    public Robot(String name) {
+    public Robot(String name, Asteroid asteroid) {
         super(name);
-        initBillToBuild();
+        this.asteroid = asteroid;
+        this.move(asteroid); // TODO: ez eredetileg a create() végén volt, de ha itt úgyis megkapja paraméterként, talán jobb így
+        printState(); // TODO remove later
     }
 
     /**
@@ -41,20 +50,10 @@ public class Robot extends Entity implements Steppable {
     public static void create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) {
         boolean hasResourcesToBuildRobot = billToBuild.use(ownedResources);
         if (hasResourcesToBuildRobot) {
-            Robot robot = new Robot("Robot_" + nameID);
+            Robot robot = new Robot("Robot_" + nameID, currentAsteroid);
+            nameID++;
             Game.getInstance().addSteppable(robot);
-            robot.move(currentAsteroid);
         }
-    }
-
-    /**
-     * Initializes the list of Resources needed to build a Robot.
-     */
-    private static void initBillToBuild() {
-        billToBuild = new BillOfResources();
-        billToBuild.addResources(new Iron());
-        billToBuild.addResources(new Coal());
-        billToBuild.addResources(new Uranium());
     }
 
     /**
@@ -65,8 +64,10 @@ public class Robot extends Entity implements Steppable {
         ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
         Random rnd = new Random();
         super.move(neighbours.get(rnd.nextInt(neighbours.size())));
+        printState(); // TODO remove later
     }
 
+    // TODO: itt a randomizálással mi legyen?
     /**
      * Every time a round ends (all the Settlers have stepped), every Robot steps. This method is a basic implementation
      * of a Robot object deciding what to do.
@@ -80,5 +81,14 @@ public class Robot extends Entity implements Steppable {
         } else {
             super.drill();
         }
+        printState(); // TODO: remove later
+    }
+
+    // TODO: proto output, marked for removal
+    private void printState() {
+        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
+        System.out.println("Robot");
+        System.out.println("name: " + name);
+        System.out.println("asteroid: " + asteroid + "\n"); // TODO: a parancs utáni üres sor legyen egységes
     }
 }
