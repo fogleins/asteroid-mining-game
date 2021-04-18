@@ -1,5 +1,6 @@
 package map.entity;
 
+import control.Game;
 import map.asteroid.Asteroid;
 import map.asteroid.Resource;
 
@@ -32,8 +33,28 @@ public class Ufo extends Entity implements Steppable {
             Random rnd = new Random();
             ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
             move(neighbours.get(rnd.nextInt(neighbours.size())));
+            printState();
         }
+    }
 
+    @Override
+    public void asteroidExploded() {
+        die();
+        printDeath();
+    }
+
+    private void printDeath() {
+        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
+        System.out.println("UFO");
+        System.out.println("name: " + name + " ->X ");
+
+    }
+
+    private void printState() {
+        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
+        System.out.println("UFO");
+        System.out.println("name: " + name);
+        System.out.println("asteroid: " + asteroid + "\n");
     }
 
 
