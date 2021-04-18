@@ -2,7 +2,6 @@ package control;
 
 import map.Map;
 import map.asteroid.Asteroid;
-import map.asteroid.BaseAsteroid;
 import map.asteroid.Resource;
 import map.entity.Settler;
 import map.entity.Steppable;
@@ -178,11 +177,15 @@ public class Game {
         if (Test.getAutomaticPerihelion()) {
             map.changePerihelion();
         }
+        // todo only for testing
+        ArrayList<Resource> resourcesToExpose = new ArrayList<>();
         for (Asteroid asteroid : map.getAsteroids())
-            if (asteroid.getSurfaceThickness() == 0)
-                asteroid.getResource().exposed();
+            if (asteroid.getSurfaceThickness() == 0 && asteroid.getResource() != null)
+                resourcesToExpose.add(asteroid.getResource());
+        for (Resource resource : resourcesToExpose)
+            resource.exposed();
         currentRound++;
-        // TODO: the following 2 lines are only used for testing
+        // TODO: the following lines are only used for testing
         for (Steppable steppable : steppables)
             steppable.setSteppedThisRound(false);
     }
