@@ -127,7 +127,7 @@ public class Settler extends Entity {
     public void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Settler");
-        System.out.println("name: " + name + " ->X ");
+        System.out.println(name + " ->X ");
 
     }
 
