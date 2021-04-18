@@ -1,4 +1,5 @@
 setmap
+a1
 a1 u 0 ip x
 setentities 1
 u ufo a1
