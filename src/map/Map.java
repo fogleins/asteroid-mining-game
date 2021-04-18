@@ -25,28 +25,9 @@ public class Map {
      */
     public static ArrayList<Asteroid> sunflareAsteroids = new ArrayList<>();
 
-    /**
-     * Constructor of the map, which is initialize some asteroids.
-     *
-     * @param baseAst Where all settlers must be to win the game (with enough resources).
-     */
 
-    public Map(BaseAsteroid baseAst) {
-        baseAsteroid = baseAst;
-        asteroids.add(baseAsteroid);
-        for (int i = 1; i < 3; i++) {
-            Asteroid a = new Asteroid();
-            a.setName("a" + i);
-            asteroids.add(a);
-        }
-        for (Asteroid a : asteroids) {
-            for (Asteroid b : asteroids) {
-                if (a != b) {
-                    a.addNeighbour(b);
+    public Map() {
 
-                }
-            }
-        }
     }
 
     /**
@@ -110,5 +91,9 @@ public class Map {
         for (Asteroid a : asteroids) {
             a.changePerihelionState();
         }
+    }
+
+    public void setBaseAsteroid(BaseAsteroid baseAsteroid) {
+        this.baseAsteroid = baseAsteroid;
     }
 }

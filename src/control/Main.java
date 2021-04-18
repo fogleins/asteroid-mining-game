@@ -44,63 +44,45 @@ public class Main {
                             if ((line = reader.readLine()).matches("^" + asteroids[i] + " ([ucx]|(ir)|(ic)) " +
                                     "\\d+ ((ip)|(op)) [a-zA-z0-9\\-]+(\\s[a-zA-z0-9]*)?$")) {
                                 thisAsteroid = line.split(" ");
-//                                neighbors = thisAsteroid[4].split("-");
-                                // the first asteroid is going to be the base asteroid
-                                if (i == 0) {
-                                    BaseAsteroid baseAsteroid = new BaseAsteroid();
-                                    baseAsteroid.setResource(null);
-                                    baseAsteroid.setSurfaceThickness(Integer.parseInt(thisAsteroid[2]));
-                                    baseAsteroid.setInPerihelion(thisAsteroid[3].equals("ip"));
-                                    // the 6th parameter is optional, but even if its given, it may be x, which has
-                                    // the same result as if it was not given
-                                    if (thisAsteroid.length == 6 && !thisAsteroid[5].equals("x")) {
-                                        TeleportGate teleportGate = (TeleportGate) getSteppableByName(thisAsteroid[5]);
-                                        if (teleportGate == null)
-                                            teleportGate = new TeleportGate();
-                                        // TODO: ezt a két lépést össze kéne vonni, pl ha az aszteroida elfogadja a teleportot,
-                                        //  mert van szabad helye, akkor az aszteroida setTeleportGate-jében meghívhatná a
-                                        //  teleport függvényét, önmagát paraméterül adva
-                                        teleportGate.setCurrentAsteroid(baseAsteroid);
-                                        baseAsteroid.setTeleportGate(teleportGate);
-                                    }
-                                    game.initMap(baseAsteroid);
+                                neighbors = thisAsteroid[4].split("-");
+                                // We are checking if this asteroid was initialized previously. If yes, we modify its
+                                // variables, otherwise we create a new asteroid.
+                                Asteroid asteroid = getAsteroidByName(thisAsteroid[0]);
+                                if (asteroid == null)
+                                    asteroid = new Asteroid();
+                                asteroid.setName(thisAsteroid[0]);
+                                asteroid.setResource(getResourceObject(thisAsteroid[1]));
+                                asteroid.setSurfaceThickness(Integer.parseInt(thisAsteroid[2]));
+                                asteroid.setInPerihelion(thisAsteroid[3].equals("ip"));
+                                String[] neighbours = thisAsteroid[4].split("-");
+                                if(game.getMap().getAsteroids().size()==0){
+                                    BaseAsteroid baseAsteroid= new BaseAsteroid(asteroid);
                                     game.getMap().addAsteroid(baseAsteroid);
-                                } else {
-                                    // We are checking if this asteroid was initialized previously. If yes, we modify its
-                                    // variables, otherwise we create a new asteroid.
-                                    Asteroid asteroid = getAsteroidByName(thisAsteroid[0]);
-                                    if (asteroid == null)
-                                        asteroid = new Asteroid();
-                                    asteroid.setName(thisAsteroid[0]);
-                                    asteroid.setResource(getResourceObject(thisAsteroid[1]));
-                                    asteroid.setSurfaceThickness(Integer.parseInt(thisAsteroid[2]));
-                                    asteroid.setInPerihelion(thisAsteroid[3].equals("ip"));
-                                    String[] neighbours = thisAsteroid[4].split("-");
-                                    if (!neighbours[0].equals("x")) {
-                                        for (int j = 0; j < neighbours.length; j++) {
-                                            Asteroid neighbor = getAsteroidByName(neighbours[j]);
-                                            if (neighbor == null) {
-                                                neighbor = new Asteroid();
-                                                neighbor.setName(neighbours[j]);
-                                                game.getMap().addAsteroid(neighbor);
-                                            }
-                                            asteroid.addNeighbour(neighbor);
-                                            neighbor.addNeighbour(asteroid); // TODO: ezt csinálhatná az addNeighbour?
+                                    game.getMap().setBaseAsteroid(baseAsteroid);
+                                    asteroid=baseAsteroid;
+                                }
+                                if (!neighbours[0].equals("x")) {
+                                    for (int j = 0; j < neighbours.length; j++) {
+                                        Asteroid neighbor = getAsteroidByName(neighbours[j]);
+                                        if (neighbor == null) {
+                                            neighbor = new Asteroid();
+                                            neighbor.setName(neighbours[j]);
+                                            game.getMap().addAsteroid(neighbor);
                                         }
+                                        asteroid.addNeighbour(neighbor);
                                     }
-                                    // the 6th parameter is optional, but even if its given, it may be x, which has
-                                    // the same result as if it was not given
-                                    if (thisAsteroid.length == 6 && !thisAsteroid[5].equals("x")) {
-                                        TeleportGate teleportGate = (TeleportGate) getSteppableByName(thisAsteroid[5]);
-                                        if (teleportGate == null)
-                                            teleportGate = new TeleportGate();
-                                        // TODO: ezt a két lépést össze kéne vonni, pl ha az aszteroida elfogadja a teleportot,
-                                        //  mert van szabad helye, akkor az aszteroida setTeleportGate-jében meghívhatná a
-                                        //  teleport függvényét, önmagát paraméterül adva
-                                        teleportGate.setCurrentAsteroid(asteroid);
-                                        asteroid.setTeleportGate(teleportGate);
-                                    }
-                                    game.getMap().addAsteroid(asteroid);
+                                }
+                                // the 6th parameter is optional, but even if its given, it may be x, which has
+                                // the same result as if it was not given
+                                if (thisAsteroid.length == 6 && !thisAsteroid[5].equals("x")) {
+                                    TeleportGate teleportGate = (TeleportGate) getSteppableByName(thisAsteroid[5]);
+                                    if (teleportGate == null)
+                                        teleportGate = new TeleportGate();
+                                    // TODO: ezt a két lépést össze kéne vonni, pl ha az aszteroida elfogadja a teleportot,
+                                    //  mert van szabad helye, akkor az aszteroida setTeleportGate-jében meghívhatná a
+                                    //  teleport függvényét, önmagát paraméterül adva
+                                    teleportGate.setCurrentAsteroid(asteroid);
+                                    asteroid.setTeleportGate(teleportGate);
                                 }
                             } else // if the syntax doesn't match the specified syntax, an exception is thrown
                                 throw new InvalidSyntaxException("Invalid syntax.");

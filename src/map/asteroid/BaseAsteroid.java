@@ -31,6 +31,23 @@ public class BaseAsteroid extends Asteroid {
 //        printState();
     }
 
+    public BaseAsteroid (Asteroid a){
+        name=a.name;
+        resource=a.resource;
+        surfaceThickness=a.surfaceThickness;
+        inPerihelion=a.inPerihelion;
+
+        winConditionResources = new BillOfResources();
+
+        //To win the game, three of every resource needed
+        for (int i = 0; i < 3; i++) {
+            winConditionResources.addResources(new Iron());
+            winConditionResources.addResources(new Uranium());
+            winConditionResources.addResources(new Coal());
+            winConditionResources.addResources(new Ice());
+        }
+    }
+
 
     /**
      * Get the value of m_billOfResources
