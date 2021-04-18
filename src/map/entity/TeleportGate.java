@@ -13,7 +13,14 @@ public class TeleportGate implements Steppable {
     /**
      * The bill to build a teleportgate(pair).
      */
-    private static BillOfResources billToBuild;
+    private final static BillOfResources billToBuild;
+    static {    // initialize the billToBuild variable
+        billToBuild = new BillOfResources();
+        billToBuild.addResources(new Iron());
+        billToBuild.addResources(new Iron());
+        billToBuild.addResources(new Ice());
+        billToBuild.addResources(new Uranium());
+    }
     /**
      * The asteroid, where the teleportgate placed on.
      */
@@ -32,7 +39,6 @@ public class TeleportGate implements Steppable {
      * Constructor of the TeleportGate, which initialize the resources to build a gate(pair).
      */
     public TeleportGate() {
-        initBillToBuild();
         crazy=false;
     }
 
@@ -72,17 +78,6 @@ public class TeleportGate implements Steppable {
      */
     public void setCurrentAsteroid(Asteroid asteroid) {
         currentAsteroid = asteroid;
-    }
-
-    /**
-     * Initialize the resources to the bill, which is required to build a gate(pair).
-     */
-    private void initBillToBuild() {
-        billToBuild = new BillOfResources();
-        billToBuild.addResources(new Iron());
-        billToBuild.addResources(new Iron());
-        billToBuild.addResources(new Ice());
-        billToBuild.addResources(new Uranium());
     }
 
 
