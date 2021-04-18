@@ -135,15 +135,17 @@ public class Asteroid {
         //You can't drill if the surface thickness is 0
         if (surfaceThickness != 0) {
             this.surfaceThickness--;
-
+            // todo: just for testing, marked for removal
+            printState();
             //If the asteroid is in the perihelion zone, some resources behave different, that's why drilledInPerihelion() is called
             if (surfaceThickness == 0 && inPerihelion) {
                 this.resource.drilledInPerihelion();
             }
+        }else{
+            System.out.println("Error: Cannot be drilled");
         }
 
-        // todo: just for testing, marked for removal
-        printState();
+
     }
 
     /**

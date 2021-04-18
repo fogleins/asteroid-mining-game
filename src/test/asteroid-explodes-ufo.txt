@@ -1,8 +1,9 @@
 setmap
-a1
-a1 u 0 ip x
+b1 b2
+b1 u 0 ip b2
+b2 u 10 ip b1
 setentities 1
-u ufo a1
+u ufo b1
 finishround
 finishround
 finishround
