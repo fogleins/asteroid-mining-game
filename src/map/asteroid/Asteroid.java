@@ -142,7 +142,7 @@ public class Asteroid {
                 this.resource.drilledInPerihelion();
             }
         }else{
-            System.out.println("Error: Cannot be drilled");
+            System.out.println("Error: Cannot drill");
         }
 
 
