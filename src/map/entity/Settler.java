@@ -161,11 +161,11 @@ public class Settler extends Entity {
         }
         System.out.println("resources: " + (ress.equals("") ? "x" : ress));
         String tps = "";
-        for (int i = 0; i < resources.size(); i++) {
-            if (i == resources.size() - 1) {
-                tps += resources.get(i).getTypeName();
+        for (int i = 0; i < teleports.size(); i++) {
+            if (i == teleports.size() - 1) {
+                tps += teleports.get(i).getName();
             } else {
-                tps += resources.get(i).getTypeName() + "-";
+                tps += teleports.get(i).getName() + "-";
             }
         }
         System.out.println("teleportgates: " + (tps.equals("") ? "x" : tps) + "\n");
