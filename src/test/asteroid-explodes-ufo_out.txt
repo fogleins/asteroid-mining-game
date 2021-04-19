@@ -6,9 +6,11 @@ surfacethickness: 0
 inperihelion: false
 neighbours:
 teleportgate: null
+
 Round number: 3
 UFO
 name: ufo ->X
+
 Round number: 3
 Asteroid
 name: a1 ->X
