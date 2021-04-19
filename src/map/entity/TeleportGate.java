@@ -146,6 +146,6 @@ public class TeleportGate implements Steppable {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Teleport");
         System.out.println(name);
-        System.out.println("asteroid: " + currentAsteroid.getName() + "\n");
+        System.out.println("asteroid: " + ((currentAsteroid == null) ? "x" : currentAsteroid.getName()) + "\n");
     }
 }
