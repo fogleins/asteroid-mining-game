@@ -86,6 +86,6 @@ public class BaseAsteroid extends Asteroid {
 
         if (winConditionResources.check(resourcesOnAsteroid))
             Game.getInstance().gameWon();
-        printState();
+        //printState();
     }
 }

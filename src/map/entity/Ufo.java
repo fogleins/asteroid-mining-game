@@ -41,7 +41,6 @@ public class Ufo extends Entity implements Steppable {
 
             if(neighbours.size()!=0){
                 move(neighbours.get(rnd.nextInt(neighbours.size())));
-                printState();
             }
 
         }
