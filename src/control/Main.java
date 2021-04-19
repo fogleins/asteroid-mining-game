@@ -245,6 +245,7 @@ public class Main {
                             ArrayList<TeleportGate> before = new ArrayList<>();
                             for (TeleportGate teleportGate : settler.getTeleports())
                                 before.add(teleportGate);
+                            Test.setAutomaticPerihelionChange(false);
                             settler.buildTeleport();
                             boolean firstRenamed = false;
                             // we are looking for the robot we've just created

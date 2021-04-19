@@ -4,6 +4,6 @@ name: a1
 resource: null
 surfacethickness: 2
 inperihelion: false
-neighbors: 
+neighbours: 
 teleportgate: null
 
