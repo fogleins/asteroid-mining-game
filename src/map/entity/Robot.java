@@ -37,8 +37,7 @@ public class Robot extends Entity implements Steppable {
     public Robot(String name, Asteroid asteroid) {
         super(name);
         this.asteroid = asteroid;
-        this.move(asteroid); // TODO: ez eredetileg a create() végén volt, de ha itt úgyis megkapja paraméterként, talán jobb így
-//        printState(); // TODO remove later
+        this.move(asteroid);
     }
 
     /**
@@ -70,7 +69,6 @@ public class Robot extends Entity implements Steppable {
         printState(); // TODO remove later
     }
 
-    // TODO: itt a randomizálással mi legyen?
     /**
      * Every time a round ends (all the Settlers have stepped), every Robot steps. This method is a basic implementation
      * of a Robot object deciding what to do.
@@ -87,19 +85,21 @@ public class Robot extends Entity implements Steppable {
         }
     }
 
-    // TODO
+
+
+    // TODO: the following methods are only used for testing
+
+
     @Override
     public boolean getSteppedThisRound() {
         return steppedThisRound;
     }
 
-    // TODO
     @Override
     public void setSteppedThisRound(boolean stepped) {
         this.steppedThisRound = stepped;
     }
 
-    // TODO: proto output, marked for removal
     public void printState() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
