@@ -12,7 +12,9 @@ public class Uranium extends RadioactiveResource {
     public Uranium() {}
 
     @Override
-    public void drilledInPerihelion() {}
+    public void drilledInPerihelion() {
+        this.exposedCount++;
+    }
 
     /**
      * Increments the exposition counter
