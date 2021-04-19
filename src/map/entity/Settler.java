@@ -109,7 +109,6 @@ public class Settler extends Entity {
                 for (TeleportGate tp : teleportGates) {
                     teleports.add(tp);
                 }
-                printState(); // TODO: ez kell ide?
                 Game.getInstance().nextPlayer();
             }
         }
