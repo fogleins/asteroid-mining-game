@@ -7,11 +7,11 @@ neighbours: BASE
 teleportgate: null
 
 Round number: 3
-Asteroid
-NGC1304 -> X
-
-Round number: 3
 Robot
 name: s
 asteroid: Base
+
+Round number: 3
+Asteroid
+NGC1304 -> X
 
