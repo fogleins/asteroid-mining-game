@@ -1,0 +1,6 @@
+setmap
+a1
+a1 ir 0 op x x
+setentities 1
+s settler1 a1 c x
+mine s settler1

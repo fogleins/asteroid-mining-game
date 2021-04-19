@@ -1,0 +1,16 @@
+Round number: 1
+Asteroid
+name: a1
+resource: null
+surfacethickness: 0
+inperihelion: false
+neighbours: 
+teleportgate: null
+
+Round number: 1
+Settler
+name: settler1
+asteroid: a1
+resources: c-c-c-c-c-u-u-u-u-ir
+teleportgates: null
+
