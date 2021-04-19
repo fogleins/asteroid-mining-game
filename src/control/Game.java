@@ -182,9 +182,9 @@ public class Game {
         for (Asteroid asteroid : map.getAsteroids())
             if (asteroid.getSurfaceThickness() == 0 && asteroid.getResource() != null)
                 resourcesToExpose.add(asteroid.getResource());
+        currentRound++;
         for (Resource resource : resourcesToExpose)
             resource.exposed();
-        currentRound++;
         // TODO: the following lines are only used for testing
         for (Steppable steppable : steppables)
             steppable.setSteppedThisRound(false);
