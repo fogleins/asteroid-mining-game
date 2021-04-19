@@ -20,7 +20,7 @@ public class Main {
         boolean mapSet = false;
         boolean entitiesSet = false;
         Test.setInitiazePhase(true);
-        Test.setAutomaticPerihelionChange(true); //TODO remove later
+        Test.setAutomaticPerihelionChange(true);
 
 
         try {
@@ -79,10 +79,6 @@ public class Main {
                                     TeleportGate teleportGate = (TeleportGate) getSteppableByName(thisAsteroid[5]);
                                     if (teleportGate == null)
                                         teleportGate = new TeleportGate();
-                                    // TODO: ezt a két lépést össze kéne vonni, pl ha az aszteroida elfogadja a teleportot,
-                                    //  mert van szabad helye, akkor az aszteroida setTeleportGate-jében meghívhatná a
-                                    //  teleport függvényét, önmagát paraméterül adva
-                                    teleportGate.setCurrentAsteroid(asteroid);
                                     asteroid.setTeleportGate(teleportGate);
                                 }
                                 if (game.getMap().getAsteroids().size() != 0)
@@ -113,7 +109,7 @@ public class Main {
                                  */
                                 thisEntity = line.split(" ");
                                 if (line.matches("^s [a-zA-Z0-9]+ [a-zA-Z0-9]+ ([ucx\\-]|(ir)|(ic)){1,19}" +
-                                        "(\\s[a-zA-z0-9]*)?$")) { // TODO: max 3 teleport nincs ellenőrizve, [ucx] nem *-gal?
+                                        "(\\s[a-zA-z0-9]*)?$")) {
                                     Settler settler = new Settler(thisEntity[1]);
                                     Asteroid asteroid = getAsteroidByName(thisEntity[2]);
                                     settler.setAsteroid(asteroid);
@@ -131,8 +127,6 @@ public class Main {
                                             if (teleportGate == null)
                                                 throw new BadArgumentException("TeleportGate " + teleports[j] + " doesn't exist.");
                                             settler.addTeleport(teleportGate);
-                                            // TODO: hozzáadjuk a Game-hez? hogy kezeljük, ha a teleportkapu párja meghal
-//                                        game.addSteppable(teleportGate);
                                         }
                                     }
                                     asteroid.acceptEntity(settler);
@@ -214,13 +208,7 @@ public class Main {
                                 if (settler == null)
                                     throw new BadArgumentException("Settler " + parameters[2] + " can't be found.");
                                 settler.mine();
-                            } /* TODO: ez akkor egyáltalán nem kell? else {
-                                Ufo ufo = (Ufo) getSteppableByName(parameters[2]);
-                                if (ufo == null)
-                                    throw new BadArgumentException("Robot " + parameters[2] + " can't be found.");
-                                ufo.mine();
-                                ufo.setSteppedThisRound(true);
-                            }*/
+                            }
                         } else throw new InvalidSyntaxException("Invalid syntax in drill.");
                         break;
                     case "buildrobot":
@@ -314,11 +302,6 @@ public class Main {
                     case "finishround":
                         game.roundFinishedWrapper();
                         break;
-                    case "exchresource":
-                        if (line.matches("^exchresource [a-zA-Z0-9]+ \\d+")) {
-                            // TODO: ezt elvileg már nem kéne használni, egyelőre meghagyom exceptionnel
-                            throw new InvalidSyntaxException("Invalid command");
-                        } else throw new InvalidSyntaxException("Invalid syntax in exchresource.");
                     case "exit":
                         break;
                     default:
