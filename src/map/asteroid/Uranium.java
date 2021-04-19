@@ -14,6 +14,8 @@ public class Uranium extends RadioactiveResource {
     @Override
     public void drilledInPerihelion() {
         this.exposedCount++;
+        if (exposedCount >= exposedThreshold)
+            asteroid.explode();
     }
 
     /**
