@@ -1,13 +1,4 @@
 Round number: 1
-Asteroid
-name: a1
-resource: null
-surfacethickness: 0
-inperihelion: false
-neighbours: 
-teleportgate: null
-
-Round number: 1
 Robot
 name: Robot_0
 asteroid: a1
