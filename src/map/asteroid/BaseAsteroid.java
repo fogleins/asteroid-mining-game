@@ -1,6 +1,7 @@
 package map.asteroid;
 
 import control.Game;
+import control.Test;
 import map.BillOfResources;
 import map.entity.Entity;
 
@@ -86,6 +87,8 @@ public class BaseAsteroid extends Asteroid {
 
         if (winConditionResources.check(resourcesOnAsteroid))
             Game.getInstance().gameWon();
-        //printState();
+
+        if(!Test.isInitiazePhase())
+            printState();
     }
 }

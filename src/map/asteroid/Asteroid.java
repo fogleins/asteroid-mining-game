@@ -1,6 +1,7 @@
 package map.asteroid;
 
 import control.Game;
+import control.Test;
 import map.entity.Entity;
 import map.entity.TeleportGate;
 
@@ -198,6 +199,8 @@ public class Asteroid {
      */
     public void acceptEntity(Entity entity) {
         this.entities.add(entity);
+        if(!Test.isInitiazePhase())
+            printState();
     }
 
     /**
