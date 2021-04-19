@@ -1,6 +1,6 @@
 Round number: 2
 Teleport
-name: t2
+t2
 asteroid: a1
 
 Round number: 2
@@ -14,7 +14,7 @@ teleportgate: t2
 
 Round number: 3
 Teleport
-name: t2
+t2
 asteroid: a1
 
 Round number: 3

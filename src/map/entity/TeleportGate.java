@@ -84,8 +84,7 @@ public class TeleportGate implements Steppable {
      * Sets the current asteroid, not used in the test.
      */
     public void setCurrentAsteroid(Asteroid asteroid) {
-        if (asteroid.setTeleportGate(this))
-            currentAsteroid = asteroid;
+        currentAsteroid = asteroid;
         printState();
     }
 
