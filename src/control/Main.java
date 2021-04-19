@@ -28,6 +28,7 @@ public class Main {
                 String[] details = line.split(" ");
                 switch (details[0]) {
                     case "setmap": {
+                        Test.setInitiazePhase(true);
                         String[] asteroids = reader.readLine().split(" ");
                         String[] thisAsteroid;
                         String[] neighbors;
@@ -87,9 +88,11 @@ public class Main {
                                 throw new InvalidSyntaxException("Invalid syntax.");
                         }
                         mapSet = true;
+                        Test.setInitiazePhase(false);
                         break;
                     }
                     case "setentities":
+                        Test.setInitiazePhase(true);
                         if (line.matches("setentities \\d+")) {
                             int entityCount = Integer.parseInt(line.split(" ")[1]);
                             String[] thisEntity;
@@ -158,6 +161,7 @@ public class Main {
                         } else
                             throw new InvalidSyntaxException("Invalid syntax.");
                         entitiesSet = true;
+                        Test.setInitiazePhase(false);
                         break;
                     case "move":
                         if (line.matches("^move [sru] [a-zA-Z0-9]+ [a-zA-Z0-9]+$")) {
@@ -286,6 +290,7 @@ public class Main {
                         break;
                     }
                     case "setteleport":
+                        Test.setInitiazePhase(true);
                         if (!mapSet && !entitiesSet && line.matches("^setteleport [a-zA-z0-9\\-]+$")) {
                             String[] gatesNames = line.split(" ")[1].split("-");
                             ArrayList<Resource> resources = new ArrayList<>();
@@ -298,6 +303,7 @@ public class Main {
                             teleportGates.add(gates.get(1));
                         } else throw new InvalidSyntaxException("Syntax error. Maybe setteleport was " +
                                 "called after map or entities have been set?");
+                        Test.setInitiazePhase(false);
                         break;
                     case "finishround":
                         game.roundFinishedWrapper();
