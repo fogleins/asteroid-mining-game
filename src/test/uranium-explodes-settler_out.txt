@@ -7,10 +7,10 @@ neighbours: BASE
 teleportgate: null
 
 Round number: 3
-Asteroid
-NGC1304 -> X
-
-Round number: 3
 Settler
 s -> X
+
+Round number: 3
+Asteroid
+NGC1304 -> X
 
