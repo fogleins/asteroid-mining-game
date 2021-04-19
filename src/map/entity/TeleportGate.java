@@ -1,5 +1,6 @@
 package map.entity;
 
+import control.Game;
 import map.BillOfResources;
 import map.asteroid.*;
 
@@ -79,6 +80,7 @@ public class TeleportGate implements Steppable {
      */
     public void setCurrentAsteroid(Asteroid asteroid) {
         currentAsteroid = asteroid;
+        printState();
     }
 
 
@@ -103,6 +105,7 @@ public class TeleportGate implements Steppable {
         ArrayList<Asteroid> neighbours = currentAsteroid.getNeighboursWithoutTeleportGate();
         currentAsteroid.removeTeleportGate();
         neighbours.get(neighbours.size()-1).setTeleportGate(this);
+        this.currentAsteroid = neighbours.get(neighbours.size() - 1);
     }
 
     /**
@@ -140,5 +143,12 @@ public class TeleportGate implements Steppable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    private void printState() {
+        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
+        System.out.println("Teleport");
+        System.out.println("name: " + name);
+        System.out.println("asteroid: " + currentAsteroid.getName() + "\n");
     }
 }

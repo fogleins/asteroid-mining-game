@@ -234,6 +234,7 @@ public class Asteroid {
     public boolean setTeleportGate(TeleportGate teleportGate) {
         if (this.teleportGate == null) {
             this.teleportGate = teleportGate;
+            this.teleportGate.setCurrentAsteroid(this);
             printState();
             return true;
         } else {
