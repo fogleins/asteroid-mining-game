@@ -37,7 +37,7 @@ public class Game {
     /**
      * The settler, who should steps next.
      */
-    private Settler current; // TODO: ez nincs beállítva sehol
+    private Settler current;
 
     /**
      * List of Settlers, who are playing the game.
@@ -59,7 +59,7 @@ public class Game {
         map = new Map();
         settlers = new ArrayList<>();
         steppables = new ArrayList<>();
-        current = null/*settlers.get(0)*/;
+        current = null;
     }
 
     /**
