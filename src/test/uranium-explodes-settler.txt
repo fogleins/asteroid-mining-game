@@ -7,3 +7,4 @@ s Settler NGC1304 x
 drill s Settler
 finishround
 finishround
+finishround
