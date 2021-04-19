@@ -1,6 +1,7 @@
 package map.entity;
 
 import control.Game;
+import control.Test;
 import map.asteroid.Asteroid;
 import map.asteroid.Resource;
 
@@ -56,7 +57,8 @@ abstract public class Entity {
         }
         whereTo.acceptEntity(this);
         asteroid = whereTo;
-        printState();
+        if(!Test.isInitiazePhase())
+            printState();
     }
 
 
