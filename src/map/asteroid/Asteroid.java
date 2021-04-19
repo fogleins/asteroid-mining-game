@@ -1,6 +1,7 @@
 package map.asteroid;
 
 import control.Game;
+import control.Test;
 import map.entity.Entity;
 import map.entity.TeleportGate;
 
@@ -198,6 +199,8 @@ public class Asteroid {
      */
     public void acceptEntity(Entity entity) {
         this.entities.add(entity);
+        if(!Test.isInitiazePhase())
+            printState();
     }
 
     /**
@@ -234,7 +237,7 @@ public class Asteroid {
             this.teleportGate = null;
             printState();
             return true;
-        } else if (this.teleportGate == null) { // todo: itt hívja meg a setCurrentAsteroidot
+        } else if (this.teleportGate == null) {
             this.teleportGate = teleportGate;
             this.teleportGate.setCurrentAsteroid(this);
             printState();
@@ -285,6 +288,7 @@ public class Asteroid {
                 }
             }
         }
+        // TODO: ez nem concurrentModification?
         for (Entity entity : entities2)
             entity.die();
     }

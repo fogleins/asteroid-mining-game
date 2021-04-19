@@ -15,6 +15,7 @@ public class TeleportGate implements Steppable {
      * The bill to build a teleportgate(pair).
      */
     private final static BillOfResources billToBuild;
+
     static {    // initialize the billToBuild variable
         billToBuild = new BillOfResources();
         billToBuild.addResources(new Iron());
@@ -22,6 +23,7 @@ public class TeleportGate implements Steppable {
         billToBuild.addResources(new Ice());
         billToBuild.addResources(new Uranium());
     }
+
     /**
      * The asteroid, where the teleportgate placed on.
      */
@@ -36,12 +38,16 @@ public class TeleportGate implements Steppable {
      */
     private boolean crazy;
     private boolean steppedThisRound = false; // TODO remove later
+    /*
+     * TODO: MUST BE REMOVED after tests.
+     */
+    private String name;
 
     /**
      * Constructor of the TeleportGate, which initialize the resources to build a gate(pair).
      */
     public TeleportGate() {
-        crazy=false;
+        crazy = false;
     }
 
     /**
@@ -65,7 +71,6 @@ public class TeleportGate implements Steppable {
         return null;
     }
 
-
     /**
      * Getter of the current asteroid, not used in the test.
      *
@@ -79,13 +84,10 @@ public class TeleportGate implements Steppable {
      * Sets the current asteroid, not used in the test.
      */
     public void setCurrentAsteroid(Asteroid asteroid) {
-        if (currentAsteroid != null)
-            currentAsteroid.setTeleportGate(null);
         if (asteroid.setTeleportGate(this))
             currentAsteroid = asteroid;
         printState();
     }
-
 
     /**
      * Returns an asteroid, where the other gate is placed on.
@@ -96,19 +98,19 @@ public class TeleportGate implements Steppable {
         return otherGate.getCurrentAsteroid();
     }
 
-    public void hitBySunflare(){
-        crazy=true;
+    public void hitBySunflare() {
+        crazy = true;
     }
 
     /**
      * At the finish of the round the teleportgate move to anoteher asteroid (which hasn't got teleportgate),
      * if the telport gate has been hitted by sunflare before.
      */
-    private void move(){
+    private void move() {
         ArrayList<Asteroid> neighbours = currentAsteroid.getNeighboursWithoutTeleportGate();
         currentAsteroid.removeTeleportGate();
-        neighbours.get(neighbours.size()-1).setTeleportGate(this);
-        this.currentAsteroid = neighbours.get(neighbours.size() - 1);
+        neighbours.get(neighbours.size() - 1).setTeleportGate(this);
+//        this.setCurrentAsteroid(neighbours.get(neighbours.size() - 1));
     }
 
     /**
@@ -116,22 +118,18 @@ public class TeleportGate implements Steppable {
      */
     @Override
     public void step() {
-        if(crazy){
+        if (crazy) {
             move();
         }
     }
 
-
-
-
-    /*
-     * TODO: MUST BE REMOVED after tests.
-     */
-    private String name;
-
     @Override
     public String getName() {
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -142,10 +140,6 @@ public class TeleportGate implements Steppable {
     @Override
     public void setSteppedThisRound(boolean stepped) {
         this.steppedThisRound = stepped;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     private void printState() {

@@ -1,6 +1,7 @@
 package map.entity;
 
 import control.Game;
+import control.Test;
 import map.asteroid.Asteroid;
 import map.asteroid.Resource;
 
@@ -56,7 +57,8 @@ abstract public class Entity {
         }
         whereTo.acceptEntity(this);
         asteroid = whereTo;
-        printState();
+        if(!Test.isInitiazePhase())
+            printState();
     }
 
 
@@ -93,13 +95,24 @@ abstract public class Entity {
         return null;
     }
 
+    /**
+     * Sets the name of an entity.
+     * @param name String type, name of entity.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
     // proto output, marked for removal
+
+    /**
+     * Prints the state of the entity.
+     */
     abstract void printState();
 
+    /**
+     * Prints the death of an entity.
+     */
     // proto output, marked for removal
     abstract void printDeath();
 
