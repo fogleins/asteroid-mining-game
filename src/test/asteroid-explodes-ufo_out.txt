@@ -1,8 +1,8 @@
 Round number: 3
 UFO
-ufo ->X
+ufo -> X
 
 Round number: 3
 Asteroid
-a1 ->X
+a1 -> X
 
