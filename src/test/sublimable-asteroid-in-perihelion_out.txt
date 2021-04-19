@@ -1,9 +1,17 @@
 Round number: 1
 Asteroid
 name: NGC1304
-resource: null
+resource: ic
 surfacethickness: 0
 inperihelion: true
 neighbours: BASE
 teleportgate: null
 
+Round number: 1
+Asteroid
+name: NGC1304
+resource: null
+surfacethickness: 0
+inperihelion: true
+neighbours: BASE
+teleportgate: null
