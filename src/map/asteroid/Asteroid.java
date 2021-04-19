@@ -237,7 +237,7 @@ public class Asteroid {
             this.teleportGate = null;
             printState();
             return true;
-        } else if (this.teleportGate == null) { // todo: itt hívja meg a setCurrentAsteroidot
+        } else if (this.teleportGate == null) {
             this.teleportGate = teleportGate;
             this.teleportGate.setCurrentAsteroid(this);
             printState();
@@ -288,6 +288,7 @@ public class Asteroid {
                 }
             }
         }
+        // TODO: ez nem concurrentModification?
         for (Entity entity : entities2)
             entity.die();
     }
