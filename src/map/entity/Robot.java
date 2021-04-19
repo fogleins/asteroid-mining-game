@@ -81,7 +81,6 @@ public class Robot extends Entity implements Steppable {
             super.move(neighbours.get(rnd.nextInt(neighbours.size())));
         } else {
             super.drill();
-            printState(); // TODO: remove later
         }
     }
 
