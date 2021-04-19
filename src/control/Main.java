@@ -151,6 +151,8 @@ public class Main {
                                         Robot robot = new Robot(thisEntity[1], getAsteroidByName(thisEntity[2]));
                                         Asteroid asteroid = getAsteroidByName(thisEntity[2]);
                                         robot.setAsteroid(asteroid);
+                                        if (thisEntity.length == 4 && thisEntity[3].equals("dm"))
+                                            Test.setRobotDontMove(true);
                                         asteroid.acceptEntity(robot);
                                         game.addSteppable(robot);
                                     }
