@@ -7,4 +7,3 @@ s Settler a1 ir-ir-ic-u
 setsunflare 2 a1
 buildteleport Settler t1 t2
 placeteleport Settler
-finishround
