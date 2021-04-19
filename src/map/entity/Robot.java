@@ -111,6 +111,6 @@ public class Robot extends Entity implements Steppable {
     public void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
-        System.out.println(name + " ->X \n");
+        System.out.println(name + " ->X\n");
     }
 }

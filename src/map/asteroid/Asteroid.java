@@ -317,7 +317,7 @@ public class Asteroid {
     private void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Asteroid");
-        System.out.println("name: " + name + " ->X \n");
+        System.out.println(name + " ->X\n");
 
     }
 }
