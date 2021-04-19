@@ -12,5 +12,5 @@ Settler
 name: settler1
 asteroid: a1
 resources: c-c-c-c-c-u-u-u-u-ir
-teleportgates: null
+teleportgates: x
 
