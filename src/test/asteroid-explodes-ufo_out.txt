@@ -1,7 +1,14 @@
 Round number: 3
 Asteroid
-a1 -> X
-
+name: a1
+resource: u
+surfacethickness: 0
+inperihelion: false
+neighbours:
+teleportgate: null
 Round number: 3
 UFO
-ufo -> x
+name: ufo ->X
+Round number: 3
+Asteroid
+name: a1 ->X
