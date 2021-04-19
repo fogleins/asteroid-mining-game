@@ -280,18 +280,13 @@ public class Asteroid {
 
         ArrayList<Entity> entities2 = new ArrayList<>();
         ///If the asteroid is not empty, all the entities die on its surface
-        if (resource != null) {
-            for (Entity e : entities) {
-                if (surfaceThickness != 0) {
-                    entities2.add(e);
-                }
-            }
+        if (resource != null || surfaceThickness != 0) {
+            entities2.addAll(entities);
+            for (Entity entity : entities2)
+                entity.die();
         }
         if (teleportGate != null)
             teleportGate.hitBySunflare();
-        // TODO: ez nem concurrentModification?
-        for (Entity entity : entities2)
-            entity.die();
     }
 
 
