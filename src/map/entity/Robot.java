@@ -84,7 +84,11 @@ public class Robot extends Entity implements Steppable {
         }
     }
 
-
+    @Override
+    public void die() {
+        super.die();
+        Game.getInstance().removeSteppable(this);
+    }
 
     // TODO: the following methods are only used for testing
 

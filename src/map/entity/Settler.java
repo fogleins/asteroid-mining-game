@@ -135,6 +135,12 @@ public class Settler extends Entity {
         }
     }
 
+    @Override
+    public void die() {
+        super.die();
+        Game.getInstance().removeSettler(this);
+    }
+
     // TODO: remove after tests
     public ArrayList<TeleportGate> getTeleports() {
         return teleports;
