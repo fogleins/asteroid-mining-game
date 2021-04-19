@@ -59,8 +59,14 @@ public class Settler extends Entity {
      * from the asteroid to the cargo otherwise.
      */
     public void mine() {
+        /**
+         * if there's space in cargo, the settler can mine.
+         */
         if (resources.size() < 10) {
             Resource r = asteroid.mined();
+            /**
+             * if there's any resource, the settler adds the resource to the cargo
+             */
             if (r != null) {
                 resources.add(r);
                 printState();
@@ -94,6 +100,9 @@ public class Settler extends Entity {
      * Settler tries to build a teleportgate if there aren't any teleportgates in the cargo hold.
      */
     public void buildTeleport() {
+        /**
+         * can only build new teleportgates if there's less than 2 in cargo.
+         */
         if (teleports.size() < 2) {
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
@@ -139,6 +148,9 @@ public class Settler extends Entity {
         System.out.println("Settler");
         System.out.println("name: " + name);
         System.out.println("asteroid: " + asteroid.getName());
+        /**
+         * gets the resources a settler has
+         */
         String ress = "";
         for (int i = 0; i < resources.size(); i++) {
             if (i == resources.size() - 1) {
