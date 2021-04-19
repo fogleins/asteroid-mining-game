@@ -78,8 +78,8 @@ public class Robot extends Entity implements Steppable {
     public void step() {
         Random rnd = new Random();
         int choice = rnd.nextInt(2); // generated number will be 0 or 1
-        if (choice == 0) {
-            ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
+        ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
+        if (choice == 0 && !(neighbours.size() < 1)) {
             super.move(neighbours.get(rnd.nextInt(neighbours.size())));
         } else {
             super.drill();
@@ -103,7 +103,7 @@ public class Robot extends Entity implements Steppable {
     public void printState() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
-        System.out.println(name);
+        System.out.println("name: " + name);
         System.out.println("asteroid: " + asteroid.getName() + "\n");
     }
 

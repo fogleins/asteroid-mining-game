@@ -1,7 +1,6 @@
 setmap
-BASE a1
-BASE x 0 op a1
-a1 x 0 op BASE
+a1
+a1 x 0 op x
 setentities 1
 s Settler a1 c-u-ir
 buildrobot Settler Robot
