@@ -153,7 +153,6 @@ public class Main {
                                         robot.setAsteroid(asteroid);
                                         if (thisEntity.length == 4 && thisEntity[3].equals("dm"))
                                             Test.setRobotDontMove(true);
-                                        asteroid.acceptEntity(robot);
                                         game.addSteppable(robot);
                                     }
                                 } else {
