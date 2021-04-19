@@ -2,9 +2,8 @@ $testname = $args[0]
 $outputfile = "test\"+$testname+"_out.txt"
 $testcasefile = "test\"+$testname+".txt"
 
-Write-Host $args[1]
-
 if ($args[1] -eq "-compile") {
+    Write-Host "Compiling..." `n
     javac -cp .\ control\main.java
 }
 
