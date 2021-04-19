@@ -235,6 +235,8 @@ public class Asteroid {
             printState();
             return true;
         } else if (this.teleportGate == null) {
+            if (!Game.getInstance().getSteppables().contains(teleportGate))
+                Game.getInstance().getSteppables().add(teleportGate);
             this.teleportGate = teleportGate;
             this.teleportGate.setCurrentAsteroid(this);
             printState();
@@ -285,6 +287,8 @@ public class Asteroid {
                 }
             }
         }
+        if (teleportGate != null)
+            teleportGate.hitBySunflare();
         // TODO: ez nem concurrentModification?
         for (Entity entity : entities2)
             entity.die();

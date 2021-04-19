@@ -163,14 +163,14 @@ public class Game {
      * checks if there should be a sunflare, and changes the asteroid's 'inPerihelion' state.
      */
     private void roundFinished() {
+        if (currentRound == nextSunflare) {
+            map.sunflare();
+            generateNextSunflare();
+        }
         for (Steppable steppable : steppables) {
             // TODO: if statement only for testing, otherwise just call step() for every steppable
             if (!steppable.getSteppedThisRound())
                 steppable.step();
-        }
-        if (currentRound == nextSunflare) {
-            map.sunflare();
-            generateNextSunflare();
         }
 
         //TODO only in test phase. Remove later

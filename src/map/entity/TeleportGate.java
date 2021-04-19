@@ -109,7 +109,6 @@ public class TeleportGate implements Steppable {
         ArrayList<Asteroid> neighbours = currentAsteroid.getNeighboursWithoutTeleportGate();
         currentAsteroid.removeTeleportGate();
         neighbours.get(neighbours.size() - 1).setTeleportGate(this);
-//        this.setCurrentAsteroid(neighbours.get(neighbours.size() - 1));
     }
 
     /**
