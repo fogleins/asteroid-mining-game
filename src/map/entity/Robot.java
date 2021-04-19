@@ -1,6 +1,7 @@
 package map.entity;
 
 import control.Game;
+import control.Test;
 import map.BillOfResources;
 import map.asteroid.*;
 
@@ -77,7 +78,7 @@ public class Robot extends Entity implements Steppable {
         Random rnd = new Random();
         int choice = rnd.nextInt(2); // generated number will be 0 or 1
         ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
-        if (choice == 0 && !(neighbours.size() < 1)) {
+        if (choice == 0 && !(neighbours.size() < 1) && !Test.isRobotDontMove()) {
             super.move(neighbours.get(rnd.nextInt(neighbours.size())));
         } else {
             super.drill();
