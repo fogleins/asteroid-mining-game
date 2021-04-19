@@ -1,7 +1,7 @@
 setmap
 BASE NGC1304
-BASE x 2 ip NGC1304
-NGC1304 u 1 ip BASE
+BASE x 2 ip x
+NGC1304 u 1 ip x
 setentities 1
 r Robot NGC1304
 drill r Robot

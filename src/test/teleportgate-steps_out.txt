@@ -9,7 +9,7 @@ name: a1
 resource: null
 surfacethickness: 0
 inperihelion: false
-neighbors: a1
+neighbours: BASE
 teleportgate: t2
 
 Round number: 3
@@ -23,8 +23,8 @@ name: a1
 resource: null
 surfacethickness: 0
 inperihelion: false
-neighbors: a1
-teleportgate:
+neighbours: BASE
+teleportgate: null
 
 Round number: 3
 Asteroid
@@ -32,6 +32,6 @@ name: BASE
 resource: null
 surfacethickness: 0
 inperihelion: false
-neighbors: a1
+neighbours: a1
 teleportgate: t2
 
