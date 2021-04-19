@@ -31,7 +31,6 @@ public class Main {
                         Test.setInitiazePhase(true);
                         String[] asteroids = reader.readLine().split(" ");
                         String[] thisAsteroid;
-                        String[] neighbors;
                         for (int i = 0; i < asteroids.length; i++) {
                             /*
                              * Regexps arent easy:
