@@ -135,6 +135,7 @@ public class Main {
                                     }
                                     asteroid.acceptEntity(settler);
                                     game.addSettler(settler);
+                                    game.nextPlayer();
                                     // if the entity is a ufo or robot
                                 } else if (line.matches("^[ur] [a-zA-Z0-9]+ [a-zA-Z0-9]+(\\s[a-zA-z0-9]*)?$")) {
                                     // ufo

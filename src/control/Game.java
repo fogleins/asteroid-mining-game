@@ -201,4 +201,17 @@ public class Game {
     public int getCurrentRound() {
         return currentRound;
     }
+
+    public void nextPlayer() {
+        if (current == null) {
+            current = settlers.get(0);
+            return;
+        }
+        if (settlers.indexOf(current) == settlers.size() - 1) {
+            roundFinished();
+            current = settlers.get(0);
+        } else {
+            current = settlers.get(settlers.indexOf(current) + 1);
+        }
+    }
 }

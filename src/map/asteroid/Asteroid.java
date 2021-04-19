@@ -127,7 +127,6 @@ public class Asteroid {
     }
 
 
-
     /**
      * The asteroid is drilled.
      */
@@ -141,7 +140,7 @@ public class Asteroid {
             if (surfaceThickness == 0 && inPerihelion) {
                 this.resource.drilledInPerihelion();
             }
-        }else{
+        } else {
             System.out.println("Error: Cannot drill");
         }
 
@@ -183,16 +182,15 @@ public class Asteroid {
     /**
      * @return An asteroid list whose don't have teleportgate.
      */
-    public ArrayList<Asteroid> getNeighboursWithoutTeleportGate(){
-        ArrayList<Asteroid> neighbourswithouttele =new ArrayList<>();
-        for(Asteroid a : neighbours){
-            if(a.getTeleportGate()==null){
+    public ArrayList<Asteroid> getNeighboursWithoutTeleportGate() {
+        ArrayList<Asteroid> neighbourswithouttele = new ArrayList<>();
+        for (Asteroid a : neighbours) {
+            if (a.getTeleportGate() == null) {
                 neighbourswithouttele.add(a);
             }
         }
         return neighbourswithouttele;
     }
-
 
 
     /**
@@ -215,7 +213,7 @@ public class Asteroid {
      */
     public void addNeighbour(Asteroid asteroid) {
         this.neighbours.add(asteroid);
-        
+
     }
 
     /**
@@ -232,7 +230,11 @@ public class Asteroid {
      * @return success or not
      */
     public boolean setTeleportGate(TeleportGate teleportGate) {
-        if (this.teleportGate == null) {
+        if (teleportGate == null) {
+            this.teleportGate = null;
+            printState();
+            return true;
+        } else if (this.teleportGate == null) { // todo: itt hívja meg a setCurrentAsteroidot
             this.teleportGate = teleportGate;
             this.teleportGate.setCurrentAsteroid(this);
             printState();
@@ -274,17 +276,17 @@ public class Asteroid {
      */
     public void hitBySunflare() {
 
+        ArrayList<Entity> entities2 = new ArrayList<>();
         ///If the asteroid is not empty, all the entities die on its surface
         if (resource != null) {
             for (Entity e : entities) {
-                if (resource != null || surfaceThickness != 0) {
-                    e.die();
+                if (surfaceThickness != 0) {
+                    entities2.add(e);
                 }
             }
         }
-
-
-
+        for (Entity entity : entities2)
+            entity.die();
     }
 
 

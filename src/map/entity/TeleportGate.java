@@ -79,7 +79,10 @@ public class TeleportGate implements Steppable {
      * Sets the current asteroid, not used in the test.
      */
     public void setCurrentAsteroid(Asteroid asteroid) {
-        currentAsteroid = asteroid;
+        if (currentAsteroid != null)
+            currentAsteroid.setTeleportGate(null);
+        if (asteroid.setTeleportGate(this))
+            currentAsteroid = asteroid;
         printState();
     }
 
@@ -148,7 +151,7 @@ public class TeleportGate implements Steppable {
     private void printState() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Teleport");
-        System.out.println("name: " + name);
+        System.out.println(name);
         System.out.println("asteroid: " + currentAsteroid.getName() + "\n");
     }
 }

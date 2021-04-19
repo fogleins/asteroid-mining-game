@@ -3,7 +3,6 @@ package map.entity;
 import control.Game;
 import map.asteroid.Resource;
 
-
 import java.util.ArrayList;
 
 
@@ -78,6 +77,7 @@ public class Settler extends Entity {
                 printState();
             }
         }
+        Game.getInstance().nextPlayer();
     }
 
     /**
@@ -86,6 +86,7 @@ public class Settler extends Entity {
 
     public void buildRobot() {
         Robot.create(asteroid, resources);
+        Game.getInstance().nextPlayer();
     }
 
 
@@ -99,7 +100,8 @@ public class Settler extends Entity {
                 for (TeleportGate tp : teleportGates) {
                     teleports.add(tp);
                 }
-                printState();
+                printState(); // TODO: ez kell ide?
+                Game.getInstance().nextPlayer();
             }
         }
     }
@@ -114,6 +116,7 @@ public class Settler extends Entity {
             if (success) {
                 teleports.remove(0);
                 printState();
+                Game.getInstance().nextPlayer();
             }
         }
     }
