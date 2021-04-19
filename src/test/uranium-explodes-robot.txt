@@ -7,3 +7,4 @@ r Robot NGC1304
 drill r Robot
 finishround
 finishround
+finishround
