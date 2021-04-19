@@ -67,7 +67,6 @@ public class Robot extends Entity implements Steppable {
         ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
         Random rnd = new Random();
         super.move(neighbours.get(rnd.nextInt(neighbours.size())));
-        printState(); // TODO remove later
     }
 
     /**
@@ -111,6 +110,6 @@ public class Robot extends Entity implements Steppable {
     public void printDeath() {
         System.out.println("Round number: " + Game.getInstance().getCurrentRound());
         System.out.println("Robot");
-        System.out.println(name + " ->X\n");
+        System.out.println(name + " -> X\n");
     }
 }

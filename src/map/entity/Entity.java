@@ -57,6 +57,8 @@ abstract public class Entity {
         }
         whereTo.acceptEntity(this);
         asteroid = whereTo;
+
+        // todo: remove after proto
         if(!Test.isInitiazePhase())
             printState();
     }
