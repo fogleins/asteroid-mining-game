@@ -13,11 +13,13 @@ public class Main {
     private static final Game game = Game.getInstance();
     private static final ArrayList<TeleportGate> teleportGates = new ArrayList<>();
 
+
     public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line;
         boolean mapSet = false;
         boolean entitiesSet = false;
+        Test.setInitiazePhase(true);
         Test.setAutomaticPerihelionChange(true); //TODO remove later
 
 
@@ -330,6 +332,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Test.setInitiazePhase(false);
     }
 
     /**
