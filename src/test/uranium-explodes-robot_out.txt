@@ -2,14 +2,14 @@ Round number: 1
 Asteroid
 resource: uranium
 surfacethickness: 0
-inperihelion: false
+inperihelion: true
 neighbours: BASE
 teleportgate: null
 
 Round number: 3
 Robot
 name: s
-asteroid: Base
+asteroid: BASE
 
 Round number: 3
 Asteroid
