@@ -199,8 +199,6 @@ public class Asteroid {
      */
     public void acceptEntity(Entity entity) {
         this.entities.add(entity);
-        if(!Test.isInitiazePhase())
-            printState();
     }
 
     /**
@@ -208,7 +206,6 @@ public class Asteroid {
      */
     public void removeEntity(Entity entity) {
         entities.remove(entity);
-        printState();
     }
 
     /**
