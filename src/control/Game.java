@@ -205,7 +205,7 @@ public class Game {
     public void nextPlayer() {
         if (current == null) {
             current = settlers.get(0);
-            //return;
+            return;
         }
         if (settlers.indexOf(current) == settlers.size() - 1) {
             roundFinished();

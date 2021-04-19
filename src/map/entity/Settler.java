@@ -86,6 +86,12 @@ public class Settler extends Entity {
         Game.getInstance().nextPlayer();
     }
 
+    @Override
+    public void drill() {
+        asteroid.drilled();
+        Game.getInstance().nextPlayer();
+    }
+
     /**
      * Settler tries to build a robot.
      */
