@@ -1,7 +1,0 @@
-setmap
-a1 a2
-a1 x 3 op a2 x
-a2 x 3 op a1 x
-setentities 1
-r rob1 a1
-move r rob1 a2

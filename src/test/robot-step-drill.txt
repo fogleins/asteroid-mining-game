@@ -1,6 +1,0 @@
-setmap
-a1
-a1 x 3 op x x
-setentities 1
-r rob1 a1
-drill r rob1

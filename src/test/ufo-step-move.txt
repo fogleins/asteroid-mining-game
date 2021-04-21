@@ -1,7 +1,0 @@
-setmap
-a1 a2
-a1 ir 2 op a2 x
-a2 ir 2 op a1 x
-setentities 1
-u ufo a1
-finishround

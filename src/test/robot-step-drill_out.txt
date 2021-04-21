@@ -1,9 +1,0 @@
-Round number: 1
-Asteroid
-name: a1
-resource: null
-surfacethickness: 2
-inperihelion: false
-neighbours: 
-teleportgate: null
-

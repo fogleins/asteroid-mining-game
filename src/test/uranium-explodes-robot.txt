@@ -1,9 +1,0 @@
-setmap
-BASE NGC1304
-BASE x 2 ip NGC1304
-NGC1304 u 1 ip BASE
-setentities 1
-r Robot NGC1304 dm
-drill r Robot
-finishround
-finishround

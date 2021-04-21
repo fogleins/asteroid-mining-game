@@ -1,6 +1,0 @@
-Round number: 1
-Robot
-name: Robot_0
-asteroid: a1
-
-Error: Cannot drill

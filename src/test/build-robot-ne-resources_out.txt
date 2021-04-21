@@ -1,1 +1,0 @@
-Error: Not enough resources, robot cannot be built.

@@ -1,8 +1,0 @@
-Round number: 4
-UFO
-ufo -> X
-
-Round number: 4
-Asteroid
-a1 -> X
-
