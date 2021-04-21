@@ -14,8 +14,4 @@ public class Coal extends Resource {
         return new Coal();
     }
 
-    @Override
-    public String getTypeName() {
-        return "c";
-    }
 }

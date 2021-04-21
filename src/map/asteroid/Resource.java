@@ -41,6 +41,4 @@ public abstract class Resource {
      */
     abstract public Resource clone();
 
-    // todo: just for testing, marked for removal
-    abstract public String getTypeName();
 }

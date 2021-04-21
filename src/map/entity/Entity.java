@@ -1,10 +1,7 @@
 package map.entity;
 
-import control.Game;
-import control.Test;
 import map.asteroid.Asteroid;
 import map.asteroid.Resource;
-
 
 import java.util.ArrayList;
 
@@ -57,12 +54,7 @@ abstract public class Entity {
         }
         whereTo.acceptEntity(this);
         asteroid = whereTo;
-
-        // todo: remove after proto
-        if(!Test.isInitiazePhase())
-            printState();
     }
-
 
     /**
      * Entity tries to drill.
@@ -71,15 +63,12 @@ abstract public class Entity {
         asteroid.drilled();
     }
 
-
     /**
      * Entity dies.
      */
     public void die() {
         asteroid.removeEntity(this);
-        printDeath();
     }
-
 
     /**
      * Handles the event of asteroid explosion on the exposed entity.
@@ -90,7 +79,6 @@ abstract public class Entity {
 
     /**
      * Returns a list of resources in carry capable entities. Returns null by default.
-     *
      * @return null.
      */
     public ArrayList<Resource> getResources() {
@@ -104,19 +92,5 @@ abstract public class Entity {
     public void setName(String name) {
         this.name = name;
     }
-
-    // proto output, marked for removal
-
-    /**
-     * Prints the state of the entity.
-     */
-    abstract void printState();
-
-    /**
-     * Prints the death of an entity.
-     */
-    // proto output, marked for removal
-    abstract void printDeath();
-
 
 }

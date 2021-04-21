@@ -1,12 +1,10 @@
 package map.asteroid;
 
 import control.Game;
-import control.Test;
 import map.entity.Entity;
 import map.entity.TeleportGate;
 
 import java.util.ArrayList;
-
 
 /**
  * Class map.asteroid.Asteroid
@@ -21,22 +19,14 @@ public class Asteroid {
     protected Resource resource;
     protected TeleportGate teleportGate;
 
-
-    public Asteroid() {
-    }
-
+    public Asteroid() {}
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     /**
      * Get the value of surfaceThickness
-     *
      * @return the value of surfaceThickness
      */
     public int getSurfaceThickness() {
@@ -44,17 +34,7 @@ public class Asteroid {
     }
 
     /**
-     * Set the value of surfaceThickness
-     *
-     * @param thickness the new value of surfaceThickness
-     */
-    public void setSurfaceThickness(int thickness) {
-        surfaceThickness = thickness;
-    }
-
-    /**
      * Get the value of inPerihelion
-     *
      * @return the value of inPerihelion
      */
     public boolean getInPerihelion() {
@@ -63,36 +43,22 @@ public class Asteroid {
 
     /**
      * Set the value of inPerihelion
-     *
      * @param inPerihelion the new value of inPerihelion
      */
     public void setInPerihelion(boolean inPerihelion) {
         this.inPerihelion = inPerihelion;
     }
 
-
     /**
      * Get the List of Entities objects held by entitiesVector
-     *
      * @return List of Entities objects held by entitiesVector
      */
     private ArrayList<Entity> getEntitiesList() {
         return entities;
     }
 
-
-    /**
-     * Add a map.asteroid.Resource object to the map.asteroid.Asteroid
-     */
-    public void addResource(Resource resource) {
-        this.resource = resource;
-        this.resource.setAsteroid(this);
-    }
-
-
     /**
      * Get the asteroid's resource
-     *
      * @return The resource which the asteroid contains
      */
     public Resource getResource() {
@@ -107,7 +73,6 @@ public class Asteroid {
 
     /**
      * Get the List of map.entity.TeleportGate objects held by teleportgateVector
-     *
      * @return List of map.entity.TeleportGate objects held by teleportgateVector
      */
     private TeleportGate getTeleportGate() {
@@ -118,15 +83,13 @@ public class Asteroid {
      * Asteroid explodes.
      */
     public void explode() {
-
         //All entities that were on the asteroid are warned that the asteroid has been exploded
-        for (int i = 0; i < entities.size(); i++) {
-            entities.get(i).asteroidExploded();
+        for (Entity entity : entities) {
+            entity.asteroidExploded();
         }
         Game.getInstance().getMap().removeAsteroid(this);
-        printDeath();
+        // todo: connect neighbours, kill teleport gates
     }
-
 
     /**
      * The asteroid is drilled.
@@ -135,8 +98,6 @@ public class Asteroid {
         //You can't drill if the surface thickness is 0
         if (surfaceThickness != 0) {
             this.surfaceThickness--;
-            // todo: just for testing, marked for removal
-            printState();
             //If the asteroid is in the perihelion zone, some resources behave different, that's why drilledInPerihelion() is called
             if (resource != null && surfaceThickness == 0 && inPerihelion) {
                 this.resource.drilledInPerihelion();
@@ -144,23 +105,18 @@ public class Asteroid {
         } else {
             System.out.println("Error: Cannot drill");
         }
-
-
     }
 
     /**
      * @return the mined asteroid (map.asteroid.Resource)
      */
     public Resource mined() {
-
-
         Resource minedResource = null;
         //If the asteroid is not empty and the thickness is zero, the resource is mined
         if (this.resource != null && surfaceThickness == 0) {
             minedResource = resource;
             resource = null;
             minedResource.setAsteroid(null);
-            printState();
         }
         return minedResource;
     }
@@ -175,7 +131,6 @@ public class Asteroid {
         if (teleportGate != null) {
             teleportGateOtherSide.add(teleportGate.getOtherSide());
         }
-
 
         return new Neighbours(neighbours, teleportGateOtherSide);
     }
@@ -192,7 +147,6 @@ public class Asteroid {
         }
         return neighbourswithouttele;
     }
-
 
     /**
      * @param entity that will be added to the list
@@ -213,16 +167,13 @@ public class Asteroid {
      */
     public void addNeighbour(Asteroid asteroid) {
         this.neighbours.add(asteroid);
-
     }
 
     /**
      * @param asteroid remove this asteroid from  it's neighbours
      */
     public void removeAsteroid(Asteroid asteroid) {
-
         this.neighbours.remove(asteroid);
-        printState();
     }
 
     /**
@@ -232,63 +183,51 @@ public class Asteroid {
     public boolean setTeleportGate(TeleportGate teleportGate) {
         if (teleportGate == null) {
             this.teleportGate = null;
-            printState();
             return true;
         } else if (this.teleportGate == null) {
             if (!Game.getInstance().getSteppables().contains(teleportGate))
                 Game.getInstance().getSteppables().add(teleportGate);
             this.teleportGate = teleportGate;
             this.teleportGate.setCurrentAsteroid(this);
-            printState();
             return true;
         } else {
             return false;
         }
-
     }
 
     /**
      * remove the teleport gate from the asteroid
      */
     public void removeTeleportGate() {
-
         this.teleportGate = null;
-        printState();
     }
-
 
     /**
      * @param resource this will be placed in the asteroid
      */
     public boolean placeResource(Resource resource) {
-
         //if the asteroid is empty and the surface thickness is zero, we can place the resource inside the asteroid
         if (this.resource == null && surfaceThickness == 0) {
             this.resource = resource;
             this.resource.setAsteroid(this);
             return true;
         }
-        printState();
         return false;
     }
-
 
     /**
      * a sunflare hits the asteroid
      */
     public void hitBySunflare() {
-
-        ArrayList<Entity> entities2 = new ArrayList<>();
         ///If the asteroid is not empty, all the entities die on its surface
         if (resource != null || surfaceThickness != 0) {
-            entities2.addAll(entities);
+            ArrayList<Entity> entities2 = new ArrayList<>(entities);
             for (Entity entity : entities2)
                 entity.die();
         }
         if (teleportGate != null)
             teleportGate.hitBySunflare();
     }
-
 
     /**
      * change the perihelion state
@@ -297,27 +236,4 @@ public class Asteroid {
         this.inPerihelion = !inPerihelion;
     }
 
-    // todo: proto output, marked for removal
-    protected void printState() {
-        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
-        System.out.println("Asteroid");
-        System.out.println("name: " + name);
-        System.out.println("resource: " + (resource != null ? resource.getTypeName() : "null"));
-        System.out.println("surfacethickness: " + surfaceThickness);
-        System.out.println("inperihelion: " + inPerihelion);
-        System.out.print("neighbours: ");
-        for (int i = 0; i < neighbours.size(); i++) {
-            if (i != 0) System.out.print("-");
-            System.out.print(neighbours.get(i).name);
-        }
-        System.out.println("\nteleportgate: " + (teleportGate != null ? teleportGate.getName() : "null") + "\n");
-    }
-
-    // todo: proto output, marked for removal
-    private void printDeath() {
-        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
-        System.out.println("Asteroid");
-        System.out.println(name + " -> X\n");
-
-    }
 }

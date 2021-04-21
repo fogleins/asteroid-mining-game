@@ -14,8 +14,4 @@ public class Iron extends Resource {
         return new Iron();
     }
 
-    @Override
-    public String getTypeName() {
-        return "ir";
-    }
 }

@@ -14,8 +14,4 @@ public class Ice extends SublimableResource {
         return new Ice();
     }
 
-    @Override
-    public String getTypeName() {
-        return "ic";
-    }
 }

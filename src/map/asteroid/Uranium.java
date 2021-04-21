@@ -34,8 +34,4 @@ public class Uranium extends RadioactiveResource {
         return new Uranium();
     }
 
-    @Override
-    public String getTypeName() {
-        return "u";
-    }
 }

@@ -1,6 +1,5 @@
 package map.entity;
 
-import control.Game;
 import map.BillOfResources;
 import map.asteroid.*;
 
@@ -37,22 +36,16 @@ public class TeleportGate implements Steppable {
      * Determines that the teleportgate has been hitted by sunflare.
      */
     private boolean crazy;
-    private boolean steppedThisRound = false; // TODO remove later
-    /*
-     * TODO: MUST BE REMOVED after tests.
-     */
-    private String name;
 
     /**
      * Constructor of the TeleportGate, which initialize the resources to build a gate(pair).
      */
-    public TeleportGate() {
+    private TeleportGate() {
         crazy = false;
     }
 
     /**
      * Creates a teleportgate(pair) if there is enough resources to build.
-     *
      * @param ownedResources The resources of settler, whereof the gate can be built.
      * @return with the gate-pair.
      */
@@ -73,7 +66,6 @@ public class TeleportGate implements Steppable {
 
     /**
      * Getter of the current asteroid, not used in the test.
-     *
      * @return currentAsteroid.
      */
     private Asteroid getCurrentAsteroid() {
@@ -85,12 +77,10 @@ public class TeleportGate implements Steppable {
      */
     public void setCurrentAsteroid(Asteroid asteroid) {
         currentAsteroid = asteroid;
-        printState();
     }
 
     /**
      * Returns an asteroid, where the other gate is placed on.
-     *
      * @return The asteroid, where the other gate is placed on.
      */
     public Asteroid getOtherSide() {
@@ -121,29 +111,4 @@ public class TeleportGate implements Steppable {
         }
     }
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public boolean getSteppedThisRound() {
-        return steppedThisRound;
-    }
-
-    @Override
-    public void setSteppedThisRound(boolean stepped) {
-        this.steppedThisRound = stepped;
-    }
-
-    private void printState() {
-        System.out.println("Round number: " + Game.getInstance().getCurrentRound());
-        System.out.println("Teleport");
-        System.out.println(name);
-        System.out.println("asteroid: " + ((currentAsteroid == null) ? "x" : currentAsteroid.getName()) + "\n");
-    }
 }

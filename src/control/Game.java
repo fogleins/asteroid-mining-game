@@ -1,14 +1,12 @@
 package control;
 
 import map.Map;
-import map.asteroid.Asteroid;
 import map.asteroid.Resource;
 import map.entity.Settler;
 import map.entity.Steppable;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 
 /**
  * Class control.Game
@@ -32,7 +30,7 @@ public class Game {
     /**
      * Reference to the Map object, which contains game's map.
      */
-    private Map map;
+    private final Map map;
 
     /**
      * The settler, who should steps next.
@@ -42,13 +40,12 @@ public class Game {
     /**
      * List of Settlers, who are playing the game.
      */
-    private ArrayList<Settler> settlers;
+    private final ArrayList<Settler> settlers;
 
     /**
      * List of Steppables who are playing.
      */
-    private ArrayList<Steppable> steppables;
-
+    private final ArrayList<Steppable> steppables;
 
     /**
      * Constructor. Initializes the Game object.
@@ -60,11 +57,11 @@ public class Game {
         settlers = new ArrayList<>();
         steppables = new ArrayList<>();
         current = null;
+        // todo: game initialization
     }
 
     /**
      * Other objects can use this method to access the Game object.
-     *
      * @return The instance of the Game class.
      */
     public static Game getInstance() {
@@ -73,24 +70,14 @@ public class Game {
 
     /**
      * Returns the map the game is played on.
-     *
      * @return The game's Map object.
      */
     public Map getMap() {
         return map;
     }
 
-    public ArrayList<Settler> getSettlers() {
-        return settlers;
-    }
-
     public ArrayList<Steppable> getSteppables() {
         return steppables;
-    }
-
-    // TODO: only for testing, remove later
-    public void setNextSunflare(int nextSunflare) {
-        this.nextSunflare = nextSunflare;
     }
 
     /**
@@ -123,7 +110,6 @@ public class Game {
 
     /**
      * Returns a {@code Resource} object from the Settler's resource list which should be exchanged.
-     *
      * @param resources A list of {@code Resource}s the Settler has.
      * @return The {@code Resource} which should be exchanged.
      */
@@ -147,7 +133,6 @@ public class Game {
 
     /**
      * Randomly generates a number when a sunflare should occur.
-     *
      * @return int The number of round in which the next sunflare occurs.
      */
     private int generateNextSunflare() {
@@ -168,38 +153,13 @@ public class Game {
             generateNextSunflare();
         }
         for (Steppable steppable : steppables) {
-            // TODO: if statement only for testing, otherwise just call step() for every steppable
-            if (!steppable.getSteppedThisRound())
-                steppable.step();
+            steppable.step();
         }
-
-        //TODO only in test phase. Remove later
-        if (Test.getAutomaticPerihelion()) {
-            map.changePerihelion();
-        }
-        // todo only for testing
-        ArrayList<Resource> resourcesToExpose = new ArrayList<>();
-        for (Asteroid asteroid : map.getAsteroids())
-            if (asteroid.getSurfaceThickness() == 0 && asteroid.getResource() != null)
-                resourcesToExpose.add(asteroid.getResource());
         currentRound++;
-        for (Resource resource : resourcesToExpose)
-            resource.exposed();
-        // TODO: the following lines are only used for testing
-        for (Steppable steppable : steppables)
-            steppable.setSteppedThisRound(false);
-    }
+        current = settlers.get(0);
 
-    /**
-     * TODO: used only for testing, should be removed later.
-     */
-    public void roundFinishedWrapper() {
-        this.roundFinished();
-    }
-
-    // todo: just for testing, marked for removal
-    public int getCurrentRound() {
-        return currentRound;
+        // todo: resource exposition
+        // Make map a steppable? Depends on when should steppables step. Before or after players in a given round?
     }
 
     public void nextPlayer() {
@@ -209,7 +169,6 @@ public class Game {
         }
         if (settlers.indexOf(current) == settlers.size() - 1) {
             roundFinished();
-            current = settlers.get(0);
         } else {
             current = settlers.get(settlers.indexOf(current) + 1);
         }

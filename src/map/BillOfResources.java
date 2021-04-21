@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class BillOfResources {
 
-    private ArrayList<Resource> resourcesNeeded = new ArrayList<>();
+    private final ArrayList<Resource> resourcesNeeded = new ArrayList<>();
 
     /**
      * Constructor of class
