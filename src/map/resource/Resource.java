@@ -1,4 +1,6 @@
-package map.asteroid;
+package map.resource;
+
+import map.asteroid.Asteroid;
 
 /**
  * Class map.asteroid.Resource

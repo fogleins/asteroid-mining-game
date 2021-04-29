@@ -1,7 +1,7 @@
 package map.asteroid;
 
 import control.Game;
-import map.BillOfResources;
+import map.resource.*;
 import map.entity.Entity;
 
 import java.util.ArrayList;

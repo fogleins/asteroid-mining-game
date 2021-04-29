@@ -1,7 +1,7 @@
 package control;
 
 import map.Map;
-import map.asteroid.Resource;
+import map.resource.Resource;
 import map.entity.Settler;
 import map.entity.Steppable;
 

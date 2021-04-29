@@ -1,6 +1,7 @@
 package map.asteroid;
 
 import control.Game;
+import map.resource.Resource;
 import map.entity.Entity;
 import map.entity.TeleportGate;
 

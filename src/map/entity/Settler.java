@@ -1,7 +1,7 @@
 package map.entity;
 
 import control.Game;
-import map.asteroid.Resource;
+import map.resource.Resource;
 
 import java.util.ArrayList;
 

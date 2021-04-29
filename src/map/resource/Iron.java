@@ -1,4 +1,4 @@
-package map.asteroid;
+package map.resource;
 
 /**
  * Class map.asteroid.Iron

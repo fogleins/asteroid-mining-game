@@ -1,6 +1,5 @@
-package map;
+package map.resource;
 
-import map.asteroid.Resource;
 import java.util.ArrayList;
 
 /**
