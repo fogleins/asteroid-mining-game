@@ -1,5 +1,6 @@
 package map.entity;
 
+import control.Game;
 import map.asteroid.Asteroid;
 import map.resource.Resource;
 
@@ -33,6 +34,12 @@ public class Ufo extends Entity implements Steppable {
                 move(neighbours.get(rnd.nextInt(neighbours.size())));
             }
         }
+    }
+
+    @Override
+    public void die() {
+        super.die();
+        Game.getInstance().removeSteppable(this);
     }
 
 }

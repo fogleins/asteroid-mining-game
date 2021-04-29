@@ -10,4 +10,10 @@ public interface Steppable {
      * executed, and that operation is valid for the given object.
      */
     void step();
+
+    /**
+     * The steppable is destroyed
+     * Dying should be implemented in all steppable, to remove it from the list of steppable objects in Game
+     */
+    void die();
 }

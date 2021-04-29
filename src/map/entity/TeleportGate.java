@@ -1,5 +1,6 @@
 package map.entity;
 
+import control.Game;
 import map.resource.*;
 import map.asteroid.*;
 
@@ -111,4 +112,10 @@ public class TeleportGate implements Steppable {
         }
     }
 
+    @Override
+    public void die() {
+        // todo: properly remove the gates from everything
+        otherGate.die();
+        Game.getInstance().removeSteppable(this);
+    }
 }

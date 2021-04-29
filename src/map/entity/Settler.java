@@ -108,6 +108,8 @@ public class Settler extends Entity {
     @Override
     public void die() {
         super.die();
+        for (TeleportGate tg : teleports)
+            tg.die();   // all teleport gate in storage dies
         Game.getInstance().removeSettler(this);
     }
 
