@@ -238,4 +238,12 @@ public class Asteroid {
         this.inPerihelion = !inPerihelion;
     }
 
+    /**
+     * Exposes the resource in the asteroid's core if the surface is fully drilled and the asteroid is in perihelion
+     */
+    public void expose() {
+        if (surfaceThickness == 0 && inPerihelion && resource != null)
+            resource.exposed();
+    }
+
 }

@@ -85,4 +85,14 @@ public class Map {
         }
     }
 
+    /**
+     * Tells the map that a round has passed
+     * Exposes the necessary resource on the map
+     */
+    public void roundPassed() {
+        for (Asteroid a : asteroids) {
+            a.expose();
+        }
+    }
+
 }

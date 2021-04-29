@@ -154,8 +154,7 @@ public class Game {
         currentRound++;
         current = settlers.get(0);
 
-        // todo: resource exposition
-        // Make map a steppable? Depends on when should steppables step. Before or after players in a given round?
+        map.roundPassed();  // resource exposition
     }
 
     public void nextPlayer() {
