@@ -4,6 +4,7 @@ import control.Game;
 import map.resource.Resource;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Class map.entity.Settler
@@ -36,29 +37,35 @@ public class Settler extends Entity {
     }
 
     /**
-     * Settler mines. Asks for item exchange if cargo hold is full and places the resource
-     * from the asteroid to the cargo otherwise.
+     * Settler mines the asteroid for resource.
+     * Asks for item exchange if cargo inventory is full and places the resource from the asteroid to the cargo otherwise.
      */
     public void mine() {
-        // todo: fix resource place back (new method?)
-        // if there's space in cargo, the settler can mine.
-        Resource r = asteroid.mined();
-        if (resources.size() < 10) {
-            // if there's any resource, the settler adds the resource to the cargo
-            if (r != null) {
-                resources.add(r);
-            }
-        } else {
-            if (r != null) {
-                Resource resourceToExchange = Game.getInstance().exchangeResource(resources);
-                resources.add(r);
-                boolean success = asteroid.placeResource(resourceToExchange);
-                if (success) {
-                    resources.remove(resourceToExchange);
+        /* new */
+        if (asteroid.getResource() != null) {        // if there's any resource to mine
+            if (resources.size() < 10) {        // if there's space in cargo
+                resources.add(asteroid.mined());   // add resource to inventory
+                Game.getInstance().nextPlayer();    // the settler used its only step
+            } else {    // if there is no space in cargo, another resource must be placed back to get the new one
+                Resource resourceToExchange = Game.getInstance().exchangeResource(resources);   // todo: move exchange from game to view
+                if (resources.contains(resourceToExchange)) {   // if the resource is owned by the settler
+                    resources.add(asteroid.mined());
+                    asteroid.placeResource(resourceToExchange);     // place back the resource
+                    resources.remove(resourceToExchange);   // remove the placed back resource from inventory
+                    Game.getInstance().nextPlayer();    // the settler used its only step
                 }
             }
         }
-        Game.getInstance().nextPlayer();
+    }
+
+    /**
+     * Places a selected resource from the settlers inventory to the asteroid's core
+     * @param resource The resource to be placed
+     */
+    public void placeBack(Resource resource) {
+        if (!resources.contains(resource)) return;   // if the resource is not in the settler's inventory, the action is not valid
+        if (asteroid.placeResource(resource))   // try to place back the resource
+            Game.getInstance().nextPlayer();    // if it was successful, notify the game
     }
 
     @Override
