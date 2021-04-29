@@ -56,8 +56,8 @@ public class Game {
         map = new Map();
         settlers = new ArrayList<>();
         steppables = new ArrayList<>();
-        current = null;
         // todo: game initialization
+        current = null;     // todo: initialize it to the first settler in the list
     }
 
     /**
@@ -76,17 +76,6 @@ public class Game {
         return map;
     }
 
-    public ArrayList<Steppable> getSteppables() {
-        return steppables;
-    }
-
-    /**
-     * Add a Settler object to the settlers list
-     */
-    public void addSettler(Settler settler) {
-        settlers.add(settler);
-    }
-
     /**
      * Remove a Settler object from settlers
      */
@@ -95,10 +84,12 @@ public class Game {
     }
 
     /**
-     * Add a Steppable object to the steppables list
+     * Add a Steppable object to the steppables list (if the object is not already in it)
+     * @param newSteppable The steppable object that should be added to the list
      */
-    public void addSteppable(Steppable steppable) {
-        steppables.add(steppable);
+    public void addSteppable(Steppable newSteppable) {
+        if (!steppables.contains(newSteppable))
+            steppables.add(newSteppable);
     }
 
     /**
@@ -140,7 +131,7 @@ public class Game {
         if (currentRound < 20) {
             return rnd.nextInt(2) + 20;
         }
-        return rnd.nextInt(19) + 10 + currentRound;
+        return rnd.nextInt(20) + 10;
     }
 
     /**
@@ -150,11 +141,16 @@ public class Game {
     private void roundFinished() {
         if (currentRound == nextSunflare) {
             map.sunflare();
-            generateNextSunflare();
+            nextSunflare = generateNextSunflare() + currentRound;
         }
         for (Steppable steppable : steppables) {
             steppable.step();
         }
+        map.changePerihelion();     // todo: should be done with time intervals
+
+        if (settlers.size() == 0)
+            gameLost();
+
         currentRound++;
         current = settlers.get(0);
 
@@ -163,14 +159,11 @@ public class Game {
     }
 
     public void nextPlayer() {
-        if (current == null) {
-            current = settlers.get(0);
-            return;
-        }
-        if (settlers.indexOf(current) == settlers.size() - 1) {
+        int idx = settlers.indexOf(current);
+        if (idx == settlers.size() - 1) {
             roundFinished();
         } else {
-            current = settlers.get(settlers.indexOf(current) + 1);
+            current = settlers.get(idx + 1);
         }
     }
 }

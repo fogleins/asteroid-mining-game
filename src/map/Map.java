@@ -80,7 +80,6 @@ public class Map {
      * Calls changePerihelionState function in all asteroids at the end of the round.
      */
     public void changePerihelion() {
-        // todo: should be done with time intervals
         for (Asteroid a : asteroids) {
             a.changePerihelionState();
         }

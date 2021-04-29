@@ -73,8 +73,8 @@ public class Asteroid {
     }
 
     /**
-     * Get the List of map.entity.TeleportGate objects held by teleportgateVector
-     * @return List of map.entity.TeleportGate objects held by teleportgateVector
+     * Get the TeleportGate of this asteroid
+     * @return The TeleportGate object, null if there is none
      */
     private TeleportGate getTeleportGate() {
         return teleportGate;
@@ -89,7 +89,9 @@ public class Asteroid {
             entity.asteroidExploded();
         }
         Game.getInstance().getMap().removeAsteroid(this);
-        // todo: connect neighbours, kill teleport gates
+        if (teleportGate != null)
+            teleportGate.die();
+        // todo: connect neighbours
     }
 
     /**
@@ -104,7 +106,7 @@ public class Asteroid {
                 this.resource.drilledInPerihelion();
             }
         } else {
-            System.out.println("Error: Cannot drill");
+            System.out.println("Error: Cannot drill");  // todo: error handling
         }
     }
 
@@ -171,7 +173,7 @@ public class Asteroid {
     }
 
     /**
-     * @param asteroid remove this asteroid from  it's neighbours
+     * @param asteroid remove this asteroid from it's neighbours
      */
     public void removeAsteroid(Asteroid asteroid) {
         this.neighbours.remove(asteroid);
@@ -186,8 +188,7 @@ public class Asteroid {
             this.teleportGate = null;
             return true;
         } else if (this.teleportGate == null) {
-            if (!Game.getInstance().getSteppables().contains(teleportGate))
-                Game.getInstance().getSteppables().add(teleportGate);
+            Game.getInstance().addSteppable(teleportGate);
             this.teleportGate = teleportGate;
             this.teleportGate.setCurrentAsteroid(this);
             return true;
