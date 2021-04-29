@@ -42,14 +42,13 @@ public class Settler extends Entity {
     public void mine() {
         // todo: fix resource place back (new method?)
         // if there's space in cargo, the settler can mine.
+        Resource r = asteroid.mined();
         if (resources.size() < 10) {
-            Resource r = asteroid.mined();
             // if there's any resource, the settler adds the resource to the cargo
             if (r != null) {
                 resources.add(r);
             }
         } else {
-            Resource r = asteroid.mined();
             if (r != null) {
                 Resource resourceToExchange = Game.getInstance().exchangeResource(resources);
                 resources.add(r);
@@ -82,7 +81,7 @@ public class Settler extends Entity {
      */
     public void buildTeleport() {
         // can only build new teleportgates if there's room for it in cargo (max capacity is 3).
-        if (teleports.size() + 2 < 3) {
+        if (teleports.size() + 2 <= 3) {
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
                 teleports.addAll(teleportGates);
