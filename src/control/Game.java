@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Class control.Game
  */
-public class Game {
+public final class Game {
     /**
      * The instance of the singleton Game class.
      */
@@ -56,8 +56,20 @@ public class Game {
         map = new Map();
         settlers = new ArrayList<>();
         steppables = new ArrayList<>();
-        // todo: game initialization
-        current = null;     // todo: initialize it to the first settler in the list
+    }
+
+    /**
+     * Adds settlers with the specified names to the settlers list and sets the first settler as current.
+     *
+     * @param playerNames A String list containing the players' names.
+     */
+    public static void start(ArrayList<String> playerNames) {
+        instance.settlers.clear(); // just to be sure
+        for (String playerName : playerNames) {
+            instance.settlers.add(new Settler(playerName));
+        }
+        instance.current = instance.settlers.get(0);
+        instance.current.yourTurn(); // TODO: implement yourTurn in Settler
     }
 
     /**
@@ -139,6 +151,7 @@ public class Game {
      * checks if there should be a sunflare, and changes the asteroid's 'inPerihelion' state.
      */
     private void roundFinished() {
+        Random random = new Random();
         if (currentRound == nextSunflare) {
             map.sunflare();
             nextSunflare = generateNextSunflare() + currentRound;
@@ -146,7 +159,8 @@ public class Game {
         for (Steppable steppable : steppables) {
             steppable.step();
         }
-        map.changePerihelion();     // todo: should be done with time intervals
+        if (random.nextInt(4) == 0) // generates a random number, where 0 <= n < 4
+            map.changePerihelion();
 
         if (settlers.size() == 0)
             gameLost();
