@@ -81,8 +81,8 @@ public class Settler extends Entity {
      * Settler tries to build a teleportgate if there aren't any teleportgates in the cargo hold.
      */
     public void buildTeleport() {
-        //can only build new teleportgates if there's less than 2 in cargo.
-        if (teleports.size() < 2) {
+        // can only build new teleportgates if there's room for it in cargo (max capacity is 3).
+        if (teleports.size() + 2 < 3) {
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
                 teleports.addAll(teleportGates);
