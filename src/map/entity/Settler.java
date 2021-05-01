@@ -91,7 +91,10 @@ public class Settler extends Entity {
         if (teleports.size() + 2 <= 3) {
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
-                teleports.addAll(teleportGates);
+                for(int i = 0; i < teleportGates.size(); i++){
+                    teleports.add(teleportGates.get(i));
+                    teleportGates.get(i).setSettler(this);
+                }
                 Game.getInstance().nextPlayer();
             }
         }
@@ -105,10 +108,19 @@ public class Settler extends Entity {
         if (teleports.size() != 0) {
             boolean success = asteroid.setTeleportGate(teleports.get(0));
             if (success) {
+                teleports.get(0).setSettler(null);
                 teleports.remove(0);
                 Game.getInstance().nextPlayer();
             }
         }
+    }
+
+    /**
+     * Removes dead teleportgate from cargo.
+     * @param t Dead teleportgate to be removed.
+     */
+    public void removeTeleportGate(TeleportGate t){
+        teleports.remove(t);
     }
 
     @Override

@@ -34,6 +34,11 @@ public class TeleportGate implements Steppable {
     private TeleportGate otherGate;
 
     /**
+     * The settler whose cargo this teleport is in.
+     */
+    private Settler settler;
+
+    /**
      * Determines that the teleportgate has been hitted by sunflare.
      */
     private boolean crazy;
@@ -88,6 +93,14 @@ public class TeleportGate implements Steppable {
         return otherGate.getCurrentAsteroid();
     }
 
+    /**
+     * Reference to the settler whose cargo this teleport is in.
+     * @param settler Value to set.
+     */
+    public void setSettler(Settler settler) {
+        this.settler = settler;
+    }
+
     public void hitBySunflare() {
         crazy = true;
     }
@@ -112,10 +125,26 @@ public class TeleportGate implements Steppable {
         }
     }
 
+    /**
+     * Handles the death of a teleportgate pair. A teleportgate is either
+     * belongs to an asteroid or a settler, but not both. After removing it from them
+     * a teleportgate needs to call its pair's die() method.
+     *
+     * To ensure the avoidance of a circular method call, the die() method is only called
+     * when the gate still belongs to an asteroid or a settler.
+     */
     @Override
     public void die() {
         // todo: properly remove the gates from everything
-        otherGate.die();
+        if(currentAsteroid != null){
+            currentAsteroid.removeTeleportGate();
+        }
+        if(settler != null){
+            settler.removeTeleportGate(this);
+        }
+        if(otherGate.settler != null || otherGate.currentAsteroid != null){
+            otherGate.die();
+        }
         Game.getInstance().removeSteppable(this);
     }
 }
