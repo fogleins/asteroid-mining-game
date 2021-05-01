@@ -1,5 +1,6 @@
 package map.entity;
 
+import Exceptions.ActionFailedException;
 import control.Game;
 import map.resource.Resource;
 
@@ -44,8 +45,11 @@ public class Settler extends Entity {
         /* new */
         if (asteroid.getResource() != null) {        // if there's any resource to mine
             if (resources.size() < 10) {        // if there's space in cargo
-                resources.add(asteroid.mined());   // add resource to inventory
-                Game.getInstance().nextPlayer();    // the settler used its only step
+                Resource r = asteroid.mined();
+                if(r != null) {
+                    resources.add(r);   // add resource to inventory
+                    Game.getInstance().nextPlayer();    // the settler used its only step
+                } else throw new ActionFailedException("Mined returned null.");
             } else {    // if there is no space in cargo, another resource must be placed back to get the new one
                 Resource resourceToExchange = Game.getInstance().exchangeResource(resources);   // todo: move exchange from game to view
                 if (resources.contains(resourceToExchange)) {   // if the resource is owned by the settler
@@ -53,7 +57,7 @@ public class Settler extends Entity {
                     asteroid.placeResource(resourceToExchange);     // place back the resource
                     resources.remove(resourceToExchange);   // remove the placed back resource from inventory
                     Game.getInstance().nextPlayer();    // the settler used its only step
-                }
+                } else throw new ActionFailedException("Invalid resource selected.");
             }
         }
     }
@@ -64,8 +68,9 @@ public class Settler extends Entity {
      */
     public void placeBack(Resource resource) {
         if (!resources.contains(resource)) return;   // if the resource is not in the settler's inventory, the action is not valid
-        if (asteroid.placeResource(resource))   // try to place back the resource
+        if (asteroid.placeResource(resource)) {   // try to place back the resource
             Game.getInstance().nextPlayer();    // if it was successful, notify the game
+        } else throw new ActionFailedException("Couldn't place resource.");
     }
 
     @Override
@@ -96,7 +101,7 @@ public class Settler extends Entity {
                     teleportGates.get(i).setSettler(this);
                 }
                 Game.getInstance().nextPlayer();
-            }
+            } else throw new ActionFailedException("Teleportgates have not been built.");
         }
     }
 

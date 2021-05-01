@@ -1,4 +1,4 @@
-package control;
+package Exceptions;
 
 public class ActionFailedException extends Exception {
     public ActionFailedException(String errorMessage) {
