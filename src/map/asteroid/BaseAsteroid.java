@@ -11,9 +11,12 @@ import java.util.ArrayList;
  */
 public class BaseAsteroid extends Asteroid {
 
+    //Stores the Resources that are needed to win the game
     public static final BillOfResources winConditionResources;
+
+
     static {
-        //To win the game, three of every resource needed
+        //To win the game, three of every type of resource are needed
         winConditionResources = new BillOfResources();
         for (int i = 0; i < 3; i++) {
             winConditionResources.addResources(new Iron());
