@@ -1,5 +1,6 @@
 package map.resource;
 
+import Exceptions.ActionFailedException;
 import map.asteroid.Asteroid;
 
 /**
@@ -22,7 +23,7 @@ public abstract class Resource {
      * Called when the asteroid with this resource in its core is drilled in perihelion
      * Default implementation
      */
-    public void drilledInPerihelion() {}
+    public void drilledInPerihelion() throws ActionFailedException {}
 
     /**
      * Returns whether the parameter is the same type of resource as this resource

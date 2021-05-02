@@ -1,5 +1,6 @@
 package map.entity;
 
+import Exceptions.ActionFailedException;
 import control.Game;
 import map.asteroid.Asteroid;
 import map.resource.Resource;
@@ -23,14 +24,14 @@ public class Ufo extends Entity implements Steppable {
      */
     @Override
     public void step() {
-        Resource resource = asteroid.mined();
-
-        //If the UFO couldn't mine, it moves on
-        if (resource == null) {
+        try {
+            asteroid.mined();
+        } catch (ActionFailedException e) {
+            // If the UFO couldn't mine, it moves on
             Random rnd = new Random();
             ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
 
-            if(neighbours.size()!=0){
+            if(neighbours.size() != 0) {
                 move(neighbours.get(rnd.nextInt(neighbours.size())));
             }
         }
@@ -41,5 +42,4 @@ public class Ufo extends Entity implements Steppable {
         super.die();
         Game.getInstance().removeSteppable(this);
     }
-
 }

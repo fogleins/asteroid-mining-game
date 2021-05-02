@@ -1,5 +1,6 @@
 package map.entity;
 
+import Exceptions.ActionFailedException;
 import map.asteroid.Asteroid;
 import map.resource.Resource;
 
@@ -59,7 +60,7 @@ abstract public class Entity {
     /**
      * Entity tries to drill.
      */
-    public void drill() {
+    public void drill() throws ActionFailedException {
         asteroid.drilled();
     }
 

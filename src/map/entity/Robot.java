@@ -1,5 +1,6 @@
 package map.entity;
 
+import Exceptions.ActionFailedException;
 import control.Game;
 import map.resource.*;
 import map.asteroid.*;
@@ -77,7 +78,11 @@ public class Robot extends Entity implements Steppable {
         if (choice == 0 && !(neighbours.size() < 1)) {
             super.move(neighbours.get(rnd.nextInt(neighbours.size())));
         } else {
-            super.drill();
+            try {
+                super.drill();
+            } catch (ActionFailedException e) { // TODO: ez így elég fura, hogy legyen?
+                super.move(neighbours.get(rnd.nextInt(neighbours.size())));
+            }
         }
     }
 

@@ -5,7 +5,6 @@ import control.Game;
 import map.resource.Resource;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Class map.entity.Settler
@@ -31,6 +30,7 @@ public class Settler extends Entity {
 
     /**
      * Returns a list of resources.
+     *
      * @return list of resources.
      */
     public ArrayList<Resource> getResources() {
@@ -41,12 +41,11 @@ public class Settler extends Entity {
      * Settler mines the asteroid for resource.
      * Asks for item exchange if cargo inventory is full and places the resource from the asteroid to the cargo otherwise.
      */
-    public void mine() {
-        /* new */
+    public void mine() throws ActionFailedException {
         if (asteroid.getResource() != null) {        // if there's any resource to mine
             if (resources.size() < 10) {        // if there's space in cargo
                 Resource r = asteroid.mined();
-                if(r != null) {
+                if (r != null) {
                     resources.add(r);   // add resource to inventory
                     Game.getInstance().nextPlayer();    // the settler used its only step
                 } else throw new ActionFailedException("Mined returned null.");
@@ -64,17 +63,19 @@ public class Settler extends Entity {
 
     /**
      * Places a selected resource from the settlers inventory to the asteroid's core
+     *
      * @param resource The resource to be placed
      */
-    public void placeBack(Resource resource) {
-        if (!resources.contains(resource)) return;   // if the resource is not in the settler's inventory, the action is not valid
+    public void placeBack(Resource resource) throws ActionFailedException {
+        if (!resources.contains(resource))
+            return;   // if the resource is not in the settler's inventory, the action is not valid
         if (asteroid.placeResource(resource)) {   // try to place back the resource
             Game.getInstance().nextPlayer();    // if it was successful, notify the game
         } else throw new ActionFailedException("Couldn't place resource.");
     }
 
     @Override
-    public void drill() {
+    public void drill() throws ActionFailedException {
         asteroid.drilled();
         Game.getInstance().nextPlayer();
     }
@@ -87,18 +88,17 @@ public class Settler extends Entity {
         Game.getInstance().nextPlayer();
     }
 
-
     /**
      * Settler tries to build a teleportgate if there aren't any teleportgates in the cargo hold.
      */
-    public void buildTeleport() {
+    public void buildTeleport() throws ActionFailedException {
         // can only build new teleportgates if there's room for it in cargo (max capacity is 3).
         if (teleports.size() + 2 <= 3) {
             ArrayList<TeleportGate> teleportGates = TeleportGate.create(resources);
             if (teleportGates != null) {
-                for(int i = 0; i < teleportGates.size(); i++){
-                    teleports.add(teleportGates.get(i));
-                    teleportGates.get(i).setSettler(this);
+                for (TeleportGate teleportGate : teleportGates) {
+                    teleports.add(teleportGate);
+                    teleportGate.setSettler(this);
                 }
                 Game.getInstance().nextPlayer();
             } else throw new ActionFailedException("Teleportgates have not been built.");
@@ -122,9 +122,10 @@ public class Settler extends Entity {
 
     /**
      * Removes dead teleportgate from cargo.
+     *
      * @param t Dead teleportgate to be removed.
      */
-    public void removeTeleportGate(TeleportGate t){
+    public void removeTeleportGate(TeleportGate t) {
         teleports.remove(t);
     }
 
@@ -136,4 +137,9 @@ public class Settler extends Entity {
         Game.getInstance().removeSettler(this);
     }
 
+    public void yourTurn() {
+        // TODO: implement
+        //  "a telepes átállítja a két nézetet saját magára, valamint jelzi a nézeteknek, hogy frissítsék a tartalmukat
+        //  a jelenlegi telepes adataival"
+    }
 }
