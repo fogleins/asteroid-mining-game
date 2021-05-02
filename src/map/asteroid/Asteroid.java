@@ -1,5 +1,6 @@
 package map.asteroid;
 
+import Exceptions.ActionFailedException;
 import control.Game;
 import map.resource.Resource;
 import map.entity.Entity;
@@ -12,15 +13,43 @@ import java.util.ArrayList;
  */
 public class Asteroid {
 
+    /*
+    List of entities that are on the surface of the asteroid.
+     */
     protected final ArrayList<Entity> entities = new ArrayList<>();
+
+    /*
+    List of the neighbours.
+     */
     protected final ArrayList<Asteroid> neighbours = new ArrayList<>();
+
+    /*
+     Surface thickness.
+     */
     protected int surfaceThickness;
+
+    /*
+    Gives whether the asteroid located inside the perihelion zone.
+     */
     protected boolean inPerihelion;
+
+    /*
+    Name of the asteroid.
+     */
     protected String name;
+
+    /*
+    The resource that is located in the core.
+     */
     protected Resource resource;
+
+    /*
+    The teleport gate that is attached to the asteroid.
+     */
     protected TeleportGate teleportGate;
 
-    public Asteroid() {}
+    public Asteroid() {
+    }
 
     public String getName() {
         return name;
@@ -28,6 +57,7 @@ public class Asteroid {
 
     /**
      * Get the value of surfaceThickness
+     *
      * @return the value of surfaceThickness
      */
     public int getSurfaceThickness() {
@@ -36,6 +66,7 @@ public class Asteroid {
 
     /**
      * Get the value of inPerihelion
+     *
      * @return the value of inPerihelion
      */
     public boolean getInPerihelion() {
@@ -44,6 +75,7 @@ public class Asteroid {
 
     /**
      * Set the value of inPerihelion
+     *
      * @param inPerihelion the new value of inPerihelion
      */
     public void setInPerihelion(boolean inPerihelion) {
@@ -52,6 +84,7 @@ public class Asteroid {
 
     /**
      * Get the List of Entities objects held by entitiesVector
+     *
      * @return List of Entities objects held by entitiesVector
      */
     private ArrayList<Entity> getEntitiesList() {
@@ -60,12 +93,16 @@ public class Asteroid {
 
     /**
      * Get the asteroid's resource
+     *
      * @return The resource which the asteroid contains
      */
     public Resource getResource() {
         return resource;
     }
 
+    /*
+        Sets the resource of the core
+     */
     public void setResource(Resource resource) {
         this.resource = resource;
         if (this.resource != null)
@@ -74,6 +111,7 @@ public class Asteroid {
 
     /**
      * Get the TeleportGate of this asteroid
+     *
      * @return The TeleportGate object, null if there is none
      */
     private TeleportGate getTeleportGate() {
@@ -81,7 +119,8 @@ public class Asteroid {
     }
 
     /**
-     * Asteroid explodes.
+     * Asteroid explodes. The asteroid is removed from the map and the neighbours of the asteroid
+     * will be each other's neighbours.
      */
     public void explode() {
         //All entities that were on the asteroid are warned that the asteroid has been exploded
@@ -91,13 +130,21 @@ public class Asteroid {
         Game.getInstance().getMap().removeAsteroid(this);
         if (teleportGate != null)
             teleportGate.die();
-        // todo: connect neighbours
+
+        ArrayList<Asteroid> realNeighbours = getNeighboursWithoutTeleportGate();
+
+        //Connecting the neighbours to each other
+        for (int i = 0; i < realNeighbours.size() - 1; i++) {
+            for (int j = i + 1; j < realNeighbours.size(); j++) {
+                realNeighbours.get(i).addNeighbour(realNeighbours.get(j));
+            }
+        }
     }
 
     /**
      * The asteroid is drilled.
      */
-    public void drilled() {
+    public void drilled() throws ActionFailedException {
         //You can't drill if the surface thickness is 0
         if (surfaceThickness != 0) {
             this.surfaceThickness--;
@@ -106,25 +153,36 @@ public class Asteroid {
                 this.resource.drilledInPerihelion();
             }
         } else {
-            System.out.println("Error: Cannot drill");  // todo: error handling
+            throw new ActionFailedException("The surface thickness is 0, cannot drill");
         }
     }
 
     /**
+     * The asteroid is mined.
+     *
      * @return the mined asteroid (map.asteroid.Resource)
      */
-    public Resource mined() {
+    public Resource mined() throws ActionFailedException {
         Resource minedResource = null;
         //If the asteroid is not empty and the thickness is zero, the resource is mined
-        if (this.resource != null && surfaceThickness == 0) {
-            minedResource = resource;
-            resource = null;
-            minedResource.setAsteroid(null);
+        if (resource != null) {
+            if (surfaceThickness == 0) {
+                minedResource = resource;
+                resource = null;
+                minedResource.setAsteroid(null);
+            } else {
+                throw new ActionFailedException("Surface thickness is not 0, cannot mine");
+            }
+        } else {
+            throw new ActionFailedException("There is no resource inside the core");
         }
+
         return minedResource;
     }
 
     /**
+     * Gets all neighbours
+     *
      * @return A map.asteroid.Neighbours object that contains all the neighbours of the asteroid
      */
     public Neighbours getNeighbours() {
@@ -152,6 +210,8 @@ public class Asteroid {
     }
 
     /**
+     * Places an entity onto the surface of the asteroid
+     *
      * @param entity that will be added to the list
      */
     public void acceptEntity(Entity entity) {
@@ -159,6 +219,8 @@ public class Asteroid {
     }
 
     /**
+     * Removes an entity from the asteroid
+     *
      * @param entity that will be removed from the list
      */
     public void removeEntity(Entity entity) {
@@ -166,13 +228,18 @@ public class Asteroid {
     }
 
     /**
+     * Adds a new neighbour to the asteroid
+     *
      * @param asteroid new neighbour of the asteroid
      */
     public void addNeighbour(Asteroid asteroid) {
-        this.neighbours.add(asteroid);
+        if (!neighbours.contains(asteroid))
+            this.neighbours.add(asteroid);
     }
 
     /**
+     * Removes a neighbour
+     *
      * @param asteroid remove this asteroid from it's neighbours
      */
     public void removeAsteroid(Asteroid asteroid) {
@@ -198,13 +265,14 @@ public class Asteroid {
     }
 
     /**
-     * remove the teleport gate from the asteroid
+     * removes the teleport gate from the asteroid
      */
     public void removeTeleportGate() {
         this.teleportGate = null;
     }
 
     /**
+     * Places a resource inside the asteroid
      * @param resource this will be placed in the asteroid
      */
     public boolean placeResource(Resource resource) {
