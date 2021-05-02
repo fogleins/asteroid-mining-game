@@ -292,7 +292,7 @@ public class Asteroid {
         ///If the asteroid is not empty, all the entities die on its surface
         if (resource != null || surfaceThickness != 0) {
             ArrayList<Entity> entities2 = new ArrayList<>(entities);
-            for (Entity entity : entities2)
+            for (Entity entity :entities2)
                 entity.die();
         }
         if (teleportGate != null)
