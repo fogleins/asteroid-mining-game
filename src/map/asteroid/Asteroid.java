@@ -2,7 +2,7 @@ package map.asteroid;
 
 import Exceptions.ActionFailedException;
 import control.Game;
-import map.resource.Resource;
+import map.resource.*;
 import map.entity.Entity;
 import map.entity.TeleportGate;
 
@@ -49,6 +49,48 @@ public class Asteroid {
     protected TeleportGate teleportGate;
 
     public Asteroid() {
+    }
+
+    /**
+     * Constructor for the map initialization.
+     * @param name Name of the asteroid.
+     * @param inPerihelion Gives whether the asteroid located inside the perihelion zone.
+     * @param surfaceThickness Surface thickness.
+     * @param resourceNumber Gives what type of resource need to be set.
+     *                       0-null (nothing)
+     *                       1-Coal
+     *                       2-Iron
+     *                       3-Ice
+     *                       4-Uranium
+     */
+    public Asteroid(String name, boolean inPerihelion, int surfaceThickness, int resourceNumber) {
+        this.name = name;
+        this.inPerihelion = inPerihelion;
+        this.surfaceThickness = surfaceThickness;
+        teleportGate=null;
+        if(surfaceThickness>0){
+            switch (resourceNumber){
+                case 0: resource=null;
+                    break;
+                case 1: resource=new Coal();
+                    break;
+                case 2: resource=new Iron();
+                    break;
+                case 3: resource=new Ice();
+                    break;
+                case 4: resource=new Uranium();
+                    break;
+            }
+        }
+        else {
+            switch (resourceNumber){
+                case 1: resource=new Coal();
+                    break;
+                case 2: resource=new Iron();
+                    break;
+                default: resource=null;
+            }
+        }
     }
 
     public String getName() {

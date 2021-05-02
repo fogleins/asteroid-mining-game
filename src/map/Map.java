@@ -4,6 +4,7 @@ import map.asteroid.Asteroid;
 import map.asteroid.BaseAsteroid;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Class Map
@@ -25,9 +26,28 @@ public class Map {
      */
     public static ArrayList<Asteroid> sunflareAsteroids = new ArrayList<>();
 
+    /**
+     * Random object, for random generation.
+     */
+    private static Random rnd = new Random();
+
+    /**
+     * Constructor of the map, this will initialize the asteroids, and neighbour connections.
+     */
     public Map() {
         baseAsteroid = new BaseAsteroid();
-        // todo: map init, create field
+        asteroids.add(baseAsteroid);
+        for(int i = 1;i<3;i++){
+            Asteroid a = new Asteroid("A"+i,rnd.nextBoolean(), rnd.nextInt(7), rnd.nextInt(5) );
+            asteroids.add(a);
+        }
+        for(Asteroid a : asteroids){
+            for(Asteroid b : asteroids){
+                if(a!=b){
+                    a.addNeighbour(b);
+                }
+            }
+        }
     }
 
     /**
@@ -70,18 +90,21 @@ public class Map {
      * Spreads sunflare all across the asteroids in the list.
      */
     public void sunflare() {
-        // todo: selective sunflare
         for (Asteroid a : asteroids) {
-            a.hitBySunflare();
+            if(rnd.nextInt(100)<20){
+                a.hitBySunflare();
+            }
         }
     }
 
     /**
-     * Calls changePerihelionState function in all asteroids at the end of the round.
+     * Calls changePerihelionState function in some asteroids at the end of the round.
      */
     public void changePerihelion() {
         for (Asteroid a : asteroids) {
-            a.changePerihelionState();
+            if(rnd.nextInt(100)<40){
+                a.changePerihelionState();
+            }
         }
     }
 
