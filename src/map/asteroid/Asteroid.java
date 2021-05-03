@@ -5,6 +5,7 @@ import control.Game;
 import map.resource.*;
 import map.entity.Entity;
 import map.entity.TeleportGate;
+import view.AsteroidView;
 
 import java.util.ArrayList;
 
@@ -13,42 +14,50 @@ import java.util.ArrayList;
  */
 public class Asteroid {
 
-    /*
-    List of entities that are on the surface of the asteroid.
+    /**
+     * List of entities that are on the surface of the asteroid.
      */
     protected final ArrayList<Entity> entities = new ArrayList<>();
 
-    /*
-    List of the neighbours.
+    /**
+     * List of the neighbours.
      */
     protected final ArrayList<Asteroid> neighbours = new ArrayList<>();
 
-    /*
-     Surface thickness.
+    /**
+     * Surface thickness.
      */
     protected int surfaceThickness;
 
-    /*
-    Gives whether the asteroid located inside the perihelion zone.
+    /**
+     * Gives whether the asteroid located inside the perihelion zone.
      */
     protected boolean inPerihelion;
 
-    /*
-    Name of the asteroid.
+    /**
+     * Name of the asteroid.
      */
     protected String name;
 
-    /*
-    The resource that is located in the core.
+    /**
+     * The resource that is located in the core.
      */
     protected Resource resource;
 
-    /*
-    The teleport gate that is attached to the asteroid.
+    /**
+     * The teleport gate that is attached to the asteroid.
      */
     protected TeleportGate teleportGate;
 
-    public Asteroid() {
+    /**
+     * The view that displays the asteroid.
+     */
+    protected final AsteroidView asteroidView;
+
+    public Asteroid() { // BaseAsteroid's ctor calls this
+        this.asteroidView = new AsteroidView(this);
+        // TODO: MapView init
+        this.asteroidView.updateView();
     }
 
     /**
@@ -91,6 +100,9 @@ public class Asteroid {
                 default: resource=null;
             }
         }
+        this.asteroidView = new AsteroidView(this);
+        // TODO: MapView init
+        this.asteroidView.updateView();
     }
 
     public String getName() {
@@ -142,8 +154,8 @@ public class Asteroid {
         return resource;
     }
 
-    /*
-        Sets the resource of the core
+    /**
+     * Sets the resource of the core
      */
     public void setResource(Resource resource) {
         this.resource = resource;

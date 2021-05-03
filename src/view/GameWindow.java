@@ -1,8 +1,10 @@
 package view;
 
 import control.Game;
+import map.asteroid.Asteroid;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -30,6 +32,8 @@ public class GameWindow extends JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null); // place the window in the center of the screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new BorderLayout());
+//        this.add(new AsteroidView(new Asteroid("Asteroid", false, 2, 1)), BorderLayout.CENTER);
         // TODO: initialize views, set layout
         //  this.pack();
     }

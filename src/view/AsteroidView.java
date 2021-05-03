@@ -3,6 +3,8 @@ package view;
 import map.asteroid.Asteroid;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
 /**
  * Displays an asteroid on the map.
@@ -11,13 +13,15 @@ public class AsteroidView extends JButton {
     /**
      * The Asteroid object to display.
      */
-    private Asteroid asteroid;
+    private final Asteroid asteroid;
 //    private AsteroidStatusView statusView; // TODO
+    private Point coordinates;
 
     /**
      * Creates an AsteroidView object.
      */
-    public AsteroidView() {
+    public AsteroidView(Asteroid asteroid) {
+        this.asteroid = asteroid;
         this.addActionListener(actionEvent -> selected());
     }
 
@@ -26,6 +30,7 @@ public class AsteroidView extends JButton {
      */
     public void updateView() {
         // TODO
+//        statusView.updateView(asteroid);
     }
 
 //    public void setStatusView(AsteroidStatusView statusView) {
@@ -34,5 +39,6 @@ public class AsteroidView extends JButton {
 
     public void selected() {
         // TODO: implement callback method
+//        statusView.updateView(asteroid);
     }
 }
