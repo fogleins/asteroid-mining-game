@@ -168,7 +168,7 @@ public class Asteroid {
      *
      * @return The TeleportGate object, null if there is none
      */
-    private TeleportGate getTeleportGate() {
+    public TeleportGate getTeleportGate() {
         return teleportGate;
     }
 

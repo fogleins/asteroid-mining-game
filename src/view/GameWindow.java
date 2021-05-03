@@ -2,6 +2,7 @@ package view;
 
 import control.Game;
 import map.asteroid.Asteroid;
+import map.asteroid.BaseAsteroid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,13 +30,21 @@ public class GameWindow extends JFrame {
      */
     private GameWindow() {
         super("Asteroid mining game");
-        this.setSize(1280, 720);
+        Dimension windowSize = new Dimension(1280, 720);
+        this.setPreferredSize(windowSize);
+        this.setMinimumSize(windowSize); // TODO: teszteléshez ezt majd lehet célszerű kikommentezni
         this.setLocationRelativeTo(null); // place the window in the center of the screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
-//        this.add(new AsteroidView(new Asteroid("Asteroid", false, 2, 1)), BorderLayout.CENTER);
+        JPanel panel = new JPanel();
+        JScrollPane scrollPane = new JScrollPane(panel);
+        panel.add(new AsteroidView(new BaseAsteroid()));
+        panel.add(new AsteroidView(new Asteroid("Asteroid1", false, 2, 1)));
+        panel.add(new AsteroidView(new Asteroid("Asteroid2", false, 3, 1)));
+        panel.add(new AsteroidView(new Asteroid("Asteroid3", false, 6, 1)));
+        this.add(scrollPane, BorderLayout.CENTER);
         // TODO: initialize views, set layout
-        //  this.pack();
+        this.pack();
     }
 
     /**
