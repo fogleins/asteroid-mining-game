@@ -1,5 +1,6 @@
 package view;
 
+import control.Game;
 import map.asteroid.Asteroid;
 
 import javax.swing.*;
@@ -95,8 +96,13 @@ public class AsteroidView extends JButton {
         }
 
         // todo: honnan tudjuk, hogy a telepes melyik aszteroidán áll?
+        // the base asteroid is painted purple
         if (asteroid.getName() == null || asteroid.getName().equals("BASE")) // TODO
             setBackground(new Color(128, 25, 128, 255)); // purple
+        // the asteroid on which the current settler stands, is painted light pink
+//        else if (asteroid.getEntities().contains(Game.getInstance().getCurrentSettler()))
+//            setBackground(new Color(255, 186, 209)); // light pink
+        // if none of the above conditions are met, we paint the asteroid based on its surface thickness
         else {
             int surfaceThickness = asteroid.getSurfaceThickness();
             if (surfaceThickness >= 0 && surfaceThickness <= 2)
