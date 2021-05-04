@@ -19,7 +19,7 @@ public final class Game {
     private static final Game instance = new Game();
 
     /**
-     * Reference to the Map object, which contains game's map.
+     * Reference to the Map object, which contains the game's map.
      */
     private final Map map;
 
@@ -44,7 +44,7 @@ public final class Game {
     private int nextSunflare;
 
     /**
-     * The settler, who should steps next.
+     * The settler, who should step next.
      */
     private Settler current;
 
@@ -96,7 +96,7 @@ public final class Game {
     }
 
     /**
-     * Returns the player who should move next.
+     * Returns the player who should step next.
      *
      * @return The current settler.
      */
