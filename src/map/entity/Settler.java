@@ -3,6 +3,8 @@ package map.entity;
 import Exceptions.ActionFailedException;
 import control.Game;
 import map.resource.Resource;
+import view.SettlerActionsView;
+import view.SettlerInventoryView;
 
 import java.util.ArrayList;
 
@@ -21,12 +23,20 @@ public class Settler extends Entity {
      */
     private final ArrayList<TeleportGate> teleports = new ArrayList<>();
 
+    //reference to the actions view, where the player can choose from different actions
+    private SettlerActionsView actionsView;
+
+    //reference to the inventory view, where data of the settler is shown
+    private SettlerInventoryView settlerView;
+
     /**
      * Constructor of Settler.
      */
     public Settler(String name) {
         super(name);
     }
+
+
 
     /**
      * Returns a list of resources.
