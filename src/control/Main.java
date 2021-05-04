@@ -22,12 +22,22 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(new BorderLayout(25, 25));
-        JLabel centerLabel = new JLabel("Input players' names");
-        centerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        centerLabel.setFont(centerLabel.getFont().deriveFont(36.0f));
+        JLabel centerSubtitleLabel = new JLabel("Asteroid mining game");
+        centerSubtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        centerSubtitleLabel.setFont(centerSubtitleLabel.getFont().deriveFont(36.0f));
+        JLabel centerTitleLabel = new JLabel("Input players' names");
+        centerTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        centerTitleLabel.setFont(centerTitleLabel.getFont().deriveFont(24.0f));
         JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBorder(BorderFactory.createEmptyBorder(80, 0, 0, 0));
-        northPanel.add(centerLabel, BorderLayout.NORTH);
+        JPanel north1 = new JPanel();
+        JPanel north2 = new JPanel();
+        north2.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        north1.add(centerSubtitleLabel);
+        north2.add(centerTitleLabel);
+        northPanel.add(north1);
+        northPanel.add(north2);
         panel.setBorder(BorderFactory.createEmptyBorder(80, 200, 100, 200));
         JPanel labels = new JPanel(new GridLayout(0, 1, 2, 2));
         JPanel input = new JPanel(new GridLayout(0, 1, 2, 2));
@@ -46,6 +56,7 @@ public class Main {
         JPanel buttons = new JPanel();
         buttons.setLayout(new BorderLayout());
         JButton startGameButton = new JButton("Start game");
+        startGameButton.setFont(startGameButton.getFont().deriveFont(18.0f));
         buttons.add(startGameButton, BorderLayout.EAST);
         startGameButton.addActionListener(actionEvent -> {
             ArrayList<String> playerNames = new ArrayList<>();
