@@ -2,10 +2,12 @@ package view;
 
 import map.entity.Settler;
 
-public class SettlerActionsView {
+import javax.swing.*;
+
+public class SettlerActionsView extends JPanel {
     private Settler settler;
 
-    public void updateView(Settler settler){
-
+    public void updateView(Settler settler) {
+        this.settler = settler;
     }
 }
