@@ -251,6 +251,15 @@ public class Asteroid {
     }
 
     /**
+     * Gets all the entities who are on this asteroid.
+     *
+     * @return The entities who are staniding on this asteroid.
+     */
+    public ArrayList<Entity> getEntities() {
+        return entities;
+    }
+
+    /**
      * @return An asteroid list whose don't have teleportgate.
      */
     public ArrayList<Asteroid> getNeighboursWithoutTeleportGate() {

@@ -59,6 +59,7 @@ public class AsteroidView extends JButton {
      */
     public void updateView() {
         // TODO
+        revalidate();
 //        statusView.updateView(asteroid);
     }
 
@@ -92,16 +93,16 @@ public class AsteroidView extends JButton {
         if (asteroid.getTeleportGate() != null) {
             g.setColor(Color.BLUE); // the asteroid's name is written in blue
             // TODO: a kör befogó téglalapján kívülre itt nem tudunk rajzolni
-            g.drawString("TG", getX() + 10, getY() + 10); // todo: test place teleport
+            g.drawString("TG", radius - 9, radius + 25); // todo: test place teleport
         }
 
         // todo: honnan tudjuk, hogy a telepes melyik aszteroidán áll?
-        // the base asteroid is painted purple
-        if (asteroid.getName() == null || asteroid.getName().equals("BASE")) // TODO
-            setBackground(new Color(128, 25, 128, 255)); // purple
         // the asteroid on which the current settler stands, is painted light pink
-//        else if (asteroid.getEntities().contains(Game.getInstance().getCurrentSettler()))
-//            setBackground(new Color(255, 186, 209)); // light pink
+        if (asteroid.getEntities().contains(Game.getInstance().getCurrentSettler())) // TODO
+            setBackground(new Color(255, 186, 209)); // light pink
+        // the base asteroid is painted purple
+        else if (asteroid.getName() == null || asteroid.getName().equals("BASE")) // TODO
+            setBackground(new Color(128, 25, 128, 255)); // purple
         // if none of the above conditions are met, we paint the asteroid based on its surface thickness
         else {
             int surfaceThickness = asteroid.getSurfaceThickness();

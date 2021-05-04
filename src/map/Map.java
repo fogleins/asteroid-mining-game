@@ -54,7 +54,7 @@ public class Map {
      * Default getter of the BaseAsteroid, not used in the test.
      * @return baseAsteroid
      */
-    private Asteroid getBaseAsteroid() {
+    public Asteroid getBaseAsteroid() {
         return baseAsteroid;
     }
 
@@ -117,5 +117,4 @@ public class Map {
             a.expose();
         }
     }
-
 }

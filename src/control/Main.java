@@ -35,8 +35,8 @@ public class Main {
         JButton startGameButton = new JButton("Start game");
         buttons.add(startGameButton, BorderLayout.EAST);
         startGameButton.addActionListener(actionEvent -> {
-            // after the game has been started, closing the start game dialog window will not close the main game window
-            frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            // hide the start screen, so that no new game can be started when the main window is active
+            frame.setVisible(false);
             startGame(textFields);
         });
         panel.add(buttons, BorderLayout.SOUTH);
@@ -49,7 +49,8 @@ public class Main {
     private static void startGame(ArrayList<JTextField> textFields) {
         ArrayList<String> playerNames = new ArrayList<>();
         for (JTextField textField : textFields) {
-            playerNames.add(textField.getText());
+            if (!textField.getText().equals(""))
+                playerNames.add(textField.getText());
         }
         GameWindow.getInstance().setVisible(true);
         GameWindow.init(playerNames);

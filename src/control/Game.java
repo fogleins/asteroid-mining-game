@@ -1,9 +1,9 @@
 package control;
 
 import map.Map;
-import map.resource.Resource;
 import map.entity.Settler;
 import map.entity.Steppable;
+import map.resource.Resource;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,10 +12,26 @@ import java.util.Random;
  * Class control.Game
  */
 public final class Game {
+
     /**
      * The instance of the singleton Game class.
      */
     private static final Game instance = new Game();
+
+    /**
+     * Reference to the Map object, which contains game's map.
+     */
+    private final Map map;
+
+    /**
+     * List of Settlers, who are playing the game.
+     */
+    private final ArrayList<Settler> settlers;
+
+    /**
+     * List of Steppables who are playing.
+     */
+    private final ArrayList<Steppable> steppables;
 
     /**
      * Counts the number of rounds played.
@@ -28,24 +44,9 @@ public final class Game {
     private int nextSunflare;
 
     /**
-     * Reference to the Map object, which contains game's map.
-     */
-    private final Map map;
-
-    /**
      * The settler, who should steps next.
      */
     private Settler current;
-
-    /**
-     * List of Settlers, who are playing the game.
-     */
-    private final ArrayList<Settler> settlers;
-
-    /**
-     * List of Steppables who are playing.
-     */
-    private final ArrayList<Steppable> steppables;
 
     /**
      * Constructor. Initializes the Game object.
@@ -70,10 +71,15 @@ public final class Game {
         }
         instance.current = instance.settlers.get(0);
         instance.current.yourTurn(); // TODO: implement yourTurn in Settler
+        // settlers are placed on the base asteroid at the beginning of the game
+        for (Settler settler : instance.settlers) {
+            settler.move(instance.map.getBaseAsteroid());
+        }
     }
 
     /**
      * Other objects can use this method to access the Game object.
+     *
      * @return The instance of the Game class.
      */
     public static Game getInstance() {
@@ -82,10 +88,20 @@ public final class Game {
 
     /**
      * Returns the map the game is played on.
+     *
      * @return The game's Map object.
      */
     public Map getMap() {
         return map;
+    }
+
+    /**
+     * Returns the player who should move next.
+     *
+     * @return The current settler.
+     */
+    public Settler getCurrentSettler() {
+        return current;
     }
 
     /**
@@ -97,6 +113,7 @@ public final class Game {
 
     /**
      * Add a Steppable object to the steppables list (if the object is not already in it)
+     *
      * @param newSteppable The steppable object that should be added to the list
      */
     public void addSteppable(Steppable newSteppable) {
@@ -113,6 +130,7 @@ public final class Game {
 
     /**
      * Returns a {@code Resource} object from the Settler's resource list which should be exchanged.
+     *
      * @param resources A list of {@code Resource}s the Settler has.
      * @return The {@code Resource} which should be exchanged.
      */
@@ -136,6 +154,7 @@ public final class Game {
 
     /**
      * Randomly generates a number when a sunflare should occur.
+     *
      * @return int The number of round in which the next sunflare occurs.
      */
     private int generateNextSunflare() {
