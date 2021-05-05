@@ -54,8 +54,15 @@ public class Asteroid {
      */
     protected final AsteroidView asteroidView;
 
+    /**
+     * Indicates whether or not the asteroid has exploded. The value is used in AsteroidView to display the asteroid
+     * correctly.
+     */
+    protected boolean exploded;
+
     public Asteroid() { // BaseAsteroid's ctor calls this
         this.asteroidView = new AsteroidView(this);
+        this.exploded = false;
         // TODO: MapView init
         this.asteroidView.updateView();
     }
@@ -101,6 +108,7 @@ public class Asteroid {
             }
         }
         this.asteroidView = new AsteroidView(this);
+        this.exploded = false;
         // TODO: MapView init
         this.asteroidView.updateView();
     }
@@ -173,6 +181,14 @@ public class Asteroid {
     }
 
     /**
+     * Returns whether the asteroid has exploded or not.
+     * @return True, if the asteroid has exploded, false otherwise.
+     */
+    public boolean isExploded() {
+        return exploded;
+    }
+
+    /**
      * Asteroid explodes. The asteroid is removed from the map and the neighbours of the asteroid
      * will be each other's neighbours.
      */
@@ -193,6 +209,7 @@ public class Asteroid {
                 realNeighbours.get(i).addNeighbour(realNeighbours.get(j));
             }
         }
+        this.exploded = true; // this way the AsteroidView knows not to paint this asteroid
     }
 
     /**

@@ -89,6 +89,9 @@ public class AsteroidView extends JButton {
 
     @Override
     protected void paintComponent(Graphics g) {
+        // if the asteroid has exploded, we won't paint it
+        if (asteroid.isExploded())
+            return;
         // if there's a teleport on the asteroid, we indicate it by writing a small text next to the asteroid
         if (asteroid.getTeleportGate() != null) {
             g.setColor(Color.BLUE); // the asteroid's name is written in blue
