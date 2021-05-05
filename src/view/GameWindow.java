@@ -44,6 +44,13 @@ public class GameWindow extends JFrame {
 //        panel.add(new AsteroidView(new Asteroid("Asteroid2", false, 3, 1)));
 //        panel.add(new AsteroidView(new Asteroid("Asteroid3", false, 6, 1)));
         this.add(scrollPane, BorderLayout.CENTER);
+
+        SettlerActionsView actionsView = new SettlerActionsView();
+        this.add(actionsView, BorderLayout.SOUTH);
+
+        SettlerInventoryView inventoryView = new SettlerInventoryView();
+        this.add(inventoryView, BorderLayout.WEST);
+
         // TODO: initialize views, set layout
         this.pack();
     }
