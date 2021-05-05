@@ -67,14 +67,13 @@ public final class Game {
     public static void start(ArrayList<String> playerNames) {
         instance.settlers.clear(); // just to be sure
         for (String playerName : playerNames) {
-            instance.settlers.add(new Settler(playerName));
+            Settler settler = new Settler(playerName);
+            instance.settlers.add(settler);
+            // settlers are placed on the base asteroid at the beginning of the game
+            settler.move(instance.map.getBaseAsteroid());
         }
         instance.current = instance.settlers.get(0);
         instance.current.yourTurn(); // TODO: implement yourTurn in Settler
-        // settlers are placed on the base asteroid at the beginning of the game
-        for (Settler settler : instance.settlers) {
-            settler.move(instance.map.getBaseAsteroid());
-        }
     }
 
     /**
@@ -190,6 +189,9 @@ public final class Game {
         map.roundPassed();  // resource exposition
     }
 
+    /**
+     * A Settler calls this method after he stepped in a given round.
+     */
     public void nextPlayer() {
         int idx = settlers.indexOf(current);
         if (idx == settlers.size() - 1) {
@@ -197,5 +199,6 @@ public final class Game {
         } else {
             current = settlers.get(idx + 1);
         }
+        current.yourTurn();
     }
 }
