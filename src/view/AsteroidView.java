@@ -28,6 +28,11 @@ public class AsteroidView extends JButton {
     private final Point coordinates;
 
     /**
+     * Reference to asteroid status view.
+     */
+    private AsteroidStatusView statusView;
+
+    /**
      * Creates an AsteroidView object.
      */
     public AsteroidView(Asteroid asteroid) {
@@ -63,13 +68,13 @@ public class AsteroidView extends JButton {
 //        statusView.updateView(asteroid);
     }
 
-//    public void setStatusView(AsteroidStatusView statusView) {
-//        this.statusView = statusView;
-//    }
+    public AsteroidView setStatusView(AsteroidStatusView statusView) {
+        this.statusView = statusView;
+        return this;
+    }
 
-    public void selected() {
-        // TODO: implement callback method
-//        statusView.updateView(asteroid);
+    public void selected(){
+        statusView.updateView(asteroid);
     }
 
     private void calculateCenterCoordinates() {

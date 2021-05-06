@@ -19,6 +19,7 @@ public class GameWindow extends JFrame {
 
     private SettlerActionsView actionsView;
     private SettlerInventoryView inventoryView;
+    private AsteroidStatusView asteroidStatusView;
 
     /*
         private GameStatusView gameStatusView;
@@ -41,11 +42,8 @@ public class GameWindow extends JFrame {
         this.setLayout(new BorderLayout());
         JPanel panel = new JPanel();
         JScrollPane scrollPane = new JScrollPane(panel);
-        panel.add(new AsteroidView(Game.getInstance().getMap().getBaseAsteroid()));
-//        panel.add(new AsteroidView(new BaseAsteroid()));
-//        panel.add(new AsteroidView(new Asteroid("Asteroid1", false, 2, 1)));
-//        panel.add(new AsteroidView(new Asteroid("Asteroid2", false, 3, 1)));
-//        panel.add(new AsteroidView(new Asteroid("Asteroid3", false, 6, 1)));
+
+
         this.add(scrollPane, BorderLayout.CENTER);
 
         actionsView = new SettlerActionsView();
@@ -53,6 +51,15 @@ public class GameWindow extends JFrame {
 
         inventoryView = new SettlerInventoryView();
         this.add(inventoryView, BorderLayout.WEST);
+
+        asteroidStatusView = new AsteroidStatusView();
+        this.add(asteroidStatusView, BorderLayout.EAST);
+
+        panel.add(new AsteroidView(Game.getInstance().getMap().getBaseAsteroid()).setStatusView(asteroidStatusView));
+//        panel.add(new AsteroidView(new BaseAsteroid()));
+//        panel.add(new AsteroidView(new Asteroid("Asteroid1", false, 2, 1)));
+//        panel.add(new AsteroidView(new Asteroid("Asteroid2", false, 3, 1)));
+//        panel.add(new AsteroidView(new Asteroid("Asteroid3", false, 6, 1)));
 
         // TODO: initialize views, set layout
         this.pack();
