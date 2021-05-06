@@ -93,7 +93,7 @@ public class Settler extends Entity {
     /**
      * Settler tries to build a robot.
      */
-    public void buildRobot() {
+    public void buildRobot() throws ActionFailedException {
         Robot.create(asteroid, resources);
         Game.getInstance().nextPlayer();
     }

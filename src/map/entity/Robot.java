@@ -46,14 +46,14 @@ public class Robot extends Entity implements Steppable {
      * @param currentAsteroid The Asteroid object on which the caller Entity is on.
      * @param ownedResources  A list of {@code Resource}s the caller has.
      */
-    public static void create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) {
+    public static void create(Asteroid currentAsteroid, ArrayList<Resource> ownedResources) throws ActionFailedException {
         boolean hasResourcesToBuildRobot = billToBuild.use(ownedResources);
         if (hasResourcesToBuildRobot) {
             Robot robot = new Robot("Robot_" + nameID, currentAsteroid);
             nameID++;
             Game.getInstance().addSteppable(robot);
         } else {
-            System.out.println("Error: Not enough resources, robot cannot be built.");
+            throw new ActionFailedException("You don't have enough resources to build a robot.");
         }
     }
 

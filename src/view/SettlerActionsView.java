@@ -41,7 +41,13 @@ public class SettlerActionsView extends JPanel {
         placeTeleportBtn.addActionListener(actionListener -> settler.placeTeleport());
 
         JButton buildRobotBtn = new JButton("Build Robot");
-        buildRobotBtn.addActionListener(actionListener -> settler.buildRobot());
+        buildRobotBtn.addActionListener(actionListener -> {
+            try {
+                settler.buildRobot();
+            } catch (ActionFailedException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        });
 
         JButton buildTeleportBtn = new JButton("Place Teleport");
 
