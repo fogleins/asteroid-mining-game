@@ -17,6 +17,9 @@ public class GameWindow extends JFrame {
      */
     private static final GameWindow instance = new GameWindow();
 
+    private SettlerActionsView actionsView;
+    private SettlerInventoryView inventoryView;
+
     /*
         private GameStatusView gameStatusView;
         private MapView mapView;
@@ -45,10 +48,10 @@ public class GameWindow extends JFrame {
 //        panel.add(new AsteroidView(new Asteroid("Asteroid3", false, 6, 1)));
         this.add(scrollPane, BorderLayout.CENTER);
 
-        SettlerActionsView actionsView = new SettlerActionsView();
+        actionsView = new SettlerActionsView();
         this.add(actionsView, BorderLayout.SOUTH);
 
-        SettlerInventoryView inventoryView = new SettlerInventoryView();
+        inventoryView = new SettlerInventoryView();
         this.add(inventoryView, BorderLayout.WEST);
 
         // TODO: initialize views, set layout
