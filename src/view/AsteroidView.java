@@ -31,6 +31,8 @@ public class AsteroidView extends JButton {
      * Reference to asteroid status view.
      */
     private AsteroidStatusView statusView;
+    // Hit detection.
+    private Shape shape;
 
     /**
      * Creates an AsteroidView object.
@@ -68,12 +70,11 @@ public class AsteroidView extends JButton {
 //        statusView.updateView(asteroid);
     }
 
-    public AsteroidView setStatusView(AsteroidStatusView statusView) {
+    public void setStatusView(AsteroidStatusView statusView) {
         this.statusView = statusView;
-        return this;
     }
 
-    public void selected(){
+    public void selected() {
         statusView.updateView(asteroid);
     }
 
@@ -88,7 +89,7 @@ public class AsteroidView extends JButton {
     }
 
     @Override
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         paintComponent(g);
     }
 
@@ -139,9 +140,6 @@ public class AsteroidView extends JButton {
         g.setColor(Color.darkGray);
         g.drawOval(0, 0, getSize().width, getSize().height);
     }
-
-    // Hit detection.
-    private Shape shape;
 
     @Override
     public boolean contains(int x, int y) {

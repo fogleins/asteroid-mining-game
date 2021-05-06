@@ -55,7 +55,10 @@ public class GameWindow extends JFrame {
         asteroidStatusView = new AsteroidStatusView();
         this.add(asteroidStatusView, BorderLayout.EAST);
 
-        panel.add(new AsteroidView(Game.getInstance().getMap().getBaseAsteroid()).setStatusView(asteroidStatusView));
+        // TODO: ezt majd ki kell venni
+        AsteroidView av = new AsteroidView(Game.getInstance().getMap().getBaseAsteroid());
+        av.setStatusView(asteroidStatusView);
+        panel.add(av);
 //        panel.add(new AsteroidView(new BaseAsteroid()));
 //        panel.add(new AsteroidView(new Asteroid("Asteroid1", false, 2, 1)));
 //        panel.add(new AsteroidView(new Asteroid("Asteroid2", false, 3, 1)));
