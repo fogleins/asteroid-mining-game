@@ -116,6 +116,7 @@ public class MapView extends JPanel {
     private void drawNeighboursConnection(Graphics g){
         g.setColor(Color.BLACK);
         Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(3));
         for (Asteroid a : map.getAsteroids()){
             for(Asteroid b: a.getNeighbours().getAsteroidNeighbours()){
