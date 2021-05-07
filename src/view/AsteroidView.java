@@ -67,7 +67,6 @@ public class AsteroidView extends JButton {
     public void updateView() {
         // TODO
         revalidate();
-//        statusView.updateView(asteroid);
     }
 
     public void setStatusView(AsteroidStatusView statusView) {
@@ -75,6 +74,7 @@ public class AsteroidView extends JButton {
     }
 
     public void selected() {
+        this.statusView = GameWindow.getAsteroidStatusView();
         statusView.updateView(asteroid);
     }
 

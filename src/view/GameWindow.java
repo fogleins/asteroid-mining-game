@@ -21,12 +21,6 @@ public class GameWindow extends JFrame {
     private GameStatusView gameStatusView;
     private MapView mapView;
 
-    /*
-    private AsteroidStatusView asteroidStatusView;
-    private SettlerActionsView settlerActionView; // TODO: docsban actionView-ként szerepel
-    private SettlerInventoryView settlerInventoryView;
-     */
-
     /**
      * Creates a GameWindow object.
      */
@@ -39,7 +33,7 @@ public class GameWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
 
-        mapView= new MapView();
+        mapView = new MapView();
         JScrollPane scrollPane = new JScrollPane(mapView);
         this.add(scrollPane, BorderLayout.CENTER);
 
@@ -55,8 +49,6 @@ public class GameWindow extends JFrame {
         asteroidStatusView = new AsteroidStatusView();
         this.add(asteroidStatusView, BorderLayout.EAST);
 
-
-        // TODO: initialize views, set layout
         this.pack();
     }
 
@@ -77,5 +69,14 @@ public class GameWindow extends JFrame {
      */
     public static GameWindow getInstance() {
         return instance;
+    }
+
+    /**
+     * Get the singleton class' AsteroidStatusView object.
+     *
+     * @return The AsteroidStatusView used throughout the game.
+     */
+    public static AsteroidStatusView getAsteroidStatusView() {
+        return instance.asteroidStatusView;
     }
 }
