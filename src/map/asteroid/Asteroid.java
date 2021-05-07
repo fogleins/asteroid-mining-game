@@ -55,6 +55,14 @@ public class Asteroid {
     protected final AsteroidView asteroidView;
 
     /**
+     * Getter of the asteroidview. Used in MapView generation.
+     * @return The AsteroidView object.
+     */
+    public AsteroidView getAsteroidView() {
+        return asteroidView;
+    }
+
+    /**
      * Indicates whether or not the asteroid has exploded. The value is used in AsteroidView to display the asteroid
      * correctly.
      */

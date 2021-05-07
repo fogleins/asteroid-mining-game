@@ -40,7 +40,7 @@ public class AsteroidView extends JButton {
     public AsteroidView(Asteroid asteroid) {
         this.asteroid = asteroid;
         this.addActionListener(actionEvent -> selected());
-        this.radius = 100;
+        this.radius = 50;
         this.coordinates = new Point(getX() + radius, getY() + radius);
         setFocusable(false);
 

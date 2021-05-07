@@ -19,9 +19,9 @@ public class GameWindow extends JFrame {
     private SettlerInventoryView inventoryView;
     private AsteroidStatusView asteroidStatusView;
     private GameStatusView gameStatusView;
+    private MapView mapView;
 
     /*
-    private MapView mapView;
     private AsteroidStatusView asteroidStatusView;
     private SettlerActionsView settlerActionView; // TODO: docsban actionView-ként szerepel
     private SettlerInventoryView settlerInventoryView;
@@ -38,10 +38,9 @@ public class GameWindow extends JFrame {
         this.setLocationRelativeTo(null); // place the window in the center of the screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
-        JPanel panel = new JPanel();
-        JScrollPane scrollPane = new JScrollPane(panel);
 
-
+        mapView= new MapView();
+        JScrollPane scrollPane = new JScrollPane(mapView);
         this.add(scrollPane, BorderLayout.CENTER);
 
         gameStatusView = new GameStatusView();
@@ -56,14 +55,6 @@ public class GameWindow extends JFrame {
         asteroidStatusView = new AsteroidStatusView();
         this.add(asteroidStatusView, BorderLayout.EAST);
 
-        // TODO: ezt majd ki kell venni
-        AsteroidView av = new AsteroidView(Game.getInstance().getMap().getBaseAsteroid());
-        av.setStatusView(asteroidStatusView);
-        panel.add(av);
-//        panel.add(new AsteroidView(new BaseAsteroid()));
-//        panel.add(new AsteroidView(new Asteroid("Asteroid1", false, 2, 1)));
-//        panel.add(new AsteroidView(new Asteroid("Asteroid2", false, 3, 1)));
-//        panel.add(new AsteroidView(new Asteroid("Asteroid3", false, 6, 1)));
 
         // TODO: initialize views, set layout
         this.pack();

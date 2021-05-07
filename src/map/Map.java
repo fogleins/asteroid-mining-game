@@ -24,20 +24,60 @@ public class Map {
     private final Asteroid baseAsteroid;
 
     /**
+     * It's declare how many "row" or "column" will there be.
+     * For example mapBound=10 means that will be total of 10x10=100 asteroids.
+     */
+    private int mapBound;
+
+    /**
      * Constructor of the map, this will initialize the asteroids, and neighbour connections.
      */
     public Map() {
+        mapBound=10;
         baseAsteroid = new BaseAsteroid();
         asteroids.add(baseAsteroid);
-        for (int i = 1; i < 3; i++) {
-            Asteroid a = new Asteroid("A" + i, rnd.nextBoolean(), rnd.nextInt(7), rnd.nextInt(5));
-            asteroids.add(a);
-        }
-        for (Asteroid a : asteroids) {
-            for (Asteroid b : asteroids) {
-                if (a != b) {
-                    a.addNeighbour(b);
+        /**
+         * 2D array, which is being used in asteroid generations, and in connecting them
+         * as neighbours.
+         */
+        Asteroid [][] asteroidsMatrix = new Asteroid[mapBound][mapBound];
+        asteroidsMatrix[0][0]=baseAsteroid;
+
+        /**
+         * Generation of the asteroids.
+         */
+        for (int i = 0;i<mapBound;i++){
+            for(int j = 0;j<mapBound;j++){
+                if(!(i==0 && j==0)){
+                    Asteroid a = new Asteroid("A" + i +""+ j, rnd.nextBoolean(), rnd.nextInt(7), rnd.nextInt(5));
+                    asteroidsMatrix[i][j]=a;
+                    asteroids.add(a);
                 }
+            }
+        }
+
+        /**
+         * Connects the asteroids as neighbours. The asteroids are connected only with
+         * the upper, lower, right, left side asteroids.
+         */
+        for (int i = 0;i<mapBound;i++){
+            for(int j = 0;j<mapBound;j++){
+                /**
+                 * The purpose of the try-catches is to connect the upper, lower rows,
+                 * and side columns asteroids with each other. IndexOutOfBounds exceptions are ignored for purpose.
+                 */
+                try {
+                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i-1][j]);
+                } catch (ArrayIndexOutOfBoundsException e) {}
+                try {
+                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i+1][j]);
+                } catch (ArrayIndexOutOfBoundsException e) {}
+                try {
+                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i][j-1]);
+                } catch (ArrayIndexOutOfBoundsException e) {}
+                try {
+                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i][j+1]);
+                } catch (ArrayIndexOutOfBoundsException e) {}
             }
         }
     }
