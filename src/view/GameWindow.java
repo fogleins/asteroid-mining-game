@@ -1,8 +1,6 @@
 package view;
 
 import control.Game;
-import map.asteroid.Asteroid;
-import map.asteroid.BaseAsteroid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,13 +18,13 @@ public class GameWindow extends JFrame {
     private SettlerActionsView actionsView;
     private SettlerInventoryView inventoryView;
     private AsteroidStatusView asteroidStatusView;
+    private GameStatusView gameStatusView;
 
     /*
-        private GameStatusView gameStatusView;
-        private MapView mapView;
-        private AsteroidStatusView asteroidStatusView;
-        private SettlerActionsView settlerActionView; // TODO: docsban actionView-ként szerepel
-        private SettlerInventoryView settlerInventoryView;
+    private MapView mapView;
+    private AsteroidStatusView asteroidStatusView;
+    private SettlerActionsView settlerActionView; // TODO: docsban actionView-ként szerepel
+    private SettlerInventoryView settlerInventoryView;
      */
 
     /**
@@ -45,6 +43,9 @@ public class GameWindow extends JFrame {
 
 
         this.add(scrollPane, BorderLayout.CENTER);
+
+        gameStatusView = new GameStatusView();
+        this.add(gameStatusView, BorderLayout.NORTH);
 
         actionsView = new SettlerActionsView();
         this.add(actionsView, BorderLayout.SOUTH);
@@ -74,6 +75,7 @@ public class GameWindow extends JFrame {
      * @param names A list containing the players' names.
      */
     public static void init(ArrayList<String> names) {
+        Game.setStatusView(instance.gameStatusView);
         Game.start(names);
     }
 

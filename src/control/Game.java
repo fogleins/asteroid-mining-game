@@ -4,6 +4,7 @@ import map.Map;
 import map.entity.Settler;
 import map.entity.Steppable;
 import map.resource.Resource;
+import view.GameStatusView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,6 +49,8 @@ public final class Game {
      */
     private Settler current;
 
+    private static GameStatusView statusView;
+
     /**
      * Constructor. Initializes the Game object.
      */
@@ -74,6 +77,11 @@ public final class Game {
         }
         instance.current = instance.settlers.get(0);
         instance.current.yourTurn(); // TODO: implement yourTurn in Settler
+    }
+
+    public static void setStatusView(GameStatusView view) {
+        statusView = view;
+        statusView.updateView(instance.currentRound, false);
     }
 
     /**
@@ -186,6 +194,7 @@ public final class Game {
         currentRound++;
         current = settlers.get(0);
 
+        statusView.updateView(currentRound, nextSunflare + 1 >= currentRound);
         map.roundPassed();  // resource exposition
     }
 

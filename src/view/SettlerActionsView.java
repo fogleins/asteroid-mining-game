@@ -13,10 +13,11 @@ public class SettlerActionsView extends JPanel {
     SettlerActionsView() {
         JButton moveBtn = new JButton("Move");
         moveBtn.addActionListener(actionEvent -> {
-            NeighbourChooser chooser = new NeighbourChooser();
-            Asteroid chosen = chooser.ChooseAsteroid(settler.getAsteroid().getNeighbours());
-            settler.move(chosen);
-
+            // todo: remove testing code (should be settler.getAsteroid...)
+            NeighbourChooser chooser = new NeighbourChooser(Game.getInstance().getCurrentSettler().getAsteroid().getNeighbours());
+            Asteroid chosen = chooser.chooseAsteroid();
+            if (chosen != null)
+                settler.move(chosen);
         });
 
         JButton drillBtn = new JButton("Drill");

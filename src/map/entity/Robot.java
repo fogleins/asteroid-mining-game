@@ -64,7 +64,7 @@ public class Robot extends Entity implements Steppable {
     public void asteroidExploded() {
         ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
         Random rnd = new Random();
-        super.move(neighbours.get(rnd.nextInt(neighbours.size())));
+        move(neighbours.get(rnd.nextInt(neighbours.size())));
     }
 
     /**
