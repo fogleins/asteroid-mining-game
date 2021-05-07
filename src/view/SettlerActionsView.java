@@ -24,7 +24,7 @@ public class SettlerActionsView extends JPanel {
             try {
                 settler.drill();
             } catch (ActionFailedException e) {
-                JOptionPane.showMessageDialog(this, "You can't drill!");
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         });
 
@@ -33,7 +33,7 @@ public class SettlerActionsView extends JPanel {
             try {
                 settler.mine();
             } catch (ActionFailedException e) {
-                JOptionPane.showMessageDialog(this, "You can't mine!");
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         });
 
