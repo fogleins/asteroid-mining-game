@@ -58,7 +58,24 @@ public class BillOfResources {
     public boolean check(ArrayList<Resource> ownedResources) {
         // create a copy of the input array, because we need to modify it, but just locally (elements are not duplicated)
         ArrayList<Resource> ownedRes = new ArrayList<>(ownedResources);
-        int okCnt = 0; // number of found resources
+
+        // okCnt: number of found resources
+        int okCnt = checker(ownedRes);
+        return okCnt == resourcesNeeded.size(); // if it found all the necessary resources, then its okay
+    }
+
+     /**
+      * Calculates how many resources does the caller have. resourceNeeded must contain only one resource
+      * @param ownedResources The resources that the caller owns.
+      * @return number of found resources
+     * */
+    public int count(ArrayList<Resource> ownedResources){
+        return checker(ownedResources);
+    }
+
+    //Calculates how many necessary resources are there
+    private int checker(ArrayList<Resource> ownedRes){
+        int okCnt = 0;
         for (Resource rn : resourcesNeeded) {
             boolean found = false;
             for (int i = 0; i < ownedRes.size(); ++i)
@@ -70,6 +87,7 @@ public class BillOfResources {
             if (!found) break;
             else ++okCnt; // increment the number of found resources
         }
-        return okCnt == resourcesNeeded.size(); // if it found all the necessary resources, then its okay
+
+        return okCnt;
     }
 }
