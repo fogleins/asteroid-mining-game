@@ -84,6 +84,10 @@ public class Settler extends Entity {
         } else throw new ActionFailedException("Couldn't place resource.");
     }
 
+    public int getTeleportNumber(){
+        return teleports.size();
+    }
+
     @Override
     public void drill() throws ActionFailedException {
         asteroid.drilled();
