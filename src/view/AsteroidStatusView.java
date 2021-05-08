@@ -45,7 +45,7 @@ public class AsteroidStatusView extends JPanel {
     private String getTeleportInfo(Asteroid asteroid) {
         String res = "";
         res += "Teleport:\n";
-        res += asteroid.getTeleportGate() != null ? (asteroid.getTeleportGate().getOtherSide() == null ? "\t->" +
+        res += asteroid.getTeleportGate() != null ? (asteroid.getTeleportGate().getOtherSide() != null ? "\t->" +
                 asteroid.getTeleportGate().getOtherSide().getName() + "\n" : "\t-\n") : "\t-\n";
         return res;
     }

@@ -106,7 +106,9 @@ public class MapView extends JPanel {
         }
         super.paintComponent(g);
         drawNeighboursConnection(g);
-        drawTeleportGates(g);
+//        drawTeleportGates(g); // a mapot nem frissítjük, amikor egy aszteroida változik, és felesleges is lenne;
+        // emiatt viszont nem frissül a nézet, amikor lerakunk egy teleportot, úgyhogy egyelőre marad az asteroid
+        // view-ban lévő megoldás a teleportkapu kijelzésére
     }
 
     /**

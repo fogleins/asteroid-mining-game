@@ -1,7 +1,12 @@
 package view;
 
+import Exceptions.ActionFailedException;
 import control.Game;
 import map.asteroid.Asteroid;
+import map.entity.Settler;
+import map.resource.Ice;
+import map.resource.Iron;
+import map.resource.Uranium;
 
 import javax.swing.*;
 import java.awt.*;
@@ -120,12 +125,6 @@ public class AsteroidView extends JButton {
         // if the asteroid has exploded, we won't paint it
         if (asteroid.isExploded())
             return;
-        // if there's a teleport on the asteroid, we indicate it by writing a small text next to the asteroid
-        if (asteroid.getTeleportGate() != null) {
-            g.setColor(Color.BLUE); // the asteroid's name is written in blue
-            // TODO: a kör befogó téglalapján kívülre itt nem tudunk rajzolni
-            g.drawString("TG", radius - 9, radius + 25); // todo: test place teleport
-        }
 
         // todo: honnan tudjuk, hogy a telepes melyik aszteroidán áll?
         // the asteroid on which the current settler stands, is painted light pink
@@ -153,6 +152,13 @@ public class AsteroidView extends JButton {
         setSize(radius * 2, radius * 2);
         g.fillOval(0, 0, getSize().width, getSize().height);
         super.paintComponent(g);
+
+        // if there's a teleport on the asteroid, we indicate it by writing a small text next to the asteroid
+        if (asteroid.getTeleportGate() != null) {
+            g.setColor(Color.BLUE); // the asteroid's name is written in blue
+            // TODO: a kör befogó téglalapján kívülre itt nem tudunk rajzolni
+            g.drawString("TG", radius - 9, radius + 25); // todo: test place teleport
+        }
 
         this.setText(asteroid.getName());
     }
