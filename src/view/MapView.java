@@ -3,11 +3,9 @@ package view;
 import control.Game;
 import map.Map;
 import map.asteroid.Asteroid;
-import map.entity.TeleportGate;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MapView extends JPanel {
@@ -63,96 +61,91 @@ public class MapView extends JPanel {
      * Constructor of the MapView. Sets the asteroids in position, connect the asteroids etc.
      */
     public MapView() {
-        this.setPreferredSize(new Dimension(width,height));
+        this.setPreferredSize(new Dimension(width, height));
         this.setLayout(null);
 
-        /**
-         * Delta variables change where the asteroids being placed.
-         */
-        int dX=0;
-        int dY=0;
-        for(Asteroid a : map.getAsteroids()){
+        // Delta variables change where the asteroids being placed.
+        int dX = 0;
+        int dY = 0;
+        for (Asteroid a : map.getAsteroids()) {
             AsteroidView av = a.getAsteroidView();
-            /**
-             * Setting random position for the asteroidView in an imaginary container, and adding them to the panel.
-             */
-            int x = rnd.nextInt(containerSize-(gap+teleportSize+asteroidSize))+dX;
-            int y = rnd.nextInt(containerSize-(gap+teleportSize+asteroidSize))+dY;
-            av.setBounds(x, y,asteroidSize,asteroidSize);
+
+            // Setting random position for the asteroidView in an imaginary container, and adding them to the panel.
+            int x = rnd.nextInt(containerSize - (gap + teleportSize + asteroidSize)) + dX;
+            int y = rnd.nextInt(containerSize - (gap + teleportSize + asteroidSize)) + dY;
+            av.setBounds(x, y, asteroidSize, asteroidSize);
             add(av);
-            dX+=containerSize;
-            if(dX>=width){
-                dY+=containerSize;
-                dX=0;
+            dX += containerSize;
+            if (dX >= width) {
+                dY += containerSize;
+                dX = 0;
             }
         }
-
-
-
     }
 
     /**
      * Draws the neighbour connections and the teleport gates.
+     *
      * @param g Graphics object of the map(panel)
      */
     @Override
     protected void paintComponent(Graphics g) {
-        /**
-         * Repaints the panel if its necessary.
-         */
-        if(clearPanel){
+
+        // Repaints the panel if necessary.
+        if (clearPanel) {
             repaint();
-            clearPanel=false;
+            clearPanel = false;
         }
         super.paintComponent(g);
         drawNeighboursConnection(g);
-//        drawTeleportGates(g); // a mapot nem frissítjük, amikor egy aszteroida változik, és felesleges is lenne;
-        // emiatt viszont nem frissül a nézet, amikor lerakunk egy teleportot, úgyhogy egyelőre marad az asteroid
-        // view-ban lévő megoldás a teleportkapu kijelzésére
+        // TODO: a mapot nem frissítjük, amikor egy aszteroida változik, és felesleges is lenne;
+        //  emiatt viszont nem frissül a nézet, amikor lerakunk egy teleportot, úgyhogy egyelőre marad az asteroid
+        //  view-ban lévő megoldás a teleportkapu kijelzésére
+//        drawTeleportGates(g);
     }
 
     /**
      * Draws the neighbour connections.
+     *
      * @param g Graphics object of the map(panel)
      */
-    private void drawNeighboursConnection(Graphics g){
+    private void drawNeighboursConnection(Graphics g) {
         g.setColor(Color.BLACK);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(3));
-        for (Asteroid a : map.getAsteroids()){
-            for(Asteroid b: a.getNeighbours().getAsteroidNeighbours()){
+        for (Asteroid a : map.getAsteroids()) {
+            for (Asteroid b : a.getNeighbours().getAsteroidNeighbours()) {
                 int x1 = a.getAsteroidView().getCenter().x;
                 int y1 = a.getAsteroidView().getCenter().y;
                 int x2 = b.getAsteroidView().getCenter().x;
                 int y2 = b.getAsteroidView().getCenter().y;
-                g2.drawLine(x1,y1,x2,y2);
+                g2.drawLine(x1, y1, x2, y2);
             }
         }
     }
 
     /**
      * Draws the teleport gates.
+     *
      * @param g Graphics object of the map(panel)
      */
-    private void drawTeleportGates(Graphics g){
+    private void drawTeleportGates(Graphics g) {
         g.setColor(Color.BLUE);
-        for (Asteroid a : map.getAsteroids()){
-            if(a.getTeleportGate()!=null){
+        for (Asteroid a : map.getAsteroids()) {
+            if (a.getTeleportGate() != null) {
                 Point p = a.getAsteroidView().getCenter();
-                int dX = asteroidSize/2+5;
-                int dY = asteroidSize/2+5;
-                g.fillOval(p.x+dX,p.y-dY,25,25);
+                int dX = asteroidSize / 2 + 5;
+                int dY = asteroidSize / 2 + 5;
+                g.fillOval(p.x + dX, p.y - dY, 25, 25);
             }
         }
     }
 
     /**
      * Updates the map(panel).
-     * @param asteroidView The AsteroidView object, who is called th update.
      */
-    public void updateView(AsteroidView asteroidView){
-        clearPanel=true;
+    public void updateView() {
+        clearPanel = true;
     }
-
 }

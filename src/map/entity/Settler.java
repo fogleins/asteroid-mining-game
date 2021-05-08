@@ -38,8 +38,6 @@ public class Settler extends Entity {
         super(name);
     }
 
-
-
     /**
      * Returns a list of resources.
      *
@@ -74,7 +72,7 @@ public class Settler extends Entity {
     }
 
     @Override
-    public void move(Asteroid whereTo){
+    public void move(Asteroid whereTo) {
         if (asteroid != null) {
             asteroid.removeEntity(this);
             asteroid.getAsteroidView().updateView();
@@ -97,7 +95,7 @@ public class Settler extends Entity {
         } else throw new ActionFailedException("Couldn't place resource.");
     }
 
-    public int getTeleportNumber(){
+    public int getTeleportNumber() {
         return teleports.size();
     }
 
@@ -166,7 +164,7 @@ public class Settler extends Entity {
 
     public void yourTurn() {
         actionsView = GameWindow.getActionsView();
-        settlerView=GameWindow.getInventoryView();
+        settlerView = GameWindow.getInventoryView();
         actionsView.updateView(this);
         settlerView.updateView(this);
     }
