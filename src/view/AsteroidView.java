@@ -1,12 +1,7 @@
 package view;
 
-import Exceptions.ActionFailedException;
 import control.Game;
 import map.asteroid.Asteroid;
-import map.entity.Settler;
-import map.resource.Ice;
-import map.resource.Iron;
-import map.resource.Uranium;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,31 +12,29 @@ import java.awt.geom.Ellipse2D;
  */
 public class AsteroidView extends JButton {
     /**
+     * The currently selected asteroid.
+     */
+    private static Asteroid selected;
+    /**
      * The Asteroid object to display.
      */
     private final Asteroid asteroid;
-
     /**
      * The radius of the asteroid.
      */
     private final int radius;
-
     /**
      * The center of the asteroid in the window.
      */
     private final Point coordinates;
-
     /**
      * Reference to asteroid status view.
      */
     private AsteroidStatusView statusView;
-    // Hit detection.
-    private Shape shape;
-
     /**
-     * The currently selected asteroid.
+     * Used for hit detection.
      */
-    private static Asteroid selected;
+    private Shape shape;
 
     /**
      * Creates an AsteroidView object.
@@ -128,13 +121,11 @@ public class AsteroidView extends JButton {
 
         // todo: honnan tudjuk, hogy a telepes melyik aszteroidán áll?
         // the asteroid on which the current settler stands, is painted light pink
-        if (asteroid.getEntities().contains(Game.getInstance().getCurrentSettler())) // TODO
+        if (asteroid.getEntities().contains(Game.getInstance().getCurrentSettler())) {
             setBackground(new Color(255, 186, 209)); // light pink
-        // the base asteroid is painted purple
-        else if (asteroid.getName() == null || asteroid.getName().equals("BASE")) // TODO
+        } else if (asteroid.getName() == null || asteroid.getName().equals("BASE")) { // the base asteroid is purple
             setBackground(new Color(128, 25, 128, 255)); // purple
-        // if none of the above conditions are met, we paint the asteroid based on its surface thickness
-        else {
+        } else { // if none of the above conditions are met, we paint the asteroid based on its surface thickness
             int surfaceThickness = asteroid.getSurfaceThickness();
             if (surfaceThickness >= 0 && surfaceThickness <= 2)
                 setBackground(Color.GREEN);
@@ -171,7 +162,7 @@ public class AsteroidView extends JButton {
 
     @Override
     public boolean contains(int x, int y) {
-        // If the button has changed size,  make a new shape object.
+        // If the button has changed size, make a new shape object.
         if (shape == null || !shape.getBounds().equals(getBounds())) {
             shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
         }
