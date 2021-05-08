@@ -16,7 +16,7 @@ public class ResourceChooser extends JDialog {
         super(GameWindow.getInstance(), "Choose a resource", true);
         setMinimumSize(new Dimension(220, 120));
         setResizable(false);
-        resourceList = new JList<>((Resource[])resources.toArray());
+        resourceList = new JList<>(resources.toArray(new Resource[0]));
         initDialog();
         this.pack();
         setLocationRelativeTo(GameWindow.getInstance());

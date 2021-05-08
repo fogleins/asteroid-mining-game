@@ -74,7 +74,8 @@ public class BillOfResources {
     }
 
     //Calculates how many necessary resources are there
-    private int checker(ArrayList<Resource> ownedRes){
+    private int checker(ArrayList<Resource> owned){
+        ArrayList<Resource> ownedRes = (ArrayList<Resource>) owned.clone();
         int okCnt = 0;
         for (Resource rn : resourcesNeeded) {
             boolean found = false;
