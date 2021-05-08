@@ -89,8 +89,9 @@ public class Settler extends Entity {
      */
     public void placeBack(Resource resource) throws ActionFailedException {
         if (!resources.contains(resource))
-            return;   // if the resource is not in the settler's inventory, the action is not valid
+            throw new ActionFailedException("Resource is not in players inventory!");   // if the resource is not in the settler's inventory, the action is not valid
         if (asteroid.placeResource(resource)) {   // try to place back the resource
+            resources.remove(resource);     // remove placed resource
             Game.getInstance().nextPlayer();    // if it was successful, notify the game
         } else throw new ActionFailedException("Couldn't place resource.");
     }
