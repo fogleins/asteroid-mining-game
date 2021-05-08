@@ -5,6 +5,7 @@ import map.resource.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class SettlerInventoryView extends JPanel {
 
@@ -27,38 +28,26 @@ public class SettlerInventoryView extends JPanel {
         informationLabel.setPreferredSize(new Dimension(180, 170));
         informationLabel.setEditable(false);
         informationLabel.setHighlighter(null);
-        informationLabel.setBackground(new Color(200, 200, 200, 255));
+        informationLabel.setBackground(new Color(238, 238, 238, 255));
     }
 
     public void updateView(Settler currentSettler) {
         settler = currentSettler;
         titleLabel.setText(settler.getName());
-
-        Uranium uranium = new Uranium();
-        Ice ice = new Ice();
-        Coal coal = new Coal();
-        Iron iron = new Iron();
-
-        BillOfResources bill = new BillOfResources();
-        bill.addResources(uranium);
-
         informationLabel.setText("");
 
-        informationLabel.append("Uranium: " + bill.count(settler.getResources()) + "\n");
-        bill.removeResources(uranium);
-        bill.addResources(coal);
+        HashMap<String, Integer> resCount = new HashMap<>();
+        resCount.put((new Uranium()).toString(), 0);
+        resCount.put((new Coal()).toString(), 0);
+        resCount.put((new Ice()).toString(), 0);
+        resCount.put((new Iron()).toString(), 0);
+        for (Resource r : settler.getResources()) {
+            int countSoFar = resCount.get(r.toString());
+            resCount.put(r.toString(), countSoFar + 1);
+        }
+        resCount.forEach((k, v) -> informationLabel.append(k + ": " + v + '\n'));
 
-        informationLabel.append("Coal: " + bill.count(settler.getResources()) + "\n");
-        bill.removeResources(coal);
-        bill.addResources(ice);
-
-        informationLabel.append("Ice: " + bill.count(settler.getResources()) + "\n");
-        bill.removeResources(ice);
-        bill.addResources(iron);
-
-        informationLabel.append("Iron: " + bill.count(settler.getResources()) + "\n\n");
-
-        informationLabel.append("Teleports: " + settler.getTeleportNumber());
+        informationLabel.append("\nTeleports: " + settler.getTeleportNumber());
     }
 
 }

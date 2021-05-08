@@ -64,15 +64,6 @@ public class BillOfResources {
         return okCnt == resourcesNeeded.size(); // if it found all the necessary resources, then its okay
     }
 
-     /**
-      * Calculates how many resources does the caller have. resourceNeeded must contain only one resource
-      * @param ownedResources The resources that the caller owns.
-      * @return number of found resources
-     * */
-    public int count(ArrayList<Resource> ownedResources){
-        return checker(ownedResources);
-    }
-
     //Calculates how many necessary resources are there
     private int checker(ArrayList<Resource> owned){
         ArrayList<Resource> ownedRes = (ArrayList<Resource>) owned.clone();
