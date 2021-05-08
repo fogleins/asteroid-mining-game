@@ -80,7 +80,7 @@ public class AsteroidView extends JButton {
         if (asteroid == selected) {
             statusView.updateView(asteroid);
         }
-        revalidate();
+        repaint();
     }
 
     // TODO: jelenleg nem használt

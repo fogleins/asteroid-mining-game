@@ -208,6 +208,8 @@ public final class Game {
         } else {
             current = settlers.get(idx + 1);
         }
+        // update the current settler's asteroid's view so that its painted in light pink
+        current.getAsteroid().getAsteroidView().updateView();
         current.yourTurn();
     }
 }
