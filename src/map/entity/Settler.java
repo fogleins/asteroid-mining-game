@@ -3,6 +3,7 @@ package map.entity;
 import Exceptions.ActionFailedException;
 import control.Game;
 import map.resource.Resource;
+import view.GameWindow;
 import view.SettlerActionsView;
 import view.SettlerInventoryView;
 
@@ -152,8 +153,9 @@ public class Settler extends Entity {
     }
 
     public void yourTurn() {
-        // TODO: implement
-        //  "a telepes átállítja a két nézetet saját magára, valamint jelzi a nézeteknek, hogy frissítsék a tartalmukat
-        //  a jelenlegi telepes adataival"
+        actionsView = GameWindow.getActionsView();
+        settlerView=GameWindow.getInventoryView();
+        actionsView.updateView(this);
+        settlerView.updateView(this);
     }
 }
