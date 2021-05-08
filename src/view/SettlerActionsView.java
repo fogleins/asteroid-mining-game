@@ -8,6 +8,7 @@ import map.entity.Settler;
 import javax.swing.*;
 
 public class SettlerActionsView extends JPanel {
+    private final JButton placeTeleportBtn;
     private Settler settler;
 
     SettlerActionsView() {
@@ -38,7 +39,7 @@ public class SettlerActionsView extends JPanel {
             }
         });
 
-        JButton placeTeleportBtn = new JButton("Place Teleport");
+        this.placeTeleportBtn = new JButton("Place Teleport");
         placeTeleportBtn.addActionListener(actionListener -> settler.placeTeleport());
 
         JButton buildRobotBtn = new JButton("Build Robot");
@@ -70,5 +71,11 @@ public class SettlerActionsView extends JPanel {
 
     public void updateView(Settler settler) {
         this.settler = settler;
+
+        // if the settler doesn't have at least one teleport gate or the asteroid he's standing on already has a
+        // teleport, the place teleport button is disabled
+        if (settler.getTeleportNumber() == 0 || settler.getAsteroid().getTeleportGate() != null) {
+            this.placeTeleportBtn.setEnabled(false);
+        }
     }
 }
