@@ -2,6 +2,7 @@ package map.entity;
 
 import Exceptions.ActionFailedException;
 import control.Game;
+import map.asteroid.Asteroid;
 import map.resource.Resource;
 import view.GameWindow;
 import view.SettlerActionsView;
@@ -70,6 +71,16 @@ public class Settler extends Entity {
                 } else throw new ActionFailedException("Invalid resource selected.");
             }
         }
+    }
+
+    @Override
+    public void move(Asteroid whereTo){
+        if (asteroid != null) {
+            asteroid.removeEntity(this);
+        }
+        whereTo.acceptEntity(this);
+        asteroid = whereTo;
+        Game.getInstance().nextPlayer();
     }
 
     /**
