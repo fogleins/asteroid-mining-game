@@ -54,6 +54,8 @@ public class GameWindow extends JFrame {
 
         mapView = new MapView();
         JScrollPane scrollPane = new JScrollPane(mapView);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(20);
         this.add(scrollPane, BorderLayout.CENTER);
 
         gameStatusView = new GameStatusView();
@@ -91,7 +93,7 @@ public class GameWindow extends JFrame {
     }
 
     /**
-     * Get the singleton class' AsteroidStatusView object.
+     * Gets the singleton class' AsteroidStatusView object.
      *
      * @return The AsteroidStatusView used throughout the game.
      */
@@ -99,10 +101,20 @@ public class GameWindow extends JFrame {
         return instance.asteroidStatusView;
     }
 
+    /**
+     * Gets the SettlerActionsView object.
+     *
+     * @return The SettlerActionsView used throughout the game.
+     */
     public static SettlerActionsView getActionsView() {
         return instance.actionsView;
     }
 
+    /**
+     * Gets the SettlerInventoryView object.
+     *
+     * @return The SettlerInventoryView used throughout the game.
+     */
     public static SettlerInventoryView getInventoryView() {
         return instance.inventoryView;
     }
