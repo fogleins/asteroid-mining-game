@@ -15,15 +15,16 @@ public class AsteroidStatusView extends JPanel {
         setPreferredSize(new Dimension(200, 500));
         add(titleLabel);
         add(detailsTextArea);
-        titleLabel.setPreferredSize(new Dimension(180, 50));
+        titleLabel.setPreferredSize(new Dimension(200, 50));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setVerticalAlignment(SwingConstants.TOP);
-        detailsTextArea.setPreferredSize(new Dimension(180, 450));
+        detailsTextArea.setPreferredSize(new Dimension(200, 450));
         //detailsTextArea.setVerticalAlignment(SwingConstants.TOP);
         detailsTextArea.setEditable(false);
         detailsTextArea.setHighlighter(null);
         detailsTextArea.setBackground(new Color(200, 200, 200, 255));
         //detailsTextArea.setBackground(UIManager.getColor("Panel.background"));
+        this.setPreferredSize(new Dimension(230, 500));
     }
 
     public static String toMultiline(String orig) {
