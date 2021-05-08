@@ -34,4 +34,9 @@ public class Uranium extends RadioactiveResource {
         return new Uranium();
     }
 
+    // needed for displaying the resource's name in AsteroidStatusView
+    @Override
+    public String toString() {
+        return "Uranium";
+    }
 }

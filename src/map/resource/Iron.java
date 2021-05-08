@@ -14,4 +14,9 @@ public class Iron extends Resource {
         return new Iron();
     }
 
+    // needed for displaying the resource's name in AsteroidStatusView
+    @Override
+    public String toString() {
+        return "Iron";
+    }
 }

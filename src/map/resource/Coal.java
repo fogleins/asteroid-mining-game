@@ -14,4 +14,9 @@ public class Coal extends Resource {
         return new Coal();
     }
 
+    // needed for displaying the resource's name in AsteroidStatusView
+    @Override
+    public String toString() {
+        return "Coal";
+    }
 }

@@ -14,4 +14,9 @@ public class Ice extends SublimableResource {
         return new Ice();
     }
 
+    // needed for displaying the resource's name in AsteroidStatusView
+    @Override
+    public String toString() {
+        return "Ice";
+    }
 }
