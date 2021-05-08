@@ -98,4 +98,12 @@ public class GameWindow extends JFrame {
     public static AsteroidStatusView getAsteroidStatusView() {
         return instance.asteroidStatusView;
     }
+
+    public static SettlerActionsView getActionsView() {
+        return instance.actionsView;
+    }
+
+    public static SettlerInventoryView getInventoryView() {
+        return instance.inventoryView;
+    }
 }
