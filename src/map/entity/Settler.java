@@ -25,10 +25,14 @@ public class Settler extends Entity {
      */
     private final ArrayList<TeleportGate> teleports = new ArrayList<>();
 
-    //reference to the actions view, where the player can choose from different actions
+    /**
+     * Reference to the actions view, where the player can choose from different actions.
+     */
     private SettlerActionsView actionsView;
 
-    //reference to the inventory view, where data of the settler is shown
+    /**
+     * Reference to the inventory view, where data of the settler is shown
+     */
     private SettlerInventoryView settlerView;
 
     /**

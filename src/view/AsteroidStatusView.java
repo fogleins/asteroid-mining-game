@@ -6,9 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AsteroidStatusView extends JPanel {
+    /**
+     * Label for asteroid's name.
+     */
     private final JLabel titleLabel = new JLabel();
+    /**
+     * Text area for asteroid's details.
+     */
     private final JTextArea detailsTextArea = new JTextArea();
 
+    /**
+     * Creates an AsteroidStatusView Object
+     */
     public AsteroidStatusView() {
         titleLabel.setFont(titleLabel.getFont().deriveFont(35.0f));
         detailsTextArea.setFont(detailsTextArea.getFont().deriveFont(20.0f));
@@ -27,10 +36,19 @@ public class AsteroidStatusView extends JPanel {
         this.setPreferredSize(new Dimension(230, 500));
     }
 
+    /**
+     * Replaces new lines and tabs with their correct html versions.
+     * @param orig String to be converted.
+     * @return Returns string with replaced elements.
+     */
     public static String toMultiline(String orig) {
         return orig.replaceAll("\n", System.lineSeparator()).replaceAll("\t", "      ");
     }
 
+    /**
+     * Updates the asteroid's status view.
+     * @param asteroid Given asteroid.
+     */
     public void updateView(Asteroid asteroid) {
         if (asteroid == null) {
             return;
@@ -43,6 +61,11 @@ public class AsteroidStatusView extends JPanel {
         detailsTextArea.setText(toMultiline(details));
     }
 
+    /**
+     * Gets info of teleportgates on asteroid.
+     * @param asteroid Given asteroid.
+     * @return Returns where the teleportgate goes, if there's any on asteroid.
+     */
     private String getTeleportInfo(Asteroid asteroid) {
         String res = "";
         res += "Teleport:\n";
@@ -51,6 +74,11 @@ public class AsteroidStatusView extends JPanel {
         return res;
     }
 
+    /**
+     * Gets info of entity on asteroid.
+     * @param asteroid Given asteroid.
+     * @return Returns with names of entities on asteroid.
+     */
     private String getEntityInfo(Asteroid asteroid) {
         String res = "";
         res += "Entities:\n";
@@ -64,6 +92,11 @@ public class AsteroidStatusView extends JPanel {
         return res;
     }
 
+    /**
+     * Gets info of asteroid.
+     * @param asteroid Given asteroid.
+     * @return Returns with info if asteroid's in perihelion and what resource it has.
+     */
     private String getAsteroidInfo(Asteroid asteroid) {
         String res = "";
         res += asteroid.getInPerihelion() ? "In Perihelion\n" : "\n";
@@ -71,6 +104,10 @@ public class AsteroidStatusView extends JPanel {
         return res;
     }
 
+    /**
+     * Updates the name when an asteroid is chosen.
+     * @param asteroid Given asteroid.
+     */
     private void updateNameText(Asteroid asteroid) {
         titleLabel.setText(asteroid.getName());
     }
