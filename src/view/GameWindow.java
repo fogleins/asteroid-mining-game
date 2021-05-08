@@ -118,4 +118,8 @@ public class GameWindow extends JFrame {
     public static SettlerInventoryView getInventoryView() {
         return instance.inventoryView;
     }
+
+    public static MapView getMapView() {
+        return instance.mapView;
+    }
 }

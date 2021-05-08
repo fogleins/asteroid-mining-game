@@ -118,8 +118,11 @@ public class AsteroidView extends JButton {
     @Override
     protected void paintComponent(Graphics g) {
         // if the asteroid has exploded, we won't paint it
-        if (asteroid.isExploded())
+        if (asteroid.isExploded()) {
+            // TODO: teszteljük, hogy az aszteroida robbanásakor ez helyesen működik-e
+            GameWindow.getMapView().updateView();
             return;
+        }
 
         // todo: honnan tudjuk, hogy a telepes melyik aszteroidán áll?
         // the asteroid on which the current settler stands, is painted light pink
