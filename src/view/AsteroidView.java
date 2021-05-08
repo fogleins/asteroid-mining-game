@@ -34,6 +34,11 @@ public class AsteroidView extends JButton {
     private Shape shape;
 
     /**
+     * The currently selected asteroid.
+     */
+    private static Asteroid selected;
+
+    /**
      * Creates an AsteroidView object.
      */
     public AsteroidView(Asteroid asteroid) {
@@ -65,6 +70,11 @@ public class AsteroidView extends JButton {
      */
     public void updateView() {
         // TODO
+        // we update the AsteroidStatusView panel if the selected asteroid's property changes, but not if an asteroid -
+        // which is not selected - explodes, for example
+        if (asteroid == selected) {
+            statusView.updateView(asteroid);
+        }
         revalidate();
     }
 
@@ -77,6 +87,7 @@ public class AsteroidView extends JButton {
      * Event handler. Called when a player selects an asteroid.
      */
     public void selected() {
+        selected = asteroid;
         this.statusView = GameWindow.getAsteroidStatusView();
         statusView.updateView(asteroid);
     }
