@@ -16,7 +16,7 @@ public class SettlerInventoryView extends JPanel {
     SettlerInventoryView() {
         titleLabel = new JLabel();
         informationLabel = new JTextArea();
-        titleLabel.setFont(titleLabel.getFont().deriveFont(20.0f));
+        titleLabel.setFont(titleLabel.getFont().deriveFont(35.0f));
 
         informationLabel.setFont(informationLabel.getFont().deriveFont(20.0f));
         setPreferredSize(new Dimension(200, 500));
