@@ -2,6 +2,8 @@ package view;
 
 import control.Game;
 import map.asteroid.Asteroid;
+import map.entity.Entity;
+import map.entity.Settler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -149,6 +151,18 @@ public class AsteroidView extends JButton {
             g.setColor(Color.BLUE); // the asteroid's name is written in blue
             // TODO: a kör befogó téglalapján kívülre itt nem tudunk rajzolni
             g.drawString("TG", radius - 9, radius + 25); // todo: test place teleport
+        }
+
+        // we count the number of settlers on the asteroid, and if there's at least one on it, we display the number
+        int settlers = 0;
+        for (Entity entity : asteroid.getEntities()) {
+            if (entity instanceof Settler)
+                settlers++;
+        }
+        if (settlers != 0) {
+            g.setColor(Color.BLACK);
+            g.drawString(settlers + (settlers == 1 ? " settler" : " settlers"),
+                    settlers == 1 ? radius - 30 : radius - 32, radius - 15);
         }
 
         this.setText(asteroid.getName());
