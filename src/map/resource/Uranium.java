@@ -6,8 +6,8 @@ package map.resource;
  */
 public class Uranium extends RadioactiveResource {
 
-    int exposedCount = 0;
-    final static int exposedThreshold = 3;
+    private int exposedCount = 0;
+    private final static int exposedThreshold = 3;
 
     public Uranium() {}
 

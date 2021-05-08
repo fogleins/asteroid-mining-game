@@ -10,8 +10,8 @@ import java.util.HashMap;
 public class SettlerInventoryView extends JPanel {
 
     private Settler settler;
-    JTextArea informationLabel;
-    JLabel titleLabel;
+    private final JTextArea informationLabel;
+    private final JLabel titleLabel;
 
     SettlerInventoryView() {
         titleLabel = new JLabel();
