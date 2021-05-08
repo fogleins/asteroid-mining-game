@@ -115,6 +115,9 @@ public class Asteroid {
                 default: resource=null;
             }
         }
+        if (this.resource != null) {
+            this.resource.setAsteroid(this);
+        }
         this.asteroidView = new AsteroidView(this);
         this.exploded = false;
         // TODO: MapView init
