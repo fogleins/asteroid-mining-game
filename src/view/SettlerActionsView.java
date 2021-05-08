@@ -66,7 +66,7 @@ public class SettlerActionsView extends JPanel {
         placeBtn.addActionListener(actionEvent -> {
             try {
                 if (settler.getResources().isEmpty()) {
-                    JOptionPane.showMessageDialog(GameWindow.getInstance(), "Nincs nyersanyag a raktérben, így nincs mit visszatenni!");
+                    JOptionPane.showMessageDialog(GameWindow.getInstance(), "There is no resource in the inventory, nothing to place back!");
                     return;
                 }
                 ResourceChooser rc = new ResourceChooser(settler.getResources());

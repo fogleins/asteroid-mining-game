@@ -212,13 +212,11 @@ public class Asteroid {
         if (teleportGate != null)
             teleportGate.die();
 
-        ArrayList<Asteroid> realNeighbours = getNeighboursWithoutTeleportGate();
-
-        //Connecting the neighbours to each other
-        for (int i = 0; i < realNeighbours.size() - 1; i++) {
-            for (int j = i + 1; j < realNeighbours.size(); j++) {
-                realNeighbours.get(i).addNeighbour(realNeighbours.get(j));
-            }
+        // Modifying neighbours to preserve consistency
+        for (int i = 0; i < neighbours.size() - 1; i++) {
+            neighbours.get(i).removeAsteroid(this);
+            for (int j = i + 1; j < neighbours.size(); j++)     // Connecting the neighbours to each other
+                if (i != j) neighbours.get(i).addNeighbour(neighbours.get(j));
         }
         this.exploded = true; // this way the AsteroidView knows not to paint this asteroid
     }
@@ -245,7 +243,7 @@ public class Asteroid {
      * @return the mined asteroid (map.asteroid.Resource)
      */
     public Resource mined() throws ActionFailedException {
-        Resource minedResource = null;
+        Resource minedResource;
         //If the asteroid is not empty and the thickness is zero, the resource is mined
         if (resource != null) {
             if (surfaceThickness == 0) {
@@ -268,7 +266,6 @@ public class Asteroid {
      * @return A map.asteroid.Neighbours object that contains all the neighbours of the asteroid
      */
     public Neighbours getNeighbours() {
-
         //A Neighbours osztály konstruktora ArrayList-et vár a teleport által összekötött aszteroidák listájával
         ArrayList<Asteroid> teleportGateOtherSide = new ArrayList<>();
         if (teleportGate != null) {
@@ -291,13 +288,7 @@ public class Asteroid {
      * @return An asteroid list whose don't have teleportgate.
      */
     public ArrayList<Asteroid> getNeighboursWithoutTeleportGate() {
-        ArrayList<Asteroid> neighbourswithouttele = new ArrayList<>();
-        for (Asteroid a : neighbours) {
-            if (a.getTeleportGate() == null) {
-                neighbourswithouttele.add(a);
-            }
-        }
-        return neighbourswithouttele;
+        return neighbours;
     }
 
     /**
@@ -324,7 +315,7 @@ public class Asteroid {
      * @param asteroid new neighbour of the asteroid
      */
     public void addNeighbour(Asteroid asteroid) {
-        if (!neighbours.contains(asteroid))
+        if (!neighbours.contains(asteroid) && asteroid != this)
             this.neighbours.add(asteroid);
     }
 

@@ -62,7 +62,7 @@ public class Settler extends Entity {
                 if (r != null) {
                     resources.add(r);   // add resource to inventory
                     Game.getInstance().nextPlayer();    // the settler used its only step
-                } else throw new ActionFailedException("Mined returned null.");
+                } else throw new ActionFailedException("Mine returned null.");
             } else {    // if there is no space in cargo, another resource must be placed back to get the new one
                 Resource resourceToExchange = Game.getInstance().exchangeResource(resources);   // todo: move exchange from game to view
                 if (resources.contains(resourceToExchange)) {   // if the resource is owned by the settler
@@ -72,7 +72,7 @@ public class Settler extends Entity {
                     Game.getInstance().nextPlayer();    // the settler used its only step
                 } else throw new ActionFailedException("Invalid resource selected.");
             }
-        }
+        } else throw new ActionFailedException("No resource in the Asteroid.");
     }
 
     @Override
