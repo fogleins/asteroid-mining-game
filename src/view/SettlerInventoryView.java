@@ -28,7 +28,6 @@ public class SettlerInventoryView extends JPanel {
         informationLabel.setEditable(false);
         informationLabel.setHighlighter(null);
         informationLabel.setBackground(new Color(200, 200, 200, 255));
-        updateView(new Settler("TeszTomi")); //TODO remove this
     }
 
     public void updateView(Settler currentSettler) {
