@@ -1,6 +1,7 @@
 package view;
 
 import control.Game;
+import map.entity.Settler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,6 +41,8 @@ public class GameWindow extends JFrame {
      */
     private MapView mapView;
 
+    private final JScrollPane mapScrollPane;
+
     /**
      * Creates a GameWindow object.
      */
@@ -53,10 +56,10 @@ public class GameWindow extends JFrame {
         this.setLayout(new BorderLayout());
 
         mapView = new MapView();
-        JScrollPane scrollPane = new JScrollPane(mapView);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
-        scrollPane.getHorizontalScrollBar().setUnitIncrement(20);
-        this.add(scrollPane, BorderLayout.CENTER);
+        this.mapScrollPane = new JScrollPane(mapView);
+        mapScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        mapScrollPane.getHorizontalScrollBar().setUnitIncrement(20);
+        this.add(mapScrollPane, BorderLayout.CENTER);
 
         gameStatusView = new GameStatusView();
         this.add(gameStatusView, BorderLayout.NORTH);
@@ -121,5 +124,15 @@ public class GameWindow extends JFrame {
 
     public static MapView getMapView() {
         return instance.mapView;
+    }
+
+    public static void currentSettlerChanged(Settler previous, Settler current) {
+        JViewport viewport = instance.mapScrollPane.getViewport();
+        int width = viewport.getWidth();
+        int height = viewport.getHeight();
+        Point asdf = new Point(current.getAsteroid().getAsteroidView().getCenter().x - width / 2,
+                current.getAsteroid().getAsteroidView().getCenter().y - height / 2);
+        viewport.setViewPosition(asdf);
+        instance.mapScrollPane.repaint();
     }
 }

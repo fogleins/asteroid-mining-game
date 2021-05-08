@@ -218,6 +218,7 @@ public final class Game {
         current.getAsteroid().getAsteroidView().updateView();
         // we update the status view to display info about the asteroid the current settler is standing on
         GameWindow.getAsteroidStatusView().updateView(current.getAsteroid());
+        GameWindow.currentSettlerChanged(previousSettler, current);
         current.yourTurn();
     }
 }
