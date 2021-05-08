@@ -15,10 +15,29 @@ public class GameWindow extends JFrame {
      */
     private static final GameWindow instance = new GameWindow();
 
+    /**
+     * A subclass of JPanel containing buttons of actions a settler may perform.
+     */
     private SettlerActionsView actionsView;
+
+    /**
+     * Displays the content of the current settler's inventory.
+     */
     private SettlerInventoryView inventoryView;
+
+    /**
+     * Displays the details of the selected asteroid.
+     */
     private AsteroidStatusView asteroidStatusView;
+
+    /**
+     * Displays the current round number. Also, notifies the player if a sunflare is coming in the next round.
+     */
     private GameStatusView gameStatusView;
+
+    /**
+     * A subclass of JPanel containing the game's map. Displays the asteroids.
+     */
     private MapView mapView;
 
     /**

@@ -15,7 +15,6 @@ public class AsteroidView extends JButton {
      * The Asteroid object to display.
      */
     private final Asteroid asteroid;
-//    private AsteroidStatusView statusView; // TODO
 
     /**
      * The radius of the asteroid.
@@ -69,20 +68,32 @@ public class AsteroidView extends JButton {
         revalidate();
     }
 
+    // TODO: jelenleg nem használt
     public void setStatusView(AsteroidStatusView statusView) {
         this.statusView = statusView;
     }
 
+    /**
+     * Event handler. Called when a player selects an asteroid.
+     */
     public void selected() {
         this.statusView = GameWindow.getAsteroidStatusView();
         statusView.updateView(asteroid);
     }
 
+    /**
+     * Calculates the center coordinates of the asteroid.
+     */
     private void calculateCenterCoordinates() {
         this.coordinates.x = getX() + radius;
         this.coordinates.y = getY() + radius;
     }
 
+    /**
+     * Returns the asteroid's center coordinates.
+     *
+     * @return A Point object with the asteroid's center coordinates.
+     */
     public Point getCenter() {
         calculateCenterCoordinates();
         return coordinates;

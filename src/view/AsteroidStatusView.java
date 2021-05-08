@@ -34,7 +34,7 @@ public class AsteroidStatusView extends JPanel {
         if (asteroid == null) {
             return;
         }
-        getNameText(asteroid);
+        updateNameText(asteroid);
         String details = "";
         details += getAsteroidInfo(asteroid);
         details += getEntityInfo(asteroid);
@@ -70,7 +70,7 @@ public class AsteroidStatusView extends JPanel {
         return res;
     }
 
-    private void getNameText(Asteroid asteroid) {
+    private void updateNameText(Asteroid asteroid) {
         titleLabel.setText(asteroid.getName());
     }
 }
