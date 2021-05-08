@@ -202,11 +202,16 @@ public final class Game {
      * A Settler calls this method after he stepped in a given round.
      */
     public void nextPlayer() {
+        Settler previousSettler = current;
         int idx = settlers.indexOf(current);
         if (idx == settlers.size() - 1) {
             roundFinished();
         } else {
             current = settlers.get(idx + 1);
+        }
+        // the previous settler's asteroid should not be painted light pink, so we repaint it
+        if (previousSettler != null) {
+            previousSettler.getAsteroid().getAsteroidView().updateView();
         }
         // update the current settler's asteroid's view so that its painted in light pink
         current.getAsteroid().getAsteroidView().updateView();
