@@ -100,7 +100,9 @@ public class AsteroidStatusView extends JPanel {
     private String getAsteroidInfo(Asteroid asteroid) {
         String res = "";
         res += asteroid.getInPerihelion() ? "In Perihelion\n" : "\n";
-        res += "Surface thickness: " + asteroid.getSurfaceThickness() + "\n";
+        if (!asteroid.getEntities().isEmpty()) {
+            res += "Surface thickness: " + asteroid.getSurfaceThickness() + "\n";
+        }
         res += "Resource: " + (asteroid.getResource() == null ? "-\n" : asteroid.getResource().toString() + "\n");
         return res;
     }
