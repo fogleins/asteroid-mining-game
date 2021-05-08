@@ -5,6 +5,7 @@ import map.entity.Settler;
 import map.entity.Steppable;
 import map.resource.Resource;
 import view.GameStatusView;
+import view.GameWindow;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -215,6 +216,8 @@ public final class Game {
         }
         // update the current settler's asteroid's view so that its painted in light pink
         current.getAsteroid().getAsteroidView().updateView();
+        // we update the status view to display info about the asteroid the current settler is standing on
+        GameWindow.getAsteroidStatusView().updateView(current.getAsteroid());
         current.yourTurn();
     }
 }
