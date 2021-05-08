@@ -25,7 +25,7 @@ public class SettlerActionsView extends JPanel {
             try {
                 settler.drill();
             } catch (ActionFailedException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                JOptionPane.showMessageDialog(GameWindow.getInstance(), e.getMessage());
             }
         });
 
@@ -34,11 +34,11 @@ public class SettlerActionsView extends JPanel {
             try {
                 settler.mine();
             } catch (ActionFailedException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                JOptionPane.showMessageDialog(GameWindow.getInstance(), e.getMessage());
             }
         });
 
-        JButton placeTeleportBtn = new JButton("Build Teleport");
+        JButton placeTeleportBtn = new JButton("Place Teleport");
         placeTeleportBtn.addActionListener(actionListener -> settler.placeTeleport());
 
         JButton buildRobotBtn = new JButton("Build Robot");
@@ -46,11 +46,18 @@ public class SettlerActionsView extends JPanel {
             try {
                 settler.buildRobot();
             } catch (ActionFailedException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                JOptionPane.showMessageDialog(GameWindow.getInstance(), e.getMessage());
             }
         });
 
-        JButton buildTeleportBtn = new JButton("Place Teleport");
+        JButton buildTeleportBtn = new JButton("Build Teleport");
+        buildTeleportBtn.addActionListener(actionEvent -> {
+            try {
+                settler.buildTeleport();
+            } catch (ActionFailedException e) {
+                JOptionPane.showMessageDialog(GameWindow.getInstance(), e.getMessage());
+            }
+        });
 
         add(moveBtn);
         add(drillBtn);
