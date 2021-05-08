@@ -42,6 +42,8 @@ public class SettlerInventoryView extends JPanel {
         BillOfResources bill = new BillOfResources();
         bill.addResources(uranium);
 
+        informationLabel.setText("");
+
         informationLabel.append("Uranium: " + bill.count(settler.getResources()) + "\n");
         bill.removeResources(uranium);
         bill.addResources(coal);
