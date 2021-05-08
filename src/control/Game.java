@@ -194,7 +194,7 @@ public final class Game {
         currentRound++;
         current = settlers.get(0);
 
-        statusView.updateView(currentRound, nextSunflare + 1 >= currentRound);
+        statusView.updateView(currentRound, nextSunflare + 1 == currentRound);
         map.roundPassed();  // resource exposition
     }
 

@@ -4,8 +4,10 @@ import Exceptions.ActionFailedException;
 import control.Game;
 import map.asteroid.Asteroid;
 import map.entity.Settler;
+import map.resource.Resource;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class SettlerActionsView extends JPanel {
     private final JButton placeTeleportBtn;
@@ -60,12 +62,29 @@ public class SettlerActionsView extends JPanel {
             }
         });
 
+        JButton placeBtn = new JButton("Place back resource");
+        placeBtn.addActionListener(actionEvent -> {
+            try {
+                if (settler.getResources().isEmpty()) {
+                    JOptionPane.showMessageDialog(GameWindow.getInstance(), "Nincs nyersanyag a raktérben, így nincs mit visszatenni!");
+                    return;
+                }
+                ResourceChooser rc = new ResourceChooser(settler.getResources());
+                Resource res = rc.chooseResource();
+                if (res != null)
+                    settler.placeBack(res);
+            } catch (ActionFailedException e) {
+                JOptionPane.showMessageDialog(GameWindow.getInstance(), e.getMessage());
+            }
+        });
+
         add(moveBtn);
         add(drillBtn);
         add(mineBtn);
+        add(placeBtn);
+        add(buildTeleportBtn);
         add(placeTeleportBtn);
         add(buildRobotBtn);
-        add(buildTeleportBtn);
     }
 
 
