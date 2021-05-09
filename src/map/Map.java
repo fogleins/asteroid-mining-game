@@ -144,6 +144,7 @@ public class Map implements Serializable {
         } catch (ArrayIndexOutOfBoundsException e) {}
     }
 
+
     /**
      * Returns a new Resource object based on the passed number.
      *
