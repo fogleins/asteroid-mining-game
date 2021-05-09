@@ -7,7 +7,6 @@ import map.entity.Settler;
 import map.resource.Resource;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class SettlerActionsView extends JPanel {
     private final JButton placeTeleportBtn;
@@ -79,9 +78,7 @@ public class SettlerActionsView extends JPanel {
         });
 
         JButton passBtn = new JButton("Pass");
-        passBtn.addActionListener(actionListener -> {
-            Game.getInstance().nextPlayer();
-        });
+        passBtn.addActionListener( actionListener -> Game.getInstance().nextPlayer() );
 
         buildRobotBtn.setToolTipText("Required resources: Uranium: 1, Coal: 1, Iron: 1");
         buildTeleportBtn.setToolTipText("Required resources: Uranium: 1, Ice: 1, Iron: 2");
@@ -98,6 +95,11 @@ public class SettlerActionsView extends JPanel {
 
 
     public void updateView(Settler settler) {
+        if (settler == null) {  // used if the game ended
+            this.setVisible(false);
+            return;
+        } else this.setVisible(true);
+
         this.settler = settler;
 
         // if the settler doesn't have at least one teleport gate or the asteroid he's standing on already has a

@@ -141,6 +141,12 @@ public final class Game implements Serializable {
      * Remove a Settler object from settlers
      */
     public void removeSettler(Settler settler) {
+        if (settlers.size() <= 1) {
+            gameLost();
+            return;
+        }
+        if (settler == current)
+            nextPlayer();
         settlers.remove(settler);
     }
 
@@ -175,14 +181,15 @@ public final class Game implements Serializable {
      * This method is called when the settlers have collected all the needed resources on a single asteroid.
      */
     public void gameWon() {
-        System.out.println("Settlers won!");
+        JOptionPane.showMessageDialog(GameWindow.getInstance(), "Settlers won!");
     }
 
     /**
      * This method is called if there's no way for the players to win.
      */
     private void gameLost() {
-        System.out.println("Settlers lost!");
+        JOptionPane.showMessageDialog(GameWindow.getInstance(), "Settlers lost!");
+        GameWindow.getActionsView().updateView(null);
     }
 
     /**
