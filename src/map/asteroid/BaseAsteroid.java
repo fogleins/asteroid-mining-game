@@ -50,4 +50,10 @@ public class BaseAsteroid extends Asteroid {
         if (winConditionResources.check(resourcesOnAsteroid))
             Game.getInstance().gameWon();
     }
+
+    /**
+     * Overridden method, because the Base Asteroid should not be in perihelion
+     */
+    @Override
+    public void changePerihelionState() {}
 }
