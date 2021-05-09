@@ -77,12 +77,10 @@ public class Settler extends Entity {
 
     @Override
     public void move(Asteroid whereTo) {
+        super.move(whereTo);
         if (asteroid != null) {
-            asteroid.removeEntity(this);
             asteroid.getAsteroidView().updateView();
         }
-        whereTo.acceptEntity(this);
-        asteroid = whereTo;
         Game.getInstance().nextPlayer();
     }
 
