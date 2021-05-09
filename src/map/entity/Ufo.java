@@ -25,7 +25,7 @@ public class Ufo extends Entity implements Steppable {
     @Override
     public void step() {
         try {
-            asteroid.mined();
+            resources.add(asteroid.mined());
         } catch (ActionFailedException e) {
             // If the UFO couldn't mine, it moves on
             Random rnd = new Random();
