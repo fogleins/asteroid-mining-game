@@ -4,7 +4,9 @@ import Exceptions.ActionFailedException;
 import control.Game;
 import map.asteroid.Asteroid;
 import map.resource.Resource;
+import map.resource.Uranium;
 import view.GameWindow;
+import view.ResourceChooser;
 import view.SettlerActionsView;
 import view.SettlerInventoryView;
 
@@ -64,7 +66,8 @@ public class Settler extends Entity {
                     Game.getInstance().nextPlayer();    // the settler used its only step
                 } else throw new ActionFailedException("Mine returned null.");
             } else {    // if there is no space in cargo, another resource must be placed back to get the new one
-                Resource resourceToExchange = Game.getInstance().exchangeResource(resources);   // todo: move exchange from game to view
+                ResourceChooser rc = new ResourceChooser(resources);
+                Resource resourceToExchange = rc.chooseResource();
                 if (resources.contains(resourceToExchange)) {   // if the resource is owned by the settler
                     resources.add(asteroid.mined());
                     asteroid.placeResource(resourceToExchange);     // place back the resource
