@@ -7,6 +7,8 @@ import map.asteroid.Asteroid;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MapView extends JPanel {
     /**
@@ -76,6 +78,40 @@ public class MapView extends JPanel {
                 dX = 0;
             }
         }
+
+        MouseAdapter mouseAdapter = new MouseAdapter() {
+            private Point origin;
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                origin = new Point(e.getPoint());
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (origin != null) {
+                    JViewport viewPort = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, MapView.this);
+                    if (viewPort != null) {
+                        int deltaX = origin.x - e.getX();
+                        int deltaY = origin.y - e.getY();
+
+                        Rectangle view = viewPort.getViewRect();
+                        view.x += deltaX;
+                        view.y += deltaY;
+
+                        MapView.this.scrollRectToVisible(view);
+                    }
+                }
+            }
+        };
+
+        this.setAutoscrolls(true);
+        this.addMouseListener(mouseAdapter);
+        this.addMouseMotionListener(mouseAdapter);
     }
 
     /**
