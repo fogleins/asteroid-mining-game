@@ -15,9 +15,10 @@ public class Main {
     private static void showNameInputWindow() {
         JFrame frame = new JFrame("New game");
         frame.setLayout(new BorderLayout());
-        Dimension windowSize = new Dimension(1280, 720);
+        Dimension windowSize = new Dimension(860, 620);
         frame.setPreferredSize(windowSize);
         frame.setMinimumSize(windowSize);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setJMenuBar(GameWindow.GameMenuBar.getInstance());
@@ -31,7 +32,7 @@ public class Main {
         centerSubtitleLabel.setFont(centerSubtitleLabel.getFont().deriveFont(24.0f));
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
-        northPanel.setBorder(BorderFactory.createEmptyBorder(80, 0, 0, 0));
+        northPanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
         JPanel north1 = new JPanel();
         JPanel north2 = new JPanel();
         north2.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
@@ -39,7 +40,7 @@ public class Main {
         north2.add(centerSubtitleLabel);
         northPanel.add(north1);
         northPanel.add(north2);
-        panel.setBorder(BorderFactory.createEmptyBorder(60, 200, 120, 200));
+        panel.setBorder(BorderFactory.createEmptyBorder(60, 100, 80, 100));
         JPanel labels = new JPanel(new GridLayout(0, 1, 2, 2));
         JPanel input = new JPanel(new GridLayout(0, 1, 2, 2));
         ArrayList<JTextField> textFields = new ArrayList<>();

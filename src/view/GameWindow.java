@@ -18,27 +18,27 @@ public class GameWindow extends JFrame {
     /**
      * A subclass of JPanel containing buttons of actions a settler may perform.
      */
-    private SettlerActionsView actionsView;
+    private final SettlerActionsView actionsView;
 
     /**
      * Displays the content of the current settler's inventory.
      */
-    private SettlerInventoryView inventoryView;
+    private final SettlerInventoryView inventoryView;
 
     /**
      * Displays the details of the selected asteroid.
      */
-    private AsteroidStatusView asteroidStatusView;
+    private final AsteroidStatusView asteroidStatusView;
 
     /**
      * Displays the current round number. Also, notifies the player if a sunflare is coming in the next round.
      */
-    private GameStatusView gameStatusView;
+    private final GameStatusView gameStatusView;
 
     /**
      * A subclass of JPanel containing the game's map. Displays the asteroids.
      */
-    private MapView mapView;
+    private final MapView mapView;
 
     private final JScrollPane mapScrollPane;
 
@@ -57,9 +57,16 @@ public class GameWindow extends JFrame {
             // initialize help menu
             JMenu helpMenu = new JMenu("Help");
             JMenuItem about = new JMenuItem("About");
-            about.addActionListener(e -> {
-                JOptionPane.showMessageDialog(null, "Asteroid mining game\n© rapid_sloths, 2021\n");
-            });
+            about.addActionListener(e ->
+                JOptionPane.showMessageDialog(null, "Asteroid mining game\n\n" +
+                        "Created by:\n" +
+                        "Főglein Simon István,\n" +
+                        "Gódor Márton,\n" +
+                        "Szabó Viktor Ákos,\n" +
+                        "Telek Benjámin Márk,\n" +
+                        "Wang Tingli Alexandra\n" +
+                        "\n© rapid_sloths, 2021\n\n")
+            );
             helpMenu.add(about);
             this.add(fileMenu);
             this.add(helpMenu);
