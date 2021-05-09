@@ -5,7 +5,6 @@ import map.entity.Settler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * The game's main window.
@@ -78,12 +77,10 @@ public class GameWindow extends JFrame {
 
     /**
      * Starts the game.
-     *
-     * @param names A list containing the players' names.
      */
-    public static void init(ArrayList<String> names) {
+    public static void init() {
+        instance.setVisible(true);
         Game.setStatusView(instance.gameStatusView);
-        Game.start(names);
     }
 
     /**

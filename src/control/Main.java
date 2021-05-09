@@ -73,7 +73,7 @@ public class Main {
             }
             // hide the start screen, so that no new game can be started when the main window is active
             frame.setVisible(false);
-            startGame(playerNames);
+            Game.start(playerNames);
         });
         panel.add(buttons, BorderLayout.SOUTH);
         panel.add(input, BorderLayout.CENTER);
@@ -81,10 +81,5 @@ public class Main {
         frame.add(northPanel, BorderLayout.NORTH);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    private static void startGame(ArrayList<String> playerNames) {
-        GameWindow.getInstance().setVisible(true);
-        GameWindow.init(playerNames);
     }
 }

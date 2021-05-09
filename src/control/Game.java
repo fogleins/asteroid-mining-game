@@ -88,6 +88,7 @@ public final class Game {
             ufo.setAsteroid(asteroids.get(rnd.nextInt(asteroids.size())));
             instance.steppables.add(ufo);
         }
+        GameWindow.init();
         instance.current = instance.settlers.get(0);
         instance.current.yourTurn();
     }
