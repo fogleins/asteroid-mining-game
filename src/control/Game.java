@@ -1,8 +1,10 @@
 package control;
 
 import map.Map;
+import map.asteroid.Asteroid;
 import map.entity.Settler;
 import map.entity.Steppable;
+import map.entity.Ufo;
 import map.resource.Resource;
 import view.GameStatusView;
 import view.GameWindow;
@@ -76,8 +78,18 @@ public final class Game {
             // settlers are placed on the base asteroid at the beginning of the game
             settler.move(instance.map.getBaseAsteroid());
         }
+        // add UFOs
+        Random rnd = new Random();
+        int ufoCount = rnd.nextInt(11); // 0 <= n < 11
+        for (int i = 0; i < ufoCount; i++) {
+            Ufo ufo = new Ufo(String.format("UFO-%02d", i + 1));
+            // place the ufo on a random asteroid
+            ArrayList<Asteroid> asteroids = instance.map.getAsteroids();
+            ufo.setAsteroid(asteroids.get(rnd.nextInt(asteroids.size())));
+            instance.steppables.add(ufo);
+        }
         instance.current = instance.settlers.get(0);
-        instance.current.yourTurn(); // TODO: implement yourTurn in Settler
+        instance.current.yourTurn();
     }
 
     public static void setStatusView(GameStatusView view) {
