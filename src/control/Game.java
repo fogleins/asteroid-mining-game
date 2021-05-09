@@ -220,7 +220,7 @@ public final class Game implements Serializable {
         currentRound++;
         current = settlers.get(0);
 
-        statusView.updateView(currentRound, nextSunflare + 1 == currentRound);
+        statusView.updateView(currentRound, nextSunflare == currentRound + 1);
         map.roundPassed();  // resource exposition
     }
 
