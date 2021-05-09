@@ -48,11 +48,8 @@ public class GameWindow extends JFrame {
         private GameMenuBar() {
             // initialize file menu
             JMenu fileMenu = new JMenu("File");
-            JMenuItem open = new JMenuItem("Load previously saved session");
-            open.addActionListener(e -> Game.readDataFromFile());
             JMenuItem save = new JMenuItem("Save current session");
             save.addActionListener(e -> Game.getInstance().saveData());
-            fileMenu.add(open);
             fileMenu.add(save);
             // initialize help menu
             JMenu helpMenu = new JMenu("Help");
