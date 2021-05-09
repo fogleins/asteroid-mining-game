@@ -93,6 +93,7 @@ public class SettlerActionsView extends JPanel {
         add(buildTeleportBtn);
         add(placeTeleportBtn);
         add(buildRobotBtn);
+        add(passBtn);
     }
 
 
