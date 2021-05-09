@@ -3,11 +3,13 @@ package map.resource;
 import Exceptions.ActionFailedException;
 import map.asteroid.Asteroid;
 
+import java.io.Serializable;
+
 /**
  * Class map.asteroid.Resource
  * Represents a resource object, which is used to build things
  */
-public abstract class Resource {
+public abstract class Resource implements Serializable {
 
     protected Asteroid asteroid;
 

@@ -4,12 +4,13 @@ import Exceptions.ActionFailedException;
 import map.asteroid.Asteroid;
 import map.resource.Resource;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class map.entity.Entity
  */
-abstract public class Entity {
+abstract public class Entity implements Serializable {
     /**
      * Entity's name.
      */

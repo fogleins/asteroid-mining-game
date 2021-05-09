@@ -4,13 +4,14 @@ import map.asteroid.Asteroid;
 import map.asteroid.BaseAsteroid;
 import map.resource.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Class Map
  */
-public class Map {
+public class Map implements Serializable {
     /**
      * Random object, for random generation.
      */

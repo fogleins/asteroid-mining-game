@@ -9,18 +9,20 @@ import map.resource.Resource;
 import view.GameStatusView;
 import view.GameWindow;
 
+import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Class control.Game
  */
-public final class Game {
+public final class Game implements Serializable {
 
     /**
      * The instance of the singleton Game class.
      */
-    private static final Game instance = new Game();
+    private static Game instance = new Game();
 
     /**
      * Reference to the Map object, which contains the game's map.
@@ -63,6 +65,16 @@ public final class Game {
         map = new Map();
         settlers = new ArrayList<>();
         steppables = new ArrayList<>();
+        instance = this;
+    }
+
+    private Game(Game game) {
+        currentRound = game.currentRound;
+        nextSunflare = game.nextSunflare;
+        map = game.map;
+        settlers = game.settlers;
+        steppables = game.steppables;
+        instance = this;
     }
 
     /**
@@ -225,5 +237,37 @@ public final class Game {
         }
         GameWindow.currentSettlerChanged(previousSettler, current);
         current.yourTurn();
+    }
+
+    public void saveData() {
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("./save.dat"));
+            outputStream.writeObject(this);
+            outputStream.close();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Game session cannot be saved ("
+                    + ex.getMessage() + ')', "Error saving game", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void readDataFromFile() {
+        try {
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./save.dat"));
+            Game.instance = new Game((Game) inputStream.readObject());
+            inputStream.close();
+            GameWindow.init(); // todo: update all views
+        } catch (FileNotFoundException notFoundException) {
+            JOptionPane.showMessageDialog(null, "File cannot be found. Error message: " +
+                            notFoundException.getMessage(), "File not found", JOptionPane.WARNING_MESSAGE);
+            System.exit(-1);
+        } catch (StreamCorruptedException streamCorruptedException) {
+            JOptionPane.showMessageDialog(null, "Save file is corrupted. Error message: " +
+                            streamCorruptedException.getMessage(), "File corrupted", JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
+        } catch (Exception exception) { // IOException, ClassNotFoundException vagy InvalidClassException
+            JOptionPane.showMessageDialog(null, "Error while reading save file. Shutting down." +
+                    "Error message: " + exception.getMessage(), "Error in save file", JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
+        }
     }
 }

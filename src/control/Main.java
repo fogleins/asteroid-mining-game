@@ -20,6 +20,7 @@ public class Main {
         frame.setMinimumSize(windowSize);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setJMenuBar(GameWindow.GameMenuBar.getInstance());
 
         JPanel panel = new JPanel(new BorderLayout(25, 25));
         JLabel centerTitleLabel = new JLabel("Asteroid mining game");

@@ -1,11 +1,12 @@
 package map.asteroid;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class map.asteroid.Neighbours
  */
-public class Neighbours {
+public class Neighbours implements Serializable {
 
     private final ArrayList<Asteroid> asteroidNeighbours;
     private final ArrayList<Asteroid> teleportGateNeighbours;

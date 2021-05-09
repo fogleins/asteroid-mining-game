@@ -8,12 +8,13 @@ import map.entity.TeleportGate;
 import view.AsteroidView;
 import view.GameWindow;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class map.asteroid.Asteroid
  */
-public class Asteroid {
+public class Asteroid implements Serializable {
 
     /**
      * List of entities that are on the surface of the asteroid.

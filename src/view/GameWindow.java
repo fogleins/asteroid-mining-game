@@ -42,6 +42,34 @@ public class GameWindow extends JFrame {
 
     private final JScrollPane mapScrollPane;
 
+    public static class GameMenuBar extends JMenuBar {
+        private final static GameMenuBar instance = new GameMenuBar();
+
+        private GameMenuBar() {
+            // initialize file menu
+            JMenu fileMenu = new JMenu("File");
+            JMenuItem open = new JMenuItem("Load previously saved session");
+            open.addActionListener(e -> Game.readDataFromFile());
+            JMenuItem save = new JMenuItem("Save current session");
+            save.addActionListener(e -> Game.getInstance().saveData());
+            fileMenu.add(open);
+            fileMenu.add(save);
+            // initialize help menu
+            JMenu helpMenu = new JMenu("Help");
+            JMenuItem about = new JMenuItem("About");
+            about.addActionListener(e -> {
+                JOptionPane.showMessageDialog(null, "Asteroid mining game\n© rapid_sloths, 2021\n");
+            });
+            helpMenu.add(about);
+            this.add(fileMenu);
+            this.add(helpMenu);
+        }
+
+        public static GameMenuBar getInstance() {
+            return instance;
+        }
+    }
+
     /**
      * Creates a GameWindow object.
      */
@@ -71,6 +99,8 @@ public class GameWindow extends JFrame {
 
         asteroidStatusView = new AsteroidStatusView();
         this.add(asteroidStatusView, BorderLayout.EAST);
+
+        this.setJMenuBar(new GameMenuBar());
 
         this.pack();
     }
