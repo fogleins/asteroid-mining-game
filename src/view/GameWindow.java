@@ -101,7 +101,8 @@ public class GameWindow extends JFrame {
         this.add(asteroidStatusView, BorderLayout.EAST);
 
         this.setJMenuBar(new GameMenuBar());
-
+        // maximize window
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.pack();
     }
 
