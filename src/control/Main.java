@@ -21,7 +21,6 @@ public class Main {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setJMenuBar(GameWindow.GameMenuBar.getInstance());
 
         JPanel panel = new JPanel(new BorderLayout(25, 25));
         JLabel centerTitleLabel = new JLabel("Asteroid mining game");
@@ -55,12 +54,21 @@ public class Main {
         }
         panel.add(labels, BorderLayout.WEST);
 
-        JPanel buttons = new JPanel();
-        buttons.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        buttons.setLayout(new BorderLayout());
+        /* buttons on the bottom (south panel) */
+        JPanel southPanel = new JPanel();
+        southPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        southPanel.setLayout(new BorderLayout());
+        JPanel startPanel = new JPanel();
+        // load button
+        JButton loadGameBtn = new JButton("Load game");
+        Font buttonFont = loadGameBtn.getFont().deriveFont(16.0f);
+        loadGameBtn.setFont(buttonFont);
+        loadGameBtn.addActionListener(e -> Game.readDataFromFile());
+        startPanel.add(loadGameBtn);
+        // start button
         JButton startGameButton = new JButton("Start game");
-        startGameButton.setFont(startGameButton.getFont().deriveFont(20.0f));
-        buttons.add(startGameButton, BorderLayout.EAST);
+        startGameButton.setFont(buttonFont);
+        startPanel.add(startGameButton);
         startGameButton.addActionListener(actionEvent -> {
             ArrayList<String> playerNames = new ArrayList<>();
             for (JTextField textField : textFields) {
@@ -77,7 +85,30 @@ public class Main {
             frame.setVisible(false);
             Game.start(playerNames);
         });
-        panel.add(buttons, BorderLayout.SOUTH);
+        southPanel.add(startPanel, BorderLayout.EAST);
+        // about button
+        JButton about = new JButton("About");
+        java.net.URL imgURL = Main.class.getResource("/team_logo.png");
+        String message = "Asteroid mining game\n\n" +
+                "Created by:\n" +
+                "Főglein Simon István,\n" +
+                "Gódor Márton,\n" +
+                "Szabó Viktor Ákos,\n" +
+                "Telek Benjámin Márk,\n" +
+                "Wang Tingli Alexandra\n" +
+                "\n© rapid_sloths, 2021\n\n";
+        if (imgURL != null)
+            about.addActionListener(e ->
+                    JOptionPane.showMessageDialog(null, message, "About this game", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imgURL))
+            );
+        else
+            about.addActionListener(e ->
+                    JOptionPane.showMessageDialog(null, message, "About this game", JOptionPane.PLAIN_MESSAGE)
+            );
+        southPanel.add(about, BorderLayout.WEST);
+
+        // add everything and show
+        panel.add(southPanel, BorderLayout.SOUTH);
         panel.add(input, BorderLayout.CENTER);
         frame.add(panel, BorderLayout.CENTER);
         frame.add(northPanel, BorderLayout.NORTH);
