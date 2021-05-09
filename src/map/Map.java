@@ -97,6 +97,51 @@ public class Map implements Serializable {
                 } catch (ArrayIndexOutOfBoundsException e) {}
             }
         }
+        /**
+         * Gives an optional diagonal edge to the neighbours.
+         */
+        for (int i = 0; i< mapBound; i++){
+            for(int j = 0; j< mapBound; j++){
+                if(rnd.nextBoolean()){
+                    try {
+                        addDiagonal(asteroidsMatrix[i][j],asteroidsMatrix[i-1][j-1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {}
+                    try {
+                        addDiagonal(asteroidsMatrix[i][j],asteroidsMatrix[i-1][j+1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {}
+                    try {
+                        addDiagonal(asteroidsMatrix[i][j],asteroidsMatrix[i+1][j-1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {}
+                    try {
+                        addDiagonal(asteroidsMatrix[i][j],asteroidsMatrix[i+1][j+1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {}
+
+
+                    /**
+                     * Removes a random edge from the current asteroid.
+                     */
+                    int neighboursSize = asteroidsMatrix[i][j].getNeighbours().getAsteroidNeighbours().size();
+                    Asteroid temp = asteroidsMatrix[i][j].getNeighbours().getAsteroidNeighbours().get(rnd.nextInt(neighboursSize));
+                    asteroidsMatrix[i][j].getNeighbours().getAsteroidNeighbours().remove(temp);
+                    temp.getNeighbours().getAsteroidNeighbours().remove(asteroidsMatrix[i][j]);
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Adds an additional neighbour to the current one in diagonal represented in a matrix.
+     * @param a First asteroid.
+     * @param b Second asteroid.
+     */
+    private void addDiagonal(Asteroid a, Asteroid b){
+        try {
+            if(!(a.getNeighbours().getAsteroidNeighbours().contains(b) && b.getNeighbours().getAsteroidNeighbours().contains(a))){
+                a.addNeighbour(b);
+                b.addNeighbour(a);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {}
     }
 
     /**
