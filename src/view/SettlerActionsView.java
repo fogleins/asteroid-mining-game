@@ -106,6 +106,8 @@ public class SettlerActionsView extends JPanel {
         // teleport, the place teleport button is disabled
         if (settler.getTeleportNumber() == 0 || settler.getAsteroid().getTeleportGate() != null) {
             this.placeTeleportBtn.setEnabled(false);
+        }else{
+            this.placeTeleportBtn.setEnabled(true);
         }
     }
 }
