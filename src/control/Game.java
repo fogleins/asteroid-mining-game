@@ -262,7 +262,9 @@ public final class Game implements Serializable {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./save.dat"));
             Game.instance = new Game((Game) inputStream.readObject());
             inputStream.close();
-            GameWindow.init(); // todo: update all views
+            GameWindow.init();
+            instance.current = instance.settlers.get(0);
+            instance.current.yourTurn();
         } catch (FileNotFoundException notFoundException) {
             JOptionPane.showMessageDialog(null, "File cannot be found. Error message: " +
                             notFoundException.getMessage(), "File not found", JOptionPane.WARNING_MESSAGE);
