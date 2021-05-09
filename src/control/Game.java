@@ -210,14 +210,6 @@ public final class Game {
         } else {
             current = settlers.get(idx + 1);
         }
-        // the previous settler's asteroid should not be painted light pink, so we repaint it
-        if (previousSettler != null) {
-            previousSettler.getAsteroid().getAsteroidView().updateView();
-        }
-        // update the current settler's asteroid's view so that its painted in light pink
-        current.getAsteroid().getAsteroidView().updateView();
-        // we update the status view to display info about the asteroid the current settler is standing on
-        GameWindow.getAsteroidStatusView().updateView(current.getAsteroid());
         GameWindow.currentSettlerChanged(previousSettler, current);
         current.yourTurn();
     }

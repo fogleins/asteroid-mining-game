@@ -126,13 +126,29 @@ public class GameWindow extends JFrame {
         return instance.mapView;
     }
 
+    /**
+     * Updates the GUI so that the components display correctly after the current settler changes.
+     *
+     * @param previous The previous settler.
+     * @param current The current settler.
+     */
     public static void currentSettlerChanged(Settler previous, Settler current) {
+        // the previous settler's asteroid should not be painted light pink, so we repaint it
+        if (previous != null) {
+            previous.getAsteroid().getAsteroidView().updateView();
+        }
+        // update the current settler's asteroid's view so that its painted in light pink
+        current.getAsteroid().getAsteroidView().updateView();
+        // update the status view to display info about the asteroid the current settler is standing on
+        GameWindow.getAsteroidStatusView().updateView(current.getAsteroid());
+
+        // center the current asteroid
         JViewport viewport = instance.mapScrollPane.getViewport();
         int width = viewport.getWidth();
         int height = viewport.getHeight();
-        Point asdf = new Point(current.getAsteroid().getAsteroidView().getCenter().x - width / 2,
+        Point viewportCenter = new Point(current.getAsteroid().getAsteroidView().getCenter().x - width / 2,
                 current.getAsteroid().getAsteroidView().getCenter().y - height / 2);
-        viewport.setViewPosition(asdf);
+        viewport.setViewPosition(viewportCenter);
         instance.mapScrollPane.repaint();
     }
 }
