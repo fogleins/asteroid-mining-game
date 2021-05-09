@@ -78,6 +78,9 @@ public class SettlerActionsView extends JPanel {
             }
         });
 
+        buildRobotBtn.setToolTipText("Required resources: Uranium: 1, Coal: 1, Iron: 1");
+        buildTeleportBtn.setToolTipText("Required resources: Uranium: 1, Ice: 1, Iron: 2");
+
         add(moveBtn);
         add(drillBtn);
         add(mineBtn);
