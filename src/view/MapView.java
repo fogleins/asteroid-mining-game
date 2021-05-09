@@ -51,11 +51,6 @@ public class MapView extends JPanel {
      */
     private Random rnd = new Random();
 
-    /**
-     * A flag, which is describe if repaint should be used.
-     */
-    private boolean clearPanel = false;
-
 
     /**
      * Constructor of the MapView. Sets the asteroids in position, connect the asteroids etc.
@@ -90,18 +85,8 @@ public class MapView extends JPanel {
      */
     @Override
     protected void paintComponent(Graphics g) {
-
-        // Repaints the panel if necessary.
-        if (clearPanel) {
-            repaint();
-            clearPanel = false;
-        }
         super.paintComponent(g);
         drawNeighboursConnection(g);
-        // TODO: a mapot nem frissítjük, amikor egy aszteroida változik, és felesleges is lenne;
-        //  emiatt viszont nem frissül a nézet, amikor lerakunk egy teleportot, úgyhogy egyelőre marad az asteroid
-        //  view-ban lévő megoldás a teleportkapu kijelzésére
-//        drawTeleportGates(g);
     }
 
     /**
@@ -143,9 +128,10 @@ public class MapView extends JPanel {
     }
 
     /**
-     * Updates the map(panel).
+     * Updates the map(panel), repaints it.
      */
-    public void updateView() {
-        clearPanel = true;
+    public void updateView(Asteroid asteroid) {
+        remove(asteroid.getAsteroidView());
+        repaint();
     }
 }

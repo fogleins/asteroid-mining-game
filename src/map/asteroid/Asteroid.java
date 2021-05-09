@@ -6,6 +6,7 @@ import map.resource.*;
 import map.entity.Entity;
 import map.entity.TeleportGate;
 import view.AsteroidView;
+import view.GameWindow;
 
 import java.util.ArrayList;
 
@@ -208,16 +209,25 @@ public class Asteroid {
         for (Entity entity : entities) {
             entity.asteroidExploded();
         }
-        Game.getInstance().getMap().removeAsteroid(this);
+
         if (teleportGate != null)
             teleportGate.die();
 
         // Modifying neighbours to preserve consistency
-        for (int i = 0; i < neighbours.size() - 1; i++) {
-            neighbours.get(i).removeAsteroid(this);
-            for (int j = i + 1; j < neighbours.size(); j++)     // Connecting the neighbours to each other
-                if (i != j) neighbours.get(i).addNeighbour(neighbours.get(j));
+        for(Asteroid a : neighbours){
+            a.neighbours.remove(this);
+
+            for(Asteroid b : this.neighbours){
+                if(a.neighbours.contains(b)){
+                    continue;
+                }
+                a.neighbours.add(b);
+            }
+            a.neighbours.remove(a);
+
         }
+        Game.getInstance().getMap().removeAsteroid(this);
+        GameWindow.getMapView().updateView(this);
         this.exploded = true; // this way the AsteroidView knows not to paint this asteroid
     }
 
