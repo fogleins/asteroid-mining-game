@@ -2,6 +2,7 @@ package map;
 
 import map.asteroid.Asteroid;
 import map.asteroid.BaseAsteroid;
+import map.resource.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,45 +25,57 @@ public class Map {
     private final Asteroid baseAsteroid;
 
     /**
-     * It's declare how many "row" or "column" will there be.
-     * For example mapBound=10 means that will be total of 10x10=100 asteroids.
-     */
-    private int mapBound;
-
-    /**
      * Constructor of the map, this will initialize the asteroids, and neighbour connections.
      */
     public Map() {
-        mapBound=10;
+        /*
+         * It's declare how many "row" or "column" will there be.
+         * For example mapBound=10 means that will be total of 10x10=100 asteroids.
+         */
+        int mapBound = 10;    // should be minimum 4
         baseAsteroid = new BaseAsteroid();
         asteroids.add(baseAsteroid);
-        /**
-         * 2D array, which is being used in asteroid generations, and in connecting them
-         * as neighbours.
-         */
+
+        // 2D array, which is being used in asteroid generations, and in connecting them as neighbours.
         Asteroid [][] asteroidsMatrix = new Asteroid[mapBound][mapBound];
         asteroidsMatrix[0][0]=baseAsteroid;
 
-        /**
-         * Generation of the asteroids.
-         */
-        for (int i = 0;i<mapBound;i++){
-            for(int j = 0;j<mapBound;j++){
+        int resLength = mapBound * mapBound;
+        Resource[] resources = new Resource[resLength];
+        // generate minimum number of resources (3 each)
+        for (int i = 0; i < 3*4; i++) {
+            // generate asteroid index
+            int idx = rnd.nextInt(resLength);
+            while (idx == 0 || resources[idx] != null)  // generate new random numbers if the index is already used
+                idx = rnd.nextInt(resLength);
+            resources[idx] = generateResource(i % 4);   // save resource
+        }
+        for (int i = 1; i < resLength; i++) {   // skip base asteroid but loop through the rest
+            if (resources[i] == null)
+                // if the resource is not already added, generate a new one
+                resources[i] = generateResource(rnd.nextInt(5));
+        }
+
+
+        // Generation of the asteroids.
+        for (int i = 0; i< mapBound; i++){
+            for(int j = 0; j< mapBound; j++){
                 if(!(i==0 && j==0)){
-                    Asteroid a = new Asteroid("A" + i +""+ j, rnd.nextBoolean(), rnd.nextInt(7), rnd.nextInt(5));
+                    int resIdx = mapBound *i + j;
+                    Asteroid a = new Asteroid("A" + i +""+ j, rnd.nextBoolean(), rnd.nextInt(6) + 1, resources[resIdx]);
                     asteroidsMatrix[i][j]=a;
                     asteroids.add(a);
                 }
             }
         }
 
-        /**
+        /*
          * Connects the asteroids as neighbours. The asteroids are connected only with
          * the upper, lower, right, left side asteroids.
          */
-        for (int i = 0;i<mapBound;i++){
-            for(int j = 0;j<mapBound;j++){
-                /**
+        for (int i = 0; i< mapBound; i++){
+            for(int j = 0; j< mapBound; j++){
+                /*
                  * The purpose of the try-catches is to connect the upper, lower rows,
                  * and side columns asteroids with each other. IndexOutOfBounds exceptions are ignored for purpose.
                  */
@@ -83,24 +96,28 @@ public class Map {
     }
 
     /**
+     * Returns a new Resource object based on the passed number.
+     *
+     * @param i resource id number (0-Uranium, 1-Coal, 2-Iron, 3-Ice, 4+-null)
+     * @return the new resource object
+     */
+    private Resource generateResource(int i) {
+        switch (i){
+            case 0: return new Uranium();
+            case 1: return new Coal();
+            case 2: return new Iron();
+            case 3: return new Ice();
+            default: return null;
+        }
+    }
+
+    /**
      * Default getter of the BaseAsteroid, not used in the test.
      *
      * @return baseAsteroid
      */
     public Asteroid getBaseAsteroid() {
         return baseAsteroid;
-    }
-
-    /**
-     * Adds an asteroid to the asteroids.
-     */
-    public void addAsteroid(Asteroid asteroid) {
-        for (Asteroid a : asteroids) {
-            if (a == asteroid) {
-                return;
-            }
-        }
-        asteroids.add(asteroid);
     }
 
     /**
