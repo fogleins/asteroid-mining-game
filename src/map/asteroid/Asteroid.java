@@ -170,8 +170,8 @@ public class Asteroid {
      */
     public void explode() {
         //All entities that were on the asteroid are warned that the asteroid has been exploded
-        for (Entity entity : entities) {
-            entity.asteroidExploded();  // todo: fix concurrentModificationException (entity removal in this loop)
+        for(int i =0;i<entities.size();i++){
+            entities.get(i).asteroidExploded();
         }
 
         if (teleportGate != null)
