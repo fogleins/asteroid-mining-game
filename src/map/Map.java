@@ -34,11 +34,11 @@ public class Map {
          */
         int mapBound = 10;    // should be minimum 4
         baseAsteroid = new BaseAsteroid();
-        asteroids.add(baseAsteroid);
+        int centerIndex = mapBound/2;
 
         // 2D array, which is being used in asteroid generations, and in connecting them as neighbours.
         Asteroid [][] asteroidsMatrix = new Asteroid[mapBound][mapBound];
-        asteroidsMatrix[0][0]=baseAsteroid;
+        asteroidsMatrix[centerIndex][centerIndex]=baseAsteroid;
 
         int resLength = mapBound * mapBound;
         Resource[] resources = new Resource[resLength];
@@ -60,7 +60,10 @@ public class Map {
         // Generation of the asteroids.
         for (int i = 0; i< mapBound; i++){
             for(int j = 0; j< mapBound; j++){
-                if(!(i==0 && j==0)){
+                if((i==centerIndex && j==centerIndex)){
+                    asteroids.add(baseAsteroid);
+                }
+                else {
                     int resIdx = mapBound *i + j;
                     Asteroid a = new Asteroid("A" + i +""+ j, rnd.nextBoolean(), rnd.nextInt(6) + 1, resources[resIdx]);
                     asteroidsMatrix[i][j]=a;
