@@ -9,6 +9,7 @@ import view.AsteroidView;
 import view.GameWindow;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class map.asteroid.Asteroid
@@ -175,15 +176,6 @@ public class Asteroid {
     }
 
     /**
-     * Sets the resource of the core
-     */
-    public void setResource(Resource resource) {
-        this.resource = resource;
-        if (this.resource != null)
-            this.resource.setAsteroid(this);
-    }
-
-    /**
      * Get the TeleportGate of this asteroid
      *
      * @return The TeleportGate object, null if there is none
@@ -207,24 +199,17 @@ public class Asteroid {
     public void explode() {
         //All entities that were on the asteroid are warned that the asteroid has been exploded
         for (Entity entity : entities) {
-            entity.asteroidExploded();
+            entity.asteroidExploded();  // todo: fix concurrentModificationException (entity removal in this loop)
         }
 
         if (teleportGate != null)
             teleportGate.die();
 
         // Modifying neighbours to preserve consistency
-        for(Asteroid a : neighbours){
-            a.neighbours.remove(this);
-
-            for(Asteroid b : this.neighbours){
-                if(a.neighbours.contains(b)){
-                    continue;
-                }
-                a.neighbours.add(b);
-            }
-            a.neighbours.remove(a);
-
+        for (int i = 0; i < neighbours.size(); i++) {
+            neighbours.get(i).removeAsteroid(this);
+            for (int j = 0; j < neighbours.size(); j++)     // Connecting the neighbours to each other
+                if (i != j) neighbours.get(i).addNeighbour(neighbours.get(j));
         }
         Game.getInstance().getMap().removeAsteroid(this);
         GameWindow.getMapView().updateView(this);
