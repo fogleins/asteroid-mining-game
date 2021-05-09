@@ -14,9 +14,9 @@ public class GameStatusView extends JPanel {
      */
     public GameStatusView() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 22, 8));
-        setFont(getFont().deriveFont(16.0f));
+        setFont(getFont().deriveFont(24.0f));
         round = new JLabel();
-        round.setFont(getFont());
+        round.setFont(getFont().deriveFont(Font.BOLD));
         add(round);
         sunflare = new JLabel();
         sunflare.setFont(getFont().deriveFont(Font.BOLD));
