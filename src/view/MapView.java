@@ -131,19 +131,33 @@ public class MapView extends JPanel {
      * @param g Graphics object of the map(panel)
      */
     private void drawNeighboursConnection(Graphics g) {
-        g.setColor(Color.BLACK);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setStroke(new BasicStroke(3));
         for (Asteroid a : map.getAsteroids()) {
+            g2.setColor(Color.BLACK);
             for (Asteroid b : a.getNeighbours().getAsteroidNeighbours()) {
-                int x1 = a.getAsteroidView().getCenter().x;
-                int y1 = a.getAsteroidView().getCenter().y;
-                int x2 = b.getAsteroidView().getCenter().x;
-                int y2 = b.getAsteroidView().getCenter().y;
-                g2.drawLine(x1, y1, x2, y2);
+                drawNeighbourLine(g2, a, b);
+            }
+            g2.setColor(Color.CYAN);
+            for (Asteroid b : a.getNeighbours().getTeleportGateNeighbours()) {
+                drawNeighbourLine(g2, a, b);
             }
         }
+    }
+
+    /**
+     * Draws a neighbour line
+     * @param g2 graphics object to draw the line to
+     * @param a first Asteroid of line
+     * @param b second Asteroid of line
+     */
+    private void drawNeighbourLine(Graphics2D g2, Asteroid a, Asteroid b) {
+        int x1 = a.getAsteroidView().getCenter().x;
+        int y1 = a.getAsteroidView().getCenter().y;
+        int x2 = b.getAsteroidView().getCenter().x;
+        int y2 = b.getAsteroidView().getCenter().y;
+        g2.drawLine(x1, y1, x2, y2);
     }
 
     /**
