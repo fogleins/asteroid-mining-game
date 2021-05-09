@@ -135,16 +135,13 @@ public class TeleportGate implements Steppable {
      */
     @Override
     public void die() {
-        // todo: properly remove the gates from everything
         if(currentAsteroid != null){
             currentAsteroid.removeTeleportGate();
         }
         if(settler != null){
             settler.removeTeleportGate(this);
         }
-        if(otherGate.settler != null || otherGate.currentAsteroid != null){
-            otherGate.die();
-        }
+        otherGate.die();
         Game.getInstance().removeSteppable(this);
     }
 }
