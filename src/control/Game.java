@@ -246,6 +246,9 @@ public final class Game implements Serializable {
         current.yourTurn();
     }
 
+    /**
+     * Saves the game's current state.
+     */
     public void saveData() {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("./save.dat"));
@@ -257,6 +260,9 @@ public final class Game implements Serializable {
         }
     }
 
+    /**
+     * Loads the previously saved game.
+     */
     public static void readDataFromFile() {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./save.dat"));
@@ -265,6 +271,7 @@ public final class Game implements Serializable {
             GameWindow.init();
             instance.current = instance.settlers.get(0);
             instance.current.yourTurn();
+            GameWindow.currentSettlerChanged(null, instance.current);
         } catch (FileNotFoundException notFoundException) {
             JOptionPane.showMessageDialog(null, "File cannot be found. Error message: " +
                             notFoundException.getMessage(), "File not found", JOptionPane.WARNING_MESSAGE);
