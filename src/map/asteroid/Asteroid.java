@@ -170,9 +170,14 @@ public class Asteroid implements Serializable {
      * will be each other's neighbours.
      */
     public void explode() {
-        //All entities that were on the asteroid are warned that the asteroid has been exploded
-        for(int i =0;i<entities.size();i++){
+        // All entities that were on the asteroid are warned that the asteroid has been exploded
+        int size = entities.size();
+        for (int i = 0; i < entities.size() ; i++){
             entities.get(i).asteroidExploded();
+            if (size > entities.size()) {
+                i = i - (size - entities.size());
+                size = entities.size();
+            }
         }
 
         if (teleportGate != null)
@@ -187,6 +192,7 @@ public class Asteroid implements Serializable {
         Game.getInstance().getMap().removeAsteroid(this);
         GameWindow.getMapView().updateView(this);
         this.exploded = true; // this way the AsteroidView knows not to paint this asteroid
+        asteroidView.explosionNotification();
     }
 
     /**

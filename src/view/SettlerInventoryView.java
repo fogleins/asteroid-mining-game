@@ -16,8 +16,7 @@ public class SettlerInventoryView extends JPanel {
     SettlerInventoryView() {
         titleLabel = new JLabel();
         informationLabel = new JTextArea();
-        titleLabel.setFont(titleLabel.getFont().deriveFont(35.0f));
-
+        titleLabel.setFont(titleLabel.getFont().deriveFont(28.0f));
         informationLabel.setFont(informationLabel.getFont().deriveFont(20.0f));
         setPreferredSize(new Dimension(200, 500));
         add(titleLabel);
@@ -28,7 +27,7 @@ public class SettlerInventoryView extends JPanel {
         informationLabel.setPreferredSize(new Dimension(180, 170));
         informationLabel.setEditable(false);
         informationLabel.setHighlighter(null);
-        informationLabel.setBackground(new Color(238, 238, 238, 255));
+        informationLabel.setBackground(UIManager.getColor("Panel.background"));
     }
 
     public void updateView(Settler currentSettler) {

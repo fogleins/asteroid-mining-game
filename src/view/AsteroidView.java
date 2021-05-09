@@ -178,4 +178,8 @@ public class AsteroidView extends JButton {
         }
         return shape.contains(x, y);
     }
+
+    public void explosionNotification() {
+        JOptionPane.showMessageDialog(GameWindow.getInstance(), "Asteroid " + asteroid.getName() + " exploded!");
+    }
 }

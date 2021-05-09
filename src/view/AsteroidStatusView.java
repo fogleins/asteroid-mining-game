@@ -19,7 +19,7 @@ public class AsteroidStatusView extends JPanel {
      * Creates an AsteroidStatusView Object
      */
     public AsteroidStatusView() {
-        titleLabel.setFont(titleLabel.getFont().deriveFont(35.0f));
+        titleLabel.setFont(titleLabel.getFont().deriveFont(28.0f));
         detailsTextArea.setFont(detailsTextArea.getFont().deriveFont(20.0f));
         setPreferredSize(new Dimension(200, 500));
         add(titleLabel);
@@ -31,8 +31,7 @@ public class AsteroidStatusView extends JPanel {
         //detailsTextArea.setVerticalAlignment(SwingConstants.TOP);
         detailsTextArea.setEditable(false);
         detailsTextArea.setHighlighter(null);
-        detailsTextArea.setBackground(new Color(200, 200, 200, 255));
-        //detailsTextArea.setBackground(UIManager.getColor("Panel.background"));
+        detailsTextArea.setBackground(UIManager.getColor("Panel.background"));
         this.setPreferredSize(new Dimension(230, 500));
     }
 
