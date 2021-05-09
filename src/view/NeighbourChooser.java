@@ -56,9 +56,11 @@ public class NeighbourChooser extends JDialog {
 
         neighboursArray = new ArrayList<>();
         for (Asteroid a : neighbours.getAsteroidNeighbours())
-            neighboursArray.add(new NeighbourAsteroid(a, false));
+            if (a != null)
+                neighboursArray.add(new NeighbourAsteroid(a, false));
         for (Asteroid a : neighbours.getTeleportGateNeighbours())
-            neighboursArray.add(new NeighbourAsteroid(a, true));
+            if (a != null)
+                neighboursArray.add(new NeighbourAsteroid(a, true));
 
         initDialog();
         this.pack();

@@ -242,7 +242,7 @@ public class Asteroid implements Serializable {
     public Neighbours getNeighbours() {
         //A Neighbours osztály konstruktora ArrayList-et vár a teleport által összekötött aszteroidák listájával
         ArrayList<Asteroid> teleportGateOtherSide = new ArrayList<>();
-        if (teleportGate != null) {
+        if (teleportGate != null && teleportGate.getOtherSide() != null) {
             teleportGateOtherSide.add(teleportGate.getOtherSide());
         }
 
