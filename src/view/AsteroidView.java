@@ -145,8 +145,7 @@ public class AsteroidView extends JButton {
         // if there's a teleport on the asteroid, we indicate it by writing a small text next to the asteroid
         if (asteroid.getTeleportGate() != null) {
             g.setColor(Color.BLUE); // the asteroid's name is written in blue
-            // TODO: a kör befogó téglalapján kívülre itt nem tudunk rajzolni
-            g.drawString("TG", radius - 9, radius + 25); // todo: test place teleport
+            drawCenteredString(g, "TG", 20);
         }
 
         // we count the number of settlers on the asteroid, and if there's at least one on it, we display the number
@@ -157,8 +156,8 @@ public class AsteroidView extends JButton {
         }
         if (settlers != 0) {
             g.setColor(Color.BLACK);
-            g.drawString(settlers + (settlers == 1 ? " settler" : " settlers"),
-                    settlers == 1 ? radius - 30 : radius - 32, radius - 15);
+            String settlerStr = settlers + (settlers == 1 ? " settler" : " settlers");
+            drawCenteredString(g, settlerStr, -20);
         }
 
         this.setText(asteroid.getName());
@@ -181,5 +180,21 @@ public class AsteroidView extends JButton {
 
     public void explosionNotification() {
         JOptionPane.showMessageDialog(GameWindow.getInstance(), "Asteroid " + asteroid.getName() + " exploded!");
+    }
+
+    /**
+     * Draws a horizontally centered string.
+     *
+     * @param g The graphics object to draw with.
+     * @param text The text to be drawn.
+     * @param yOffset The number of pixels the string should be drawn vertically from the center.
+     */
+    private void drawCenteredString(Graphics g, String text, int yOffset) {
+        Rectangle rect = new Rectangle(radius * 2, radius * 2);
+        FontMetrics metrics = g.getFontMetrics(this.getFont());
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent() + yOffset;
+        g.setFont(this.getFont());
+        g.drawString(text, x, y);
     }
 }
