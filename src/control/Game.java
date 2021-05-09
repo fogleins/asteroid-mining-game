@@ -264,7 +264,7 @@ public final class Game implements Serializable {
             JOptionPane.showMessageDialog(null, "Save file is corrupted. Error message: " +
                             streamCorruptedException.getMessage(), "File corrupted", JOptionPane.ERROR_MESSAGE);
             System.exit(-1);
-        } catch (Exception exception) { // IOException, ClassNotFoundException vagy InvalidClassException
+        } catch (Exception exception) { // IOException, ClassNotFoundException or InvalidClassException
             JOptionPane.showMessageDialog(null, "Error while reading save file. Shutting down." +
                     "Error message: " + exception.getMessage(), "Error in save file", JOptionPane.ERROR_MESSAGE);
             System.exit(-1);
