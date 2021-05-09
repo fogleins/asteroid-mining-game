@@ -97,7 +97,7 @@ public final class Game implements Serializable {
             Ufo ufo = new Ufo(String.format("UFO-%02d", i + 1));
             // place the ufo on a random asteroid
             ArrayList<Asteroid> asteroids = instance.map.getAsteroids();
-            ufo.setAsteroid(asteroids.get(rnd.nextInt(asteroids.size())));
+            ufo.move(asteroids.get(rnd.nextInt(asteroids.size())));
             instance.steppables.add(ufo);
         }
         GameWindow.init();

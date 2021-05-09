@@ -3,7 +3,9 @@ package view;
 import control.Game;
 import map.asteroid.Asteroid;
 import map.entity.Entity;
+import map.entity.Robot;
 import map.entity.Settler;
+import map.entity.Ufo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -145,19 +147,32 @@ public class AsteroidView extends JButton {
         // if there's a teleport on the asteroid, we indicate it by writing a small text next to the asteroid
         if (asteroid.getTeleportGate() != null) {
             g.setColor(Color.BLUE); // the asteroid's name is written in blue
-            drawCenteredString(g, "TG", 20);
+            drawCenteredString(g, "TG", 30);
         }
 
         // we count the number of settlers on the asteroid, and if there's at least one on it, we display the number
         int settlers = 0;
+        int robots = 0;
+        int ufos = 0;
         for (Entity entity : asteroid.getEntities()) {
             if (entity instanceof Settler)
                 settlers++;
+            else if (entity instanceof Robot)
+                robots++;
+            else if (entity instanceof Ufo)
+                ufos++;
         }
+        g.setColor(Color.BLACK);
         if (settlers != 0) {
-            g.setColor(Color.BLACK);
             String settlerStr = settlers + (settlers == 1 ? " settler" : " settlers");
-            drawCenteredString(g, settlerStr, -20);
+            drawCenteredString(g, settlerStr, -15);
+        }
+        if (robots != 0 && ufos != 0) {
+            drawCenteredString(g, "R, U", 15);
+        } else if (robots != 0) {
+            drawCenteredString(g, "R", 15);
+        } else if (ufos != 0) {
+            drawCenteredString(g, "U", 15);
         }
 
         this.setText(asteroid.getName());
