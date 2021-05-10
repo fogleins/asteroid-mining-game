@@ -9,12 +9,15 @@ import map.entity.Ufo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
+import java.io.Serializable;
 
 /**
  * Displays an asteroid on the map.
  */
-public class AsteroidView extends JButton {
+public class AsteroidView extends JButton implements ActionListener, Serializable {
     /**
      * The currently selected asteroid.
      */
@@ -45,7 +48,7 @@ public class AsteroidView extends JButton {
      */
     public AsteroidView(Asteroid asteroid) {
         this.asteroid = asteroid;
-        this.addActionListener(actionEvent -> selected());
+        this.addActionListener(this);
         this.radius = 50;
         this.coordinates = new Point(getX() + radius, getY() + radius);
         setFocusable(false);
@@ -211,5 +214,15 @@ public class AsteroidView extends JButton {
         int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent() + yOffset;
         g.setFont(this.getFont());
         g.drawString(text, x, y);
+    }
+
+    /**
+     * Implementation of the ActionListener interface. This method is called when an asteroid is clicked on.
+     *
+     * @param e Tha ActionEvent object.
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        selected();
     }
 }
