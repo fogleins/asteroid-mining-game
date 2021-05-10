@@ -41,8 +41,14 @@ public class GameWindow extends JFrame {
      */
     private final MapView mapView;
 
+    /**
+     * The scroll pane that contains the map view.
+     */
     private final JScrollPane mapScrollPane;
 
+    /**
+     * A menu bar for the game window.
+     */
     public static class GameMenuBar extends JMenuBar {
         private final static GameMenuBar instance = new GameMenuBar();
 
