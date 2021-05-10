@@ -68,13 +68,18 @@ public final class Game implements Serializable {
         instance = this;
     }
 
+    /**
+     * Copy constructor.
+     *
+     * @param game The Game object to copy.
+     */
     private Game(Game game) {
         currentRound = game.currentRound;
         nextSunflare = game.nextSunflare;
         map = game.map;
         settlers = game.settlers;
         steppables = game.steppables;
-        instance = this;
+        current = game.current;
     }
 
     /**
@@ -269,7 +274,6 @@ public final class Game implements Serializable {
             Game.instance = new Game((Game) inputStream.readObject());
             inputStream.close();
             GameWindow.init();
-            instance.current = instance.settlers.get(0);
             instance.current.yourTurn();
             GameWindow.currentSettlerChanged(null, instance.current);
         } catch (FileNotFoundException notFoundException) {
