@@ -37,7 +37,7 @@ public class AsteroidView extends JButton implements ActionListener, Serializabl
     /**
      * Reference to asteroid status view.
      */
-    private AsteroidStatusView statusView;
+    private transient AsteroidStatusView statusView;
     /**
      * Used for hit detection.
      */
