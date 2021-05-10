@@ -1,7 +1,5 @@
 package control;
 
-import view.GameWindow;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,7 +9,9 @@ public class Main {
         showNameInputWindow();
     }
 
-    // TODO: majd ha lesz rá idő, ezen lehetne szépíteni
+    /**
+     * Displays the start screen.
+     */
     private static void showNameInputWindow() {
         JFrame frame = new JFrame("New game");
         frame.setLayout(new BorderLayout());
@@ -101,12 +101,12 @@ public class Main {
                 "Wang Tingli Alexandra\n" +
                 "\n© rapid_sloths, 2021\n\n";
         if (imgURL != null)
-            about.addActionListener(e ->
-                    JOptionPane.showMessageDialog(null, message, "About this game", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imgURL))
+            about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
+                    JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imgURL))
             );
         else
-            about.addActionListener(e ->
-                    JOptionPane.showMessageDialog(null, message, "About this game", JOptionPane.PLAIN_MESSAGE)
+            about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
+                    JOptionPane.PLAIN_MESSAGE)
             );
         southPanel.add(about, BorderLayout.WEST);
 

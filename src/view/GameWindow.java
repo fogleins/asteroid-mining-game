@@ -47,56 +47,13 @@ public class GameWindow extends JFrame {
     private final JScrollPane mapScrollPane;
 
     /**
-     * A menu bar for the game window.
-     */
-    public static class GameMenuBar extends JMenuBar {
-        private final static GameMenuBar instance = new GameMenuBar();
-
-        private GameMenuBar() {
-            // initialize file menu
-            JMenu fileMenu = new JMenu("File");
-            JMenuItem save = new JMenuItem("Save game");
-            save.addActionListener(e -> Game.getInstance().saveData());
-            fileMenu.add(save);
-            // initialize help menu
-            JMenu helpMenu = new JMenu("Help");
-            JMenuItem about = new JMenuItem("About");
-            // TODO: kódduplikáció
-            java.net.URL imgURL = Main.class.getResource("/team_logo.png");
-            String message = "Asteroid mining game\n\n" +
-                    "Created by:\n" +
-                    "Főglein Simon István,\n" +
-                    "Gódor Márton,\n" +
-                    "Szabó Viktor Ákos,\n" +
-                    "Telek Benjámin Márk,\n" +
-                    "Wang Tingli Alexandra\n" +
-                    "\n© rapid_sloths, 2021\n\n";
-            if (imgURL != null)
-                about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
-                                JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imgURL))
-                );
-            else
-                about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
-                                JOptionPane.PLAIN_MESSAGE)
-                );
-            helpMenu.add(about);
-            this.add(fileMenu);
-            this.add(helpMenu);
-        }
-
-        public static GameMenuBar getInstance() {
-            return instance;
-        }
-    }
-
-    /**
      * Creates a GameWindow object.
      */
     private GameWindow() {
         super("Asteroid mining game");
         Dimension windowSize = new Dimension(1280, 720);
         this.setPreferredSize(windowSize);
-        this.setMinimumSize(windowSize); // TODO: teszteléshez ezt majd lehet célszerű kikommentezni
+        this.setMinimumSize(windowSize);
         this.setLocationRelativeTo(null); // place the window in the center of the screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
@@ -177,7 +134,7 @@ public class GameWindow extends JFrame {
      * Updates the GUI so that the components display correctly after the current settler changes.
      *
      * @param previous The previous settler.
-     * @param current The current settler.
+     * @param current  The current settler.
      */
     public static void currentSettlerChanged(Settler previous, Settler current) {
         // the previous settler's asteroid should not be painted light pink, so we repaint it
@@ -197,5 +154,48 @@ public class GameWindow extends JFrame {
                 current.getAsteroid().getAsteroidView().getCenter().y - height / 2);
         viewport.setViewPosition(viewportCenter);
         instance.mapScrollPane.repaint();
+    }
+
+    /**
+     * A menu bar for the game window.
+     */
+    public static class GameMenuBar extends JMenuBar {
+        private final static GameMenuBar instance = new GameMenuBar();
+
+        private GameMenuBar() {
+            // initialize file menu
+            JMenu fileMenu = new JMenu("File");
+            JMenuItem save = new JMenuItem("Save game");
+            save.addActionListener(e -> Game.getInstance().saveData());
+            fileMenu.add(save);
+            // initialize help menu
+            JMenu helpMenu = new JMenu("Help");
+            JMenuItem about = new JMenuItem("About");
+            // TODO: kódduplikáció
+            java.net.URL imgURL = Main.class.getResource("/team_logo.png");
+            String message = "Asteroid mining game\n\n" +
+                    "Created by:\n" +
+                    "Főglein Simon István,\n" +
+                    "Gódor Márton,\n" +
+                    "Szabó Viktor Ákos,\n" +
+                    "Telek Benjámin Márk,\n" +
+                    "Wang Tingli Alexandra\n" +
+                    "\n© rapid_sloths, 2021\n\n";
+            if (imgURL != null)
+                about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
+                        JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imgURL))
+                );
+            else
+                about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
+                        JOptionPane.PLAIN_MESSAGE)
+                );
+            helpMenu.add(about);
+            this.add(fileMenu);
+            this.add(helpMenu);
+        }
+
+        public static GameMenuBar getInstance() {
+            return instance;
+        }
     }
 }

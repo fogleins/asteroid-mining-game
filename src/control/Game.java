@@ -24,38 +24,34 @@ public final class Game implements Serializable {
      * The instance of the singleton Game class.
      */
     private static Game instance = new Game();
-
+    /**
+     * The panel on which the game displays info about the current round.
+     */
+    private static GameStatusView statusView;
     /**
      * Reference to the Map object, which contains the game's map.
      */
     private final Map map;
-
     /**
      * List of Settlers, who are playing the game.
      */
     private final ArrayList<Settler> settlers;
-
     /**
      * List of Steppables who are playing.
      */
     private final ArrayList<Steppable> steppables;
-
     /**
      * Counts the number of rounds played.
      */
     private int currentRound;
-
     /**
      * The number of the round in which the next sunflare occurs.
      */
     private int nextSunflare;
-
     /**
      * The settler, who should step next.
      */
     private Settler current;
-
-    private static GameStatusView statusView;
 
     /**
      * Constructor. Initializes the Game object.
@@ -111,6 +107,11 @@ public final class Game implements Serializable {
         instance.current.yourTurn();
     }
 
+    /**
+     * Sets the status view object.
+     *
+     * @param view The GameStatusView
+     */
     public static void setStatusView(GameStatusView view) {
         statusView = view;
         statusView.updateView(instance.currentRound, false);
@@ -123,6 +124,32 @@ public final class Game implements Serializable {
      */
     public static Game getInstance() {
         return instance;
+    }
+
+    /**
+     * Loads the previously saved game.
+     */
+    public static void readDataFromFile() {
+        try {
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./save.dat"));
+            Game.instance = new Game((Game) inputStream.readObject());
+            inputStream.close();
+            GameWindow.init();
+            instance.current.yourTurn();
+            GameWindow.currentSettlerChanged(null, instance.current);
+        } catch (FileNotFoundException notFoundException) {
+            JOptionPane.showMessageDialog(null, "File cannot be found. Error message: " +
+                    notFoundException.getMessage(), "File not found", JOptionPane.WARNING_MESSAGE);
+            System.exit(-1);
+        } catch (StreamCorruptedException streamCorruptedException) {
+            JOptionPane.showMessageDialog(null, "Save file is corrupted. Error message: " +
+                    streamCorruptedException.getMessage(), "File corrupted", JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
+        } catch (Exception exception) { // IOException, ClassNotFoundException or InvalidClassException
+            JOptionPane.showMessageDialog(null, "Error while reading save file. Shutting down." +
+                    "Error message: " + exception.getMessage(), "Error in save file", JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
+        }
     }
 
     /**
@@ -180,7 +207,7 @@ public final class Game implements Serializable {
      * @return The {@code Resource} which should be exchanged.
      */
     public Resource exchangeResource(ArrayList<Resource> resources) {
-        return resources.get(resources.size() - 1);  // a lista utolsó tagját cseréljük ki
+        return resources.get(resources.size() - 1);  // swap the last element of the list
     }
 
     /**
@@ -263,32 +290,6 @@ public final class Game implements Serializable {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Game session cannot be saved ("
                     + ex.getMessage() + ')', "Error saving game", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    /**
-     * Loads the previously saved game.
-     */
-    public static void readDataFromFile() {
-        try {
-            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("./save.dat"));
-            Game.instance = new Game((Game) inputStream.readObject());
-            inputStream.close();
-            GameWindow.init();
-            instance.current.yourTurn();
-            GameWindow.currentSettlerChanged(null, instance.current);
-        } catch (FileNotFoundException notFoundException) {
-            JOptionPane.showMessageDialog(null, "File cannot be found. Error message: " +
-                            notFoundException.getMessage(), "File not found", JOptionPane.WARNING_MESSAGE);
-            System.exit(-1);
-        } catch (StreamCorruptedException streamCorruptedException) {
-            JOptionPane.showMessageDialog(null, "Save file is corrupted. Error message: " +
-                            streamCorruptedException.getMessage(), "File corrupted", JOptionPane.ERROR_MESSAGE);
-            System.exit(-1);
-        } catch (Exception exception) { // IOException, ClassNotFoundException or InvalidClassException
-            JOptionPane.showMessageDialog(null, "Error while reading save file. Shutting down." +
-                    "Error message: " + exception.getMessage(), "Error in save file", JOptionPane.ERROR_MESSAGE);
-            System.exit(-1);
         }
     }
 }
