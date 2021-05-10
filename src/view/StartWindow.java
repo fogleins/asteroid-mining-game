@@ -95,12 +95,12 @@ public class StartWindow extends JFrame {
         java.net.URL imgURL = getClass().getResource("/team_logo.png");
         String message = "Asteroid mining game\n\n" +
                 "Created by:\n" +
-                "Főglein Simon István,\n" +
-                "Gódor Márton,\n" +
-                "Szabó Viktor Ákos,\n" +
-                "Telek Benjámin Márk,\n" +
+                "Foglein Simon,\n" +
+                "Godor Marton,\n" +
+                "Szabo Viktor Akos,\n" +
+                "Telek Benjamin Mark,\n" +
                 "Wang Tingli Alexandra\n" +
-                "\n© rapid_sloths, 2021\n\n";
+                "\n(C) rapid_sloths, 2021\n\n";
         if (imgURL != null)
             about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
                     JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imgURL))
