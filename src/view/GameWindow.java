@@ -1,6 +1,7 @@
 package view;
 
 import control.Game;
+import control.Main;
 import map.entity.Settler;
 
 import javax.swing.*;
@@ -48,22 +49,30 @@ public class GameWindow extends JFrame {
         private GameMenuBar() {
             // initialize file menu
             JMenu fileMenu = new JMenu("File");
-            JMenuItem save = new JMenuItem("Save current session");
+            JMenuItem save = new JMenuItem("Save game");
             save.addActionListener(e -> Game.getInstance().saveData());
             fileMenu.add(save);
             // initialize help menu
             JMenu helpMenu = new JMenu("Help");
             JMenuItem about = new JMenuItem("About");
-            about.addActionListener(e ->
-                JOptionPane.showMessageDialog(null, "Asteroid mining game\n\n" +
-                        "Created by:\n" +
-                        "Főglein Simon István,\n" +
-                        "Gódor Márton,\n" +
-                        "Szabó Viktor Ákos,\n" +
-                        "Telek Benjámin Márk,\n" +
-                        "Wang Tingli Alexandra\n" +
-                        "\n© rapid_sloths, 2021\n\n")
-            );
+            // TODO: kódduplikáció
+            java.net.URL imgURL = Main.class.getResource("/team_logo.png");
+            String message = "Asteroid mining game\n\n" +
+                    "Created by:\n" +
+                    "Főglein Simon István,\n" +
+                    "Gódor Márton,\n" +
+                    "Szabó Viktor Ákos,\n" +
+                    "Telek Benjámin Márk,\n" +
+                    "Wang Tingli Alexandra\n" +
+                    "\n© rapid_sloths, 2021\n\n";
+            if (imgURL != null)
+                about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
+                                JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imgURL))
+                );
+            else
+                about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
+                                JOptionPane.PLAIN_MESSAGE)
+                );
             helpMenu.add(about);
             this.add(fileMenu);
             this.add(helpMenu);
