@@ -7,10 +7,11 @@ package map.resource;
 public class Uranium extends RadioactiveResource {
 
     private static final long serialVersionUID = 4948576870070784803L;
-    private int exposedCount = 0;
     private final static int exposedThreshold = 3;
+    private int exposedCount = 0;
 
-    public Uranium() {}
+    public Uranium() {
+    }
 
     @Override
     public void drilledInPerihelion() {

@@ -13,10 +13,12 @@ public class BillOfResources {
     /**
      * Constructor of class
      */
-    public BillOfResources() { }
+    public BillOfResources() {
+    }
 
     /**
      * Add a Resource object to the resources list
+     *
      * @param resource The resource to add
      */
     public void addResources(Resource resource) {
@@ -25,6 +27,7 @@ public class BillOfResources {
 
     /**
      * Remove a Resource object from the resources list
+     *
      * @param resource The resource to remove
      */
     public void removeResources(Resource resource) {
@@ -33,6 +36,7 @@ public class BillOfResources {
 
     /**
      * Uses the needed resources for the build (removes them from the owned ones)
+     *
      * @param ownedResources The resources that the caller owns. Changed if used.
      * @return boolean Whether the usage was successful or not. If yes, the appropriate resources were removed.
      */
@@ -52,6 +56,7 @@ public class BillOfResources {
 
     /**
      * Checks whether there is enough owned resources to build the damn thing
+     *
      * @param ownedResources The resources that the caller owns.
      * @return boolean Is there enough resources for the build?
      */
@@ -65,7 +70,7 @@ public class BillOfResources {
     }
 
     //Calculates how many necessary resources are there
-    private int checker(ArrayList<Resource> owned){
+    private int checker(ArrayList<Resource> owned) {
         ArrayList<Resource> ownedRes = (ArrayList<Resource>) owned.clone();
         int okCnt = 0;
         for (Resource rn : resourcesNeeded) {

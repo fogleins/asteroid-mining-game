@@ -8,7 +8,8 @@ import Exceptions.ActionFailedException;
  */
 public abstract class SublimableResource extends Resource {
 
-    public SublimableResource() { }
+    public SublimableResource() {
+    }
 
     public void drilledInPerihelion() throws ActionFailedException {
         asteroid.mined(); // sublimate (removes the resource from the asteroid)

@@ -6,7 +6,8 @@ package map.resource;
  */
 public abstract class RadioactiveResource extends Resource {
 
-    public RadioactiveResource() { }
+    public RadioactiveResource() {
+    }
 
     /**
      * Called if the asteroid's core is drilled in perihelion
