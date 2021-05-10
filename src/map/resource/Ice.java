@@ -6,6 +6,8 @@ package map.resource;
  */
 public class Ice extends SublimableResource {
 
+    private static final long serialVersionUID = 5260345601311354820L;
+
     public Ice() {
     }
 

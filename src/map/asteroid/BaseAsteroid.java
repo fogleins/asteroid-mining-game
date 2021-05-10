@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class BaseAsteroid extends Asteroid {
 
+    private static final long serialVersionUID = -1707774486046615795L;
     //Stores the Resources that are needed to win the game
     public static final BillOfResources winConditionResources;
 

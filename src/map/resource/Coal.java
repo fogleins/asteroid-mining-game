@@ -6,6 +6,8 @@ package map.resource;
  */
 public class Coal extends Resource {
 
+    private static final long serialVersionUID = -2088226317064543755L;
+
     public Coal() {
     }
 

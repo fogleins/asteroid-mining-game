@@ -6,6 +6,8 @@ package map.resource;
  */
 public class Iron extends Resource {
 
+    private static final long serialVersionUID = 3888305902827503176L;
+
     public Iron() {
     }
 

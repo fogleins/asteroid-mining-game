@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * Class map.entity.Entity
  */
 abstract public class Entity implements Serializable {
+    private static final long serialVersionUID = 2523005641127157231L;
     /**
      * Entity's name.
      */

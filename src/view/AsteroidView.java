@@ -18,6 +18,7 @@ import java.io.Serializable;
  * Displays an asteroid on the map.
  */
 public class AsteroidView extends JButton implements ActionListener, Serializable {
+    private static final long serialVersionUID = -3587323281526311926L;
     /**
      * The currently selected asteroid.
      */

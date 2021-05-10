@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Neighbours implements Serializable {
 
+    private static final long serialVersionUID = 4109286614855861924L;
     private final ArrayList<Asteroid> asteroidNeighbours;
     private final ArrayList<Asteroid> teleportGateNeighbours;
 

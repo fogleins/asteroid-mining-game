@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public class Asteroid implements Serializable {
 
+    private static final long serialVersionUID = -8591675552003339149L;
     /**
      * List of entities that are on the surface of the asteroid.
      */

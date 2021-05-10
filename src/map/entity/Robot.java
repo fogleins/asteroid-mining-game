@@ -13,6 +13,7 @@ import java.util.Random;
  */
 public class Robot extends Entity implements Steppable {
 
+    private static final long serialVersionUID = -4871940628772599854L;
     /**
      * The resources needed to build a Robot
      */

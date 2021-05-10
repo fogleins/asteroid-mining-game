@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Ufo extends Entity implements Steppable {
+    private static final long serialVersionUID = -3364598517128775794L;
     private final ArrayList<Resource> resources = new ArrayList<>();
 
     /**

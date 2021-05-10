@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 public abstract class Resource implements Serializable {
 
+    private static final long serialVersionUID = 8605724809759453519L;
     protected Asteroid asteroid;
 
     /**

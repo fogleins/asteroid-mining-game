@@ -12,6 +12,7 @@ import java.util.Random;
  * Class Map
  */
 public class Map implements Serializable {
+    private static final long serialVersionUID = -4586535826222086282L;
     /**
      * Random object, for random generation.
      */

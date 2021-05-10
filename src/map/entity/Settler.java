@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class Settler extends Entity {
 
+    private static final long serialVersionUID = 4265198911107303976L;
     /**
      * List of resources in the Settler's inventory.
      */
