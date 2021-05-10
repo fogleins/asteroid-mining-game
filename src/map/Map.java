@@ -34,18 +34,18 @@ public class Map implements Serializable {
          * It's declare how many "row" or "column" will there be.
          * For example mapBound=10 means that will be total of 10x10=100 asteroids.
          */
-        int mapBound = 10;    // should be minimum 4
+        int mapBound = 10; // should be at least 4
         baseAsteroid = new BaseAsteroid();
-        int centerIndex = mapBound/2;
+        int centerIndex = mapBound / 2;
 
         // 2D array, which is being used in asteroid generations, and in connecting them as neighbours.
-        Asteroid [][] asteroidsMatrix = new Asteroid[mapBound][mapBound];
-        asteroidsMatrix[centerIndex][centerIndex]=baseAsteroid;
+        Asteroid[][] asteroidsMatrix = new Asteroid[mapBound][mapBound];
+        asteroidsMatrix[centerIndex][centerIndex] = baseAsteroid;
 
         int resLength = mapBound * mapBound;
         Resource[] resources = new Resource[resLength];
         // generate minimum number of resources (3 each)
-        for (int i = 0; i < 3*4; i++) {
+        for (int i = 0; i < 3 * 4; i++) {
             // generate asteroid index
             int idx = rnd.nextInt(resLength);
             while (idx == 0 || resources[idx] != null)  // generate new random numbers if the index is already used
@@ -60,15 +60,14 @@ public class Map implements Serializable {
 
 
         // Generation of the asteroids.
-        for (int i = 0; i< mapBound; i++){
-            for(int j = 0; j< mapBound; j++){
-                if((i==centerIndex && j==centerIndex)){
+        for (int i = 0; i < mapBound; i++) {
+            for (int j = 0; j < mapBound; j++) {
+                if ((i == centerIndex && j == centerIndex)) {
                     asteroids.add(baseAsteroid);
-                }
-                else {
-                    int resIdx = mapBound *i + j;
-                    Asteroid a = new Asteroid("A" + i +""+ j, rnd.nextBoolean(), rnd.nextInt(6) + 1, resources[resIdx]);
-                    asteroidsMatrix[i][j]=a;
+                } else {
+                    int resIdx = mapBound * i + j;
+                    Asteroid a = new Asteroid("A" + i + "" + j, rnd.nextBoolean(), rnd.nextInt(6) + 1, resources[resIdx]);
+                    asteroidsMatrix[i][j] = a;
                     asteroids.add(a);
                 }
             }
@@ -78,49 +77,54 @@ public class Map implements Serializable {
          * Connects the asteroids as neighbours. The asteroids are connected only with
          * the upper, lower, right, left side asteroids.
          */
-        for (int i = 0; i< mapBound; i++){
-            for(int j = 0; j< mapBound; j++){
+        for (int i = 0; i < mapBound; i++) {
+            for (int j = 0; j < mapBound; j++) {
                 /*
                  * The purpose of the try-catches is to connect the upper, lower rows,
                  * and side columns asteroids with each other. IndexOutOfBounds exceptions are ignored for purpose.
                  */
                 try {
-                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i-1][j]);
-                } catch (ArrayIndexOutOfBoundsException e) {}
+                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i - 1][j]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
                 try {
-                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i+1][j]);
-                } catch (ArrayIndexOutOfBoundsException e) {}
+                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i + 1][j]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
                 try {
-                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i][j-1]);
-                } catch (ArrayIndexOutOfBoundsException e) {}
+                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i][j - 1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
                 try {
-                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i][j+1]);
-                } catch (ArrayIndexOutOfBoundsException e) {}
+                    asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i][j + 1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
             }
         }
-        /**
-         * Gives an optional diagonal edge to the neighbours.
-         */
-        for (int i = 0; i< mapBound; i++){
-            for(int j = 0; j< mapBound; j++){
-                if(rnd.nextBoolean()){
+
+        // Gives an optional diagonal edge to the neighbours.
+        for (int i = 0; i < mapBound; i++) {
+            for (int j = 0; j < mapBound; j++) {
+                if (rnd.nextBoolean()) {
                     try {
-                        addDiagonal(asteroidsMatrix[i][j],asteroidsMatrix[i-1][j-1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {}
+                        addDiagonal(asteroidsMatrix[i][j], asteroidsMatrix[i - 1][j - 1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                    }
                     try {
-                        addDiagonal(asteroidsMatrix[i][j],asteroidsMatrix[i-1][j+1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {}
+                        addDiagonal(asteroidsMatrix[i][j], asteroidsMatrix[i - 1][j + 1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                    }
                     try {
-                        addDiagonal(asteroidsMatrix[i][j],asteroidsMatrix[i+1][j-1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {}
+                        addDiagonal(asteroidsMatrix[i][j], asteroidsMatrix[i + 1][j - 1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                    }
                     try {
-                        addDiagonal(asteroidsMatrix[i][j],asteroidsMatrix[i+1][j+1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {}
+                        addDiagonal(asteroidsMatrix[i][j], asteroidsMatrix[i + 1][j + 1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                    }
 
 
-                    /**
-                     * Removes a random edge from the current asteroid.
-                     */
+                    // Removes a random edge from the current asteroid.
                     int neighboursSize = asteroidsMatrix[i][j].getNeighbours().getAsteroidNeighbours().size();
                     Asteroid temp = asteroidsMatrix[i][j].getNeighbours().getAsteroidNeighbours().get(rnd.nextInt(neighboursSize));
                     asteroidsMatrix[i][j].getNeighbours().getAsteroidNeighbours().remove(temp);
@@ -133,16 +137,18 @@ public class Map implements Serializable {
 
     /**
      * Adds an additional neighbour to the current one in diagonal represented in a matrix.
+     *
      * @param a First asteroid.
      * @param b Second asteroid.
      */
-    private void addDiagonal(Asteroid a, Asteroid b){
+    private void addDiagonal(Asteroid a, Asteroid b) {
         try {
-            if(!(a.getNeighbours().getAsteroidNeighbours().contains(b) && b.getNeighbours().getAsteroidNeighbours().contains(a))){
+            if (!(a.getNeighbours().getAsteroidNeighbours().contains(b) && b.getNeighbours().getAsteroidNeighbours().contains(a))) {
                 a.addNeighbour(b);
                 b.addNeighbour(a);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {}
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
     }
 
 
@@ -153,12 +159,17 @@ public class Map implements Serializable {
      * @return the new resource object
      */
     private Resource generateResource(int i) {
-        switch (i){
-            case 0: return new Uranium();
-            case 1: return new Coal();
-            case 2: return new Iron();
-            case 3: return new Ice();
-            default: return null;
+        switch (i) {
+            case 0:
+                return new Uranium();
+            case 1:
+                return new Coal();
+            case 2:
+                return new Iron();
+            case 3:
+                return new Ice();
+            default:
+                return null;
         }
     }
 
