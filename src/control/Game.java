@@ -92,7 +92,7 @@ public final class Game implements Serializable {
         }
         // add UFOs
         Random rnd = new Random();
-        int ufoCount = rnd.nextInt(11); // 0 <= n < 11
+        int ufoCount = rnd.nextInt(11) + 5; // 5 <= n < 16
         for (int i = 0; i < ufoCount; i++) {
             Ufo ufo = new Ufo(String.format("UFO-%02d", i + 1));
             // place the ufo on a random asteroid

@@ -63,7 +63,10 @@ public class Main {
         JButton loadGameBtn = new JButton("Load game");
         Font buttonFont = loadGameBtn.getFont().deriveFont(16.0f);
         loadGameBtn.setFont(buttonFont);
-        loadGameBtn.addActionListener(e -> Game.readDataFromFile());
+        loadGameBtn.addActionListener(e -> {
+            Game.readDataFromFile();
+            frame.setVisible(false);
+        });
         startPanel.add(loadGameBtn);
         // start button
         JButton startGameButton = new JButton("Start game");
