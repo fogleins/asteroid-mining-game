@@ -1,5 +1,7 @@
 package view;
 
+import control.Game;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -20,16 +22,28 @@ public class GameStatusView extends JPanel {
      * Constructor, initializes the UI components of this panel.
      */
     public GameStatusView() {
-        setLayout(new FlowLayout(FlowLayout.CENTER, 22, 8));
-        setFont(getFont().deriveFont(24.0f));
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        this.setBorder(BorderFactory.createEmptyBorder(5, 8, 5, 8));
+        setFont(getFont().deriveFont(22.0f));
+
+        JButton saveBtn = new JButton("Save game");
+        saveBtn.addActionListener(e -> Game.getInstance().saveData());
+        add(saveBtn);
+        add(Box.createHorizontalGlue());
+
         round = new JLabel();
-        round.setFont(getFont().deriveFont(Font.BOLD));
+        round.setFont(getFont());
         add(round);
         sunflare = new JLabel();
         sunflare.setFont(getFont().deriveFont(Font.BOLD));
         sunflare.setForeground(Color.RED);
         sunflare.setText("sunflare is coming");
         add(sunflare);
+        add(Box.createHorizontalGlue());
+
+        JButton centerBtn = new JButton("Center view");
+        centerBtn.addActionListener(e -> GameWindow.currentSettlerChanged(null, Game.getInstance().getCurrentSettler()));
+        add(centerBtn);
     }
 
     /**

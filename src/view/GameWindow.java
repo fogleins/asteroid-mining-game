@@ -1,7 +1,6 @@
 package view;
 
 import control.Game;
-import control.Main;
 import map.entity.Settler;
 
 import javax.swing.*;
@@ -76,7 +75,6 @@ public class GameWindow extends JFrame {
         asteroidStatusView = new AsteroidStatusView();
         this.add(asteroidStatusView, BorderLayout.EAST);
 
-        this.setJMenuBar(new GameMenuBar());
         // maximize window
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.pack();
@@ -154,48 +152,5 @@ public class GameWindow extends JFrame {
                 current.getAsteroid().getAsteroidView().getCenter().y - height / 2);
         viewport.setViewPosition(viewportCenter);
         instance.mapScrollPane.repaint();
-    }
-
-    /**
-     * A menu bar for the game window.
-     */
-    public static class GameMenuBar extends JMenuBar {
-        private final static GameMenuBar instance = new GameMenuBar();
-
-        private GameMenuBar() {
-            // initialize file menu
-            JMenu fileMenu = new JMenu("File");
-            JMenuItem save = new JMenuItem("Save game");
-            save.addActionListener(e -> Game.getInstance().saveData());
-            fileMenu.add(save);
-            // initialize help menu
-            JMenu helpMenu = new JMenu("Help");
-            JMenuItem about = new JMenuItem("About");
-            // TODO: kódduplikáció
-            java.net.URL imgURL = Main.class.getResource("/team_logo.png");
-            String message = "Asteroid mining game\n\n" +
-                    "Created by:\n" +
-                    "Főglein Simon István,\n" +
-                    "Gódor Márton,\n" +
-                    "Szabó Viktor Ákos,\n" +
-                    "Telek Benjámin Márk,\n" +
-                    "Wang Tingli Alexandra\n" +
-                    "\n© rapid_sloths, 2021\n\n";
-            if (imgURL != null)
-                about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
-                        JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imgURL))
-                );
-            else
-                about.addActionListener(e -> JOptionPane.showMessageDialog(null, message, "About this game",
-                        JOptionPane.PLAIN_MESSAGE)
-                );
-            helpMenu.add(about);
-            this.add(fileMenu);
-            this.add(helpMenu);
-        }
-
-        public static GameMenuBar getInstance() {
-            return instance;
-        }
     }
 }
