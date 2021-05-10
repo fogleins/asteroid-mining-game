@@ -9,7 +9,13 @@ import java.util.ArrayList;
 public class Neighbours implements Serializable {
 
     private static final long serialVersionUID = 4109286614855861924L;
+    /**
+     * Neighbours connected by default.
+     */
     private final ArrayList<Asteroid> asteroidNeighbours;
+    /**
+     * Neighbours connected by teleport gate.
+     */
     private final ArrayList<Asteroid> teleportGateNeighbours;
 
     public Neighbours(ArrayList<Asteroid> asteroidNeighbours, ArrayList<Asteroid> teleportGateNeighbours) {
@@ -18,19 +24,20 @@ public class Neighbours implements Serializable {
     }
 
     /**
-     * Get the value of asteroidNeighbours
-     * @return the value of asteroidNeighbours
+     * Get the value of asteroidNeighbours.
+     *
+     * @return The value of asteroidNeighbours.
      */
     public ArrayList<Asteroid> getAsteroidNeighbours() {
         return asteroidNeighbours;
     }
 
     /**
-     * Get the value of teleportGateNeighbours
-     * @return the value of teleportGateNeighbours
+     * Get the value of teleportGateNeighbours.
+     *
+     * @return The value of teleportGateNeighbours.
      */
     public ArrayList<Asteroid> getTeleportGateNeighbours() {
         return teleportGateNeighbours;
     }
-
 }
