@@ -1,6 +1,6 @@
 package view;
 
-import Exceptions.ActionFailedException;
+import control.ActionFailedException;
 import control.Game;
 import map.asteroid.Asteroid;
 import map.entity.Settler;

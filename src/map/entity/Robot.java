@@ -1,6 +1,6 @@
 package map.entity;
 
-import Exceptions.ActionFailedException;
+import control.ActionFailedException;
 import control.Game;
 import map.asteroid.Asteroid;
 import map.resource.*;

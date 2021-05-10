@@ -1,6 +1,6 @@
 package map.asteroid;
 
-import Exceptions.ActionFailedException;
+import control.ActionFailedException;
 import control.Game;
 import map.entity.Entity;
 import map.entity.TeleportGate;

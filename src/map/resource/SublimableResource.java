@@ -1,6 +1,6 @@
 package map.resource;
 
-import Exceptions.ActionFailedException;
+import control.ActionFailedException;
 
 /**
  * Class SublimableResource
