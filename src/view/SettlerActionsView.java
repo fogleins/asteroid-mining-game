@@ -15,8 +15,7 @@ public class SettlerActionsView extends JPanel {
     SettlerActionsView() {
         JButton moveBtn = new JButton("Move");
         moveBtn.addActionListener(actionEvent -> {
-            // todo: remove testing code (should be settler.getAsteroid...)
-            NeighbourChooser chooser = new NeighbourChooser(Game.getInstance().getCurrentSettler().getAsteroid().getNeighbours());
+            NeighbourChooser chooser = new NeighbourChooser(settler.getAsteroid().getNeighbours());
             Asteroid chosen = chooser.chooseAsteroid();
             if (chosen != null)
                 settler.move(chosen);
