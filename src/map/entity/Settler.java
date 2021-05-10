@@ -35,7 +35,7 @@ public class Settler extends Entity {
     /**
      * Reference to the inventory view, where data of the settler is shown
      */
-    private SettlerInventoryView settlerView;
+    private transient SettlerInventoryView settlerView;
 
     /**
      * Constructor of Settler.
