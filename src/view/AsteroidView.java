@@ -54,20 +54,11 @@ public class AsteroidView extends JButton implements ActionListener, Serializabl
         this.coordinates = new Point(getX() + radius, getY() + radius);
         setFocusable(false);
 
-	    /*
-	    todo
-	     These statements enlarge the button so that it
-	     becomes a circle rather than an oval.
-	    */
+        // enlarge the button so that it becomes a circle rather than an oval
         Dimension size = getPreferredSize();
         size.width = size.height = Math.max(size.width, size.height);
         setPreferredSize(size);
-
-	    /*
-	    todo
-	     This call causes the JButton not to paint the background.
-	     This allows us to paint a round background.
-	    */
+        // don't paint the button background, this allows us to paint a round background
         setContentAreaFilled(false);
     }
 
@@ -75,7 +66,6 @@ public class AsteroidView extends JButton implements ActionListener, Serializabl
      * Updates the asteroid's view.
      */
     public void updateView() {
-        // TODO
         // we update the AsteroidStatusView panel if the selected asteroid's property changes, but not if an asteroid -
         // which is not selected - explodes, for example
         if (asteroid == selected) {
@@ -123,7 +113,6 @@ public class AsteroidView extends JButton implements ActionListener, Serializabl
 
     @Override
     protected void paintComponent(Graphics g) {
-        // todo: honnan tudjuk, hogy a telepes melyik aszteroidán áll?
         // the asteroid on which the current settler stands, is painted light pink
         if (asteroid.getEntities().contains(Game.getInstance().getCurrentSettler())) {
             setBackground(new Color(255, 186, 209)); // light pink
@@ -204,8 +193,8 @@ public class AsteroidView extends JButton implements ActionListener, Serializabl
     /**
      * Draws a horizontally centered string.
      *
-     * @param g The graphics object to draw with.
-     * @param text The text to be drawn.
+     * @param g       The graphics object to draw with.
+     * @param text    The text to be drawn.
      * @param yOffset The number of pixels the string should be drawn vertically from the center.
      */
     private void drawCenteredString(Graphics g, String text, int yOffset) {
