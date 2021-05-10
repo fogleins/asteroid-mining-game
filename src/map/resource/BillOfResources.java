@@ -13,8 +13,7 @@ public class BillOfResources {
     /**
      * Constructor of class
      */
-    public BillOfResources() {
-    }
+    public BillOfResources() { }
 
     /**
      * Add a Resource object to the resources list
@@ -23,15 +22,6 @@ public class BillOfResources {
      */
     public void addResources(Resource resource) {
         this.resourcesNeeded.add(resource);
-    }
-
-    /**
-     * Remove a Resource object from the resources list
-     *
-     * @param resource The resource to remove
-     */
-    public void removeResources(Resource resource) {
-        this.resourcesNeeded.remove(resource);
     }
 
     /**
@@ -63,16 +53,7 @@ public class BillOfResources {
     public boolean check(ArrayList<Resource> ownedResources) {
         // create a copy of the input array, because we need to modify it, but just locally (elements are not duplicated)
         ArrayList<Resource> ownedRes = new ArrayList<>(ownedResources);
-
-        // okCnt: number of found resources
-        int okCnt = checker(ownedRes);
-        return okCnt == resourcesNeeded.size(); // if it found all the necessary resources, then its okay
-    }
-
-    //Calculates how many necessary resources are there
-    private int checker(ArrayList<Resource> owned) {
-        ArrayList<Resource> ownedRes = (ArrayList<Resource>) owned.clone();
-        int okCnt = 0;
+        int okCnt = 0; // number of found resources
         for (Resource rn : resourcesNeeded) {
             boolean found = false;
             for (int i = 0; i < ownedRes.size(); ++i)
@@ -84,7 +65,6 @@ public class BillOfResources {
             if (!found) break;
             else ++okCnt; // increment the number of found resources
         }
-
-        return okCnt;
+        return okCnt == resourcesNeeded.size(); // if it found all the necessary resources, then its okay
     }
 }
