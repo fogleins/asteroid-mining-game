@@ -99,23 +99,14 @@ public class Map implements Serializable {
         for (int i = 0; i < mapBound; i++) {
             for (int j = 0; j < mapBound; j++) {
                 if (rnd.nextBoolean()) {
-                    try {
+                    if (i != 0 && j != 0)
                         addDiagonal(asteroidsMatrix[i][j], asteroidsMatrix[i - 1][j - 1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                    try {
+                    if (i != 0 && j < mapBound - 1)
                         addDiagonal(asteroidsMatrix[i][j], asteroidsMatrix[i - 1][j + 1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                    try {
+                    if (i < mapBound - 1 && j != 0)
                         addDiagonal(asteroidsMatrix[i][j], asteroidsMatrix[i + 1][j - 1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                    try {
+                    if (i < mapBound - 1 && j  < mapBound - 1)
                         addDiagonal(asteroidsMatrix[i][j], asteroidsMatrix[i + 1][j + 1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-
 
                     // Removes a random edge from the current asteroid.
                     int neighboursSize = asteroidsMatrix[i][j].getNeighbours().getAsteroidNeighbours().size();
