@@ -9,10 +9,15 @@ import java.util.HashMap;
 
 public class SettlerInventoryView extends JPanel {
 
+    //Label for settler's information
     private final JTextArea informationLabel;
-    private final JLabel titleLabel;
-    private Settler settler;
 
+    //Label for settler's name
+    private final JLabel titleLabel;
+
+    /**
+     * Creates a SettlerInventoryView Object
+     */
     SettlerInventoryView() {
         titleLabel = new JLabel();
         informationLabel = new JTextArea();
@@ -30,9 +35,11 @@ public class SettlerInventoryView extends JPanel {
         informationLabel.setBackground(UIManager.getColor("Panel.background"));
     }
 
+    /**
+     * @param currentSettler the settler whose information will be shown
+     */
     public void updateView(Settler currentSettler) {
-        settler = currentSettler;
-        titleLabel.setText(settler.getName());
+        titleLabel.setText(currentSettler.getName());
         informationLabel.setText("");
 
         HashMap<String, Integer> resCount = new HashMap<>();
@@ -40,12 +47,13 @@ public class SettlerInventoryView extends JPanel {
         resCount.put((new Coal()).toString(), 0);
         resCount.put((new Ice()).toString(), 0);
         resCount.put((new Iron()).toString(), 0);
-        for (Resource r : settler.getResources()) {
+        for (Resource r : currentSettler.getResources()) {
             int countSoFar = resCount.get(r.toString());
             resCount.put(r.toString(), countSoFar + 1);
         }
         resCount.forEach((k, v) -> informationLabel.append(k + ": " + v + '\n'));
 
-        informationLabel.append("\nTeleports: " + settler.getTeleportNumber());
+        informationLabel.append("\nTeleports: " + currentSettler.getTeleportNumber());
     }
+
 }
