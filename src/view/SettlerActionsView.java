@@ -105,10 +105,6 @@ public class SettlerActionsView extends JPanel {
 
         // if the settler doesn't have at least one teleport gate or the asteroid he's standing on already has a
         // teleport, the place teleport button is disabled
-        if (settler.getTeleportNumber() == 0 || settler.getAsteroid().getTeleportGate() != null) {
-            this.placeTeleportBtn.setEnabled(false);
-        } else {
-            this.placeTeleportBtn.setEnabled(true);
-        }
+        this.placeTeleportBtn.setEnabled(settler.getTeleportNumber() != 0 && settler.getAsteroid().getTeleportGate() == null);
     }
 }

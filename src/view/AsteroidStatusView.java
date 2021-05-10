@@ -81,16 +81,16 @@ public class AsteroidStatusView extends JPanel {
      * @return Returns with names of entities on asteroid.
      */
     private String getEntityInfo(Asteroid asteroid) {
-        String res = "";
-        res += "Entities:\n";
+        StringBuilder res = new StringBuilder();
+        res.append("Entities:\n");
         if (asteroid.getEntities().size() == 0) {
-            res += "\t-\n";
+            res.append("\t-\n");
         } else {
             for (int i = 0; i < asteroid.getEntities().size(); i++) {
-                res += "\t" + asteroid.getEntities().get(i).getName() + "\n";
+                res.append("\t").append(asteroid.getEntities().get(i).getName()).append("\n");
             }
         }
-        return res;
+        return res.toString();
     }
 
     /**

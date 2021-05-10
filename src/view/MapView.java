@@ -14,44 +14,44 @@ public class MapView extends JPanel {
     /**
      * Map field, for accessing the asteroids, and their asteroidViews.
      */
-    private Map map = Game.getInstance().getMap();
+    private final Map map = Game.getInstance().getMap();
 
     /**
      * Height of the map (panel).
      */
-    private int height = 3000;
+    private final int height = 3000;
 
     /**
      * Width of the map (panel).
      */
-    private int width = 3000;
+    private final int width = 3000;
 
     /**
      * Determine which is the closest distance between two neighbouring asteroidView.
      */
-    private int gap = 30;
+    private final int gap = 30;
 
     /**
      * AsteroidViews are generated in an imaginary box(container),
      * which means the distances between the asteroidViews are different.
      * Container size describe the height and width (same value) of the box.
      */
-    private int containerSize = 300;
+    private final int containerSize = 300;
 
     /**
      * Describe how many pixels will the height and width of the teleport be.
      */
-    private int teleportSize = 25;
+    private final int teleportSize = 25;
 
     /**
      * Describe how many pixels will the height and width of the asteroid(View) be.
      */
-    private int asteroidSize = 100;
+    private final int asteroidSize = 100;
 
     /**
      * Random generator object, being used in generation of the asteroids positions.
      */
-    private Random rnd = new Random();
+    private final Random rnd = new Random();
 
 
     /**
