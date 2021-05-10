@@ -65,7 +65,8 @@ public class SettlerActionsView extends JPanel {
         placeBtn.addActionListener(actionEvent -> {
             try {
                 if (settler.getResources().isEmpty()) {
-                    JOptionPane.showMessageDialog(GameWindow.getInstance(), "There is no resource in the inventory, nothing to place back!");
+                    JOptionPane.showMessageDialog(GameWindow.getInstance(),
+                            "There is no resource in the inventory, nothing to place back!");
                     return;
                 }
                 ResourceChooser rc = new ResourceChooser(settler.getResources());
@@ -78,7 +79,7 @@ public class SettlerActionsView extends JPanel {
         });
 
         JButton passBtn = new JButton("Pass");
-        passBtn.addActionListener( actionListener -> Game.getInstance().nextPlayer() );
+        passBtn.addActionListener(actionListener -> Game.getInstance().nextPlayer());
 
         buildRobotBtn.setToolTipText("Required resources: Uranium: 1, Coal: 1, Iron: 1");
         buildTeleportBtn.setToolTipText("Required resources: Uranium: 1, Ice: 1, Iron: 2");
@@ -95,7 +96,7 @@ public class SettlerActionsView extends JPanel {
 
 
     public void updateView(Settler settler) {
-        if (settler == null) {  // used if the game ended
+        if (settler == null) { // used if the game ended
             this.setVisible(false);
             return;
         } else this.setVisible(true);
@@ -106,7 +107,7 @@ public class SettlerActionsView extends JPanel {
         // teleport, the place teleport button is disabled
         if (settler.getTeleportNumber() == 0 || settler.getAsteroid().getTeleportGate() != null) {
             this.placeTeleportBtn.setEnabled(false);
-        }else{
+        } else {
             this.placeTeleportBtn.setEnabled(true);
         }
     }

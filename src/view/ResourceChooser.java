@@ -8,9 +8,8 @@ import java.util.ArrayList;
 
 public class ResourceChooser extends JDialog {
 
-    private Resource selectedResource = null;
-
     private final JList<Resource> resourceList;
+    private Resource selectedResource = null;
 
     public ResourceChooser(ArrayList<Resource> resources) {
         super(GameWindow.getInstance(), "Choose a resource", true);
@@ -23,19 +22,22 @@ public class ResourceChooser extends JDialog {
     }
 
     /**
-     * Initializes the dialog UI
+     * Initializes the dialog UI.
      */
     private void initDialog() {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         add(Box.createRigidArea(new Dimension(0, 10)));
         resourceList.setFixedCellWidth(160);
-        ((DefaultListCellRenderer)resourceList.getCellRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        ((DefaultListCellRenderer) resourceList.getCellRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         add(resourceList);
         add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel applyPanel = new JPanel();
         JButton okBtn = new JButton("Ok");
-        okBtn.addActionListener(e -> { dispose(); selectedResource = resourceList.getSelectedValue(); });
+        okBtn.addActionListener(e -> {
+            dispose();
+            selectedResource = resourceList.getSelectedValue();
+        });
         applyPanel.add(okBtn);
         JButton cancelBtn = new JButton("Cancel");
         cancelBtn.addActionListener(e -> dispose());
@@ -45,6 +47,7 @@ public class ResourceChooser extends JDialog {
 
     /**
      * Shows the chooser dialog
+     *
      * @return the Resource object chosen by the user
      */
     public Resource chooseResource() {

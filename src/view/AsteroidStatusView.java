@@ -27,7 +27,6 @@ public class AsteroidStatusView extends JPanel {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setVerticalAlignment(SwingConstants.TOP);
         detailsTextArea.setPreferredSize(new Dimension(205, 450));
-        //detailsTextArea.setVerticalAlignment(SwingConstants.TOP);
         detailsTextArea.setEditable(false);
         detailsTextArea.setHighlighter(null);
         detailsTextArea.setBackground(UIManager.getColor("Panel.background"));
@@ -36,6 +35,7 @@ public class AsteroidStatusView extends JPanel {
 
     /**
      * Replaces new lines and tabs with their correct html versions.
+     *
      * @param orig String to be converted.
      * @return Returns string with replaced elements.
      */
@@ -45,6 +45,7 @@ public class AsteroidStatusView extends JPanel {
 
     /**
      * Updates the asteroid's status view.
+     *
      * @param asteroid Given asteroid.
      */
     public void updateView(Asteroid asteroid) {
@@ -61,6 +62,7 @@ public class AsteroidStatusView extends JPanel {
 
     /**
      * Gets info of teleportgates on asteroid.
+     *
      * @param asteroid Given asteroid.
      * @return Returns where the teleportgate goes, if there's any on asteroid.
      */
@@ -74,6 +76,7 @@ public class AsteroidStatusView extends JPanel {
 
     /**
      * Gets info of entity on asteroid.
+     *
      * @param asteroid Given asteroid.
      * @return Returns with names of entities on asteroid.
      */
@@ -92,6 +95,7 @@ public class AsteroidStatusView extends JPanel {
 
     /**
      * Gets info of asteroid.
+     *
      * @param asteroid Given asteroid.
      * @return Returns with info if asteroid's in perihelion and what resource it has.
      */
@@ -107,6 +111,7 @@ public class AsteroidStatusView extends JPanel {
 
     /**
      * Updates the name when an asteroid is chosen.
+     *
      * @param asteroid Given asteroid.
      */
     private void updateNameText(Asteroid asteroid) {

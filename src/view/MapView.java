@@ -6,9 +6,9 @@ import map.asteroid.Asteroid;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 public class MapView extends JPanel {
     /**
@@ -148,9 +148,10 @@ public class MapView extends JPanel {
 
     /**
      * Draws a neighbour line
+     *
      * @param g2 graphics object to draw the line to
-     * @param a first Asteroid of line
-     * @param b second Asteroid of line
+     * @param a  first Asteroid of line
+     * @param b  second Asteroid of line
      */
     private void drawNeighbourLine(Graphics2D g2, Asteroid a, Asteroid b) {
         int x1 = a.getAsteroidView().getCenter().x;

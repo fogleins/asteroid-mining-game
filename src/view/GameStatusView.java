@@ -7,10 +7,17 @@ import java.awt.*;
  * UI panel showing the data of the game's status
  */
 public class GameStatusView extends JPanel {
-    private final JLabel round, sunflare;
+    /**
+     * A JLabel displaying the current round number.
+     */
+    private final JLabel round;
+    /**
+     * A JLabel shown if sunflare is coming.
+     */
+    private final JLabel sunflare;
 
     /**
-     * Constructor, initializes the UI components of this panel
+     * Constructor, initializes the UI components of this panel.
      */
     public GameStatusView() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 22, 8));
@@ -27,8 +34,9 @@ public class GameStatusView extends JPanel {
 
     /**
      * Refreshes the data shown by this panel
-     * @param round the current round of the game
-     * @param sunflareComing whether a sunflare is coming or not
+     *
+     * @param round          The current round of the game.
+     * @param sunflareComing Whether a sunflare is coming or not.
      */
     public void updateView(Integer round, boolean sunflareComing) {
         this.round.setText("Round " + round.toString());

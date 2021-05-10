@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 public class SettlerInventoryView extends JPanel {
 
-    private Settler settler;
     private final JTextArea informationLabel;
     private final JLabel titleLabel;
+    private Settler settler;
 
     SettlerInventoryView() {
         titleLabel = new JLabel();
@@ -48,5 +48,4 @@ public class SettlerInventoryView extends JPanel {
 
         informationLabel.append("\nTeleports: " + settler.getTeleportNumber());
     }
-
 }
