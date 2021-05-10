@@ -84,22 +84,14 @@ public class Map implements Serializable {
                  * The purpose of the try-catches is to connect the upper, lower rows,
                  * and side columns asteroids with each other. IndexOutOfBounds exceptions are ignored for purpose.
                  */
-                try {
+                if (i != 0)
                     asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i - 1][j]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
-                try {
+                if (i < mapBound - 1)
                     asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i + 1][j]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
-                try {
+                if (j != 0)
                     asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i][j - 1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
-                try {
+                if (j < mapBound - 1)
                     asteroidsMatrix[i][j].addNeighbour(asteroidsMatrix[i][j + 1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
             }
         }
 
@@ -143,12 +135,9 @@ public class Map implements Serializable {
      * @param b Second asteroid.
      */
     private void addDiagonal(Asteroid a, Asteroid b) {
-        try {
-            if (!(a.getNeighbours().getAsteroidNeighbours().contains(b) && b.getNeighbours().getAsteroidNeighbours().contains(a))) {
-                a.addNeighbour(b);
-                b.addNeighbour(a);
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        if (!(a.getNeighbours().getAsteroidNeighbours().contains(b) && b.getNeighbours().getAsteroidNeighbours().contains(a))) {
+            a.addNeighbour(b);
+            b.addNeighbour(a);
         }
     }
 
