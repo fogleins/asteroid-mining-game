@@ -21,7 +21,6 @@ public class AsteroidStatusView extends JPanel {
     public AsteroidStatusView() {
         titleLabel.setFont(titleLabel.getFont().deriveFont(28.0f));
         detailsTextArea.setFont(detailsTextArea.getFont().deriveFont(20.0f));
-        setPreferredSize(new Dimension(200, 500));
         add(titleLabel);
         add(detailsTextArea);
         titleLabel.setPreferredSize(new Dimension(205, 50));
