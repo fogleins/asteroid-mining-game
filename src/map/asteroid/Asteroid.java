@@ -49,15 +49,9 @@ public class Asteroid implements Serializable {
      * The teleport gate that is attached to the asteroid.
      */
     protected TeleportGate teleportGate;
-    /**
-     * Indicates whether or not the asteroid has exploded. The value is used in AsteroidView to display the asteroid
-     * correctly.
-     */
-    protected boolean exploded;
 
     public Asteroid() { // BaseAsteroid's ctor calls this
         this.asteroidView = new AsteroidView(this);
-        this.exploded = false;
         this.asteroidView.updateView();
     }
 
@@ -79,7 +73,6 @@ public class Asteroid implements Serializable {
             this.resource.setAsteroid(this);
         }
         this.asteroidView = new AsteroidView(this);
-        this.exploded = false;
         this.asteroidView.updateView();
     }
 
@@ -117,24 +110,6 @@ public class Asteroid implements Serializable {
      */
     public boolean getInPerihelion() {
         return inPerihelion;
-    }
-
-    /**
-     * Set the value of inPerihelion
-     *
-     * @param inPerihelion the new value of inPerihelion
-     */
-    public void setInPerihelion(boolean inPerihelion) {
-        this.inPerihelion = inPerihelion;
-    }
-
-    /**
-     * Get the List of Entities objects held by entitiesVector
-     *
-     * @return List of Entities objects held by entitiesVector
-     */
-    private ArrayList<Entity> getEntitiesList() {
-        return entities;
     }
 
     /**
@@ -182,7 +157,6 @@ public class Asteroid implements Serializable {
         }
         Game.getInstance().getMap().removeAsteroid(this);
         GameWindow.getMapView().updateView(this);
-        this.exploded = true; // this way the AsteroidView knows not to paint this asteroid
     }
 
     /**

@@ -74,11 +74,6 @@ public class AsteroidView extends JButton implements ActionListener, Serializabl
         repaint();
     }
 
-    // TODO: jelenleg nem használt
-    public void setStatusView(AsteroidStatusView statusView) {
-        this.statusView = statusView;
-    }
-
     /**
      * Event handler. Called when a player selects an asteroid.
      */

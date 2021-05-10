@@ -162,23 +162,6 @@ public class MapView extends JPanel {
     }
 
     /**
-     * Draws the teleport gates.
-     *
-     * @param g Graphics object of the map(panel)
-     */
-    private void drawTeleportGates(Graphics g) {
-        g.setColor(Color.BLUE);
-        for (Asteroid a : map.getAsteroids()) {
-            if (a.getTeleportGate() != null) {
-                Point p = a.getAsteroidView().getCenter();
-                int dX = asteroidSize / 2 + 5;
-                int dY = asteroidSize / 2 + 5;
-                g.fillOval(p.x + dX, p.y - dY, 25, 25);
-            }
-        }
-    }
-
-    /**
      * Updates the map(panel), repaints it.
      */
     public void updateView(Asteroid asteroid) {

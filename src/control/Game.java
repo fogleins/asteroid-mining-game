@@ -201,16 +201,6 @@ public final class Game implements Serializable {
     }
 
     /**
-     * Returns a {@code Resource} object from the Settler's resource list which should be exchanged.
-     *
-     * @param resources A list of {@code Resource}s the Settler has.
-     * @return The {@code Resource} which should be exchanged.
-     */
-    public Resource exchangeResource(ArrayList<Resource> resources) {
-        return resources.get(resources.size() - 1);  // swap the last element of the list
-    }
-
-    /**
      * This method is called when the settlers have collected all the needed resources on a single asteroid.
      */
     public void gameWon() {

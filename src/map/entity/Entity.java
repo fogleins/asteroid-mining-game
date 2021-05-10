@@ -46,15 +46,6 @@ abstract public class Entity implements Serializable {
     }
 
     /**
-     * Sets the name of an entity.
-     *
-     * @param name String type, name of entity.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Moves the entity from current asteroid to the asteroid given as parameter.
      *
      * @param whereTo Given asteroid.
