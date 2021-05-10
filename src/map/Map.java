@@ -45,15 +45,16 @@ public class Map implements Serializable {
         int resLength = mapBound * mapBound;
         Resource[] resources = new Resource[resLength];
         // generate minimum number of resources (3 each)
+        int baseAsteroidIndex = centerIndex * (mapBound + 1);
         for (int i = 0; i < 3 * 4; i++) {
             // generate asteroid index
             int idx = rnd.nextInt(resLength);
-            while (idx == 0 || resources[idx] != null)  // generate new random numbers if the index is already used
+            while (idx == baseAsteroidIndex || resources[idx] != null)  // generate new random numbers if the index is already used
                 idx = rnd.nextInt(resLength);
             resources[idx] = generateResource(i % 4);   // save resource
         }
-        for (int i = 1; i < resLength; i++) {   // skip base asteroid but loop through the rest
-            if (resources[i] == null)
+        for (int i = 0; i < resLength; i++) {
+            if (resources[i] == null && i != baseAsteroidIndex)
                 // if the resource is not already added, generate a new one
                 resources[i] = generateResource(rnd.nextInt(5));
         }
