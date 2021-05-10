@@ -16,11 +16,6 @@ abstract public class Entity implements Serializable {
      * Entity's name.
      */
     protected String name;
-
-    public Asteroid getAsteroid() {
-        return asteroid;
-    }
-
     /**
      * Asteroid.
      */
@@ -34,6 +29,14 @@ abstract public class Entity implements Serializable {
     }
 
     /**
+     * Getter for the entity's asteroid.
+     * @return The asteroid the settler is currently standing on.
+     */
+    public Asteroid getAsteroid() {
+        return asteroid;
+    }
+
+    /**
      * Get the value of name
      *
      * @return the value of name
@@ -42,8 +45,13 @@ abstract public class Entity implements Serializable {
         return name;
     }
 
-    public void setAsteroid(Asteroid asteroid) {
-        this.asteroid = asteroid;
+    /**
+     * Sets the name of an entity.
+     *
+     * @param name String type, name of entity.
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -82,18 +90,10 @@ abstract public class Entity implements Serializable {
 
     /**
      * Returns a list of resources in carry capable entities. Returns null by default.
+     *
      * @return null.
      */
     public ArrayList<Resource> getResources() {
         return null;
     }
-
-    /**
-     * Sets the name of an entity.
-     * @param name String type, name of entity.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }

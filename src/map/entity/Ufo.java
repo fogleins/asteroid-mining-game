@@ -10,6 +10,9 @@ import java.util.Random;
 
 public class Ufo extends Entity implements Steppable {
     private static final long serialVersionUID = -3364598517128775794L;
+    /**
+     * List of resources the ufo has collected.
+     */
     private final ArrayList<Resource> resources = new ArrayList<>();
 
     /**
@@ -32,12 +35,15 @@ public class Ufo extends Entity implements Steppable {
             Random rnd = new Random();
             ArrayList<Asteroid> neighbours = this.asteroid.getNeighbours().getAsteroidNeighbours();
 
-            if(neighbours.size() != 0) {
+            if (neighbours.size() != 0) {
                 move(neighbours.get(rnd.nextInt(neighbours.size())));
             }
         }
     }
 
+    /**
+     * Ufo dies.
+     */
     @Override
     public void die() {
         super.die();

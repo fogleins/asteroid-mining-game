@@ -1,8 +1,8 @@
 package map.entity;
 
 import control.Game;
+import map.asteroid.Asteroid;
 import map.resource.*;
-import map.asteroid.*;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class TeleportGate implements Steppable {
      */
     private final static BillOfResources billToBuild;
 
-    static {    // initialize the billToBuild variable
+    static { // initialize the billToBuild variable
         billToBuild = new BillOfResources();
         billToBuild.addResources(new Iron());
         billToBuild.addResources(new Iron());
@@ -52,6 +52,7 @@ public class TeleportGate implements Steppable {
 
     /**
      * Creates a teleportgate(pair) if there is enough resources to build.
+     *
      * @param ownedResources The resources of settler, whereof the gate can be built.
      * @return with the gate-pair.
      */
@@ -72,6 +73,7 @@ public class TeleportGate implements Steppable {
 
     /**
      * Getter of the current asteroid, not used in the test.
+     *
      * @return currentAsteroid.
      */
     private Asteroid getCurrentAsteroid() {
@@ -87,6 +89,7 @@ public class TeleportGate implements Steppable {
 
     /**
      * Returns an asteroid, where the other gate is placed on.
+     *
      * @return The asteroid, where the other gate is placed on.
      */
     public Asteroid getOtherSide() {
@@ -95,6 +98,7 @@ public class TeleportGate implements Steppable {
 
     /**
      * Reference to the settler whose cargo this teleport is in.
+     *
      * @param settler Value to set.
      */
     public void setSettler(Settler settler) {
@@ -129,16 +133,16 @@ public class TeleportGate implements Steppable {
      * Handles the death of a teleportgate pair. A teleportgate is either
      * belongs to an asteroid or a settler, but not both. After removing it from them
      * a teleportgate needs to call its pair's die() method.
-     *
+     * <p>
      * To ensure the avoidance of a circular method call, the die() method is only called
      * when the gate still belongs to an asteroid or a settler.
      */
     @Override
     public void die() {
-        if(currentAsteroid != null){
+        if (currentAsteroid != null) {
             currentAsteroid.removeTeleportGate();
         }
-        if(settler != null){
+        if (settler != null) {
             settler.removeTeleportGate(this);
         }
         otherGate.die();

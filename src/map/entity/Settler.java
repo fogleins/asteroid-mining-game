@@ -4,7 +4,6 @@ import Exceptions.ActionFailedException;
 import control.Game;
 import map.asteroid.Asteroid;
 import map.resource.Resource;
-import map.resource.Uranium;
 import view.GameWindow;
 import view.ResourceChooser;
 import view.SettlerActionsView;
@@ -59,26 +58,31 @@ public class Settler extends Entity {
      * Asks for item exchange if cargo inventory is full and places the resource from the asteroid to the cargo otherwise.
      */
     public void mine() throws ActionFailedException {
-        if (asteroid.getResource() != null) {        // if there's any resource to mine
-            if (resources.size() < 10) {        // if there's space in cargo
+        if (asteroid.getResource() != null) { // if there's any resource to mine
+            if (resources.size() < 10) { // if there's space in cargo
                 Resource r = asteroid.mined();
                 if (r != null) {
-                    resources.add(r);   // add resource to inventory
-                    Game.getInstance().nextPlayer();    // the settler used its only step
+                    resources.add(r); // add resource to inventory
+                    Game.getInstance().nextPlayer(); // the settler used its only step
                 } else throw new ActionFailedException("Mine returned null.");
-            } else {    // if there is no space in cargo, another resource must be placed back to get the new one
+            } else { // if there is no space in cargo, another resource must be placed back to get the new one
                 ResourceChooser rc = new ResourceChooser(resources);
                 Resource resourceToExchange = rc.chooseResource();
-                if (resources.contains(resourceToExchange)) {   // if the resource is owned by the settler
+                if (resources.contains(resourceToExchange)) { // if the resource is owned by the settler
                     resources.add(asteroid.mined());
-                    asteroid.placeResource(resourceToExchange);     // place back the resource
-                    resources.remove(resourceToExchange);   // remove the placed back resource from inventory
-                    Game.getInstance().nextPlayer();    // the settler used its only step
+                    asteroid.placeResource(resourceToExchange); // place back the resource
+                    resources.remove(resourceToExchange); // remove the placed back resource from inventory
+                    Game.getInstance().nextPlayer(); // the settler used its only step
                 } else throw new ActionFailedException("Invalid resource selected.");
             }
         } else throw new ActionFailedException("No resource in the Asteroid.");
     }
 
+    /**
+     * Settler moves.
+     *
+     * @param whereTo The asteroid where the settler should move to.
+     */
     @Override
     public void move(Asteroid whereTo) {
         super.move(whereTo);
@@ -94,18 +98,28 @@ public class Settler extends Entity {
      * @param resource The resource to be placed
      */
     public void placeBack(Resource resource) throws ActionFailedException {
-        if (!resources.contains(resource))
-            throw new ActionFailedException("Resource is not in players inventory!");   // if the resource is not in the settler's inventory, the action is not valid
-        if (asteroid.placeResource(resource)) {   // try to place back the resource
-            resources.remove(resource);     // remove placed resource
-            Game.getInstance().nextPlayer();    // if it was successful, notify the game
+        if (!resources.contains(resource)) // if the resource is not in the settler's inventory, the action is not valid
+            throw new ActionFailedException("Resource is not in players inventory!");
+        if (asteroid.placeResource(resource)) { // try to place back the resource
+            resources.remove(resource); // remove placed resource
+            Game.getInstance().nextPlayer(); // if it was successful, notify the game
         } else throw new ActionFailedException("Couldn't place resource.");
     }
 
+    /**
+     * Gets the number of teleport gates a settler has.
+     *
+     * @return The number of the settler's teleports.
+     */
     public int getTeleportNumber() {
         return teleports.size();
     }
 
+    /**
+     * Settler drills
+     *
+     * @throws ActionFailedException When the asteroid couldn't be mined.
+     */
     @Override
     public void drill() throws ActionFailedException {
         asteroid.drilled();
@@ -161,14 +175,20 @@ public class Settler extends Entity {
         teleports.remove(t);
     }
 
+    /**
+     * Settler dies.
+     */
     @Override
     public void die() {
         super.die();
         for (TeleportGate tg : teleports)
-            tg.die();   // all teleport gate in storage dies
+            tg.die(); // all teleport gates in storage die
         Game.getInstance().removeSettler(this);
     }
 
+    /**
+     * Game calls this method when this settler should move next. Modifies related variables.
+     */
     public void yourTurn() {
         actionsView = GameWindow.getActionsView();
         settlerView = GameWindow.getInventoryView();

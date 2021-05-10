@@ -81,7 +81,7 @@ public class Robot extends Entity implements Steppable {
         } else {
             try {
                 drill();
-            } catch (ActionFailedException e) { // TODO: ez így elég fura, hogy legyen?
+            } catch (ActionFailedException e) {
                 move(neighbours.get(rnd.nextInt(neighbours.size())));
             }
         }
